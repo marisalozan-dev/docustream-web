@@ -59,4 +59,6 @@ simulation.on("tick", () => {
     .attr("cx", d => d.x)
     .attr("cy", d => d.y);
 });
+document.getElementById("graphCanvas").classList.add("fade-in");
+
 
