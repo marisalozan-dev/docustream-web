@@ -94,6 +94,76 @@ body {
   border-radius: 8px;
   transition: height 0.3s;
 }
+/* ----------------------------- */
+/* RESPONSIVE PRO                */
+/* ----------------------------- */
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #0F6E56;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  font-size: 22px;
+  border-radius: 6px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+/* Breakpoint principal */
+@media (max-width: 900px) {
+
+  /* Mostrar botón hamburguesa */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Sidebar oculto por defecto */
+  .sidebar {
+    transform: translateX(-260px);
+    transition: transform 0.3s ease;
+  }
+
+  /* Sidebar visible cuando se activa */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Contenido ocupa toda la pantalla */
+  .content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  /* Dashboard en una sola columna */
+  .cards {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  /* Grafo y heatmap fluidos */
+  #graphCanvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .heatmap {
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .heatbar {
+    min-width: 30px;
+  }
+}
+
 
 
 .heatbar {
