@@ -182,10 +182,27 @@ body {
 }
 
 
-
-
 .heatbar {
   width: 40px;
   border-radius: 8px;
   transition: height 0.3s;
 }
+.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.sidebar {
+  transition: transform 0.35s ease;
+}
+.menu-toggle {
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.menu-toggle:active {
+  transform: scale(0.9);
+}
+
