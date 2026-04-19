@@ -6,7 +6,6 @@ for (let i = 0; i < 12; i++) {
 
   const value = Math.random();
   bar.style.height = (value * 200 + 50) + "px";
-
   bar.style.background = `rgba(255, 80, 0, ${value})`;
 
   heatmap.appendChild(bar);
