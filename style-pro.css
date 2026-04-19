@@ -205,4 +205,15 @@ body {
 .menu-toggle:active {
   transform: scale(0.9);
 }
+.heatbar {
+  transition: height 0.4s ease, background 0.4s ease;
+}
+
+.heatbar:hover {
+  filter: brightness(1.2);
+}
+body, .card, .sidebar {
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
 
