@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Demo PRO – DocuStream</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style-pro.css">
+
+  <!-- Librerías necesarias -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
@@ -27,6 +33,7 @@
     <!-- BOTÓN MODO OSCURO -->
     <button id="darkToggle" class="dark-toggle">Modo oscuro</button>
 
+    <!-- DASHBOARD -->
     <section id="dashboard">
       <h1>Dashboard PRO</h1>
       <div id="cards" class="cards"></div>
@@ -34,11 +41,13 @@
       <canvas id="lineChart" width="500" height="250"></canvas>
     </section>
 
+    <!-- GRAFO -->
     <section id="graph">
       <h1>Grafo semántico avanzado</h1>
       <svg id="graphCanvas" width="900" height="500"></svg>
     </section>
 
+    <!-- HEATMAP -->
     <section id="heatmap">
       <h1>Heatmap de comportamiento</h1>
       <div id="heatmapContainer" class="heatmap"></div>
@@ -55,3 +64,4 @@
 
 </body>
 </html>
+
