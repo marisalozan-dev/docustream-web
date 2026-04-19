@@ -10,4 +10,3 @@ toggle.onclick = () => {
     document.body.classList.contains("dark") ? "dark" : "light"
   );
 };
-
