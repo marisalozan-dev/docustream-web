@@ -2,13 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>DocuStream – Documentación viva impulsada por Big Data</title>
+  <title>DocuStream – Living Documentation Powered by Big Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Oculta idiomas según selección */
     .lang { display: none; }
     .lang.active { display: block; }
   </style>
@@ -23,18 +22,15 @@
 
 <body>
 
-  <!-- SELECTOR DE IDIOMA -->
+  <!-- LANGUAGE SWITCHER -->
   <div class="lang-switcher">
     <button onclick="switchLang('es')" class="lang-btn">ES</button>
     <button onclick="switchLang('en')" class="lang-btn">EN</button>
   </div>
 
-  <!-- ========================================================= -->
-  <!-- ======================= ESPAÑOL ========================== -->
-  <!-- ========================================================= -->
+  <!-- ================= ESPAÑOL ================= -->
   <div id="es" class="lang active">
 
-    <!-- HERO -->
     <header class="hero">
       <div class="hero-content">
         <h1>DocuStream</h1>
@@ -51,11 +47,10 @@
       </div>
 
       <div class="hero-graphic">
-        <img src="recursos/imagenes/graph-landing.png" alt="Grafo DocuStream">
+        <img src="assets/Images/graph-landing.png" alt="Grafo DocuStream">
       </div>
     </header>
 
-    <!-- PROBLEMA -->
     <section class="problem">
       <h2>El problema</h2>
       <p class="problem-title">La documentación empresarial muere en silencio</p>
@@ -66,62 +61,33 @@
         El coste anual en empresas medianas europeas ronda los 15.000–40.000 €.
       </p>
 
-      <ul class="problem-list">
-        <li>⚠️ <strong>Documentos estáticos</strong> — Las herramientas actuales almacenan documentos pero no los monitorean.</li>
+      <ul>
+        <li>⚠️ <strong>Documentos estáticos</strong> — No se monitorean.</li>
         <li>⚠️ <strong>Sin alertas</strong> — Nadie sabe si están actualizados.</li>
         <li>⚠️ <strong>Sin trazabilidad</strong> — No se entiende cómo se usan.</li>
       </ul>
     </section>
 
-    <!-- SOLUCIÓN -->
     <section class="solution">
       <h2>La solución</h2>
       <p>
         DocuStream convierte la documentación en un sistema vivo: analiza uso real,  
-        detecta obsolescencia, identifica relaciones semánticas y genera insights  
-        accionables para equipos técnicos y de negocio.
+        detecta obsolescencia, identifica relaciones semánticas y genera insights accionables.
       </p>
 
       <div class="solution-grid">
-        <div class="card">
-          <h3>🔍 Análisis de uso</h3>
-          <p>Detecta qué se consulta, cuándo y por quién.</p>
-        </div>
-
-        <div class="card">
-          <h3>🧠 Grafo semántico</h3>
-          <p>Relaciona procesos, APIs, normativa y documentos.</p>
-        </div>
-
-        <div class="card">
-          <h3>🔥 Heatmaps</h3>
-          <p>Visualiza qué partes concentran más atención.</p>
-        </div>
-
-        <div class="card">
-          <h3>⏳ Predicción</h3>
-          <p>Anticipa cuándo un documento dejará de ser fiable.</p>
-        </div>
+        <div class="card"><h3>🔍 Análisis de uso</h3><p>Detecta qué se consulta y cuándo.</p></div>
+        <div class="card"><h3>🧠 Grafo semántico</h3><p>Relaciona procesos y documentos.</p></div>
+        <div class="card"><h3>🔥 Heatmaps</h3><p>Muestra zonas de mayor atención.</p></div>
+        <div class="card"><h3>⏳ Predicción</h3><p>Anticipa obsolescencia.</p></div>
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>© 2026 DocuStream — Concepto y desarrollo: Marisa Lozano Arroyo</p>
-      <div class="footer-links">
-        <a href="https://github.com/marisalozan-dev" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
-      </div>
-    </footer>
-
   </div>
 
-  <!-- ========================================================= -->
-  <!-- ======================== ENGLISH ========================= -->
-  <!-- ========================================================= -->
+  <!-- ================= ENGLISH ================= -->
   <div id="en" class="lang">
 
-    <!-- HERO -->
     <header class="hero">
       <div class="hero-content">
         <h1>DocuStream</h1>
@@ -138,11 +104,10 @@
       </div>
 
       <div class="hero-graphic">
-        <img src="recursos/imagenes/graph-landing.png" alt="DocuStream Graph">
+        <img src="assets/Images/graph-landing.png" alt="DocuStream Graph">
       </div>
     </header>
 
-    <!-- PROBLEM -->
     <section class="problem">
       <h2>The problem</h2>
       <p class="problem-title">Business documentation dies silently</p>
@@ -153,58 +118,33 @@
         The annual cost for medium‑sized European companies ranges between €15,000 and €40,000.
       </p>
 
-      <ul class="problem-list">
-        <li>⚠️ <strong>Static documents</strong> — Current tools store documents but do not monitor them.</li>
-        <li>⚠️ <strong>No alerts</strong> — No one knows whether they are up to date.</li>
-        <li>⚠️ <strong>No traceability</strong> — It’s impossible to understand how documentation is actually used.</li>
+      <ul>
+        <li>⚠️ <strong>Static documents</strong> — No monitoring.</li>
+        <li>⚠️ <strong>No alerts</strong> — No one knows if they are updated.</li>
+        <li>⚠️ <strong>No traceability</strong> — Impossible to understand usage.</li>
       </ul>
     </section>
 
-    <!-- SOLUTION -->
     <section class="solution">
       <h2>The solution</h2>
       <p>
         DocuStream turns documentation into a living system: it analyzes real usage,  
-        detects obsolescence, identifies semantic relationships and generates  
-        actionable insights for technical and business teams.
+        detects obsolescence, identifies semantic relationships and generates insights.
       </p>
 
       <div class="solution-grid">
-        <div class="card">
-          <h3>🔍 Usage analytics</h3>
-          <p>Detects what is consulted, when, and by whom.</p>
-        </div>
-
-        <div class="card">
-          <h3>🧠 Semantic graph</h3>
-          <p>Connects processes, APIs, regulations and documents.</p>
-        </div>
-
-        <div class="card">
-          <h3>🔥 Heatmaps</h3>
-          <p>Shows which sections receive the most attention.</p>
-        </div>
-
-        <div class="card">
-          <h3>⏳ Obsolescence prediction</h3>
-          <p>Anticipates when a document will no longer be reliable.</p>
-        </div>
+        <div class="card"><h3>🔍 Usage analytics</h3><p>Detects what is consulted and when.</p></div>
+        <div class="card"><h3>🧠 Semantic graph</h3><p>Connects processes and documents.</p></div>
+        <div class="card"><h3>🔥 Heatmaps</h3><p>Shows attention hotspots.</p></div>
+        <div class="card"><h3>⏳ Prediction</h3><p>Anticipates obsolescence.</p></div>
       </div>
     </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>© 2026 DocuStream — Concept and development: Marisa Lozano Arroyo</p>
-      <div class="footer-links">
-        <a href="https://github.com/marisalozan-dev" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
-      </div>
-    </footer>
 
   </div>
 
 </body>
 </html>
+
 
 
 
