@@ -1,5 +1,3 @@
-// --- SIDEBAR PRO ---
-
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("overlay");
@@ -26,6 +24,7 @@ document.querySelectorAll(".sidebar nav a").forEach(link => {
     overlay.classList.remove("visible");
   });
 });
+
 
 
 
