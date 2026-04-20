@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -15,11 +15,10 @@
 
 <body>
 
-  <!-- BOTÓN HAMBURGUESA (DEBE IR AQUÍ) -->
- <button id="menuToggle" class="menu-toggle">
-  <span></span>
-</button>
-
+  <!-- BOTÓN HAMBURGUESA -->
+  <button id="menuToggle" class="menu-toggle">
+    <span></span>
+  </button>
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
@@ -43,18 +42,23 @@
     <!-- DASHBOARD -->
     <section id="dashboard" class="fade-in">
       <h1>Dashboard PRO</h1>
-      <div id="cards" class="cards"></div>
-     <div class="donut-container">
-  <canvas id="donutChart"></canvas>
-  <div id="donutLabel" class="donut-label">85%</div>
-</div>
 
+      <div id="cards" class="cards"></div>
+
+      <div class="donut-container">
+        <canvas id="donutChart"></canvas>
+        <div id="donutLabel" class="donut-label">85%</div>
+      </div>
     </section>
 
     <!-- GRAFO -->
     <section id="graph" class="fade-in">
       <h1>Grafo semántico avanzado</h1>
-      <svg id="graphCanvas" width="900" height="500"></svg>
+
+      <!-- CONTENEDOR CORRECTO DEL GRAFO -->
+      <div class="graph-wrapper">
+        <svg id="graphCanvas" width="900" height="500"></svg>
+      </div>
     </section>
 
     <!-- HEATMAP -->
@@ -72,10 +76,13 @@
   <script src="js/graph-pro.js"></script>
   <script src="js/heatmap-pro.js"></script>
 
-<div id="overlay" class="overlay"></div>
-<div id="graphTooltip" class="tooltip-graph"></div>
-<div id="heatTooltip" class="tooltip-heat"></div>
+  <!-- OVERLAY + TOOLTIPS -->
+  <div id="overlay" class="overlay"></div>
+  <div id="graphTooltip" class="tooltip-graph"></div>
+  <div id="heatTooltip" class="tooltip-heat"></div>
+
 </body>
 </html>
+
 
 
