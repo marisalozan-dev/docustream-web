@@ -15,17 +15,49 @@ metrics.forEach(m => {
 });
 
 // DONUT
-const donut = document.getElementById("donutChart").getContext("2d");
-new Chart(donut, {
-  type: "doughnut",
-  data: {
-    labels: ["Actualizado", "Desactualizado"],
-    datasets: [{
-      data: [72, 28],
-      backgroundColor: ["#0F6E56", "#F7D154"]
-    }]
-  }
-});
+// --- DONUT CHART PRO ---
+
+const ctx = document.getElementById('donutChart');
+
+if (ctx) {
+  const donutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Actualizado', 'Desactualizado'],
+      datasets: [{
+        data: [85, 15],
+        backgroundColor: ['#2ecc71', '#f1c40f'],
+        borderWidth: 0,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      cutout: '70%',
+      animation: {
+        animateRotate: true,
+        animateScale: true,
+        duration: 1200
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `${context.label}: ${context.raw}%`;
+            }
+          }
+        },
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+
+  // Actualizar etiqueta central dinámicamente
+  const donutLabel = document.getElementById('donutLabel');
+  donutLabel.textContent = '85%';
+}
+
 
 // LÍNEA
 const line = document.getElementById("lineChart").getContext("2d");
