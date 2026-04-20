@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demo — DocuStream</title>
   <link rel="stylesheet" href="style.css">
+<style>
+  /* Fuerza a ignorar cualquier CSS heredado */
+  body {
+    background: #f8f7f4 !important;
+    color: #222 !important;
+  }
+
+  /* Sidebar oculta por defecto en móvil */
+  .sidebar {
+    transform: translateX(-100%) !important;
+  }
+
+  /* Sidebar abierta */
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  /* Overlay visible */
+  .overlay.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+</style>
 
   <!-- D3.js para grafo real -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
