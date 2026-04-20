@@ -153,6 +153,12 @@ body.dark .menu-toggle span::after {
   margin: 0 auto;
 }
 
+@media (min-width: 900px) {
+  .content {
+    margin-left: 260px; /* deja espacio para el sidebar */
+  }
+}
+
 /* ---------------------------------------------------
    CARDS PRO
 --------------------------------------------------- */
@@ -314,6 +320,7 @@ body.dark .tooltip-heat {
 section {
   margin-bottom: 4rem;
 }
+
 
 
 
