@@ -91,7 +91,7 @@ body.dark .menu-toggle span::after {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   padding: 2rem 1rem;
-  transform: translateX(-100%);
+  transform: translateX(0);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   z-index: 1002;
 }
@@ -155,8 +155,157 @@ body.dark .menu-toggle span::after {
 
 @media (min-width: 900px) {
   .content {
-    margin-left: 260px; /* deja espacio para el sidebar */
+    margin-left: 260px;
   }
+}
+
+/* ---------------------------------------------------
+   BOTÓN MODO OSCURO
+--------------------------------------------------- */
+.dark-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.dark-toggle:hover {
+  background: #444;
+  transform: translateY(-1px);
+}
+
+body.dark .dark-toggle {
+  background: #f0f0f0;
+  color: #000;
+}
+
+/* ---------------------------------------------------
+   HERO
+--------------------------------------------------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 36rem;
+  color: #444;
+}
+
+body.dark .hero-subtitle {
+  color: #d0d0d0;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-card {
+  background: #111827;
+  color: #e5e7eb;
+  border-radius: 16px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 18px 45px rgba(15,23,42,0.65);
+  min-width: 220px;
+}
+
+.hero-kpi-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+}
+
+.hero-kpi-value {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0.3rem 0;
+}
+
+.hero-kpi-sub {
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+/* ---------------------------------------------------
+   BOTONES
+--------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background: #10b981;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(16,185,129,0.45);
+}
+
+.btn-primary:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+body.dark .btn-secondary {
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+body.dark .btn-secondary:hover {
+  background: #374151;
 }
 
 /* ---------------------------------------------------
@@ -216,12 +365,38 @@ body.dark .donut-label {
 }
 
 /* ---------------------------------------------------
-   TITULARES
+   TITULARES Y SUBTÍTULOS
 --------------------------------------------------- */
 h1 {
-  margin-bottom: 1rem;
-  font-size: 2rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.6rem;
   font-weight: 700;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1.4rem;
+  max-width: 40rem;
+}
+
+body.dark .section-subtitle {
+  color: #cfcfcf;
+}
+
+/* ---------------------------------------------------
+   CONTENEDORES DE SECCIÓN
+--------------------------------------------------- */
+.section-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.8rem 1.6rem 2.2rem 1.6rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+body.dark .section-card {
+  background: #18181b;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
 }
 
 /* ---------------------------------------------------
@@ -229,7 +404,7 @@ h1 {
 --------------------------------------------------- */
 .graph-wrapper {
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 2rem auto 0 auto;
   display: flex;
   justify-content: center;
 }
@@ -279,7 +454,7 @@ body.dark .tooltip-graph {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 4px;
-  margin: 2rem auto;
+  margin: 2rem auto 0 auto;
   max-width: 480px;
 }
 
@@ -318,8 +493,88 @@ body.dark .tooltip-heat {
    ESPACIADO ENTRE SECCIONES
 --------------------------------------------------- */
 section {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
+
+/* ---------------------------------------------------
+   FOOTER
+--------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 1.4rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.footer-title {
+  font-weight: 700;
+}
+
+.footer-subtitle {
+  display: block;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+body.dark .site-footer {
+  border-top-color: rgba(255,255,255,0.12);
+}
+
+body.dark .footer-subtitle {
+  color: #a3a3a3;
+}
+
+/* ---------------------------------------------------
+   ANIMACIONES SUAVES
+--------------------------------------------------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .dark-toggle {
+    right: 4.5rem;
+  }
+}
+
 
 
 
