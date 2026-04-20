@@ -1,7 +1,11 @@
 // Sidebar responsive
-const menuToggle = document.getElementById("menuToggle");
-const sidebar = document.querySelector(".sidebar");
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.querySelector('.sidebar');
 
-menuToggle.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-});
+if (menuToggle && sidebar) {
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    menuToggle.classList.toggle('active');
+  });
+}
+
