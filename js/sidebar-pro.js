@@ -46,43 +46,23 @@ if (menuToggle && sidebar) {
   transform: translateX(4px);
 }
 
-/* --- OVERLAY (fondo oscuro al abrir menú) --- */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(2px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1001;
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.getElementById('overlay');
+
+function toggleSidebar() {
+  sidebar.classList.toggle('open');
+  menuToggle.classList.toggle('active');
+  overlay.classList.toggle('visible');
 }
 
-.overlay.visible {
-  opacity: 1;
-  pointer-events: auto;
+if (menuToggle) {
+  menuToggle.addEventListener('click', toggleSidebar);
 }
 
-/* En pantallas grandes, sidebar siempre visible */
-@media (min-width: 900px) {
-  .sidebar {
-    transform: translateX(0);
-    position: static;
-    height: auto;
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-
-  .overlay {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: none;
-  }
+if (overlay) {
+  overlay.addEventListener('click', toggleSidebar);
 }
+
 
 
