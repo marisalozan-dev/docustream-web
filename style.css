@@ -1,4 +1,6 @@
-/* RESET */
+/* ========================================================= */
+/* RESET                                                     */
+/* ========================================================= */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +14,9 @@ body {
   line-height: 1.6;
 }
 
-/* LANGUAGE SWITCHER */
+/* ========================================================= */
+/* LANGUAGE SWITCHER                                         */
+/* ========================================================= */
 .lang-switcher {
   display: flex;
   justify-content: flex-end;
@@ -35,7 +39,9 @@ body {
   color: #fff;
 }
 
-/* HERO */
+/* ========================================================= */
+/* HERO                                                      */
+/* ========================================================= */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -43,6 +49,7 @@ body {
   padding: 80px 10%;
   background: #f8f8f8;
   gap: 40px;
+  animation: fadeIn 0.8s ease-out;
 }
 
 .hero-content {
@@ -52,11 +59,13 @@ body {
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 10px;
+  animation: slideDown 0.6s ease-out;
 }
 
 .subtitle {
   font-size: 1.1rem;
   margin-bottom: 24px;
+  opacity: 0.85;
 }
 
 .hero-buttons {
@@ -73,6 +82,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: 0.25s;
 }
 
 .btn.primary {
@@ -80,81 +90,5 @@ body {
   color: #fff;
 }
 
-.btn.secondary {
-  background: #fff;
-  color: #000;
-  border: 2px solid #000;
-}
-
-.hero-graphic img {
-  max-width: 380px;
-  width: 100%;
-}
-
-/* PROBLEM */
-.problem {
-  padding: 70px 10%;
-}
-
-.problem h2 {
-  font-size: 1.8rem;
-}
-
-.problem-title {
-  font-size: 1.4rem;
-  margin: 10px 0 15px;
-}
-
-.problem-text {
-  max-width: 640px;
-}
-
-.problem ul {
-  list-style: none;
-  margin-top: 20px;
-}
-
-.problem ul li {
-  margin-bottom: 10px;
-}
-
-/* SOLUTION */
-.solution {
-  padding: 70px 10%;
-  background: #fafafa;
-}
-
-.solution p {
-  max-width: 640px;
-}
-
-.solution-grid {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  padding: 20px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .hero {
-    flex-direction: column;
-    text-align: left;
-    gap: 30px;
-  }
-
-  .hero-graphic img {
-    max-width: 260px;
-  }
-
-  .solution-grid {
-    grid-template-columns: 1fr;
-  }
-}
+.btn.primary:hover {
+  background
