@@ -91,14 +91,29 @@ body.dark .menu-toggle span::after {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   padding: 2rem 1rem;
-  transform: translateX(0);
+  transform: translateX(-100%); /* OCULTA por defecto */
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   z-index: 1002;
 }
 
 .sidebar.open {
-  transform: translateX(0);
+  transform: translateX(0); /* SE ABRE */
   box-shadow: 8px 0 25px rgba(0,0,0,0.45);
+}
+
+/* Sidebar SIEMPRE visible en escritorio */
+@media (min-width: 900px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .overlay {
+    display: none;
+  }
 }
 
 .sidebar-logo {
@@ -157,35 +172,6 @@ body.dark .menu-toggle span::after {
   .content {
     margin-left: 260px;
   }
-}
-
-/* ---------------------------------------------------
-   BOTÓN MODO OSCURO
---------------------------------------------------- */
-.dark-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: none;
-  background: #222;
-  color: #fff;
-  font-size: 0.85rem;
-  cursor: pointer;
-  z-index: 1100;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  transition: background 0.25s ease, transform 0.15s ease;
-}
-
-.dark-toggle:hover {
-  background: #444;
-  transform: translateY(-1px);
-}
-
-body.dark .dark-toggle {
-  background: #f0f0f0;
-  color: #000;
 }
 
 /* ---------------------------------------------------
@@ -490,13 +476,6 @@ body.dark .tooltip-heat {
 }
 
 /* ---------------------------------------------------
-   ESPACIADO ENTRE SECCIONES
---------------------------------------------------- */
-section {
-  margin-bottom: 3rem;
-}
-
-/* ---------------------------------------------------
    FOOTER
 --------------------------------------------------- */
 .site-footer {
@@ -574,6 +553,7 @@ body.dark .footer-subtitle {
     right: 4.5rem;
   }
 }
+
 
 
 
