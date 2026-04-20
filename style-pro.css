@@ -57,6 +57,28 @@ body.dark .donut-label {
   background: rgba(255,255,255,0.12);
   transform: translateX(4px);
 }
+/* --- DONUT PRO --- */
+
+.donut-container {
+  width: 260px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.donut-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  pointer-events: none;
+}
+
+body.dark .donut-label {
+  color: #f0f0f0;
+}
 
 <div id="overlay" class="overlay"></div>
 
