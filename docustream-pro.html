@@ -7,6 +7,30 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style-pro.css?v=3">
+  <style>
+  /* Fuerza a ignorar cualquier CSS heredado */
+  body {
+    background: #f8f7f4 !important;
+    color: #222 !important;
+  }
+
+  /* Sidebar oculta por defecto en móvil */
+  .sidebar {
+    transform: translateX(-100%) !important;
+  }
+
+  /* Sidebar abierta */
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  /* Overlay visible */
+  .overlay.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+</style>
+
 
   <!-- Librerías necesarias -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
