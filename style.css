@@ -1,39 +1,18 @@
-/* ---------------------------------------------------------
-   VARIABLES
---------------------------------------------------------- */
-:root {
-    --bg: #ffffff;
-    --text: #222;
-    --accent: #00d8a0;
-    --card: #f5f5f5;
-}
-
-[data-theme="dark"] {
-    --bg: #111;
-    --text: #eee;
-    --accent: #4ef0c3;
-    --card: #1a1a1a;
-}
-
-/* ---------------------------------------------------------
-   BASE
---------------------------------------------------------- */
-body {
+/* RESET */
+* {
     margin: 0;
-    font-family: system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111;
     line-height: 1.6;
 }
 
-img {
-    max-width: 100%;
-    display: block;
-}
-
-/* ---------------------------------------------------------
-   NAV
---------------------------------------------------------- */
+/* NAV */
 .nav {
     display: flex;
     justify-content: space-between;
@@ -42,119 +21,60 @@ img {
 }
 
 #logo {
-    width: 42px;
+    height: 40px;
 }
 
-#themeToggle {
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-}
-
-/* ---------------------------------------------------------
-   HERO
---------------------------------------------------------- */
+/* HERO */
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 80px 10%;
+    padding: 60px 10%;
     gap: 40px;
 }
 
 .hero-content {
-    max-width: 520px;
+    max-width: 500px;
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
 }
 
 .hero p {
     font-size: 1.2rem;
-    margin-bottom: 24px;
+    margin-bottom: 25px;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 14px;
+    gap: 15px;
 }
 
 .btn {
-    background: var(--accent);
+    background: #00c896;
+    color: #fff;
     padding: 12px 22px;
     border-radius: 8px;
-    color: #fff;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .btn-secondary {
+    background: #eee;
+    color: #111;
     padding: 12px 22px;
     border-radius: 8px;
-    border: 2px solid var(--accent);
-    color: var(--accent);
     text-decoration: none;
-    font-weight: 600;
 }
 
 .hero-img {
-    max-width: 420px;
+    width: 420px;
+    max-width: 100%;
 }
 
-/* ---------------------------------------------------------
-   SECCIÓN “LA SOLUCIÓN”
---------------------------------------------------------- */
-.section {
-    padding: 80px 10%;
-    text-align: center;
-}
-
-.section h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.section p {
-    max-width: 640px;
-    margin: 0 auto 40px;
-}
-
-.features {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card {
-    padding: 20px;
-    background: var(--card);
-    border-radius: 10px;
-    border: 1px solid #e0e0e0;
-    min-width: 180px;
-    font-weight: 600;
-}
-
-/* ---------------------------------------------------------
-   RESPONSIVE
---------------------------------------------------------- */
-@media (max-width: 900px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-img {
-        max-width: 300px;
-    }
-
-    .features {
-        flex-direction: column;
-        align-items: center;
-    }
-}
+/* DIAGRAMA DEBAJO DEL HERO */
 .diagram-section {
     padding: 40px 10%;
     display: flex;
@@ -164,8 +84,28 @@ img {
 .diagram-img {
     max-width: 600px;
     width: 100%;
-    margin: auto;
 }
+
+/* SECCIÓN SOLUCIÓN */
+.section {
+    padding: 60px 10%;
+}
+
+.features {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
 
 
 
