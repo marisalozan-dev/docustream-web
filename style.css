@@ -1,0 +1,177 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #ffffff;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* LANGUAGE SWITCHER */
+.lang-switcher {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 10%;
+}
+
+.lang-btn {
+  padding: 6px 14px;
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.lang-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 10%;
+  background: #f8f8f8;
+  gap: 40px;
+}
+
+.hero-content {
+  max-width: 520px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+}
+
+.btn {
+  padding: 11px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
+}
+
+.btn.primary {
+  background: #000;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #333;
+}
+
+.btn.secondary {
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+}
+
+.btn.secondary:hover {
+  background: #000;
+  color: #fff;
+}
+
+.hero-graphic img {
+  max-width: 380px;
+  width: 100%;
+}
+
+/* PROBLEM */
+.problem {
+  padding: 70px 10%;
+}
+
+.problem h2 {
+  font-size: 1.8rem;
+}
+
+.problem-title {
+  font-size: 1.4rem;
+  margin: 10px 0 15px;
+}
+
+.problem-text {
+  max-width: 640px;
+}
+
+.problem ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.problem ul li {
+  margin-bottom: 10px;
+}
+
+/* SOLUTION */
+.solution {
+  padding: 70px 10%;
+  background: #fafafa;
+}
+
+.solution p {
+  max-width: 640px;
+}
+
+.solution-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: left;
+    gap: 30px;
+  }
+
+  .hero-graphic img {
+    max-width: 260px;
+  }
+
+  .solution-grid {
+    grid-template-columns: 1fr;
+  }
+}
