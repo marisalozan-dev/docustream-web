@@ -237,4 +237,27 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* Ajuste fino del hero visual */
+.hero-graphic img {
+  max-width: 520px;
+  width: 100%;
+  height: auto;
+  margin-top: -20px;
+  opacity: 0;
+  animation: fadeInHero 1.2s ease-out forwards;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-graphic img {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+}
+
 
