@@ -1,1 +1,2 @@
-darkmode-pro.js
+// Placeholder para modo oscuro
+
