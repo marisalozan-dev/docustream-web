@@ -259,5 +259,137 @@ body {
     margin: 0 auto;
   }
 }
+/* ========================= */
+/* CÓMO FUNCIONA             */
+/* ========================= */
+.how {
+  padding: 90px 10%;
+  background: #fff;
+}
+
+.how h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.how-step {
+  background: #f8f8f8;
+  padding: 30px;
+  border-radius: 14px;
+  border: 1px solid #e5e5e5;
+  transition: 0.3s;
+}
+
+.how-step:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.step-number {
+  display: inline-block;
+  background: var(--mint);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
+}
+<section id="tech" class="tech">
+  <h2>Tecnología DocuStream</h2>
+
+  <div class="tech-grid">
+
+    <div class="tech-item">
+      <span class="tech-icon">🧠</span>
+      <h3>IA Semántica</h3>
+      <p>Comprende relaciones entre documentos y conceptos clave.</p>
+    </div>
+
+    <div class="tech-item">
+      <span class="tech-icon">📊</span>
+      <h3>Big Data</h3>
+      <p>Analiza uso real, patrones y métricas de comportamiento.</p>
+    </div>
+
+    <div class="tech-item">
+      <span class="tech-icon">🔗</span>
+      <h3>Grafos</h3>
+      <p>Visualiza conexiones y dependencias entre procesos.</p>
+    </div>
+
+    <div class="tech-item">
+      <span class="tech-icon">⚙️</span>
+      <h3>Automatización</h3>
+      <p>Actualiza y alerta sobre cambios críticos en tiempo real.</p>
+    </div>
+
+  </div>
+</section>
+/* ========================= */
+/* TECNOLOGÍA                */
+/* ========================= */
+.tech {
+  padding: 90px 10%;
+  background: var(--gray-light);
+}
+
+.tech h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.tech-item {
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.tech-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.tech-icon {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 900px) {
+  .tech-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
