@@ -69,5 +69,13 @@ body {
     border-radius: 14px;
     margin-top: 20px;
 }
+#graphCanvas,
+#heatmapCanvas {
+    min-height: 400px;
+    height: 400px;
+    width: 100%;
+    display: block;
+}
+
 
 
