@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>DocuStream PRO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style-pro.css">
+</head>
+
+<body class="dark">
+
+  <!-- BOTÓN HAMBURGUESA -->
+  <button id="menuToggle" class="menu-toggle">☰</button>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>DocuStream PRO</h2>
+    <ul>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#graph">Grafo semántico</a></li>
+      <li><a href="#heatmap">Heatmap</a></li>
+    </ul>
+  </aside>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="content">
+
+    <section class="hero-pro">
+      <h1>DocuStream PRO</h1>
+      <p>Plataforma de analítica documental con KPIs, grafo semántico y heatmaps de comportamiento.</p>
+      <a href="#dashboard" class="btn primary">Ver dashboard interactivo</a>
+    </section>
+
+    <section id="dashboard" class="kpis">
+      <div class="kpi-card">
+        <h3>98%</h3>
+        <p>SLA cumplido</p>
+      </div>
+
+      <div class="kpi-card">
+        <h3>42ms</h3>
+        <p>Tiempo de consulta</p>
+      </div>
+
+      <div class="kpi-card">
+        <h3>38%</h3>
+        <p>Secciones ignoradas</p>
+      </div>
+    </section>
+
+    <section id="graph" class="panel">
+      <h2>Grafo semántico</h2>
+      <div id="graphContainer"></div>
+    </section>
+
+    <section id="heatmap" class="panel">
+      <h2>Heatmap de comportamiento</h2>
+      <div id="heatmapContainer"></div>
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script src="js/sidebar-pro.js"></script>
+  <script src="js/darkmode-pro.js"></script>
+  <script src="js/dashboard-pro.js"></script>
+  <script src="js/graph-pro.js"></script>
+  <script src="js/heatmap-pro.js"></script>
+</body>
+</html>
 
