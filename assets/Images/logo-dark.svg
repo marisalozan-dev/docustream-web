@@ -1,0 +1,15 @@
+<svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="8" fill="#4EF0C3"/>
+  <circle cx="100" cy="40" r="8" fill="#4EF0C3"/>
+  <circle cx="40" cy="100" r="8" fill="#4EF0C3"/>
+  <circle cx="100" cy="100" r="8" fill="#4EF0C3"/>
+  <circle cx="70" cy="70" r="10" fill="#4EF0C3"/>
+
+  <line x1="40" y1="40" x2="70" y2="70" stroke="#4EF0C3" stroke-width="4"/>
+  <line x1="100" y1="40" x2="70" y2="70" stroke="#4EF0C3" stroke-width="4"/>
+  <line x1="40" y1="100" x2="70" y2="70" stroke="#4EF0C3" stroke-width="4"/>
+  <line x1="100" y1="100" x2="70" y2="70" stroke="#4EF0C3" stroke-width="4"/>
+
+  <!-- Contorno de la D -->
+  <path d="M20 20 H60 Q110 20 110 70 Q110 120 60 120 H20 Z" stroke="#4EF0C3" stroke-width="6" fill="none"/>
+</svg>
