@@ -5,19 +5,29 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: #ffffff;
     color: #111;
     line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* NAV */
 .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 10%;
+    z-index: 1000;
 }
 
 #logo {
@@ -35,6 +45,7 @@ body {
 
 .hero-content {
     max-width: 500px;
+    animation: fadeIn 0.8s ease-out;
 }
 
 .hero h1 {
@@ -59,6 +70,11 @@ body {
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
 }
 
 .btn-secondary {
@@ -72,9 +88,10 @@ body {
 .hero-img {
     width: 420px;
     max-width: 100%;
+    animation: float 4s ease-in-out infinite;
 }
 
-/* DIAGRAMA DEBAJO DEL HERO */
+/* DIAGRAMA */
 .diagram-section {
     padding: 40px 10%;
     display: flex;
@@ -104,7 +121,43 @@ body {
     border-radius: 10px;
     text-align: center;
     font-weight: bold;
+    transition: transform 0.2s;
 }
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* DARK MODE */
+body.dark {
+    background: #111;
+    color: #eee;
+}
+
+body.dark .nav {
+    background: rgba(0,0,0,0.7);
+}
+
+body.dark .btn-secondary {
+    background: #333;
+    color: #eee;
+}
+
+body.dark .card {
+    background: #222;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 
 
 
