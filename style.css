@@ -155,6 +155,18 @@ img {
         align-items: center;
     }
 }
+.diagram-section {
+    padding: 40px 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.diagram-img {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+}
+
 
 
 
