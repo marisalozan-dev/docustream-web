@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DocuStream – Documentación Viva</title>
+
+  <!-- SEO -->
+  <title>DocuStream – Documentación Viva impulsada por IA y Big Data</title>
+  <meta name="description" content="DocuStream convierte tu documentación en un sistema vivo con IA, Big Data, grafos y análisis inteligente. Reduce errores, detecta obsolescencia y optimiza procesos.">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="DocuStream – Documentación Viva" />
+  <meta property="og:description" content="Documentación viva impulsada por IA y Big Data." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/Images/hero-visual.svg" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -20,7 +31,7 @@
   <!-- ========================= -->
   <div id="es" class="lang active">
 
-    <!-- HERO PRO -->
+    <!-- HERO -->
     <header class="hero fade-in">
       <div class="hero-content">
         <h1>Documentación Viva impulsada por IA y Big Data</h1>
@@ -37,13 +48,11 @@
       </div>
 
       <div class="hero-graphic">
-        <img src="recursos/imagenes/hero-visual.svg" alt="Flujo documental inteligente">
+        <img src="assets/Images/hero-visual.svg" alt="Flujo documental inteligente">
       </div>
     </header>
 
-    <!-- ========================= -->
-    <!-- LA SOLUCIÓN               -->
-    <!-- ========================= -->
+    <!-- SOLUCIÓN -->
     <section id="solution" class="solution fade-in">
       <h2>La solución</h2>
       <p>
@@ -59,9 +68,7 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- CÓMO FUNCIONA             -->
-    <!-- ========================= -->
+    <!-- CÓMO FUNCIONA -->
     <section id="how" class="how fade-in">
       <h2>Cómo funciona</h2>
 
@@ -86,9 +93,7 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- TECNOLOGÍA                -->
-    <!-- ========================= -->
+    <!-- TECNOLOGÍA -->
     <section id="tech" class="tech fade-in">
       <h2>Tecnología DocuStream</h2>
 
@@ -121,9 +126,7 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- CASOS DE USO              -->
-    <!-- ========================= -->
+    <!-- CASOS DE USO -->
     <section class="usecases fade-in">
       <h2>Casos de uso</h2>
 
@@ -145,9 +148,7 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- POR QUÉ DOCUSTREAM        -->
-    <!-- ========================= -->
+    <!-- POR QUÉ DOCUSTREAM -->
     <section class="why fade-in">
       <h2>¿Por qué DocuStream?</h2>
 
@@ -159,18 +160,14 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- CTA FINAL                 -->
-    <!-- ========================= -->
+    <!-- CTA FINAL -->
     <section class="cta fade-in">
       <h2>¿Lista para transformar tu documentación?</h2>
       <p>DocuStream convierte tus documentos en un sistema vivo y conectado.</p>
       <a href="docustream-pro.html" class="btn primary cta-btn">Ver demo PRO</a>
     </section>
 
-    <!-- ========================= -->
-    <!-- FOOTER                    -->
-    <!-- ========================= -->
+    <!-- FOOTER -->
     <footer class="footer fade-in">
       <p>© 2026 DocuStream · Documentación Viva</p>
     </footer>
@@ -178,10 +175,37 @@
   </div>
 
   <!-- ========================= -->
-  <!-- INGLÉS (MISMO CONTENIDO)  -->
+  <!-- INGLÉS                    -->
   <!-- ========================= -->
-  <!-- (Por brevedad, si quieres te genero la versión EN completa también) -->
+  <div id="en" class="lang">
 
+    <header class="hero fade-in">
+      <div class="hero-content">
+        <h1>Living Documentation powered by AI and Big Data</h1>
+
+        <p class="subtitle">
+          DocuStream automates, connects and brings your documents to life with intelligent
+          analysis, dynamic flows and obsolescence prediction.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="docustream-pro.html" class="btn primary">View PRO demo</a>
+          <a href="#solution" class="btn secondary">How it works</a>
+        </div>
+      </div>
+
+      <div class="hero-graphic">
+        <img src="assets/Images/hero-visual.svg" alt="Intelligent document flow">
+      </div>
+    </header>
+
+    <!-- (El resto de secciones en inglés se pueden generar si quieres) -->
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- JS: Animaciones + Idioma  -->
+  <!-- ========================= -->
   <script>
     function switchLang(lang) {
       document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
@@ -201,5 +225,6 @@
 
 </body>
 </html>
+
 
 
