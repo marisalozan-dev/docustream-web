@@ -1,16 +1,229 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>DocuStream – Documentación Viva con Big Data</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuStream – Documentación Viva</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-  <link rel="stylesheet" href="style.css">
+<body>
 
-  <style>
-    .lang { display: none; }
-    .lang.active { display: block; }
-  </style>
+  <!-- Selector de idioma -->
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="switchLang('es')">ES</button>
+    <button class="lang-btn" onclick="switchLang('en')">EN</button>
+  </div>
+
+  <!-- ========================= -->
+  <!-- ESPAÑOL                   -->
+  <!-- ========================= -->
+  <div id="es" class="lang active">
+
+    <!-- HERO PRO -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Documentación Viva impulsada por IA y Big Data</h1>
+
+        <p class="subtitle">
+          DocuStream automatiza, conecta y da vida a tus documentos con análisis inteligente,
+          flujos dinámicos y predicción de obsolescencia.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="docustream-pro.html" class="btn primary">Ver demo PRO</a>
+          <a href="#solution" class="btn secondary">Cómo funciona</a>
+        </div>
+      </div>
+
+      <div class="hero-graphic">
+        <img src="recursos/imagenes/hero-visual.svg" alt="Flujo documental inteligente">
+      </div>
+    </header>
+
+    <!-- ========================= -->
+    <!-- LA SOLUCIÓN               -->
+    <!-- ========================= -->
+    <section id="solution" class="solution">
+      <h2>La solución</h2>
+      <p>
+        DocuStream convierte la documentación en un sistema vivo: analiza uso real,  
+        detecta obsolescencia y genera insights accionables.
+      </p>
+
+      <div class="solution-grid">
+        <div class="card"><h3>🔍 Análisis de uso</h3></div>
+        <div class="card"><h3>🧠 Grafo semántico</h3></div>
+        <div class="card"><h3>🔥 Heatmaps</h3></div>
+        <div class="card"><h3>⏳ Predicción</h3></div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- CÓMO FUNCIONA             -->
+    <!-- ========================= -->
+    <section id="how" class="how">
+      <h2>Cómo funciona</h2>
+
+      <div class="how-grid">
+        <div class="how-step">
+          <span class="step-number">1</span>
+          <h3>Conecta tu documentación</h3>
+          <p>Importa tus documentos y procesos. DocuStream los analiza automáticamente.</p>
+        </div>
+
+        <div class="how-step">
+          <span class="step-number">2</span>
+          <h3>El motor semántico detecta patrones</h3>
+          <p>Identifica relaciones, uso real, obsolescencia y puntos críticos.</p>
+        </div>
+
+        <div class="how-step">
+          <span class="step-number">3</span>
+          <h3>Recibe insights accionables</h3>
+          <p>Recomendaciones inteligentes para mejorar procesos y reducir errores.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- TECNOLOGÍA                -->
+    <!-- ========================= -->
+    <section id="tech" class="tech">
+      <h2>Tecnología DocuStream</h2>
+
+      <div class="tech-grid">
+
+        <div class="tech-item">
+          <span class="tech-icon">🧠</span>
+          <h3>IA Semántica</h3>
+          <p>Comprende relaciones entre documentos y conceptos clave.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">📊</span>
+          <h3>Big Data</h3>
+          <p>Analiza uso real, patrones y métricas de comportamiento.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">🔗</span>
+          <h3>Grafos</h3>
+          <p>Visualiza conexiones y dependencias entre procesos.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">⚙️</span>
+          <h3>Automatización</h3>
+          <p>Actualiza y alerta sobre cambios críticos en tiempo real.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- INGLÉS                    -->
+  <!-- ========================= -->
+  <div id="en" class="lang">
+
+    <!-- HERO PRO (EN) -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Living Documentation powered by AI and Big Data</h1>
+
+        <p class="subtitle">
+          DocuStream automates, connects and brings your documents to life with intelligent
+          analysis, dynamic flows and obsolescence prediction.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="docustream-pro.html" class="btn primary">View PRO demo</a>
+          <a href="#solution" class="btn secondary">How it works</a>
+        </div>
+      </div>
+
+      <div class="hero-graphic">
+        <img src="recursos/imagenes/hero-visual.svg" alt="Intelligent document flow">
+      </div>
+    </header>
+
+    <!-- SOLUTION (EN) -->
+    <section class="solution">
+      <h2>The solution</h2>
+      <p>
+        DocuStream turns documentation into a living system: it analyzes real usage,
+        detects obsolescence and generates actionable insights.
+      </p>
+
+      <div class="solution-grid">
+        <div class="card"><h3>🔍 Usage analysis</h3></div>
+        <div class="card"><h3>🧠 Semantic graph</h3></div>
+        <div class="card"><h3>🔥 Heatmaps</h3></div>
+        <div class="card"><h3>⏳ Prediction</h3></div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (EN) -->
+    <section class="how">
+      <h2>How it works</h2>
+
+      <div class="how-grid">
+        <div class="how-step">
+          <span class="step-number">1</span>
+          <h3>Connect your documentation</h3>
+          <p>Import your documents and processes. DocuStream analyzes them automatically.</p>
+        </div>
+
+        <div class="how-step">
+          <span class="step-number">2</span>
+          <h3>The semantic engine detects patterns</h3>
+          <p>Identifies relationships, real usage, obsolescence and critical points.</p>
+        </div>
+
+        <div class="how-step">
+          <span class="step-number">3</span>
+          <h3>Receive actionable insights</h3>
+          <p>Intelligent recommendations to improve processes and reduce errors.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGY (EN) -->
+    <section class="tech">
+      <h2>DocuStream Technology</h2>
+
+      <div class="tech-grid">
+
+        <div class="tech-item">
+          <span class="tech-icon">🧠</span>
+          <h3>Semantic AI</h3>
+          <p>Understands relationships between documents and key concepts.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">📊</span>
+          <h3>Big Data</h3>
+          <p>Analyzes real usage, patterns and behavior metrics.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">🔗</span>
+          <h3>Graphs</h3>
+          <p>Visualizes connections and dependencies between processes.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">⚙️</span>
+          <h3>Automation</h3>
+          <p>Updates and alerts about critical changes in real time.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
 
   <script>
     function switchLang(lang) {
@@ -18,156 +231,7 @@
       document.getElementById(lang).classList.add('active');
     }
   </script>
-</head>
-
-<body>
-
-  <!-- SELECTOR DE IDIOMA -->
-  <div class="lang-switcher">
-    <button onclick="switchLang('es')" class="lang-btn">ES</button>
-    <button onclick="switchLang('en')" class="lang-btn">EN</button>
-  </div>
-
-  <!-- ================= ESPAÑOL ================= -->
-  <div id="es" class="lang active">
-
-  <header class="hero">
-  <div class="hero-content">
-    <h1>DocuStream</h1>
-    <p class="subtitle">
-      Documentación viva impulsada por Big Data.  
-      El primer sistema que predice obsolescencia, entiende relaciones semánticas  
-      y se adapta al lector en tiempo real.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="docustream-pro.html" class="btn primary">Ver demo PRO</a>
-    </div>
-  </div>
-
-  <div class="hero-graphic">
-    <img src="recursos/imagenes/hero-visual.svg" alt="Flujo documental inteligente">
-
-  </div>
-</header>
-
-
-    <section class="problem">
-      <h2>El problema</h2>
-      <p class="problem-title">La documentación empresarial muere en silencio</p>
-
-      <p class="problem-text">
-        El 73% de los empleados admite haber seguido un proceso desactualizado  
-        por falta de alertas oportunas.
-      </p>
-
-      <ul>
-        <li>⚠️ Documentos estáticos</li>
-        <li>⚠️ Sin alertas</li>
-        <li>⚠️ Sin trazabilidad</li>
-      </ul>
-    </section>
-
-   <section class="solution">
-  <h2>La solución</h2>
-  <p>
-    DocuStream convierte la documentación en un sistema vivo: analiza uso real,  
-    detecta obsolescencia y genera insights accionables.
-  </p>
-
-  <div class="solution-grid">
-    <div class="card"><h3>🔍 Análisis de uso</h3></div>
-    <div class="card"><h3>🧠 Grafo semántico</h3></div>
-    <div class="card"><h3>🔥 Heatmaps</h3></div>
-    <div class="card"><h3>⏳ Predicción</h3></div>
-  </div>
-</section>
-
-<!-- AQUÍ VA “Cómo funciona” -->
-<section id="how" class="how">
-  <h2>Cómo funciona</h2>
-
-  <div class="how-grid">
-    <div class="how-step">
-      <span class="step-number">1</span>
-      <h3>Conecta tu documentación</h3>
-      <p>Importa tus documentos y procesos. DocuStream los analiza automáticamente.</p>
-    </div>
-
-    <div class="how-step">
-      <span class="step-number">2</span>
-      <h3>El motor semántico detecta patrones</h3>
-      <p>Identifica relaciones, uso real, obsolescencia y puntos críticos.</p>
-    </div>
-
-    <div class="how-step">
-      <span class="step-number">3</span>
-      <h3>Recibe insights accionables</h3>
-      <p>Recomendaciones inteligentes para mejorar procesos y reducir errores.</p>
-    </div>
-  </div>
-</section>
-
-
-
-  <!-- ================= ENGLISH ================= -->
-  <div id="en" class="lang">
-
- <header class="hero">
-  <div class="hero-content">
-    <h1>Living Documentation powered by AI and Big Data</h1>
-
-    <p class="subtitle">
-      DocuStream automates, connects and brings your documents to life with intelligent
-      analysis, dynamic flows and obsolescence prediction.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="docustream-pro.html" class="btn primary">View PRO demo</a>
-      <a href="#solution" class="btn secondary">How it works</a>
-    </div>
-  </div>
-
-  <div class="hero-graphic">
-    <img src="recursos/imagenes/hero-visual.svg" alt="Flujo documental inteligente">
-
-  </div>
-</header>
-
-
-
-    <section class="problem">
-      <h2>The problem</h2>
-      <p class="problem-title">Business documentation dies silently</p>
-
-      <p class="problem-text">
-        73% of employees admit they have followed an outdated process  
-        due to the lack of timely alerts.
-      </p>
-
-      <ul>
-        <li>⚠️ Static documents</li>
-        <li>⚠️ No alerts</li>
-        <li>⚠️ No traceability</li>
-      </ul>
-    </section>
-
-    <section class="solution">
-      <h2>The solution</h2>
-      <p>
-        DocuStream turns documentation into a living system: it analyzes real usage,  
-        detects obsolescence and generates actionable insights.
-      </p>
-
-      <div class="solution-grid">
-        <div class="card"><h3>🔍 Usage analytics</h3></div>
-        <div class="card"><h3>🧠 Semantic graph</h3></div>
-        <div class="card"><h3>🔥 Heatmaps</h3></div>
-        <div class="card"><h3>⏳ Prediction</h3></div>
-      </div>
-    </section>
-
-  </div>
 
 </body>
 </html>
+
