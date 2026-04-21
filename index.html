@@ -9,12 +9,25 @@
 
 <body>
 
-<header class="hero">
-    <nav class="nav">
+<header class="nav">
+    <div class="nav-left">
         <img id="logo" src="assets/images/logo-light.svg" alt="DocuStream Logo">
-        <button id="themeToggle">🌙</button>
-    </nav>
+    </div>
 
+    <div class="nav-right">
+        <button id="themeToggle">🌙</button>
+        <a href="en/index-en.html" class="lang">EN</a>
+        <button id="menuToggle" class="hamburger">☰</button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#solucion">Cómo funciona</a>
+        <a href="docustream-pro.html">Demo PRO</a>
+        <a href="en/index-en.html">English</a>
+    </div>
+</header>
+
+<section class="hero">
     <div class="hero-content">
         <h1>Documentación Inteligente impulsada por IA</h1>
         <p>Transforma documentos complejos en conocimiento estructurado, visual y accionable.</p>
@@ -26,13 +39,13 @@
     </div>
 
     <img src="assets/images/hero-visual.svg" class="hero-img" alt="Visual IA">
-</header>
-
-<section class="section diagram-section">
-    <img src="assets/images/hero-visual.svg" alt="Flujo Documental Inteligente" class="diagram-img">
 </section>
 
-<section id="solucion" class="section">
+<section class="section diagram-section">
+    <img src="assets/images/hero-visual.svg" alt="Flujo Documental Inteligente" class="diagram-img reveal">
+</section>
+
+<section id="solucion" class="section reveal">
     <h2>La solución</h2>
     <p>DocuStream convierte documentación técnica en grafos semánticos, insights y paneles interactivos.</p>
 
@@ -43,9 +56,21 @@
     </div>
 </section>
 
-<script src="assets/js/pro.js"></script>
+<footer class="footer">
+    <p>© 2026 DocuStream — Creado por Marisa Lozano Arroyo</p>
+    <div class="footer-links">
+        <a href="index.html">ES</a>
+        <a href="en/index-en.html">EN</a>
+        <a href="#solucion">Cómo funciona</a>
+        <a href="docustream-pro.html">Demo PRO</a>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+
 
 
 
