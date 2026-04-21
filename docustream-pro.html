@@ -3,63 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuStream PRO — Dashboard</title>
+    <title>DocuStream PRO — Demo Interactiva</title>
     <link rel="stylesheet" href="style-pro.css">
 </head>
 
 <body>
 
-<div class="layout">
+<header class="nav">
+    <img id="logo" src="assets/images/logo-light.svg" alt="DocuStream Logo">
+    <a href="index.html" class="back">← Volver</a>
+</header>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <img id="logo" src="assets/images/logo-light.svg" class="logo">
+<section class="hero-pro">
+    <h1>Demo PRO de DocuStream</h1>
+    <p>Explora cómo la IA transforma documentación técnica en conocimiento accionable.</p>
+</section>
 
-        <nav>
-            <button class="menu-item active" data-panel="dashboard">Dashboard</button>
-            <button class="menu-item" data-panel="graph">Grafo Semántico</button>
-            <button class="menu-item" data-panel="heatmap">Heatmap</button>
-            <button class="menu-item" data-panel="docs">Documentos Críticos</button>
-            <button class="menu-item" data-panel="alerts">Alertas</button>
-            <button class="menu-item" data-panel="config">Configuración</button>
-        </nav>
-    </aside>
+<section class="canvas-section">
+    <div class="canvas-container">
+        <canvas id="proCanvas"></canvas>
+    </div>
 
-    <!-- CONTENIDO -->
-    <main class="content">
+    <div class="controls">
+        <button class="btn" id="resetBtn">Reiniciar</button>
+        <button class="btn" id="randomBtn">Aleatorizar</button>
+        <button class="btn" id="darkBtn">Modo Oscuro</button>
+    </div>
+</section>
 
-        <!-- DASHBOARD -->
-        <section id="dashboard" class="panel active">
-            <h2>Documentos procesados</h2>
-            <canvas id="chartDocs"></canvas>
-        </section>
-
-        <!-- GRAFO -->
-        <section id="graph" class="panel">
-            <h2>Grafo Semántico</h2>
-            <canvas id="graphCanvas"></canvas>
-        </section>
-
-        <!-- HEATMAP -->
-        <section id="heatmap" class="panel">
-            <h2>Heatmap de Frecuencias</h2>
-            <canvas id="heatmapCanvas"></canvas>
-        </section>
-
-        <!-- CONFIG -->
-        <section id="config" class="panel">
-            <h2>Configuración</h2>
-            <button id="configThemeToggle" class="btn">Cambiar modo</button>
-        </section>
-
-    </main>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="assets/js/pro.js"></script>
-
 </body>
 </html>
+
 
 
 
