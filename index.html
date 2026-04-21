@@ -20,6 +20,18 @@
 
 <body>
 
+  <!-- NAVBAR -->
+  <header class="top-nav">
+    <div class="nav-logo">DocuStream</div>
+    <nav class="nav-links">
+      <a href="#solution">Solución</a>
+      <a href="#how">Cómo funciona</a>
+      <a href="#tech">Tecnología</a>
+      <a href="#usecases">Casos de uso</a>
+      <a href="#cta">Empezar</a>
+    </nav>
+  </header>
+
   <!-- Selector de idioma -->
   <div class="lang-switcher">
     <button class="lang-btn" onclick="switchLang('es')">ES</button>
@@ -29,10 +41,10 @@
   <!-- ========================= -->
   <!-- ESPAÑOL                   -->
   <!-- ========================= -->
-  <div id="es" class="lang active">
+  <main id="es" class="lang active">
 
     <!-- HERO -->
-    <header class="hero fade-in">
+    <section class="hero fade-in">
       <div class="hero-content">
         <h1>Documentación Viva impulsada por IA y Big Data</h1>
 
@@ -50,7 +62,7 @@
       <div class="hero-graphic">
         <img src="assets/Images/hero-visual.svg" alt="Flujo documental inteligente">
       </div>
-    </header>
+    </section>
 
     <!-- SOLUCIÓN -->
     <section id="solution" class="solution fade-in">
@@ -127,7 +139,7 @@
     </section>
 
     <!-- CASOS DE USO -->
-    <section class="usecases fade-in">
+    <section id="usecases" class="usecases fade-in">
       <h2>Casos de uso</h2>
 
       <div class="use-grid">
@@ -161,7 +173,7 @@
     </section>
 
     <!-- CTA FINAL -->
-    <section class="cta fade-in">
+    <section id="cta" class="cta fade-in">
       <h2>¿Lista para transformar tu documentación?</h2>
       <p>DocuStream convierte tus documentos en un sistema vivo y conectado.</p>
       <a href="docustream-pro.html" class="btn primary cta-btn">Ver demo PRO</a>
@@ -172,14 +184,15 @@
       <p>© 2026 DocuStream · Documentación Viva</p>
     </footer>
 
-  </div>
+  </main>
 
   <!-- ========================= -->
   <!-- INGLÉS                    -->
   <!-- ========================= -->
-  <div id="en" class="lang">
+  <main id="en" class="lang">
 
-    <header class="hero fade-in">
+    <!-- HERO -->
+    <section class="hero fade-in">
       <div class="hero-content">
         <h1>Living Documentation powered by AI and Big Data</h1>
 
@@ -190,18 +203,136 @@
 
         <div class="hero-buttons">
           <a href="docustream-pro.html" class="btn primary">View PRO demo</a>
-          <a href="#solution" class="btn secondary">How it works</a>
+          <a href="#solution-en" class="btn secondary">How it works</a>
         </div>
       </div>
 
       <div class="hero-graphic">
         <img src="assets/Images/hero-visual.svg" alt="Intelligent document flow">
       </div>
-    </header>
+    </section>
 
-    <!-- (El resto de secciones en inglés se pueden generar si quieres) -->
+    <!-- SOLUTION -->
+    <section id="solution-en" class="solution fade-in">
+      <h2>The solution</h2>
+      <p>
+        DocuStream turns documentation into a living system: it analyzes real usage,
+        detects obsolescence and generates actionable insights.
+      </p>
 
-  </div>
+      <div class="solution-grid">
+        <div class="card"><h3>🔍 Usage analysis</h3></div>
+        <div class="card"><h3>🧠 Semantic graph</h3></div>
+        <div class="card"><h3>🔥 Heatmaps</h3></div>
+        <div class="card"><h3>⏳ Prediction</h3></div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how fade-in">
+      <h2>How it works</h2>
+
+      <div class="how-grid">
+        <div class="how-step">
+          <span class="step-number">1</span>
+          <h3>Connect your documentation</h3>
+          <p>Import your documents and processes. DocuStream analyzes them automatically.</p>
+        </div>
+
+        <div class="how-step">
+          <span class="step-number">2</span>
+          <h3>The semantic engine detects patterns</h3>
+          <p>Identifies relationships, real usage, obsolescence and critical points.</p>
+        </div>
+
+        <div class="how-step">
+          <span class="step-number">3</span>
+          <h3>Receive actionable insights</h3>
+          <p>Intelligent recommendations to improve processes and reduce errors.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGY -->
+    <section class="tech fade-in">
+      <h2>DocuStream Technology</h2>
+
+      <div class="tech-grid">
+
+        <div class="tech-item">
+          <span class="tech-icon">🧠</span>
+          <h3>Semantic AI</h3>
+          <p>Understands relationships between documents and key concepts.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">📊</span>
+          <h3>Big Data</h3>
+          <p>Analyzes real usage, patterns and behavior metrics.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">🔗</span>
+          <h3>Graphs</h3>
+          <p>Visualizes connections and dependencies between processes.</p>
+        </div>
+
+        <div class="tech-item">
+          <span class="tech-icon">⚙️</span>
+          <h3>Automation</h3>
+          <p>Updates and alerts about critical changes in real time.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="usecases fade-in">
+      <h2>Use cases</h2>
+
+      <div class="use-grid">
+        <div class="use-item">
+          <h3>📚 Documentation teams</h3>
+          <p>Detects which documents are obsolete and which need updates.</p>
+        </div>
+
+        <div class="use-item">
+          <h3>⚙️ Technical teams</h3>
+          <p>Identifies critical dependencies and reduces errors due to outdated documentation.</p>
+        </div>
+
+        <div class="use-item">
+          <h3>🚀 Innovation and processes</h3>
+          <p>Analyzes real flows and generates insights to optimize internal processes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY DOCUSTREAM -->
+    <section class="why fade-in">
+      <h2>Why DocuStream?</h2>
+
+      <div class="why-grid">
+        <div class="why-item">✔ Reduces errors from obsolete documentation</div>
+        <div class="why-item">✔ Saves time on documentation maintenance</div>
+        <div class="why-item">✔ Detects patterns humans don’t see</div>
+        <div class="why-item">✔ Provides real-time actionable insights</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta fade-in">
+      <h2>Ready to transform your documentation?</h2>
+      <p>DocuStream turns your documents into a living, connected system.</p>
+      <a href="docustream-pro.html" class="btn primary cta-btn">View PRO demo</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer fade-in">
+      <p>© 2026 DocuStream · Living Documentation</p>
+    </footer>
+
+  </main>
 
   <!-- ========================= -->
   <!-- JS: Animaciones + Idioma  -->
@@ -210,9 +341,26 @@
     function switchLang(lang) {
       document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
       document.getElementById(lang).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Animación scroll suave */
+    // Scroll suave para enlaces internos del navbar
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const currentLang = document.querySelector('.lang.active');
+        const target = currentLang.querySelector('#' + targetId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Animación scroll
     const faders = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -225,6 +373,7 @@
 
 </body>
 </html>
+
 
 
 
