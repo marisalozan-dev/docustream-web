@@ -1,114 +1,66 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuStream PRO — Dashboard Inteligente</title>
-
-    <!-- Fuente -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Estilos PRO -->
+    <title>DocuStream PRO — Dashboard</title>
     <link rel="stylesheet" href="style-pro.css">
 </head>
 
 <body>
 
+<div class="layout">
+
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <div class="sidebar-header">
-            <img id="logo" src="assets/images/logo-light.svg" class="logo" alt="Logo DocuStream">
-            <h2>DocuStream PRO</h2>
-        </div>
+        <img id="logo" src="assets/images/logo-light.svg" class="logo">
 
-        <nav class="menu">
-            <button class="menu-item active" data-panel="dashboard">📊 Dashboard</button>
-            <button class="menu-item" data-panel="grafo">🕸️ Grafo Semántico</button>
-            <button class="menu-item" data-panel="heatmap">🔥 Heatmap</button>
-            <button class="menu-item" data-panel="criticos">📄 Documentos Críticos</button>
-            <button class="menu-item" data-panel="alertas">⚠️ Alertas</button>
-            <button class="menu-item" data-panel="config">⚙️ Configuración</button>
+        <nav>
+            <button class="menu-item active" data-panel="dashboard">Dashboard</button>
+            <button class="menu-item" data-panel="graph">Grafo Semántico</button>
+            <button class="menu-item" data-panel="heatmap">Heatmap</button>
+            <button class="menu-item" data-panel="docs">Documentos Críticos</button>
+            <button class="menu-item" data-panel="alerts">Alertas</button>
+            <button class="menu-item" data-panel="config">Configuración</button>
         </nav>
-
-        <button id="themeToggle" class="theme-btn">🌙</button>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- CONTENIDO -->
     <main class="content">
 
-        <!-- PANEL 1: DASHBOARD -->
+        <!-- DASHBOARD -->
         <section id="dashboard" class="panel active">
-            <h1>Dashboard General</h1>
-            <canvas id="chartDocs" width="400" height="200"></canvas>
+            <h2>Documentos procesados</h2>
+            <canvas id="chartDocs"></canvas>
         </section>
 
-        <!-- PANEL 2: GRAFO -->
-        <section id="grafo" class="panel">
-            <h1>Grafo Semántico</h1>
+        <!-- GRAFO -->
+        <section id="graph" class="panel">
+            <h2>Grafo Semántico</h2>
             <canvas id="graphCanvas"></canvas>
         </section>
 
-        <!-- PANEL 3: HEATMAP -->
+        <!-- HEATMAP -->
         <section id="heatmap" class="panel">
-            <h1>Heatmap de Frecuencias</h1>
+            <h2>Heatmap de Frecuencias</h2>
             <canvas id="heatmapCanvas"></canvas>
         </section>
 
-        <!-- PANEL 4: DOCUMENTOS CRÍTICOS -->
-        <section id="criticos" class="panel">
-            <h1>Documentos Críticos</h1>
-
-            <div class="criticos-list">
-                <div class="critico-card">
-                    <h3>Informe de Seguridad 2026</h3>
-                    <p>Riesgo alto — 12 incidencias detectadas</p>
-                </div>
-
-                <div class="critico-card">
-                    <h3>Manual de Operaciones</h3>
-                    <p>Riesgo medio — 5 inconsistencias</p>
-                </div>
-
-                <div class="critico-card">
-                    <h3>Especificación Técnica API</h3>
-                    <p>Riesgo alto — 8 dependencias obsoletas</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- PANEL 5: ALERTAS -->
-        <section id="alertas" class="panel">
-            <h1>Alertas del Sistema</h1>
-
-            <div class="alerta alerta-alta">⚠️ Dependencia crítica desactualizada</div>
-            <div class="alerta alerta-media">⚠️ Documento sin clasificar detectado</div>
-            <div class="alerta alerta-baja">ℹ️ Nueva versión disponible</div>
-        </section>
-
-        <!-- PANEL 6: CONFIGURACIÓN -->
+        <!-- CONFIG -->
         <section id="config" class="panel">
-            <h1>Configuración</h1>
-
-            <div class="config-card">
-                <h3>Modo de visualización</h3>
-                <button id="configThemeToggle" class="btn-config">Cambiar modo</button>
-            </div>
-
-            <div class="config-card">
-                <h3>Preferencias</h3>
-                <p>Próximamente: idioma, accesibilidad, exportación…</p>
-            </div>
+            <h2>Configuración</h2>
+            <button id="configThemeToggle" class="btn">Cambiar modo</button>
         </section>
 
     </main>
+</div>
 
-    <!-- JS PRO -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="assets/js/pro.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/js/pro.js"></script>
 
 </body>
 </html>
+
 
 
 
