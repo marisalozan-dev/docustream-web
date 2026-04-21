@@ -1,152 +1,48 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocuStream — Documentación Inteligente</title>
-
-    <!-- Fuente moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Estilos -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <img id="logo" src="assets/images/logo-light.svg" alt="DocuStream Logo" class="logo">
-            <span class="brand">DocuStream</span>
-        </div>
-
-        <div class="nav-right">
-            <button id="themeToggle" class="theme-btn">🌙</button>
-        </div>
+<header class="hero">
+    <nav class="nav">
+        <img id="logo" src="assets/images/logo-light.svg" alt="DocuStream Logo">
+        <button id="themeToggle">🌙</button>
     </nav>
 
-    <!-- HERO -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Documentación Inteligente impulsada por IA</h1>
-            <p>Transforma documentos complejos en conocimiento estructurado, visual y accionable.</p>
+    <div class="hero-content">
+        <h1>Documentación Inteligente impulsada por IA</h1>
+        <p>Transforma documentos complejos en conocimiento estructurado, visual y accionable.</p>
 
-            <div class="hero-buttons">
-                <a href="docustream-pro.html" class="btn-primary">Ver Demo PRO</a>
-                <a href="#solucion" class="btn-secondary">Cómo funciona</a>
-            </div>
+        <div class="hero-buttons">
+            <a href="docustream-pro.html" class="btn">Ver Demo PRO</a>
+            <a href="#solucion" class="btn-secondary">Cómo funciona</a>
         </div>
 
-        <div class="hero-visual">
-            <img src="assets/images/hero-visual.svg" alt="Visual IA">
-        </div>
-    </header>
+        <img src="assets/images/hero-visual.svg" class="hero-img" alt="Visual IA">
+    </div>
+</header>
 
-    <!-- SECCIÓN: LA SOLUCIÓN -->
-    <section id="solucion" class="section">
-        <h2>La solución</h2>
-        <p class="section-desc">
-            DocuStream convierte documentación técnica en grafos semánticos, insights y paneles interactivos.
-        </p>
+<section id="solucion" class="section">
+    <h2>La solución</h2>
+    <p>DocuStream convierte documentación técnica en grafos semánticos, insights y paneles interactivos.</p>
 
-        <div class="cards">
-            <div class="card">
-                <h3>Procesamiento inteligente</h3>
-                <p>Extrae entidades, relaciones y conceptos clave automáticamente.</p>
-            </div>
+    <div class="features">
+        <div class="card">Procesamiento</div>
+        <div class="card">Visualización avanzada</div>
+        <div class="card">Automatización</div>
+    </div>
+</section>
 
-            <div class="card">
-                <h3>Visualización avanzada</h3>
-                <p>Grafo dinámico, heatmaps y paneles de análisis.</p>
-            </div>
-
-            <div class="card">
-                <h3>Automatización</h3>
-                <p>Genera resúmenes, alertas y documentos críticos en segundos.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN: CÓMO FUNCIONA -->
-    <section id="funciona" class="section alt">
-        <h2>Cómo funciona</h2>
-
-        <div class="steps">
-            <div class="step">
-                <span class="step-number">1</span>
-                <p>Sube documentos técnicos o PDFs.</p>
-            </div>
-
-            <div class="step">
-                <span class="step-number">2</span>
-                <p>La IA analiza, clasifica y estructura la información.</p>
-            </div>
-
-            <div class="step">
-                <span class="step-number">3</span>
-                <p>Explora insights, grafos y paneles interactivos.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN: TECNOLOGÍA -->
-    <section id="tecnologia" class="section">
-        <h2>Tecnología</h2>
-
-        <div class="tech-grid">
-            <div class="tech-item">NLP avanzado</div>
-            <div class="tech-item">Embeddings semánticos</div>
-            <div class="tech-item">Modelos de clasificación</div>
-            <div class="tech-item">Visualización interactiva</div>
-            <div class="tech-item">Automatización documental</div>
-            <div class="tech-item">Análisis de relaciones</div>
-        </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section class="cta">
-        <h2>¿Lista para ver el poder de la IA aplicada a documentación?</h2>
-        <a href="docustream-pro.html" class="btn-primary big">Probar Demo PRO</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>© 2026 DocuStream — IA para documentación inteligente</p>
-    </footer>
-
-    <!-- JS -->
-    <script>
-        // Persistencia del modo claro/oscuro
-        const themeToggle = document.getElementById("themeToggle");
-        const logo = document.getElementById("logo");
-        const root = document.documentElement;
-
-        function applyTheme(theme) {
-            root.setAttribute("data-theme", theme);
-            localStorage.setItem("theme", theme);
-
-            if (theme === "dark") {
-                logo.src = "assets/images/logo-dark.svg";
-                themeToggle.textContent = "☀️";
-            } else {
-                logo.src = "assets/images/logo-light.svg";
-                themeToggle.textContent = "🌙";
-            }
-        }
-
-        themeToggle.addEventListener("click", () => {
-            const current = root.getAttribute("data-theme");
-            applyTheme(current === "light" ? "dark" : "light");
-        });
-
-        // Cargar tema guardado
-        const savedTheme = localStorage.getItem("theme") || "light";
-        applyTheme(savedTheme);
-    </script>
-
+<script src="assets/js/pro.js"></script>
 </body>
 </html>
+
 
 
 
