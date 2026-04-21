@@ -363,6 +363,34 @@ body {
 }
 
 /* ========================= */
+/* INTEGRACIONES             */
+/* ========================= */
+.integrations {
+  padding: 90px 10%;
+  background: #fff;
+}
+
+.integrations-sub {
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.integration-item {
+  background: var(--gray-light);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-mid);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ========================= */
 /* CASOS DE USO              */
 /* ========================= */
 .usecases {
@@ -402,6 +430,68 @@ body {
 }
 
 /* ========================= */
+/* ROADMAP                   */
+/* ========================= */
+.roadmap {
+  padding: 90px 10%;
+  background: var(--gray-light);
+}
+
+.roadmap h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.roadmap-item {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-mid);
+}
+
+/* ========================= */
+/* TESTIMONIOS               */
+/* ========================= */
+.testimonials {
+  padding: 90px 10%;
+  background: #fff;
+}
+
+.testimonials h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.testimonial {
+  background: var(--gray-light);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-mid);
+  font-style: italic;
+}
+
+.testimonial span {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  opacity: 0.7;
+}
+
+/* ========================= */
 /* POR QUÉ DOCUSTREAM        */
 /* ========================= */
 .why {
@@ -412,7 +502,7 @@ body {
 .why h2 {
   font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .why-grid {
@@ -433,6 +523,54 @@ body {
   .why-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ========================= */
+/* PRICING                   */
+/* ========================= */
+.pricing {
+  padding: 90px 10%;
+  background: var(--gray-light);
+}
+
+.pricing h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.price-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  border: 1px solid var(--gray-mid);
+  text-align: center;
+}
+
+.price-card.featured {
+  border: 2px solid var(--mint);
+  transform: scale(1.03);
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 10px 0 20px;
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.price-card li {
+  margin: 8px 0;
 }
 
 /* ========================= */
@@ -485,6 +623,7 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 
 
