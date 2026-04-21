@@ -76,6 +76,14 @@ body {
     width: 100%;
     display: block;
 }
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
 
 
 
