@@ -170,4 +170,19 @@ if (heatmapCanvas) {
 
     setInterval(drawHeatmap, 800);
 }
+menuItems.forEach(item => {
+    item.addEventListener("click", () => {
+        setTimeout(() => {
+            if (graphCanvas) {
+                graphCanvas.width = graphCanvas.offsetWidth;
+                graphCanvas.height = graphCanvas.offsetHeight;
+            }
+            if (heatmapCanvas) {
+                heatmapCanvas.width = heatmapCanvas.offsetWidth;
+                heatmapCanvas.height = heatmapCanvas.offsetHeight;
+            }
+        }, 200);
+    });
+});
+
 
