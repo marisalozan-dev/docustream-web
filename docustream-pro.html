@@ -1,75 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>DocuStream PRO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="style-pro.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuStream PRO – Demo</title>
+  <meta name="description" content="Demo PRO de DocuStream: dashboard de analítica documental con KPIs, grafo semántico y heatmaps de comportamiento.">
+  <link rel="stylesheet" href="style-pro.css" />
 </head>
+<body>
 
-<body class="dark">
+  <div class="pro-layout">
 
-  <!-- BOTÓN HAMBURGUESA -->
-  <button id="menuToggle" class="menu-toggle">☰</button>
+    <!-- SIDEBAR -->
+    <aside class="pro-sidebar">
+      <div class="pro-logo">DocuStream PRO</div>
+      <nav class="pro-menu">
+        <button class="pro-menu-item active" data-panel="dashboard">Dashboard</button>
+        <button class="pro-menu-item" data-panel="graph">Grafo semántico</button>
+        <button class="pro-menu-item" data-panel="heatmap">Heatmap</button>
+      </nav>
+      <a href="index.html" class="pro-back">← Volver a la landing</a>
+    </aside>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <h2>DocuStream PRO</h2>
-    <ul>
-      <li><a href="#dashboard">Dashboard</a></li>
-      <li><a href="#graph">Grafo semántico</a></li>
-      <li><a href="#heatmap">Heatmap</a></li>
-    </ul>
-  </aside>
+    <!-- MAIN -->
+    <main class="pro-main">
 
-  <!-- OVERLAY -->
-  <div id="overlay" class="overlay"></div>
+      <!-- HEADER -->
+      <header class="pro-header">
+        <h1>DocuStream PRO</h1>
+        <p>
+          Plataforma de analítica documental con KPIs, grafo semántico y heatmaps de comportamiento.
+        </p>
+        <span class="pro-tag">Demo simulada para portfolio</span>
+      </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="content">
+      <!-- PANELS WRAPPER -->
+      <section class="pro-panels">
 
-    <section class="hero-pro">
-      <h1>DocuStream PRO</h1>
-      <p>Plataforma de analítica documental con KPIs, grafo semántico y heatmaps de comportamiento.</p>
-      <a href="#dashboard" class="btn primary">Ver dashboard interactivo</a>
-    </section>
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="pro-panel active">
+          <h2>Dashboard de KPIs</h2>
 
-    <section id="dashboard" class="kpis">
-      <div class="kpi-card">
-        <h3>98%</h3>
-        <p>SLA cumplido</p>
-      </div>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">SLA cumplido</span>
+              <span class="kpi-value">98%</span>
+              <span class="kpi-sub">en actualizaciones críticas</span>
+            </div>
 
-      <div class="kpi-card">
-        <h3>42ms</h3>
-        <p>Tiempo de consulta</p>
-      </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Tiempo de consulta</span>
+              <span class="kpi-value">42ms</span>
+              <span class="kpi-sub">respuesta media en búsquedas</span>
+            </div>
 
-      <div class="kpi-card">
-        <h3>38%</h3>
-        <p>Secciones ignoradas</p>
-      </div>
-    </section>
+            <div class="kpi-card">
+              <span class="kpi-label">Secciones ignoradas</span>
+              <span class="kpi-value">38%</span>
+              <span class="kpi-sub">contenido sin interacción</span>
+            </div>
+          </div>
 
-    <section id="graph" class="panel">
-      <h2>Grafo semántico</h2>
-      <div id="graphContainer"></div>
-    </section>
+          <div class="pro-chart-placeholder">
+            <h3>Evolución de consultas</h3>
+            <p>Gráfico simulado de volumen de consultas por semana.</p>
+            <div class="fake-chart">
+              <div class="bar" style="height: 40%;"></div>
+              <div class="bar" style="height: 70%;"></div>
+              <div class="bar" style="height: 55%;"></div>
+              <div class="bar" style="height: 90%;"></div>
+              <div class="bar" style="height: 65%;"></div>
+            </div>
+          </div>
+        </div>
 
-    <section id="heatmap" class="panel">
-      <h2>Heatmap de comportamiento</h2>
-      <div id="heatmapContainer"></div>
-    </section>
+        <!-- GRAFO SEMÁNTICO -->
+        <div id="graph" class="pro-panel">
+          <h2>Grafo semántico</h2>
+          <p>
+            Visualización conceptual de relaciones entre módulos, manuales y procedimientos.
+          </p>
 
-  </main>
+          <div class="graph-area">
+            <div class="node center">Core</div>
+            <div class="node n1">API</div>
+            <div class="node n2">Manual técnico</div>
+            <div class="node n3">Procedimientos</div>
+            <div class="node n4">Onboarding</div>
+            <div class="node n5">Incidencias</div>
+            <svg class="graph-lines" viewBox="0 0 200 200">
+              <line x1="100" y1="100" x2="40" y2="40" />
+              <line x1="100" y1="100" x2="160" y2="50" />
+              <line x1="100" y1="100" x2="40" y2="160" />
+              <line x1="100" y1="100" x2="160" y2="150" />
+              <line x1="100" y1="100" x2="100" y2="30" />
+            </svg>
+          </div>
+        </div>
 
-  <!-- JS -->
-  <script src="js/sidebar-pro.js"></script>
-  <script src="js/darkmode-pro.js"></script>
-  <script src="js/dashboard-pro.js"></script>
-  <script src="js/graph-pro.js"></script>
-  <script src="js/heatmap-pro.js"></script>
+        <!-- HEATMAP -->
+        <div id="heatmap" class="pro-panel">
+          <h2>Heatmap de comportamiento</h2>
+          <p>
+            Mapa de calor simulado sobre secciones de un manual técnico.
+          </p>
+
+          <div class="heatmap-grid">
+            <div class="heat-cell hot">Introducción</div>
+            <div class="heat-cell warm">Instalación</div>
+            <div class="heat-cell cold">Licencia</div>
+            <div class="heat-cell hot">Casos de uso</div>
+            <div class="heat-cell warm">Resolución de problemas</div>
+            <div class="heat-cell cold">Apéndices</div>
+          </div>
+
+          <div class="heat-legend">
+            <span class="dot hot"></span> Alta interacción
+            <span class="dot warm"></span> Media
+            <span class="dot cold"></span> Baja
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.pro-menu-item');
+    const panels = document.querySelectorAll('.pro-panel');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const target = btn.getAttribute('data-panel');
+        panels.forEach(p => {
+          p.classList.toggle('active', p.id === target);
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
+
 
