@@ -1,478 +1,145 @@
-/* -------------------------------------------------------
-   BASE
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+DocuStream PRO — CSS COMPLETO
+Tema · Layout · Dashboard · Documentos · Integraciones · Grafo
+-------------------------------------------------------------- */
 
-body.pro-body {
-    margin: 0;
-    background: #050807;
-    color: #ffffff;
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
+/* --------------------------------------------------------------
+VARIABLES DE TEMA (controladas por pro-theme.js)
+-------------------------------------------------------------- */
+
+:root {
+    --bg-main: #050505;
+    --bg-panel: #0d0d0d;
+    --bg-soft: #111111;
+    --text-main: #ffffff;
+    --text-soft: #cccccc;
+    --accent: #00e5a0;
+    --accent-soft: #00e5a055;
+    --radius: 14px;
+    --shadow: 0 0 20px rgba(0, 229, 160, 0.08);
+    --transition: 0.25s ease;
 }
 
-.pro-app {
-    display: flex;
+/* --------------------------------------------------------------
+RESET
+-------------------------------------------------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3, h4 {
+    margin: 0 0 10px;
+}
+
+/* --------------------------------------------------------------
+LAYOUT GENERAL
+-------------------------------------------------------------- */
+
+.pro-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
     height: 100vh;
 }
 
-/* -------------------------------------------------------
-   SIDEBAR
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+SIDEBAR
+-------------------------------------------------------------- */
 
 .pro-sidebar {
-    width: 260px;
-    background: rgba(10, 15, 13, 0.55);
-    backdrop-filter: blur(18px);
-    border-right: 1px solid rgba(0, 229, 160, 0.15);
-    padding: 28px 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background: var(--bg-panel);
+    padding: 24px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    box-shadow: var(--shadow);
 }
 
-.pro-logo-lockup {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 40px;
+.pro-sidebar h2 {
+    margin-bottom: 24px;
 }
 
-.pro-logo-icon svg {
-    width: 42px;
-    height: 42px;
-}
-
-.pro-logo-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-}
-
-.pro-logo-tag {
-    font-size: 13px;
-    opacity: 0.7;
-}
-
-.pro-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.pro-nav-item {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 12px 14px;
-    border-radius: 10px;
-    color: #ffffff;
-    text-align: left;
-    font-size: 15px;
+.pro-nav button {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: var(--bg-soft);
+    border: none;
+    border-radius: var(--radius);
+    color: var(--text-main);
     cursor: pointer;
-    transition: 0.2s;
+    transition: var(--transition);
 }
 
-.pro-nav-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+.pro-nav button:hover {
+    background: var(--accent-soft);
 }
 
-.pro-nav-item--active {
-    border-color: #00E5A0;
-    background: rgba(0, 229, 160, 0.12);
+.pro-nav button.active {
+    background: var(--accent);
+    color: #000;
 }
 
-.pro-sidebar-bottom {
-    margin-top: 40px;
-}
-
-.pro-sidebar-pill {
-    background: rgba(0, 229, 160, 0.15);
-    border: 1px solid rgba(0, 229, 160, 0.25);
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-.pro-sidebar-link {
-    color: #00E5A0;
-    text-decoration: none;
-    font-size: 14px;
-    opacity: 0.8;
-}
-
-.pro-sidebar-link:hover {
-    opacity: 1;
-}
-
-/* -------------------------------------------------------
-   MAIN AREA
-------------------------------------------------------- */
-
-.pro-main {
-    flex: 1;
-    padding: 40px 50px;
-    overflow-y: auto;
-}
-
-/* -------------------------------------------------------
-   TOPBAR
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+TOPBAR
+-------------------------------------------------------------- */
 
 .pro-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.pro-main-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 34px;
-    margin-bottom: 6px;
-}
-
-.pro-main-subtitle {
-    opacity: 0.75;
-    font-size: 16px;
-}
-
-.pro-topbar-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.pro-chip {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-}
-
-.pro-chip--mint {
-    border-color: #00E5A0;
-    color: #00E5A0;
-}
-
-/* -------------------------------------------------------
-   KPI CARDS
-------------------------------------------------------- */
-
-.pro-kpis {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
-    margin-bottom: 40px;
-}
-
-.pro-kpi-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    padding: 20px;
-    border-radius: 16px;
-}
-
-.pro-kpi-label {
-    font-size: 14px;
-    opacity: 0.7;
-}
-
-.pro-kpi-value {
-    font-size: 28px;
-    font-weight: 600;
-    margin-top: 6px;
-}
-
-.pro-kpi-trend {
-    font-size: 13px;
-    opacity: 0.7;
-    margin-top: 4px;
-}
-
-.pro-kpi-trend--up {
-    color: #00E5A0;
-}
-
-/* -------------------------------------------------------
-   FILTERS
-------------------------------------------------------- */
-
-.pro-filters {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.pro-filter-group label {
-    font-size: 14px;
-    opacity: 0.7;
-}
-
-.pro-filter-group select {
-    margin-top: 6px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-}
-
-/* -------------------------------------------------------
-   GRID PRINCIPAL
-------------------------------------------------------- */
-
-.pro-grid {
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-    grid-template-rows: auto auto auto;
-    gap: 30px;
-}
-
-/* -------------------------------------------------------
-   PANELS
-------------------------------------------------------- */
-
-.pro-panel {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(14px);
-    border-radius: 18px;
-    padding: 24px;
-}
-
-.pro-panel-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-}
-
-.pro-panel-header p {
-    opacity: 0.75;
-    font-size: 14px;
-    margin-top: 4px;
-}
-
-.pro-panel-body {
-    margin-top: 20px;
-}
-
-/* -------------------------------------------------------
-   CHARTS
-------------------------------------------------------- */
-
-.pro-charts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.pro-chart-block h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-/* -------------------------------------------------------
-   HEATMAP
-------------------------------------------------------- */
-
-#heatmapContainer {
-    height: 260px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.04);
-    position: relative;
-    overflow: hidden;
-}
-
-/* -------------------------------------------------------
-   DETAIL PANEL
-------------------------------------------------------- */
-
-.pro-detail-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.pro-detail-meta h3 {
-    margin: 6px 0;
-}
-
-.pro-detail-pill {
-    background: rgba(0, 229, 160, 0.15);
-    border: 1px solid rgba(0, 229, 160, 0.25);
-    padding: 6px 10px;
-    border-radius: 14px;
-    font-size: 12px;
-}
-
-.pro-detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.pro-detail-footer {
+    background: var(--bg-panel);
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.pro-detail-score {
-    opacity: 0.8;
-}
+/* --------------------------------------------------------------
+VISTAS
+-------------------------------------------------------------- */
 
-.pro-btn-ghost {
-    background: transparent;
-    border: 1px solid rgba(0, 229, 160, 0.4);
-    padding: 8px 14px;
-    border-radius: 10px;
-    color: #00E5A0;
-    cursor: pointer;
-}
-
-/* -------------------------------------------------------
-   RESPONSIVE
-------------------------------------------------------- */
-
-@media (max-width: 1200px) {
-    .pro-kpis {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .pro-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 800px) {
-    .pro-filters {
-        flex-direction: column;
-    }
-}
-/* Vistas generales */
 .pro-view {
-  display: none;
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity .4s ease, transform .4s ease;
+    display: none;
+    padding: 24px;
 }
 
 .pro-view.active-view {
-  display: block;
-  opacity: 1;
-  transform: translateX(0);
+    display: block;
 }
 
-/* Sidebar activo estilo Notion/Linear */
-.pro-sidebar .active {
-  border-left: 3px solid #00e5a0;
-  background: rgba(255,255,255,0.05);
-}
-/* -------------------------------------------------------
-   GRAFO SEMÁNTICO AVANZADO — ESTILO IA PROFUNDA
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+DASHBOARD PRO
+-------------------------------------------------------------- */
 
-/* Contenedor principal */
-#view-graph {
-    padding: 0;
-    height: calc(100vh - 80px);
-    display: flex;
-    background: linear-gradient(135deg, #0b0f12, #0f1418);
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
+.pro-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
 }
 
-/* Contenedor del grafo */
-.graph-advanced-container {
-    flex: 1;
-    position: relative;
-    height: 100%;
+.pro-kpi-card {
+    background: var(--bg-panel);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
-/* SVG del grafo */
-#graphAdvanced svg {
-    width: 100%;
-    height: 100%;
-    border-radius: 14px;
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
+.pro-kpi-card h3 {
+    opacity: .8;
+    font-size: .9rem;
 }
 
-/* Tooltip */
-.graph-tooltip {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.85);
-    color: #00e5a0;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    pointer-events: none;
-    border: 1px solid rgba(0, 229, 160, 0.35);
-    box-shadow: 0 0 12px rgba(0, 229, 160, 0.25);
-    transition: opacity .15s ease;
-    z-index: 9999;
+.pro-kpi-card p {
+    font-size: 1.8rem;
+    margin-top: 6px;
 }
 
-/* Panel lateral */
-.graph-sidebar {
-    width: 280px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 24px;
-    color: white;
-    transition: transform .35s ease, opacity .35s ease;
-    overflow-y: auto;
-}
+/* --------------------------------------------------------------
+DOCUMENTOS PRO
+-------------------------------------------------------------- */
 
-.graph-sidebar.hidden {
-    transform: translateX(100%);
-    opacity: 0;
-}
-
-.graph-sidebar h2 {
-    margin-top: 0;
-    font-size: 20px;
-    color: #00e5a0;
-}
-
-.graph-sidebar p {
-    font-size: 14px;
-    margin-bottom: 10px;
-    opacity: 0.85;
-}
-
-/* Scrollbar elegante */
-.graph-sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-
-.graph-sidebar::-webkit-scrollbar-thumb {
-    background: rgba(0, 229, 160, 0.4);
-    border-radius: 4px;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .graph-sidebar {
-        width: 220px;
-    }
-}
-
-@media (max-width: 700px) {
-    #view-graph {
-        flex-direction: column;
-    }
-
-    .graph-sidebar {
-        width: 100%;
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-}
-/* DOCUMENTOS PRO */
 .documents-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -480,15 +147,16 @@ body.pro-body {
 }
 
 .doc-item {
-    background: #111;
+    background: var(--bg-panel);
     padding: 16px;
-    border-radius: 12px;
+    border-radius: var(--radius);
     cursor: pointer;
-    transition: background .2s;
+    transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .doc-item:hover {
-    background: #1a1a1a;
+    background: var(--bg-soft);
 }
 
 .doc-meta {
@@ -505,20 +173,22 @@ body.pro-body {
 }
 
 .doc-bar {
-    background: #00e5a0;
+    background: var(--accent);
     height: 100%;
 }
 
 .documents-preview {
-    background: #0d0d0d;
+    background: var(--bg-panel);
     padding: 24px;
-    border-radius: 12px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
 .doc-summary {
     opacity: .8;
 }
 
+/* Heatmap */
 .doc-heatmap {
     display: flex;
     gap: 4px;
@@ -527,10 +197,11 @@ body.pro-body {
 
 .doc-heatmap span {
     width: 10px;
-    background: #00e5a0;
+    background: var(--accent);
     border-radius: 4px;
 }
 
+/* Footer */
 .doc-footer {
     margin-top: 16px;
     display: flex;
@@ -541,7 +212,36 @@ body.pro-body {
 .doc-score {
     opacity: .8;
 }
-/* INTEGRACIONES PRO */
+
+/* --------------------------------------------------------------
+MINI-GRAFO POR DOCUMENTO
+-------------------------------------------------------------- */
+
+.mini-graph {
+    position: relative;
+    height: 160px;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at center, var(--accent-soft), transparent);
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.mini-node {
+    position: absolute;
+    padding: 4px 8px;
+    font-size: .75rem;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    transform: translate(-50%, -50%);
+    top: calc(50% + (var(--i) * 10px - 30px));
+    left: calc(50% + (var(--i) * 14px - 40px));
+}
+
+/* --------------------------------------------------------------
+INTEGRACIONES PRO
+-------------------------------------------------------------- */
+
 .integrations-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -549,18 +249,18 @@ body.pro-body {
 }
 
 .integration-card {
-    background: #0d0d0d;
+    background: var(--bg-panel);
     padding: 20px;
-    border-radius: 14px;
+    border-radius: var(--radius);
     display: flex;
     gap: 16px;
     align-items: flex-start;
     border: 1px solid rgba(255,255,255,0.05);
-    transition: transform .2s, background .2s;
+    transition: var(--transition);
 }
 
 .integration-card:hover {
-    background: #151515;
+    background: var(--bg-soft);
     transform: translateY(-4px);
 }
 
@@ -579,7 +279,7 @@ body.pro-body {
 }
 
 .integration-tags span {
-    background: #00e5a020;
+    background: var(--accent-soft);
     padding: 4px 8px;
     border-radius: 6px;
     font-size: .75rem;
@@ -591,14 +291,8 @@ body.pro-body {
     text-align: right;
 }
 
-.integration-status {
-    display: block;
-    font-size: .85rem;
-    margin-bottom: 4px;
-}
-
 .integration-status.active {
-    color: #00e5a0;
+    color: var(--accent);
 }
 
 .integration-status.paused {
@@ -609,25 +303,49 @@ body.pro-body {
     opacity: .7;
     font-size: .8rem;
 }
-.mini-graph {
-    position: relative;
-    height: 160px;
-    border-radius: 12px;
-    background: radial-gradient(circle at center, #00e5a015, transparent);
-    overflow: hidden;
+
+/* --------------------------------------------------------------
+GRAFO AVANZADO
+-------------------------------------------------------------- */
+
+.graph-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
 }
 
-.mini-node {
-    position: absolute;
-    padding: 4px 8px;
-    font-size: .75rem;
-    background: #00e5a020;
-    border-radius: 999px;
-    border: 1px solid #00e5a040;
-    transform: translate(-50%, -50%);
-    top: calc(50% + (var(--i) * 10px - 30px));
-    left: calc(50% + (var(--i) * 14px - 40px));
+#graphContainer svg {
+    background: var(--bg-panel);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
+
+.graph-sidebar {
+    background: var(--bg-panel);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* --------------------------------------------------------------
+BOTONES PRO
+-------------------------------------------------------------- */
+
+.pro-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pro-btn-ghost:hover {
+    background: var(--accent);
+    color: #000;
+}
+
 
 
 
