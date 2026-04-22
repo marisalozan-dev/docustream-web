@@ -3,46 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuStream — Intelligent Documentation</title>
+    <title>DocuStream · Document Intelligence</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="style-en.css">
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 
 <body>
 
-<header class="hero">
-    <nav class="nav">
-        <img id="logo" src="assets/images/logo-light.svg" alt="DocuStream Logo">
-        <button id="themeToggle">🌙</button>
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-left">
+        <span class="brand">DocuStream</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#what-is">What is it?</a>
+        <a href="#features">Features</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="index.html" class="lang-switch">ES</a>
     </nav>
 
-    <div class="hero-content">
-        <h1>AI‑Powered Intelligent Documentation</h1>
-        <p>Transform complex documents into structured, visual and actionable knowledge.</p>
+    <div class="nav-mobile-icon" id="mobileMenuBtn">☰</div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#what-is">What is it?</a>
+    <a href="#features">Features</a>
+    <a href="#integrations">Integrations</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="index.html">Spanish</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left">
+        <h1 class="hero-title">DocuStream</h1>
+        <h2 class="hero-subtitle">Document Intelligence</h2>
+        <p class="hero-tagline">Transforming documentation into structured knowledge.</p>
 
         <div class="hero-buttons">
-            <a href="docustream-pro.html" class="btn">View PRO Demo</a>
-            <a href="#solution" class="btn-secondary">How it works</a>
+            <a href="#" class="btn-primary">View PRO Demo</a>
+            <a href="index.html" class="btn-secondary">Versión en Español</a>
         </div>
     </div>
 
-    <img src="assets/images/hero-visual.svg" class="hero-img" alt="AI Visual">
-</header>
+    <div class="hero-right">
+        <div class="hero-icon-wrapper">
 
-<section class="section diagram-section">
-    <img src="assets/images/hero-visual.svg" alt="Intelligent Flow" class="diagram-img">
-</section>
+            <!-- MINT GLOW -->
+            <div class="hero-glow"></div>
 
-<section id="solution" class="section">
-    <h2>The Solution</h2>
-    <p>DocuStream converts technical documentation into semantic graphs, insights and interactive dashboards.</p>
+            <!-- INLINE SVG ICON -->
+            <svg class="hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="gHeroEN" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00E5A0"/>
+                        <stop offset="100%" style="stop-color:#00C48C"/>
+                    </linearGradient>
+                </defs>
 
-    <div class="features">
-        <div class="card">Processing</div>
-        <div class="card">Advanced Visualization</div>
-        <div class="card">Automation</div>
+                <line x1="56" y1="28" x2="56" y2="172" stroke="url(#gHeroEN)" stroke-width="14" stroke-linecap="round"/>
+                <path d="M56,28 C56,28 148,28 162,100 C176,172 56,172 56,172"
+                      fill="none" stroke="url(#gHeroEN)" stroke-width="14" stroke-linecap="round"/>
+
+                <line x1="100" y1="100" x2="71" y2="68" stroke="url(#gHeroEN)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+                <line x1="100" y1="100" x2="134" y2="72" stroke="url(#gHeroEN)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+                <line x1="100" y1="100" x2="71" y2="132" stroke="url(#gHeroEN)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+                <line x1="100" y1="100" x2="134" y2="128" stroke="url(#gHeroEN)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+
+                <circle cx="100" cy="100" r="10" fill="url(#gHeroEN)"/>
+                <circle cx="100" cy="100" r="4.5" fill="#0A0F0D"/>
+
+                <circle cx="71" cy="68" r="7" fill="url(#gHeroEN)"/>
+                <circle cx="134" cy="72" r="7" fill="url(#gHeroEN)"/>
+                <circle cx="71" cy="132" r="7" fill="url(#gHeroEN)"/>
+                <circle cx="134" cy="128" r="7" fill="url(#gHeroEN)"/>
+            </svg>
+
+        </div>
     </div>
 </section>
 
+<!-- WHAT IS DOCUSTREAM -->
+<section id="what-is" class="section">
+    <h2>What is DocuStream?</h2>
+    <p>DocuStream is an intelligent system that transforms technical documentation into structured, navigable, and actionable knowledge.</p>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="section">
+    <h2>Features</h2>
+    <ul class="feature-list">
+        <li>Intelligent document processing</li>
+        <li>Automatic entity extraction</li>
+        <li>Graph visualization</li>
+        <li>API integrations</li>
+        <li>Advanced semantic engine</li>
+    </ul>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations" class="section">
+    <h2>Integrations</h2>
+    <p>Compatible with document management systems, enterprise APIs, and analytics tools.</p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section">
+    <h2>Testimonials</h2>
+    <p>“DocuStream has transformed the way we work with technical documentation.”</p>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="section">
+    <h2>Roadmap</h2>
+    <ul class="roadmap-list">
+        <li>Q2: New integrations</li>
+        <li>Q3: Semantic Engine 2.0</li>
+        <li>Q4: Advanced Dashboard</li>
+    </ul>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 DocuStream · Document Intelligence</p>
+</footer>
+
+<!-- JS -->
 <script src="js-en.js"></script>
+
 </body>
 </html>
+
