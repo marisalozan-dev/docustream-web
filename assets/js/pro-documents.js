@@ -78,6 +78,7 @@ function renderDocumentsList() {
         <div class="doc-item" onclick="openDocument(${doc.id})">
             <h4>${doc.title}</h4>
             <p class="doc-meta">${doc.type} · ${doc.updated}</p>
+
             <div class="doc-confidence">
                 <div class="doc-bar" style="width:${doc.confidence * 100}%"></div>
             </div>
@@ -86,7 +87,7 @@ function renderDocumentsList() {
 }
 
 /* --------------------------------------------------------------
-VISTA PREVIA
+VISTA PREVIA COMPLETA
 -------------------------------------------------------------- */
 
 function openDocument(id) {
@@ -129,15 +130,6 @@ function openDocument(id) {
     renderMiniGraph("miniGraphContainer", doc);
 }
 
-
-/* --------------------------------------------------------------
-MINI ACCIÓN: ENVIAR AL GRAFO
--------------------------------------------------------------- */
-
-function highlightInGraph(id) {
-    console.log("Destacando documento en el grafo:", id);
-    alert("Simulación: el grafo resaltaría las entidades de este documento.");
-}
 /* --------------------------------------------------------------
 MINI-GRAFO POR DOCUMENTO (SIMULADO)
 -------------------------------------------------------------- */
@@ -154,4 +146,14 @@ function renderMiniGraph(containerId, doc) {
         </div>
     `;
 }
+
+/* --------------------------------------------------------------
+ACCIÓN: DESTACAR EN EL GRAFO
+-------------------------------------------------------------- */
+
+function highlightInGraph(id) {
+    console.log("Destacando documento en el grafo:", id);
+    alert("Simulación: el grafo resaltaría las entidades de este documento.");
+}
+
 
