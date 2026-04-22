@@ -1,137 +1,355 @@
-console.log("DocuStream PRO loaded");
+/* -------------------------------------------------------
+   BASE
+------------------------------------------------------- */
 
-/* ---------------------------------------------------
-   🎨 CONFIGURACIÓN DEL CANVAS
---------------------------------------------------- */
+body.pro-body {
+    margin: 0;
+    background: #050807;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
 
-const canvas = document.getElementById("proCanvas");
-const ctx = canvas.getContext("2d");
+.pro-app {
+    display: flex;
+    height: 100vh;
+}
 
-// Ajustar tamaño al contenedor
-canvas.width = canvas.offsetWidth;
-canvas.height = canvas.offsetHeight;
+/* -------------------------------------------------------
+   SIDEBAR
+------------------------------------------------------- */
 
-/* ---------------------------------------------------
-   🔵 NODOS Y PARÁMETROS
---------------------------------------------------- */
+.pro-sidebar {
+    width: 260px;
+    background: rgba(10, 15, 13, 0.55);
+    backdrop-filter: blur(18px);
+    border-right: 1px solid rgba(0, 229, 160, 0.15);
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-let nodes = [];
-let dragging = false;
-let offsetX = 0;
-let offsetY = 0;
-let offsetXStart = 0;
-let offsetYStart = 0;
-let zoom = 1;
+.pro-logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+}
 
-/* ---------------------------------------------------
-   🧬 CREACIÓN DE NODOS
---------------------------------------------------- */
+.pro-logo-icon svg {
+    width: 42px;
+    height: 42px;
+}
 
-function createNodes() {
-    nodes = [];
-    for (let i = 0; i < 25; i++) {
-        nodes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: 6 + Math.random() * 6,
-            dx: (Math.random() - 0.5) * 1.2,
-            dy: (Math.random() - 0.5) * 1.2
-        });
+.pro-logo-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.pro-logo-tag {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.pro-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pro-nav-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #ffffff;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pro-nav-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.pro-nav-item--active {
+    border-color: #00E5A0;
+    background: rgba(0, 229, 160, 0.12);
+}
+
+.pro-sidebar-bottom {
+    margin-top: 40px;
+}
+
+.pro-sidebar-pill {
+    background: rgba(0, 229, 160, 0.15);
+    border: 1px solid rgba(0, 229, 160, 0.25);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.pro-sidebar-link {
+    color: #00E5A0;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.pro-sidebar-link:hover {
+    opacity: 1;
+}
+
+/* -------------------------------------------------------
+   MAIN AREA
+------------------------------------------------------- */
+
+.pro-main {
+    flex: 1;
+    padding: 40px 50px;
+    overflow-y: auto;
+}
+
+/* -------------------------------------------------------
+   TOPBAR
+------------------------------------------------------- */
+
+.pro-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.pro-main-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 34px;
+    margin-bottom: 6px;
+}
+
+.pro-main-subtitle {
+    opacity: 0.75;
+    font-size: 16px;
+}
+
+.pro-topbar-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.pro-chip {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.pro-chip--mint {
+    border-color: #00E5A0;
+    color: #00E5A0;
+}
+
+/* -------------------------------------------------------
+   KPI CARDS
+------------------------------------------------------- */
+
+.pro-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-bottom: 40px;
+}
+
+.pro-kpi-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.pro-kpi-label {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.pro-kpi-value {
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.pro-kpi-trend {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+.pro-kpi-trend--up {
+    color: #00E5A0;
+}
+
+/* -------------------------------------------------------
+   FILTERS
+------------------------------------------------------- */
+
+.pro-filters {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.pro-filter-group label {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.pro-filter-group select {
+    margin-top: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* -------------------------------------------------------
+   GRID PRINCIPAL
+------------------------------------------------------- */
+
+.pro-grid {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: auto auto auto;
+    gap: 30px;
+}
+
+/* -------------------------------------------------------
+   PANELS
+------------------------------------------------------- */
+
+.pro-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.pro-panel-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+}
+
+.pro-panel-header p {
+    opacity: 0.75;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.pro-panel-body {
+    margin-top: 20px;
+}
+
+/* -------------------------------------------------------
+   CHARTS
+------------------------------------------------------- */
+
+.pro-charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pro-chart-block h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* -------------------------------------------------------
+   HEATMAP
+------------------------------------------------------- */
+
+#heatmapContainer {
+    height: 260px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+/* -------------------------------------------------------
+   DETAIL PANEL
+------------------------------------------------------- */
+
+.pro-detail-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pro-detail-meta h3 {
+    margin: 6px 0;
+}
+
+.pro-detail-pill {
+    background: rgba(0, 229, 160, 0.15);
+    border: 1px solid rgba(0, 229, 160, 0.25);
+    padding: 6px 10px;
+    border-radius: 14px;
+    font-size: 12px;
+}
+
+.pro-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pro-detail-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pro-detail-score {
+    opacity: 0.8;
+}
+
+.pro-btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(0, 229, 160, 0.4);
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: #00E5A0;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+    .pro-kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pro-grid {
+        grid-template-columns: 1fr;
     }
 }
 
-/* ---------------------------------------------------
-   🖼️ DIBUJAR ESCENA
---------------------------------------------------- */
-
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.save();
-    ctx.scale(zoom, zoom);
-    ctx.translate(offsetX, offsetY);
-
-    // Dibujar nodos
-    nodes.forEach(n => {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "#00c896";
-        ctx.fill();
-    });
-
-    // Dibujar conexiones
-    nodes.forEach(a => {
-        nodes.forEach(b => {
-            const dist = Math.hypot(a.x - b.x, a.y - b.y);
-            if (dist < 150) {
-                ctx.strokeStyle = "rgba(0,200,150,0.2)";
-                ctx.beginPath();
-                ctx.moveTo(a.x, a.y);
-                ctx.lineTo(b.x, b.y);
-                ctx.stroke();
-            }
-        });
-    });
-
-    // Movimiento de nodos
-    nodes.forEach(n => {
-        n.x += n.dx;
-        n.y += n.dy;
-
-        if (n.x < 0 || n.x > canvas.width) n.dx *= -1;
-        if (n.y < 0 || n.y > canvas.height) n.dy *= -1;
-    });
-
-    ctx.restore();
-    requestAnimationFrame(draw);
-}
-
-/* ---------------------------------------------------
-   🔍 ZOOM CON RUEDA DEL RATÓN
---------------------------------------------------- */
-
-canvas.addEventListener("wheel", e => {
-    zoom += e.deltaY * -0.001;
-    zoom = Math.min(Math.max(0.5, zoom), 2.5);
-});
-
-/* ---------------------------------------------------
-   ✋ PAN / ARRASTRAR EL LIENZO
---------------------------------------------------- */
-
-canvas.addEventListener("mousedown", e => {
-    dragging = true;
-    offsetXStart = e.offsetX / zoom - offsetX;
-    offsetYStart = e.offsetY / zoom - offsetY;
-});
-
-canvas.addEventListener("mousemove", e => {
-    if (dragging) {
-        offsetX = e.offsetX / zoom - offsetXStart;
-        offsetY = e.offsetY / zoom - offsetYStart;
+@media (max-width: 800px) {
+    .pro-filters {
+        flex-direction: column;
     }
-});
-
-canvas.addEventListener("mouseup", () => dragging = false);
-canvas.addEventListener("mouseleave", () => dragging = false);
-
-/* ---------------------------------------------------
-   🟢 BOTONES DE CONTROL
---------------------------------------------------- */
-
-document.getElementById("resetBtn").addEventListener("click", createNodes);
-document.getElementById("randomBtn").addEventListener("click", createNodes);
-
-document.getElementById("darkBtn").addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-});
-
-/* ---------------------------------------------------
-   🚀 INICIALIZACIÓN
---------------------------------------------------- */
-
-createNodes();
-draw();
+}
 
 
 
