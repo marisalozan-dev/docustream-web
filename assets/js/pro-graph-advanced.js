@@ -1,250 +1,171 @@
-/* -------------------------------------------------------
-   DocuStream PRO — GRAFO SEMÁNTICO AVANZADO
-   Zoom + pan + clusters + highlight + panel lateral
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+DocuStream PRO — GRAFO AVANZADO
+D3.js · Zoom · Pan · Sidebar dinámico · Movimiento orgánico
+-------------------------------------------------------------- */
 
 console.log("Graph Advanced PRO loaded");
 
-let graphAdvSvg = null;
-let graphAdvSimulation = null;
-let graphAdvZoom = null;
+/* --------------------------------------------------------------
+DATOS SIMULADOS DEL GRAFO
+-------------------------------------------------------------- */
 
-/* -------------------------------------------------------
-   INICIALIZACIÓN
-------------------------------------------------------- */
+const GRAPH_DATA = {
+    nodes: [
+        { id: "doc1", label: "OAuth 2.0", type: "document", confidence: 0.94 },
+        { id: "doc2", label: "Facturación", type: "document", confidence: 0.88 },
+        { id: "doc3", label: "Manual Panel", type: "document", confidence: 0.91 },
+
+        { id: "ent1", label: "Token", type: "entity" },
+        { id: "ent2", label: "Scopes", type: "entity" },
+        { id: "ent3", label: "Errores", type: "entity" },
+        { id: "ent4", label: "Factura", type: "entity" },
+        { id: "ent5", label: "Cliente", type: "entity" },
+        { id: "ent6", label: "Dashboard", type: "entity" }
+    ],
+    links: [
+        { source: "doc1", target: "ent1" },
+        { source: "doc1", target: "ent2" },
+        { source: "doc1", target: "ent3" },
+
+        { source: "doc2", target: "ent4" },
+        { source: "doc2", target: "ent5" },
+
+        { source: "doc3", target: "ent6" }
+    ]
+};
+
+/* --------------------------------------------------------------
+INICIALIZACIÓN DEL GRAFO
+-------------------------------------------------------------- */
+
+let graphSvg, graphSim, graphContainer, graphLink, graphNode;
 
 function initGraphAdvanced() {
-    const container = document.getElementById("graphAdvanced");
+    console.log("Inicializando Grafo Avanzado PRO…");
 
-    // Limpiar si ya existe
-    container.innerHTML = "";
+    const container = document.getElementById("graphContainer");
+    if (!container) return;
+
+    container.innerHTML = ""; // limpiar
 
     const width = container.clientWidth;
-    const height = container.clientHeight || 480;
+    const height = 500;
 
-    // Crear SVG con zoom
-    graphAdvSvg = d3.select("#graphAdvanced")
+    graphSvg = d3.select("#graphContainer")
         .append("svg")
         .attr("width", width)
-        .attr("height", height)
-        .style("background", "rgba(0,0,0,0.35)")
-        .call(
-            d3.zoom()
-                .scaleExtent([0.4, 2.5])
-                .on("zoom", (event) => {
-                    g.attr("transform", event.transform);
-                })
-        );
+        .attr("height", height);
 
-    const g = graphAdvSvg.append("g");
+    const zoom = d3.zoom().on("zoom", (event) => {
+        graphSvgGroup.attr("transform", event.transform);
+    });
 
-    // Crear datos
-    const graphData = generateAdvancedGraphData();
+    graphSvg.call(zoom);
 
-    // Renderizar
-    renderGraphAdvanced(g, graphData, width, height);
-}
+    const graphSvgGroup = graphSvg.append("g");
 
-/* -------------------------------------------------------
-   GENERADOR DE DATOS AVANZADOS
-------------------------------------------------------- */
-
-function generateAdvancedGraphData() {
-    const types = ["API", "Spec", "Manual", "Incident"];
-    const nodes = [];
-    const links = [];
-
-    for (let i = 0; i < 22; i++) {
-        const type = types[Math.floor(Math.random() * types.length)];
-        nodes.push({
-            id: "N" + i,
-            type,
-            relevance: Math.random(),
-            label: `${type} #${i}`
-        });
-    }
-
-    for (let i = 0; i < 32; i++) {
-        links.push({
-            source: "N" + Math.floor(Math.random() * nodes.length),
-            target: "N" + Math.floor(Math.random() * nodes.length),
-            weight: Math.random()
-        });
-    }
-
-    return { nodes, links };
-}
-
-/* -------------------------------------------------------
-   RENDERIZAR GRAFO AVANZADO
-------------------------------------------------------- */
-
-function renderGraphAdvanced(g, data, width, height) {
-
-    graphAdvSimulation = d3.forceSimulation(data.nodes)
-        .force("link", d3.forceLink(data.links)
-            .id(d => d.id)
-            .distance(d => 80 + d.weight * 40)
-            .strength(0.6))
-        .force("charge", d3.forceManyBody().strength(-220))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collision", d3.forceCollide().radius(28));
-
-    /* --------------------------
-       ENLACES
-    --------------------------- */
-    const link = g.append("g")
-        .attr("stroke", "rgba(0,229,160,0.25)")
-        .attr("stroke-width", 1.2)
+    graphLink = graphSvgGroup
         .selectAll("line")
-        .data(data.links)
+        .data(GRAPH_DATA.links)
         .enter()
-        .append("line");
+        .append("line")
+        .attr("stroke", "#00e5a055")
+        .attr("stroke-width", 1.5);
 
-    /* --------------------------
-       NODOS
-    --------------------------- */
-    const node = g.append("g")
+    graphNode = graphSvgGroup
         .selectAll("circle")
-        .data(data.nodes)
+        .data(GRAPH_DATA.nodes)
         .enter()
         .append("circle")
-        .attr("r", d => 10 + d.relevance * 6)
-        .attr("fill", d => {
-            const colors = {
-                API: "rgba(0,229,160,0.9)",
-                Spec: "rgba(0,229,160,0.6)",
-                Manual: "rgba(0,229,160,0.4)",
-                Incident: "rgba(0,229,160,0.25)"
-            };
-            return colors[d.type];
-        })
-        .attr("stroke", "rgba(255,255,255,0.15)")
+        .attr("r", 14)
+        .attr("fill", d => d.type === "document" ? "#00e5a0" : "#00e5a055")
+        .attr("stroke", "#00e5a0")
         .attr("stroke-width", 1.5)
-        .style("cursor", "pointer")
-        .call(dragNode(graphAdvSimulation))
-        .on("mouseover", highlightNode)
-        .on("mouseout", resetHighlight)
-        .on("click", openNodeSidebar);
+        .call(dragNode())
+        .on("click", (_, d) => updateGraphSidebar(d));
 
-    /* --------------------------
-       HALOS
-    --------------------------- */
-    const halo = g.append("g")
-        .selectAll("circle")
-        .data(data.nodes)
-        .enter()
-        .append("circle")
-        .attr("r", d => 22 + d.relevance * 10)
-        .attr("fill", "rgba(0,229,160,0.08)");
+    graphSim = d3.forceSimulation(GRAPH_DATA.nodes)
+        .force("link", d3.forceLink(GRAPH_DATA.links).id(d => d.id).distance(120))
+        .force("charge", d3.forceManyBody().strength(-260))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collision", d3.forceCollide().radius(40))
+        .on("tick", ticked);
 
-    /* --------------------------
-       TOOLTIP
-    --------------------------- */
-    const tooltip = d3.select("body")
-        .append("div")
-        .attr("class", "graph-tooltip")
-        .style("opacity", 0);
-
-    node.on("mousemove", (event, d) => {
-        tooltip
-            .style("opacity", 1)
-            .style("left", event.pageX + 12 + "px")
-            .style("top", event.pageY + 12 + "px")
-            .html(`
-                <strong>${d.label}</strong><br>
-                Tipo: ${d.type}<br>
-                Relevancia: ${(d.relevance * 100).toFixed(0)}%
-            `);
-    });
-
-    node.on("mouseout", () => {
-        tooltip.style("opacity", 0);
-    });
-
-    /* --------------------------
-       SIMULACIÓN
-    --------------------------- */
-    graphAdvSimulation.on("tick", () => {
-        link
+    function ticked() {
+        graphLink
             .attr("x1", d => d.source.x)
             .attr("y1", d => d.source.y)
             .attr("x2", d => d.target.x)
             .attr("y2", d => d.target.y);
 
-        node
+        graphNode
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
-
-        halo
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y);
-    });
+    }
 }
 
-/* -------------------------------------------------------
-   DRAG
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+DRAG DE NODOS
+-------------------------------------------------------------- */
 
-function dragNode(simulation) {
+function dragNode() {
     return d3.drag()
-        .on("start", event => {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            event.subject.fx = event.subject.x;
-            event.subject.fy = event.subject.y;
+        .on("start", (event, d) => {
+            if (!event.active) graphSim.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
         })
-        .on("drag", event => {
-            event.subject.fx = event.x;
-            event.subject.fy = event.y;
+        .on("drag", (event, d) => {
+            d.fx = event.x;
+            d.fy = event.y;
         })
-        .on("end", event => {
-            if (!event.active) simulation.alphaTarget(0);
-            event.subject.fx = null;
-            event.subject.fy = null;
+        .on("end", (event, d) => {
+            if (!event.active) graphSim.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
         });
 }
 
-/* -------------------------------------------------------
-   HIGHLIGHT
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+SIDEBAR DINÁMICO
+-------------------------------------------------------------- */
 
-function highlightNode(event, d) {
-    d3.selectAll("circle").attr("opacity", 0.25);
-    d3.select(this).attr("opacity", 1);
+function updateGraphSidebar(nodeData) {
+    const sidebar = document.getElementById("graphSidebarContent");
+    if (!sidebar) return;
 
-    d3.selectAll("line")
-        .attr("stroke", l =>
-            l.source.id === d.id || l.target.id === d.id
-                ? "rgba(0,229,160,0.8)"
-                : "rgba(0,229,160,0.1)"
-        );
-}
+    if (!nodeData) {
+        sidebar.innerHTML = "<p>Selecciona un nodo para ver detalles.</p>";
+        return;
+    }
 
-function resetHighlight() {
-    d3.selectAll("circle").attr("opacity", 1);
-    d3.selectAll("line").attr("stroke", "rgba(0,229,160,0.25)");
-}
-
-/* -------------------------------------------------------
-   PANEL LATERAL
-------------------------------------------------------- */
-
-function openNodeSidebar(event, d) {
-    const sidebar = document.getElementById("graphSidebar");
-    const content = document.getElementById("graphSidebarContent");
-
-    sidebar.classList.remove("hidden");
-
-    content.innerHTML = `
-        <h2>${d.label}</h2>
-        <p><strong>Tipo:</strong> ${d.type}</p>
-        <p><strong>Relevancia:</strong> ${(d.relevance * 100).toFixed(0)}%</p>
-        <p><strong>ID:</strong> ${d.id}</p>
+    sidebar.innerHTML = `
+        <h2>${nodeData.label}</h2>
+        <p><strong>Tipo:</strong> ${nodeData.type}</p>
+        <p><strong>Confianza:</strong> ${(nodeData.confidence || 0.9 * 100).toFixed(1)}%</p>
+        <p><strong>ID:</strong> ${nodeData.id}</p>
     `;
 }
 
-/* -------------------------------------------------------
-   EXPONER FUNCIÓN
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+ACTUALIZACIÓN POR FILTROS
+-------------------------------------------------------------- */
+
+function updateGraphAdvanced(state) {
+    console.log("Actualizando grafo con filtros:", state);
+
+    graphNode
+        .transition()
+        .duration(300)
+        .attr("opacity", d => {
+            if (state.docType !== "all" && d.type === "document") return 0.4;
+            return 1;
+        });
+}
+
+/* --------------------------------------------------------------
+EXPOSICIÓN GLOBAL
+-------------------------------------------------------------- */
 
 window.initGraphAdvanced = initGraphAdvanced;
+window.updateGraphAdvanced = updateGraphAdvanced;
