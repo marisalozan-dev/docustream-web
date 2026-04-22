@@ -5,8 +5,13 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+/* TIPOGRAFÍA GLOBAL */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: #ffffff;
     color: #111;
     transition: background 0.3s, color 0.3s;
@@ -32,25 +37,32 @@ body {
 .back {
     text-decoration: none;
     color: #00c896;
-    font-weight: bold;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.back:hover {
+    opacity: 0.7;
 }
 
 /* HERO PRO */
 .hero-pro {
     text-align: center;
-    padding: 60px 10%;
+    padding: 70px 10%;
 }
 
 .hero-pro h1 {
-    font-size: 2.6rem;
+    font-size: 2.8rem;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
 .hero-pro p {
     font-size: 1.2rem;
+    color: #444;
 }
 
-/* CANVAS */
+/* CANVAS SECTION */
 .canvas-section {
     padding: 40px 10%;
     display: flex;
@@ -62,10 +74,12 @@ body {
 .canvas-container {
     width: 100%;
     max-width: 900px;
-    height: 500px;
-    border-radius: 12px;
+    height: 520px;
+    border-radius: 14px;
     overflow: hidden;
     border: 2px solid #eee;
+    background: #fafafa;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
 #proCanvas {
@@ -83,16 +97,17 @@ body {
     background: #00c896;
     color: #fff;
     padding: 12px 22px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     border: none;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,200,150,0.25);
 }
 
 /* DARK MODE */
@@ -107,7 +122,31 @@ body.dark .nav {
 
 body.dark .canvas-container {
     border-color: #333;
+    background: #1a1a1a;
 }
+
+body.dark .btn {
+    background: #00b386;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .canvas-container {
+        height: 420px;
+    }
+
+    .controls {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 
 
 
