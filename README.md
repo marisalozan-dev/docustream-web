@@ -76,4 +76,65 @@ The interface includes:
 ---
 
 ## 📁 Project Structure
+docustream-web/
+│ index.html
+│ index-en.html
+│ style.css
+│ style-en.css
+│ style-pro.css
+│ js-en.js
+│ README.md
+│
+├── js/
+│   └── script.js
+│
+├── assets/
+│   ├── images/
+│   │   ├── logo-light.svg
+│   │   └── hero-visual.svg
+│   └── js/
+│       └── pro.js
+
+
+---
+
+## 🛠️ Technologies Used
+
+- **HTML5 + CSS3 + JS**
+- **GSAP** (animations)
+- **Canvas API** (interactive PRO demo)
+- **Responsive design**
+- **Dark mode with localStorage**
+- **Semantic structure & accessibility**
+
+---
+
+## 📌 About the Author
+
+**Marisa Lozano Arroyo**  
+Technical Documentalist & Archivist (20+ years)  
+Transitioning into **Data Analytics, Big Data & Innovation**  
+
+Focused on:
+- Information architecture  
+- Data-driven workflows  
+- Deeptech & innovation ecosystems  
+- Technical documentation quality  
+- Visual knowledge representation  
+
+---
+
+## 📬 Contact
+
+If you want to know more about the project or collaborate:
+
+**LinkedIn:**  
+https://www.linkedin.com/in/marisalozanoarroyo/
+
+---
+
+## 📄 License
+
+This project is part of a personal portfolio and is not intended for commercial use.
+
 
