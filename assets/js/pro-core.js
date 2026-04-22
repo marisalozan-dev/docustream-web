@@ -48,22 +48,19 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power3.out"
     });
 
-    // Inicializar Dashboard al cargar
-    if (typeof initDashboard === "function") {
-        initDashboard();
+    // Inicializar módulos según vista activa
+    if (document.getElementById("view-dashboard")?.classList.contains("active-view")) {
+        if (typeof initDashboard === "function") initDashboard();
     }
 
-    // Inicializar Documentos si la vista está activa
     if (document.getElementById("view-documents")?.classList.contains("active-view")) {
         if (typeof initDocuments === "function") initDocuments();
     }
 
-    // Inicializar Integraciones si la vista está activa
     if (document.getElementById("view-integrations")?.classList.contains("active-view")) {
         if (typeof initIntegrations === "function") initIntegrations();
     }
 
-    // Inicializar Grafo si la vista está activa
     if (document.getElementById("view-graph")?.classList.contains("active-view")) {
         if (typeof initGraphAdvanced === "function") initGraphAdvanced();
     }
@@ -108,22 +105,10 @@ function setupFilters() {
 function applyFilters() {
     console.log("Aplicando filtros:", PRO_STATE);
 
-    // Dashboard
-    if (typeof updateDashboard === "function") {
-        updateDashboard(PRO_STATE);
-    }
+    if (typeof updateDashboard === "function") updateDashboard(PRO_STATE);
+    if (typeof updateGraphAdvanced === "function") updateGraphAdvanced(PRO_STATE);
+    if (typeof updateHeatmap === "function") updateHeatmap(PRO_STATE);
 
-    // Grafo avanzado
-    if (typeof updateGraphAdvanced === "function") {
-        updateGraphAdvanced(PRO_STATE);
-    }
-
-    // Heatmap
-    if (typeof updateHeatmap === "function") {
-        updateHeatmap(PRO_STATE);
-    }
-
-    // Microanimación al aplicar filtros
     gsap.from(".pro-panel", {
         opacity: 0.6,
         duration: 0.4,
@@ -153,30 +138,29 @@ function randomPercent() {
 function switchView(viewId) {
     console.log("Cambiando a vista:", viewId);
 
-    // Ocultar todas las vistas
     document.querySelectorAll(".pro-view").forEach(v => {
         v.classList.remove("active-view");
     });
 
-    // Mostrar la vista seleccionada
     const view = document.getElementById(viewId);
     if (view) {
         view.classList.add("active-view");
-    } else {
-        console.warn("Vista no encontrada:", viewId);
+
+        gsap.from(view, {
+            opacity: 0,
+            y: 10,
+            duration: 0.4,
+            ease: "power2.out"
+        });
     }
 
-    // Activar botón del sidebar
     document.querySelectorAll(".pro-nav button").forEach(btn => {
         btn.classList.remove("active");
     });
 
     const activeBtn = document.querySelector(`[data-view="${viewId}"]`);
-    if (activeBtn) {
-        activeBtn.classList.add("active");
-    }
+    if (activeBtn) activeBtn.classList.add("active");
 
-    // Inicializar módulos según vista
     if (viewId === "view-dashboard" && typeof initDashboard === "function") initDashboard();
     if (viewId === "view-graph" && typeof initGraphAdvanced === "function") initGraphAdvanced();
     if (viewId === "view-documents" && typeof initDocuments === "function") initDocuments();
@@ -194,5 +178,6 @@ window.PRO_STATE = PRO_STATE;
 window.applyFilters = applyFilters;
 window.randomInt = randomInt;
 window.randomPercent = randomPercent;
+
 
 
