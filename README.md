@@ -1,41 +1,79 @@
-📘 DocuStream — Documentación Viva con Big Data
-Landing web oficial del proyecto DocuStream, una plataforma que transforma la documentación empresarial en un sistema vivo impulsado por Big Data, grafos semánticos y modelos predictivos.
+# 🚀 DocuStream — Intelligent Technical Documentation
 
-🚀 Contenido del repositorio
-index.html — Landing web principal
+Transforming complex technical documents into **structured, visual and actionable knowledge** using AI-driven processing, semantic graphs and interactive visualization.
 
-style.css — Estilos visuales DocuStream
+![Hero](assets/images/hero-visual.svg)
 
-DocuStream_Dossier.html — Dossier técnico completo
+---
 
-assets/ — Imágenes, iconos y recursos visuales
+## 🌐 Languages
+**ES | [EN](index-en.html)**
 
-🧠 ¿Qué es DocuStream?
-DocuStream es un sistema de inteligencia documental que:
+---
 
-Predice obsolescencia antes de que ocurra
+## 🧠 What is DocuStream?
 
-Construye un grafo semántico vivo
+DocuStream is a conceptual prototype that demonstrates how technical documentation can be transformed into:
 
-Analiza comportamiento del lector
+- Semantic knowledge graphs  
+- Automated insights  
+- Interactive visual layers  
+- Smart document workflows  
 
-Integra Big Data en tiempo real
+Designed as a **portfolio project** by **Marisa Lozano Arroyo**, combining:
 
-Se adapta al rol del usuario
+- Technical documentation expertise  
+- Data analytics  
+- Information architecture  
+- Innovation & deeptech mindset  
 
-🏗️ Tecnologías utilizadas
-HTML5 + CSS3
+---
 
-GitHub Pages
+## ✨ Key Features
 
-Diseño responsive
+### 🔍 Intelligent Processing
+Automated extraction of entities, relationships and metadata.
 
-Branding DocuStream (Mint + Negro + Big Data)
+### 🧩 Semantic Graphs
+Visual representation of document structure and meaning.
 
-🌐 Demo en vivo
-👉 (Aquí pondrás la URL cuando GitHub Pages esté activado)
+### 📊 Advanced Visualization
+Interactive diagrams, dynamic nodes and animated flows.
 
-👩‍💻 Autora
-Marisa Lozano Arroyo  
-Documentalista técnica → Data & Innovation
-Madrid, España
+### ⚙️ Automation
+Document workflows, classification and enrichment.
+
+---
+
+## 🖥️ Live Demo
+
+### ▶️ **PRO Interactive Demo**
+Explore the dynamic node graph with zoom, pan and real‑time movement:
+
+👉 `docustream-pro.html`
+
+Includes:
+- Dynamic nodes  
+- Intelligent connections  
+- Zoom & pan  
+- Dark mode  
+- Reset & random generation  
+
+---
+
+## 🎨 UI & UX
+
+The interface includes:
+
+- Responsive layout  
+- Premium hero section  
+- Mobile menu with overlay  
+- Smooth GSAP animations  
+- Scroll reveal  
+- Dark mode (persistent)  
+- Clean, modern visual identity  
+
+---
+
+## 📁 Project Structure
+
