@@ -48,9 +48,24 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power3.out"
     });
 
-    // Inicializar solo el dashboard al cargar
+    // Inicializar Dashboard al cargar
     if (typeof initDashboard === "function") {
         initDashboard();
+    }
+
+    // Inicializar Documentos si la vista está activa
+    if (document.getElementById("view-documents")?.classList.contains("active-view")) {
+        if (typeof initDocuments === "function") initDocuments();
+    }
+
+    // Inicializar Integraciones si la vista está activa
+    if (document.getElementById("view-integrations")?.classList.contains("active-view")) {
+        if (typeof initIntegrations === "function") initIntegrations();
+    }
+
+    // Inicializar Grafo si la vista está activa
+    if (document.getElementById("view-graph")?.classList.contains("active-view")) {
+        if (typeof initGraphAdvanced === "function") initGraphAdvanced();
     }
 
     // Activar filtros
