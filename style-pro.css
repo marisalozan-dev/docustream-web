@@ -350,6 +350,26 @@ body.pro-body {
         flex-direction: column;
     }
 }
+/* Vistas generales */
+.pro-view {
+  display: none;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+.pro-view.active-view {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Sidebar activo estilo Notion/Linear */
+.pro-sidebar .active {
+  border-left: 3px solid #00e5a0;
+  background: rgba(255,255,255,0.05);
+}
+
 
 
 
