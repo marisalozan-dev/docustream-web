@@ -369,6 +369,109 @@ body.pro-body {
   border-left: 3px solid #00e5a0;
   background: rgba(255,255,255,0.05);
 }
+/* -------------------------------------------------------
+   GRAFO SEMÁNTICO AVANZADO — ESTILO IA PROFUNDA
+------------------------------------------------------- */
+
+/* Contenedor principal */
+#view-graph {
+    padding: 0;
+    height: calc(100vh - 80px);
+    display: flex;
+    background: linear-gradient(135deg, #0b0f12, #0f1418);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Contenedor del grafo */
+.graph-advanced-container {
+    flex: 1;
+    position: relative;
+    height: 100%;
+}
+
+/* SVG del grafo */
+#graphAdvanced svg {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+}
+
+/* Tooltip */
+.graph-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00e5a0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    pointer-events: none;
+    border: 1px solid rgba(0, 229, 160, 0.35);
+    box-shadow: 0 0 12px rgba(0, 229, 160, 0.25);
+    transition: opacity .15s ease;
+    z-index: 9999;
+}
+
+/* Panel lateral */
+.graph-sidebar {
+    width: 280px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px;
+    color: white;
+    transition: transform .35s ease, opacity .35s ease;
+    overflow-y: auto;
+}
+
+.graph-sidebar.hidden {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.graph-sidebar h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #00e5a0;
+}
+
+.graph-sidebar p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    opacity: 0.85;
+}
+
+/* Scrollbar elegante */
+.graph-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.graph-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 160, 0.4);
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .graph-sidebar {
+        width: 220px;
+    }
+}
+
+@media (max-width: 700px) {
+    #view-graph {
+        flex-direction: column;
+    }
+
+    .graph-sidebar {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+}
 
 
 
