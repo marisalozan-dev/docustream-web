@@ -96,3 +96,10 @@ function renderIntegrations() {
         </div>
     `).join("");
 }
+
+/* --------------------------------------------------------------
+EXPOSICIÓN GLOBAL
+-------------------------------------------------------------- */
+
+window.initIntegrations = initIntegrations;
+
