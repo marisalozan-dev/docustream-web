@@ -5,16 +5,59 @@ Transforming complex documentation into **structured, visual and actionable know
 
 ---
 
-# 🌐 Languages
+<style>
+/* CONTENEDOR DE PESTAÑAS */
+.tab-container {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+}
 
-<div align="center">
+/* BOTONES DE PESTAÑA */
+.tab {
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  background: #f7f7f7;
+  margin-right: 5px;
+  border-radius: 6px 6px 0 0;
+}
 
-<a href="#-español">🇪🇸 Español</a> &nbsp;|&nbsp;  
-<a href="#-english">🇬🇧 English</a>
+.tab.active {
+  background: #ffffff;
+  border-bottom: 2px solid white;
+}
 
+/* CONTENIDO */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+</style>
+
+<div class="tab-container">
+  <div class="tab active" onclick="showTab('es')">🇪🇸 Español</div>
+  <div class="tab" onclick="showTab('en')">🇬🇧 English</div>
 </div>
 
+<script>
+function showTab(lang) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+  document.querySelector('.tab[onclick="showTab(\''+lang+'\')"]').classList.add('active');
+  document.getElementById(lang).classList.add('active');
+}
+</script>
+
 ---
+
+<div id="es" class="tab-content active">
 
 # 🇪🇸 Español
 
@@ -142,7 +185,11 @@ https://www.linkedin.com/in/marisalozanoarroyo/
 
 Proyecto de portfolio. No destinado a uso comercial.
 
+</div>
+
 ---
+
+<div id="en" class="tab-content">
 
 # 🇬🇧 English
 
@@ -231,7 +278,6 @@ docustream-web/
 │   └── js/
 │       └── pro.js
 
-
 ---
 
 ## 🛠️ Technologies Used
@@ -270,6 +316,9 @@ https://www.linkedin.com/in/marisalozanoarroyo/
 ## 📄 License
 
 This project is part of a personal portfolio and is not intended for commercial use.
+
+</div>
+
 
 
 
