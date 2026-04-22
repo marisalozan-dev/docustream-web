@@ -26,19 +26,23 @@ function updateDashboard(state) {
 
     if (!kpiDocs || !kpiLatency || !kpiQuality || !kpiAnomalies) return;
 
+    // Base de datos simulada
     const baseDocs = 1240;
     const factorPeriod = state.period / 30;
 
+    // Cálculos dinámicos
     const docsValue = Math.round(baseDocs * factorPeriod);
     const latencyValue = (120 / factorPeriod).toFixed(0);
     const qualityValue = (92 + (Math.random() * 4 - 2)).toFixed(1);
     const anomaliesValue = Math.max(0, Math.round(32 / factorPeriod - randomInt(0, 5)));
 
+    // Asignación a la UI
     kpiDocs.textContent = docsValue.toLocaleString("es-ES");
     kpiLatency.textContent = `${latencyValue} ms`;
     kpiQuality.textContent = `${qualityValue} %`;
     kpiAnomalies.textContent = anomaliesValue;
 
+    // Animaciones suaves
     animateKpiCard("#kpiDocs");
     animateKpiCard("#kpiLatency");
     animateKpiCard("#kpiQuality");
@@ -64,3 +68,4 @@ function animateKpiCard(selector) {
         }
     );
 }
+
