@@ -133,3 +133,31 @@ window.PRO_STATE = PRO_STATE;
 window.applyFilters = applyFilters;
 window.randomInt = randomInt;
 window.randomPercent = randomPercent;
+/* -------------------------------------------------------
+   NAVEGACIÓN ENTRE VISTAS
+------------------------------------------------------- */
+
+function switchView(viewId) {
+    // Ocultar todas
+    document.querySelectorAll(".pro-view").forEach(v => {
+        v.classList.remove("active-view");
+    });
+
+    // Mostrar la seleccionada
+    const view = document.getElementById(viewId);
+    view.classList.add("active-view");
+
+    // Sidebar activo
+    document.querySelectorAll(".pro-sidebar button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+    document.querySelector(`[data-view="${viewId}"]`).classList.add("active");
+
+    // Inicializar módulos según vista
+    if (viewId === "view-graph") initGraphAdvanced();
+    if (viewId === "view-documents") initDocuments();
+    if (viewId === "view-integrations") initIntegrations();
+}
+
+window.switchView = switchView;
+
