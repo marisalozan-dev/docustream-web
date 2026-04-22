@@ -1,98 +1,99 @@
-console.log("DocuStream ES loaded");
+/* -------------------------------------------------------
+   MENÚ MÓVIL
+------------------------------------------------------- */
 
-/* ---------------------------------------------
-   🌙 DARK MODE PERSISTENTE
---------------------------------------------- */
-
-// Leer preferencia guardada
-const savedTheme = localStorage.getItem("theme");
-
-// Aplicar preferencia guardada
-if (savedTheme === "dark") {
-    document.body.classList.add("dark");
-} else if (savedTheme === "light") {
-    document.body.classList.remove("dark");
-} else {
-    // Si no hay preferencia guardada → usar modo del sistema
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.body.classList.add("dark");
-    }
-}
-
-// Botón de cambio de tema
-const themeToggle = document.getElementById("themeToggle");
-
-themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    localStorage.setItem(
-        "theme",
-        document.body.classList.contains("dark") ? "dark" : "light"
-    );
-});
-
-
-/* ---------------------------------------------
-   📱 MENÚ MÓVIL PREMIUM (slide + overlay)
---------------------------------------------- */
-
-const menuToggle = document.getElementById("menuToggle");
+const mobileBtn = document.getElementById("mobileMenuBtn");
 const mobileMenu = document.getElementById("mobileMenu");
 
-// Crear overlay dinámicamente
-const overlay = document.createElement("div");
-overlay.classList.add("menu-overlay");
-document.body.appendChild(overlay);
-
-// Abrir/cerrar menú
-menuToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("open");
-    overlay.style.display = mobileMenu.classList.contains("open") ? "block" : "none";
+mobileBtn.addEventListener("click", () => {
+    if (mobileMenu.style.display === "flex") {
+        mobileMenu.style.display = "none";
+    } else {
+        mobileMenu.style.display = "flex";
+    }
 });
 
-// Cerrar menú al pulsar overlay
-overlay.addEventListener("click", () => {
-    mobileMenu.classList.remove("open");
-    overlay.style.display = "none";
+/* Cerrar menú al hacer clic en un enlace */
+document.querySelectorAll(".mobile-menu a").forEach(link => {
+    link.addEventListener("click", () => {
+        mobileMenu.style.display = "none";
+    });
 });
 
 
-/* ---------------------------------------------
-   🎬 ANIMACIONES GSAP
---------------------------------------------- */
+/* -------------------------------------------------------
+   GSAP ANIMACIONES HERO
+------------------------------------------------------- */
 
-// Animación del hero
-gsap.from(".hero-content", {
+gsap.from(".hero-title", {
     opacity: 0,
     y: 40,
     duration: 1,
-    ease: "power2.out"
+    ease: "power3.out"
 });
 
-gsap.from(".hero-img", {
+gsap.from(".hero-subtitle", {
     opacity: 0,
-    x: 40,
+    y: 30,
     duration: 1,
     delay: 0.2,
+    ease: "power3.out"
+});
+
+gsap.from(".hero-tagline", {
+    opacity: 0,
+    y: 20,
+    duration: 1,
+    delay: 0.35,
+    ease: "power3.out"
+});
+
+gsap.from(".hero-buttons", {
+    opacity: 0,
+    y: 20,
+    duration: 1,
+    delay: 0.5,
+    ease: "power3.out"
+});
+
+/* Icono grande */
+gsap.from(".hero-icon", {
+    opacity: 0,
+    x: 60,
+    duration: 1.2,
+    delay: 0.4,
+    ease: "power3.out"
+});
+
+/* Glow mint */
+gsap.from(".hero-glow", {
+    opacity: 0,
+    scale: 0.7,
+    duration: 1.4,
+    delay: 0.6,
     ease: "power2.out"
 });
 
 
-/* ---------------------------------------------
-   👀 SCROLL REVEAL (suave y elegante)
---------------------------------------------- */
+/* -------------------------------------------------------
+   SCROLLREVEAL PARA SECCIONES
+------------------------------------------------------- */
 
-const reveals = document.querySelectorAll(".reveal");
+ScrollReveal().reveal(".section h2", {
+    duration: 900,
+    distance: "40px",
+    origin: "bottom",
+    easing: "ease-out",
+    opacity: 0
+});
 
-function revealOnScroll() {
-    reveals.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            el.style.opacity = 1;
-            el.style.transform = "translateY(0)";
-        }
-    });
-}
+ScrollReveal().reveal(".section p, .feature-list li, .roadmap-list li", {
+    duration: 900,
+    distance: "20px",
+    origin: "bottom",
+    easing: "ease-out",
+    opacity: 0,
+    interval: 80
+});
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
 
