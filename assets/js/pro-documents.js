@@ -110,6 +110,9 @@ function openDocument(id) {
             ${doc.relations.map(r => `<li>${r}</li>`).join("")}
         </ul>
 
+        <h3>Mini-grafo del documento</h3>
+        <div id="miniGraphContainer"></div>
+
         <h3>Densidad semántica</h3>
         <div class="doc-heatmap">
             ${doc.heatmap.map(v => `<span style="height:${v * 3}px"></span>`).join("")}
@@ -122,7 +125,10 @@ function openDocument(id) {
             </button>
         </div>
     `;
+
+    renderMiniGraph("miniGraphContainer", doc);
 }
+
 
 /* --------------------------------------------------------------
 MINI ACCIÓN: ENVIAR AL GRAFO
@@ -132,3 +138,20 @@ function highlightInGraph(id) {
     console.log("Destacando documento en el grafo:", id);
     alert("Simulación: el grafo resaltaría las entidades de este documento.");
 }
+/* --------------------------------------------------------------
+MINI-GRAFO POR DOCUMENTO (SIMULADO)
+-------------------------------------------------------------- */
+
+function renderMiniGraph(containerId, doc) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+
+    el.innerHTML = `
+        <div class="mini-graph">
+            ${doc.entities.map((e, i) => `
+                <div class="mini-node" style="--i:${i}">${e}</div>
+            `).join("")}
+        </div>
+    `;
+}
+
