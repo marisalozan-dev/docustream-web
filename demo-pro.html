@@ -46,10 +46,11 @@
             </div>
 
             <nav class="pro-nav">
-                <button class="pro-nav-item pro-nav-item--active">Dashboard</button>
-                <button class="pro-nav-item">Grafo semántico</button>
-                <button class="pro-nav-item">Documentos</button>
-                <button class="pro-nav-item">Integraciones</button>
+                <button data-view="view-dashboard" onclick="switchView('view-dashboard')">Dashboard</button>
+                <button data-view="view-graph" onclick="switchView('view-graph')">Grafo</button>
+                <button data-view="view-documents" onclick="switchView('view-documents')">Documentos</button>
+                <button data-view="view-integrations" onclick="switchView('view-integrations')">Integraciones</button>
+
             </nav>
         </div>
 
