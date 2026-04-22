@@ -609,6 +609,26 @@ body.pro-body {
     opacity: .7;
     font-size: .8rem;
 }
+.mini-graph {
+    position: relative;
+    height: 160px;
+    border-radius: 12px;
+    background: radial-gradient(circle at center, #00e5a015, transparent);
+    overflow: hidden;
+}
+
+.mini-node {
+    position: absolute;
+    padding: 4px 8px;
+    font-size: .75rem;
+    background: #00e5a020;
+    border-radius: 999px;
+    border: 1px solid #00e5a040;
+    transform: translate(-50%, -50%);
+    top: calc(50% + (var(--i) * 10px - 30px));
+    left: calc(50% + (var(--i) * 14px - 40px));
+}
+
 
 
 
