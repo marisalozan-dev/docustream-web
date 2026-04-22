@@ -13,87 +13,66 @@
 
     <!-- Librerías -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body class="pro-body">
 
 <div class="pro-app">
 
-    <!-- SIDEBAR -->
-    <aside class="pro-sidebar">
-        <div class="pro-sidebar-top">
-            <div class="pro-logo-lockup">
-                <!-- Icono DocuStream mini -->
-                <div class="pro-logo-icon">
-                    <svg viewBox="0 0 200 200">
-                        <defs>
-                            <linearGradient id="gProMini" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#00E5A0"/>
-                                <stop offset="100%" style="stop-color:#00C48C"/>
-                            </linearGradient>
-                        </defs>
-                        <line x1="56" y1="28" x2="56" y2="172" stroke="url(#gProMini)" stroke-width="18" stroke-linecap="round"/>
-                        <path d="M56,28 C56,28 148,28 162,100 C176,172 56,172 56,172"
-                              fill="none" stroke="url(#gProMini)" stroke-width="18" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <div class="pro-logo-text">
-                    <span class="pro-logo-name">DocuStream</span>
-                    <span class="pro-logo-tag">PRO Demo</span>
-                </div>
+   <!-- SIDEBAR -->
+<aside class="pro-sidebar">
+
+    <div class="pro-sidebar-top">
+
+        <div class="pro-logo-lockup">
+            <!-- Icono DocuStream mini -->
+            <div class="pro-logo-icon">
+                <svg viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="gProMini" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00E5A0"/>
+                            <stop offset="100%" style="stop-color:#00C48C"/>
+                        </linearGradient>
+                    </defs>
+                    <line x1="56" y1="28" x2="56" y2="172" stroke="url(#gProMini)" stroke-width="18" stroke-linecap="round"/>
+                    <path d="M56,28 C56,28 148,28 162,100 C176,172 56,172 56,172"
+                          fill="none" stroke="url(#gProMini)" stroke-width="18" stroke-linecap="round"/>
+                </svg>
             </div>
 
-            <nav class="pro-nav">
-                <button data-view="view-dashboard" onclick="switchView('view-dashboard')">Dashboard</button>
-                <button data-view="view-graph" onclick="switchView('view-graph')">Grafo</button>
-                <button data-view="view-documents" onclick="switchView('view-documents')">Documentos</button>
-                <button data-view="view-integrations" onclick="switchView('view-integrations')">Integraciones</button>
-
-            </nav>
+            <div class="pro-logo-text">
+                <span class="pro-logo-name">DocuStream</span>
+                <span class="pro-logo-tag">PRO Demo</span>
+            </div>
         </div>
 
-        <div class="pro-sidebar-bottom">
-            <div class="pro-sidebar-pill">Document Intelligence</div>
-            <a href="index.html" class="pro-sidebar-link">← Volver a la landing</a>
-        </div>
-    </aside>
+        <!-- NAV -->
+        <nav class="pro-nav">
+            <button data-view="view-dashboard" onclick="switchView('view-dashboard')">Dashboard</button>
+            <button data-view="view-graph" onclick="switchView('view-graph')">Grafo</button>
+            <button data-view="view-documents" onclick="switchView('view-documents')">Documentos</button>
+            <button data-view="view-integrations" onclick="switchView('view-integrations')">Integraciones</button>
+        </nav>
 
-    <!-- MAIN AREA -->
-    <main class="pro-main">
-<!-- DASHBOARD -->
-<section id="view-dashboard" class="pro-view active-view">
-  <!-- Aquí ya tienes tu dashboard actual -->
-</section>
+    </div>
 
-<!-- GRAFO AVANZADO -->
-<section id="view-graph" class="pro-view">
-  <div class="graph-advanced-container">
-    <div id="graphAdvanced"></div>
-    <aside id="graphSidebar" class="graph-sidebar hidden">
-      <h3>Entidad seleccionada</h3>
-      <div id="graphSidebarContent"></div>
-    </aside>
-  </div>
-</section>
+    <div class="pro-sidebar-bottom">
+        <div class="pro-sidebar-pill">Document Intelligence</div>
+        <a href="index.html" class="pro-sidebar-link">← Volver a la landing</a>
+    </div>
 
-<!-- DOCUMENTOS PRO -->
-<section id="view-documents" class="pro-view">
-  <div class="documents-container">
-    <div class="documents-list" id="documentsList"></div>
-    <aside class="documents-preview" id="documentsPreview">
-      <h3>Vista previa</h3>
-      <div id="documentsPreviewContent"></div>
-    </aside>
-  </div>
-</section>
+</aside>
 
-<!-- INTEGRACIONES PRO -->
-<section id="view-integrations" class="pro-view">
-  <div class="integrations-grid" id="integrationsGrid"></div>
-</section>
 
+  <!-- MAIN AREA -->
+<main class="pro-main">
+
+    <!-- VISTAS PRO (NAVEGACIÓN) -->
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="pro-view active-view">
+        <!-- Aquí se muestra tu dashboard completo -->
+        
         <!-- TOPBAR -->
         <header class="pro-topbar">
             <div>
@@ -106,7 +85,7 @@
             </div>
         </header>
 
-        <!-- KPIs -->
+        <!-- KPIS -->
         <section class="pro-kpis">
             <div class="pro-kpi-card">
                 <span class="pro-kpi-label">Documentos procesados</span>
@@ -142,6 +121,7 @@
                     <option value="incident">Informes de incidencias</option>
                 </select>
             </div>
+
             <div class="pro-filter-group">
                 <label>Periodo</label>
                 <select id="filterPeriod">
@@ -150,6 +130,7 @@
                     <option value="365">Último año</option>
                 </select>
             </div>
+
             <div class="pro-filter-group">
                 <label>Densidad semántica</label>
                 <select id="filterDensity">
@@ -164,7 +145,7 @@
         <!-- GRID PRINCIPAL -->
         <section class="pro-grid">
 
-            <!-- PANEL GRAFO -->
+            <!-- PANEL GRAFO (Dashboard) -->
             <div class="pro-panel pro-panel--graph">
                 <div class="pro-panel-header">
                     <div>
@@ -173,9 +154,7 @@
                     </div>
                     <button class="pro-chip-sm">Vista interactiva</button>
                 </div>
-                <div id="graphContainer" class="pro-panel-body">
-                    <!-- Aquí se pintará el grafo con JS -->
-                </div>
+                <div id="graphContainer" class="pro-panel-body"></div>
             </div>
 
             <!-- PANEL DASHBOARD -->
@@ -186,11 +165,13 @@
                         <p>Evolución de documentos procesados y distribución por tipo.</p>
                     </div>
                 </div>
+
                 <div class="pro-charts-grid">
                     <div class="pro-chart-block">
                         <h3>Documentos procesados por mes</h3>
                         <canvas id="chartLine"></canvas>
                     </div>
+
                     <div class="pro-chart-block">
                         <h3>Distribución por tipo</h3>
                         <canvas id="chartDonut"></canvas>
@@ -206,9 +187,7 @@
                         <p>Zonas de mayor concentración semántica en la base documental.</p>
                     </div>
                 </div>
-                <div id="heatmapContainer" class="pro-panel-body">
-                    <!-- Heatmap simulado -->
-                </div>
+                <div id="heatmapContainer" class="pro-panel-body"></div>
             </div>
 
             <!-- PANEL DETALLE -->
@@ -219,12 +198,14 @@
                         <p>Ejemplo de cómo DocuStream estructura un documento técnico.</p>
                     </div>
                 </div>
+
                 <div class="pro-panel-body pro-detail-body">
                     <div class="pro-detail-meta">
                         <span class="pro-detail-pill">API · Autenticación</span>
                         <h3>Guía de integración OAuth 2.0</h3>
                         <p class="pro-detail-sub">Versión 1.4 · Última actualización: hace 3 días</p>
                     </div>
+
                     <div class="pro-detail-grid">
                         <div>
                             <h4>Entidades clave</h4>
@@ -235,6 +216,7 @@
                                 <li>Errores: <code>401</code>, <code>403</code>, <code>429</code></li>
                             </ul>
                         </div>
+
                         <div>
                             <h4>Relaciones detectadas</h4>
                             <ul>
@@ -244,6 +226,7 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="pro-detail-footer">
                         <span class="pro-detail-score">Confianza semántica: 94%</span>
                         <button class="pro-btn-ghost">Ver grafo de este documento</button>
@@ -252,15 +235,54 @@
             </div>
 
         </section>
+    </section>
 
-    </main>
+    <!-- GRAFO AVANZADO -->
+    <section id="view-graph" class="pro-view">
+        <div class="graph-advanced-container">
+            <div id="graphAdvanced"></div>
+            <aside id="graphSidebar" class="graph-sidebar hidden">
+                <h3>Entidad seleccionada</h3>
+                <div id="graphSidebarContent"></div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- DOCUMENTOS PRO -->
+    <section id="view-documents" class="pro-view">
+        <div class="documents-container">
+            <div class="documents-list" id="documentsList"></div>
+            <aside class="documents-preview" id="documentsPreview">
+                <h3>Vista previa</h3>
+                <div id="documentsPreviewContent"></div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- INTEGRACIONES PRO -->
+    <section id="view-integrations" class="pro-view">
+        <div class="integrations-grid" id="integrationsGrid"></div>
+    </section>
+
+</main>
+
 </div>
 
 <!-- JS PRO -->
 <script src="pro-core.js"></script>
 <script src="pro-dashboard.js"></script>
-<script src="pro-graph.js"></script>
-<script src="pro-heatmap.js"></script>
+
+<!-- Grafo avanzado -->
+<script src="pro-graph-advanced.js"></script>
+
+<!-- Documentos PRO -->
+<script src="pro-documents.js"></script>
+
+<!-- Integraciones PRO -->
+<script src="pro-integrations.js"></script>
 
 </body>
 </html>
+
+
+
