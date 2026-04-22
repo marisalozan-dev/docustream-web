@@ -472,6 +472,76 @@ body.pro-body {
         border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 }
+/* DOCUMENTOS PRO */
+.documents-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+}
+
+.doc-item {
+    background: #111;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.doc-item:hover {
+    background: #1a1a1a;
+}
+
+.doc-meta {
+    opacity: .7;
+    font-size: .85rem;
+}
+
+.doc-confidence {
+    margin-top: 8px;
+    background: #222;
+    height: 6px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.doc-bar {
+    background: #00e5a0;
+    height: 100%;
+}
+
+.documents-preview {
+    background: #0d0d0d;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.doc-summary {
+    opacity: .8;
+}
+
+.doc-heatmap {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0;
+}
+
+.doc-heatmap span {
+    width: 10px;
+    background: #00e5a0;
+    border-radius: 4px;
+}
+
+.doc-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.doc-score {
+    opacity: .8;
+}
+
 
 
 
