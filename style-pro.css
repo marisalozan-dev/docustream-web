@@ -541,6 +541,74 @@ body.pro-body {
 .doc-score {
     opacity: .8;
 }
+/* INTEGRACIONES PRO */
+.integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.integration-card {
+    background: #0d0d0d;
+    padding: 20px;
+    border-radius: 14px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform .2s, background .2s;
+}
+
+.integration-card:hover {
+    background: #151515;
+    transform: translateY(-4px);
+}
+
+.integration-icon {
+    font-size: 32px;
+}
+
+.integration-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.integration-info p {
+    opacity: .75;
+    margin: 6px 0 10px;
+}
+
+.integration-tags span {
+    background: #00e5a020;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: .75rem;
+    margin-right: 6px;
+}
+
+.integration-meta {
+    margin-left: auto;
+    text-align: right;
+}
+
+.integration-status {
+    display: block;
+    font-size: .85rem;
+    margin-bottom: 4px;
+}
+
+.integration-status.active {
+    color: #00e5a0;
+}
+
+.integration-status.paused {
+    color: #ff6b6b;
+}
+
+.integration-latency {
+    opacity: .7;
+    font-size: .8rem;
+}
 
 
 
