@@ -141,6 +141,14 @@ TEMA PRO — GLASS + GLOW GLOBAL
 .active-view {
     display: block;
 }
+/* Control de vistas PRO */
+.pro-view {
+    display: none;
+}
+
+.active-view {
+    display: block;
+}
 
 
 
