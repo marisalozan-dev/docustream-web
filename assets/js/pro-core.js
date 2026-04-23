@@ -52,6 +52,12 @@ function initActiveView() {
     }
 
     if (document.getElementById("view-graph")?.classList.contains("active-view")) {
+        // Reiniciar sidebar
+        const sidebar = document.getElementById("graphSidebarContent");
+        if (sidebar) {
+            sidebar.innerHTML = "<p>Selecciona un nodo para ver detalles.</p>";
+        }
+
         if (typeof initGraphAdvanced === "function") initGraphAdvanced();
     }
 }
@@ -83,8 +89,14 @@ function switchView(viewId) {
         initIntegrations();
     }
 
-    if (viewId === "view-graph" && typeof initGraphAdvanced === "function") {
-        initGraphAdvanced();
+    if (viewId === "view-graph") {
+        // Reiniciar sidebar SIEMPRE antes de inicializar el grafo
+        const sidebar = document.getElementById("graphSidebarContent");
+        if (sidebar) {
+            sidebar.innerHTML = "<p>Selecciona un nodo para ver detalles.</p>";
+        }
+
+        if (typeof initGraphAdvanced === "function") initGraphAdvanced();
     }
 }
 
@@ -141,3 +153,4 @@ EXPOSICIÓN GLOBAL
 
 window.switchView = switchView;
 window.PRO_STATE = PRO_STATE;
+
