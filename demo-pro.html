@@ -1,183 +1,187 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DocuStream PRO Demo</title>
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="assets/css/style-pro.css">
+    <link rel="stylesheet" href="assets/css/style-pro.css" />
 
-    <!-- Librerías externas -->
+    <!-- Librerías -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
 
-<div class="pro-layout">
-
-    <!-- --------------------------------------------------------------
-         SIDEBAR
-    -------------------------------------------------------------- -->
-    <aside class="pro-sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
         <h2>DocuStream PRO</h2>
 
-        <nav class="pro-nav">
-            <button data-view="view-dashboard" class="active" onclick="switchView('view-dashboard')">Dashboard</button>
-            <button data-view="view-documents" onclick="switchView('view-documents')">Documentos</button>
-            <button data-view="view-integrations" onclick="switchView('view-integrations')">Integraciones</button>
-            <button data-view="view-graph" onclick="switchView('view-graph')">Grafo Avanzado</button>
+        <nav>
+            <button onclick="showView('dashboard')">Dashboard</button>
+            <button onclick="showView('documents')">Documentos</button>
+            <button onclick="showView('integrations')">Integraciones</button>
+            <button onclick="showView('graph-advanced')">Grafo Avanzado</button>
         </nav>
     </aside>
 
-    <!-- --------------------------------------------------------------
-         CONTENIDO PRINCIPAL
-    -------------------------------------------------------------- -->
-    <main>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
 
-        <!-- ----------------------------------------------------------
-             TOPBAR
-        ----------------------------------------------------------- -->
-        <header class="pro-topbar">
-            <h1>Demo PRO</h1>
+        <!-- FILTROS SUPERIORES -->
+        <section class="pro-filters">
+            <select id="filterType" onchange="applyFilters()">
+                <option value="all">Todos los tipos</option>
+                <option value="api">API</option>
+                <option value="manual">Manual</option>
+            </select>
 
-            <div class="filters">
-                <select id="filterDocType">
-                    <option value="all">Todos los tipos</option>
-                    <option value="api">APIs</option>
-                    <option value="manual">Manuales</option>
-                    <option value="spec">Especificaciones</option>
-                </select>
+            <select id="filterPeriod" onchange="applyFilters()">
+                <option value="30">Últimos 30 días</option>
+                <option value="7">Últimos 7 días</option>
+                <option value="90">Últimos 90 días</option>
+            </select>
 
-                <select id="filterPeriod">
-                    <option value="7">Últimos 7 días</option>
-                    <option value="30" selected>Últimos 30 días</option>
-                    <option value="90">Últimos 90 días</option>
-                </select>
+            <select id="filterDensity" onchange="applyFilters()">
+                <option value="all">Toda la densidad</option>
+                <option value="low">Baja</option>
+                <option value="medium">Media</option>
+                <option value="high">Alta</option>
+            </select>
+        </section>
 
-                <select id="filterDensity">
-                    <option value="all">Toda la densidad</option>
-                    <option value="high">Alta</option>
-                    <option value="low">Baja</option>
-                </select>
+        <!-- ============================
+             DASHBOARD PRO
+        ============================= -->
+        <section id="view-dashboard" class="pro-view active-view">
+
+            <h2>Resumen de actividad</h2>
+
+            <div class="pro-kpi-grid">
+                <div class="pro-kpi-card">
+                    <h3>Documentos procesados</h3>
+                    <p id="kpiDocs">—</p>
+                </div>
+
+                <div class="pro-kpi-card">
+                    <h3>Latencia media</h3>
+                    <p id="kpiLatency">—</p>
+                </div>
+
+                <div class="pro-kpi-card">
+                    <h3>Calidad del dato</h3>
+                    <p id="kpiQuality">—</p>
+                </div>
+
+                <div class="pro-kpi-card">
+                    <h3>Anomalías detectadas</h3>
+                    <p id="kpiAnomalies">—</p>
+                </div>
             </div>
-        </header>
 
-        <!-- ----------------------------------------------------------
-             VISTA: DASHBOARD
-        ----------------------------------------------------------- -->
-       <section id="view-dashboard" class="pro-view active-view">
+            <div id="dashboardInsight" class="pro-panel" style="margin-top: 24px;"></div>
 
-    <h2>Resumen de actividad</h2>
+            <div class="pro-dashboard-charts">
+                <div id="activityChart" class="pro-panel"></div>
+                <div id="qualityDonut" class="pro-panel"></div>
+            </div>
 
-    <div class="pro-kpi-grid">
-        <div class="pro-kpi-card">
-            <h3>Documentos procesados</h3>
-            <p id="kpiDocs">—</p>
-        </div>
+            <div id="heatmapContainer" class="pro-panel" style="margin-top: 32px;"></div>
+        </section>
 
-        <div class="pro-kpi-card">
-            <h3>Latencia media</h3>
-            <p id="kpiLatency">—</p>
-        </div>
-
-        <div class="pro-kpi-card">
-            <h3>Calidad del dato</h3>
-            <p id="kpiQuality">—</p>
-        </div>
-
-        <div class="pro-kpi-card">
-            <h3>Anomalías detectadas</h3>
-            <p id="kpiAnomalies">—</p>
-        </div>
-    </div>
-
-    <div id="dashboardInsight" class="pro-panel" style="margin-top: 24px;"></div>
-
-    <div class="pro-dashboard-charts">
-        <div id="activityChart" class="pro-panel"></div>
-        <div id="qualityDonut" class="pro-panel"></div>
-    </div>
-
-    <div id="heatmapContainer" class="pro-panel" style="margin-top: 32px;"></div>
-</section>
-
-        <!-- ----------------------------------------------------------
-             VISTA: DOCUMENTOS
-        ----------------------------------------------------------- -->
+        <!-- ============================
+             DOCUMENTOS PRO
+        ============================= -->
         <section id="view-documents" class="pro-view">
 
             <h2>Documentos</h2>
 
-         <section id="view-documents" class="pro-view">
+            <div class="documents-container">
 
-    <h2>Documentos</h2>
+                <!-- LISTA -->
+                <div class="documents-list" id="documentsList"></div>
 
-    <div class="documents-container">
+                <!-- PREVIEW -->
+                <aside class="documents-preview">
+                    <h3>Vista previa</h3>
 
-        <!-- LISTA -->
-        <div class="documents-list" id="documentsList"></div>
+                    <div id="documentsPreviewContent">
+                        <p>Selecciona un documento para ver detalles.</p>
+                    </div>
+                </aside>
 
-        <!-- PREVIEW -->
-        <aside class="documents-preview">
-            <h3>Vista previa</h3>
-            <div id="documentsPreviewContent">
-                <p>Selecciona un documento para ver detalles.</p>
             </div>
-        </aside>
-
-    </div>
-
-</section>
 
         </section>
 
-        <!-- ----------------------------------------------------------
-             VISTA: INTEGRACIONES
-        ----------------------------------------------------------- -->
+        <!-- ============================
+             INTEGRACIONES PRO
+        ============================= -->
         <section id="view-integrations" class="pro-view">
 
             <h2>Integraciones</h2>
 
-            <div class="integrations-grid" id="integrationsGrid"></div>
+            <div id="integrationsGrid" class="integrations-grid">
+                <!-- Se rellena automáticamente -->
+            </div>
+
         </section>
 
-        <!-- ----------------------------------------------------------
-             VISTA: GRAFO AVANZADO
-        ----------------------------------------------------------- -->
-        <section id="view-graph" class="pro-view">
+        <!-- ============================
+             GRAFO AVANZADO PRO
+        ============================= -->
+        <section id="view-graph-advanced" class="pro-view">
 
             <h2>Grafo Avanzado</h2>
 
-            <div class="graph-layout">
-                <div id="graphContainer"></div>
-
-                <aside class="graph-sidebar">
-                    <h3>Detalles del nodo</h3>
-                    <div id="graphSidebarContent">
-                        <p>Selecciona un nodo para ver detalles.</p>
-                    </div>
-                </aside>
+            <div id="graphAdvancedContainer" class="pro-panel" style="height: 500px;">
+                <!-- Se rellena desde pro-graph-advanced.js -->
             </div>
+
         </section>
 
     </main>
-</div>
 
-<!-- --------------------------------------------------------------
-     SCRIPTS PRO
--------------------------------------------------------------- -->
-<script src="assets/js/pro-theme.js"></script>
-<script src="assets/js/pro-core.js"></script>
-<script src="assets/js/pro-dashboard.js"></script>
-<script src="assets/js/pro-documents.js"></script>
-<script src="assets/js/pro-integrations.js"></script>
-<script src="assets/js/pro-graph-advanced.js"></script>
-<script src="assets/js/pro-heatmap.js"></script>
+    <!-- SCRIPTS -->
+    <script src="assets/js/pro-core.js"></script>
+    <script src="assets/js/pro-dashboard.js"></script>
+    <script src="assets/js/pro-documents.js"></script>
+    <script src="assets/js/pro-integrations.js"></script>
+    <script src="assets/js/pro-graph-advanced.js"></script>
+    <script src="assets/js/pro-heatmap.js"></script>
+
+    <script>
+        // Inicialización global
+        window.onload = () => {
+            initDashboard();
+            initDocuments();
+            initIntegrations();
+            initGraphAdvanced();
+            initHeatmap();
+        };
+
+        function showView(view) {
+            document.querySelectorAll(".pro-view").forEach(v => v.classList.remove("active-view"));
+            document.getElementById(`view-${view}`).classList.add("active-view");
+        }
+
+        function applyFilters() {
+            const state = {
+                type: document.getElementById("filterType").value,
+                period: parseInt(document.getElementById("filterPeriod").value),
+                density: document.getElementById("filterDensity").value
+            };
+
+            updateDashboard(state);
+            updateHeatmap(state);
+        }
+    </script>
 
 </body>
 </html>
+
 
 
 
