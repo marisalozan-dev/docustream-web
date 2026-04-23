@@ -10,7 +10,7 @@ body {
     height: 100vh;
     background: #0d0d0d;
     color: #fff;
-    overflow: hidden;
+    overflow: auto; /* ← CORREGIDO: antes estaba hidden */
 }
 
 /* SIDEBAR */
@@ -194,6 +194,7 @@ TEMA PRO — GLASS + GLOW GLOBAL
     box-shadow: 0 0 24px rgba(0, 229, 160, 0.15);
     transform: translateY(-3px);
 }
+
 
 
 
