@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------
 DocuStream PRO — DOCUMENTOS
-Búsqueda instantánea · Vista previa · Mini-grafo
+Búsqueda instantánea · Vista previa · Mini-grafo D3 real
 -------------------------------------------------------------- */
 
 console.log("Documents PRO loaded");
@@ -59,7 +59,7 @@ function renderDocumentsList(filter = "") {
 }
 
 /* --------------------------------------------------------------
-ABRIR DOCUMENTO
+ABRIR DOCUMENTO + MINI-GRAFO REAL
 -------------------------------------------------------------- */
 
 function openDocument(id) {
@@ -80,12 +80,88 @@ function openDocument(id) {
         </ul>
 
         <h3>Mini-grafo</h3>
-        <div class="mini-graph">
-            ${doc.entities
-                .map(e => `<span class="mini-node">${e}</span>`)
-                .join("")}
-        </div>
+        <div id="miniGraphContainer" class="mini-graph-panel"></div>
     `;
+
+    renderMiniGraph(doc);
+}
+
+/* --------------------------------------------------------------
+MINI-GRAFO D3
+-------------------------------------------------------------- */
+
+function renderMiniGraph(doc) {
+    const container = document.getElementById("miniGraphContainer");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const width = container.clientWidth || 260;
+    const height = 180;
+
+    const nodes = [
+        { id: doc.title, type: "document" },
+        ...doc.entities.map(e => ({ id: e, type: "entity" }))
+    ];
+
+    const links = doc.entities.map(e => ({
+        source: doc.title,
+        target: e
+    }));
+
+    const svg = d3.select("#miniGraphContainer")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    const g = svg.append("g");
+
+    const sim = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(60))
+        .force("charge", d3.forceManyBody().strength(-120))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+    const link = g.selectAll("line")
+        .data(links)
+        .enter()
+        .append("line")
+        .attr("stroke", "#00e5a055")
+        .attr("stroke-width", 1.5);
+
+    const node = g.selectAll("circle")
+        .data(nodes)
+        .enter()
+        .append("circle")
+        .attr("r", d => d.type === "document" ? 16 : 10)
+        .attr("fill", d => d.type === "document" ? "#00e5a0" : "#00e5a055")
+        .attr("stroke", "#00e5a0")
+        .attr("stroke-width", 1.5);
+
+    const label = g.selectAll("text")
+        .data(nodes)
+        .enter()
+        .append("text")
+        .text(d => d.id)
+        .attr("font-size", "0.7rem")
+        .attr("fill", "#ccc")
+        .attr("text-anchor", "middle")
+        .attr("dy", -18);
+
+    sim.on("tick", () => {
+        link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+        node
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
+
+        label
+            .attr("x", d => d.x)
+            .attr("y", d => d.y);
+    });
 }
 
 /* --------------------------------------------------------------
@@ -120,6 +196,7 @@ EXPOSICIÓN GLOBAL
 
 window.initDocuments = initDocuments;
 window.openDocument = openDocument;
+
 
 
 
