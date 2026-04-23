@@ -1,5 +1,116 @@
 /* --------------------------------------------------------------
-TEMA PRO — GLASS + GLOW
+DOCUMENTOS PRO — LAYOUT
+-------------------------------------------------------------- */
+
+.documents-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.doc-item {
+    padding: 16px;
+    cursor: pointer;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 229, 160, 0.08);
+    backdrop-filter: blur(12px);
+    transition: all 0.25s ease;
+}
+
+.doc-item:hover {
+    border-color: rgba(0, 229, 160, 0.25);
+    box-shadow: 0 0 24px rgba(0, 229, 160, 0.15);
+    transform: translateY(-3px);
+}
+
+.documents-preview {
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 229, 160, 0.08);
+    backdrop-filter: blur(12px);
+}
+
+/* Buscador */
+.doc-search {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 229, 160, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+/* Mini-grafo */
+.mini-graph-panel {
+    width: 100%;
+    height: 200px;
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 229, 160, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    padding: 6px;
+    overflow: hidden;
+}
+
+/* --------------------------------------------------------------
+INTEGRACIONES PRO — GRID + CARDS
+-------------------------------------------------------------- */
+
+.integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.integration-card {
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 229, 160, 0.08);
+    backdrop-filter: blur(12px);
+    transition: all 0.25s ease;
+}
+
+.integration-card:hover {
+    border-color: rgba(0, 229, 160, 0.25);
+    box-shadow: 0 0 24px rgba(0, 229, 160, 0.15);
+    transform: translateY(-3px);
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+}
+
+.badge.active {
+    background: rgba(0, 229, 160, 0.25);
+    color: #00e5a0;
+}
+
+.badge.paused {
+    background: rgba(255, 150, 0, 0.25);
+    color: #ff9600;
+}
+
+/* --------------------------------------------------------------
+TEMA PRO — GLASS + GLOW GLOBAL
 -------------------------------------------------------------- */
 
 .pro-panel,
@@ -23,69 +134,5 @@ TEMA PRO — GLASS + GLOW
     transform: translateY(-3px);
 }
 
-/* Documentos */
-.doc-search {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 229, 160, 0.15);
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-}
-
-.doc-item {
-    padding: 16px;
-    cursor: pointer;
-}
-
-.mini-graph {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.mini-node {
-    padding: 6px 10px;
-    background: rgba(0, 229, 160, 0.15);
-    border-radius: 8px;
-    font-size: 0.8rem;
-}
-
-/* Integraciones */
-.integration-card {
-    padding: 20px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.badge {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-}
-
-.badge.active {
-    background: rgba(0, 229, 160, 0.25);
-    color: #00e5a0;
-}
-
-.badge.paused {
-    background: rgba(255, 150, 0, 0.25);
-    color: #ff9600;
-}
-/* Mini-grafo panel */
-.mini-graph-panel {
-    width: 100%;
-    height: 200px;
-    margin-top: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 229, 160, 0.08);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    padding: 6px;
-}
 
 
