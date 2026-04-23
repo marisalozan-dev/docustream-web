@@ -67,34 +67,41 @@
         <!-- ----------------------------------------------------------
              VISTA: DASHBOARD
         ----------------------------------------------------------- -->
-        <section id="view-dashboard" class="pro-view active-view">
+       <section id="view-dashboard" class="pro-view active-view">
 
-            <h2>Resumen de actividad</h2>
+    <h2>Resumen de actividad</h2>
 
-            <div class="pro-kpi-grid">
-                <div class="pro-kpi-card">
-                    <h3>Documentos procesados</h3>
-                    <p id="kpiDocs">—</p>
-                </div>
+    <div class="pro-kpi-grid">
+        <div class="pro-kpi-card">
+            <h3>Documentos procesados</h3>
+            <p id="kpiDocs">—</p>
+        </div>
 
-                <div class="pro-kpi-card">
-                    <h3>Latencia media</h3>
-                    <p id="kpiLatency">—</p>
-                </div>
+        <div class="pro-kpi-card">
+            <h3>Latencia media</h3>
+            <p id="kpiLatency">—</p>
+        </div>
 
-                <div class="pro-kpi-card">
-                    <h3>Calidad del dato</h3>
-                    <p id="kpiQuality">—</p>
-                </div>
+        <div class="pro-kpi-card">
+            <h3>Calidad del dato</h3>
+            <p id="kpiQuality">—</p>
+        </div>
 
-                <div class="pro-kpi-card">
-                    <h3>Anomalías detectadas</h3>
-                    <p id="kpiAnomalies">—</p>
-                </div>
-            </div>
+        <div class="pro-kpi-card">
+            <h3>Anomalías detectadas</h3>
+            <p id="kpiAnomalies">—</p>
+        </div>
+    </div>
 
-            <div id="heatmapContainer" class="pro-panel" style="margin-top: 32px;"></div>
-        </section>
+    <div id="dashboardInsight" class="pro-panel" style="margin-top: 24px;"></div>
+
+    <div class="pro-dashboard-charts">
+        <div id="activityChart" class="pro-panel"></div>
+        <div id="qualityDonut" class="pro-panel"></div>
+    </div>
+
+    <div id="heatmapContainer" class="pro-panel" style="margin-top: 32px;"></div>
+</section>
 
         <!-- ----------------------------------------------------------
              VISTA: DOCUMENTOS
