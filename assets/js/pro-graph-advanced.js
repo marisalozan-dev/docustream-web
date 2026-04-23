@@ -6,6 +6,26 @@ D3.js · Zoom · Pan · Sidebar dinámico · Movimiento orgánico
 console.log("Graph Advanced PRO loaded");
 
 /* --------------------------------------------------------------
+TOOLTIP PRO
+-------------------------------------------------------------- */
+
+const graphTooltip = document.createElement("div");
+graphTooltip.className = "graph-tooltip";
+graphTooltip.style.position = "absolute";
+graphTooltip.style.padding = "10px 14px";
+graphTooltip.style.background = "rgba(0,0,0,0.75)";
+graphTooltip.style.border = "1px solid #00e5a055";
+graphTooltip.style.borderRadius = "10px";
+graphTooltip.style.color = "#fff";
+graphTooltip.style.fontSize = "0.85rem";
+graphTooltip.style.pointerEvents = "none";
+graphTooltip.style.opacity = "0";
+graphTooltip.style.transition = "opacity 0.2s ease";
+graphTooltip.style.backdropFilter = "blur(6px)";
+document.body.appendChild(graphTooltip);
+
+
+/* --------------------------------------------------------------
 DATOS SIMULADOS DEL GRAFO
 -------------------------------------------------------------- */
 
