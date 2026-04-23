@@ -40,3 +40,4 @@ function initIntegrations() {
 window.initIntegrations = initIntegrations;
 window.openIntegration = openIntegration;
 
+
