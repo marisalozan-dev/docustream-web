@@ -1,121 +1,59 @@
-/* -------------------------------------------------------
-   DocuStream PRO — HEATMAP MODULE
-   Mapa de densidad documental con animación
-------------------------------------------------------- */
+/* --------------------------------------------------------------
+DocuStream PRO — HEATMAP REAL CON D3
+-------------------------------------------------------------- */
 
 console.log("Heatmap PRO loaded");
 
-let heatmapCanvas = null;
-let heatmapCtx = null;
-
-
-/* -------------------------------------------------------
-   INICIALIZACIÓN
-------------------------------------------------------- */
-
 function initHeatmap() {
-    const container = document.getElementById("heatmapContainer");
+    const el = document.getElementById("heatmapContainer");
+    if (!el) return;
 
-    // Limpiar si ya existe
-    container.innerHTML = "";
+    // Datos simulados (7 días x 24 horas)
+    const data = Array.from({ length: 7 }, () =>
+        Array.from({ length: 24 }, () => Math.random())
+    );
 
-    // Crear canvas
-    heatmapCanvas = document.createElement("canvas");
-    heatmapCanvas.width = container.clientWidth;
-    heatmapCanvas.height = container.clientHeight;
+    const width = el.clientWidth || 600;
+    const height = 200;
+    const cellW = width / data[0].length;
+    const cellH = height / data.length;
 
-    container.appendChild(heatmapCanvas);
+    const svg = d3.select("#heatmapContainer")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-    heatmapCtx = heatmapCanvas.getContext("2d");
+    const color = d3.scaleSequential(d3.interpolateTurbo).domain([0, 1]);
 
-    drawHeatmap(generateHeatmapData(PRO_STATE));
+    svg.selectAll("g")
+        .data(data)
+        .enter()
+        .append("g")
+        .each(function (row, rowIndex) {
+            d3.select(this)
+                .selectAll("rect")
+                .data(row)
+                .enter()
+                .append("rect")
+                .attr("x", (_, colIndex) => colIndex * cellW)
+                .attr("y", rowIndex * cellH)
+                .attr("width", cellW)
+                .attr("height", cellH)
+                .attr("fill", d => color(d));
+        });
 }
-
-
-/* -------------------------------------------------------
-   ACTUALIZACIÓN POR FILTROS
-------------------------------------------------------- */
 
 function updateHeatmap(state) {
-    const data = generateHeatmapData(state);
-    drawHeatmap(data);
+    console.log("Actualizando heatmap con filtros:", state);
 
-    gsap.from("#heatmapContainer canvas", {
-        opacity: 0,
-        duration: 0.4
-    });
+    // Por ahora solo regeneramos el heatmap
+    const el = document.getElementById("heatmapContainer");
+    if (!el) return;
+
+    el.innerHTML = "";
+    initHeatmap();
 }
-
-
-/* -------------------------------------------------------
-   GENERADOR DE DATOS
-------------------------------------------------------- */
-
-function generateHeatmapData(state) {
-    const densityMap = {
-        all: 1,
-        high: 1.4,
-        medium: 1,
-        low: 0.6
-    };
-
-    const multiplier = densityMap[state.density] || 1;
-
-    const cols = 14;
-    const rows = 8;
-
-    const data = [];
-
-    for (let y = 0; y < rows; y++) {
-        const row = [];
-        for (let x = 0; x < cols; x++) {
-            row.push(Math.random() * multiplier);
-        }
-        data.push(row);
-    }
-
-    return data;
-}
-
-
-/* -------------------------------------------------------
-   DIBUJAR HEATMAP
-------------------------------------------------------- */
-
-function drawHeatmap(data) {
-    const width = heatmapCanvas.width;
-    const height = heatmapCanvas.height;
-
-    const cols = data[0].length;
-    const rows = data.length;
-
-    const cellW = width / cols;
-    const cellH = height / rows;
-
-    heatmapCtx.clearRect(0, 0, width, height);
-
-    for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-
-            const value = data[y][x];
-
-            // Color mint según intensidad
-            const alpha = Math.min(0.8, value * 0.8);
-
-            heatmapCtx.fillStyle = `rgba(0, 229, 160, ${alpha})`;
-            heatmapCtx.fillRect(x * cellW, y * cellH, cellW, cellH);
-        }
-    }
-
-    // Glow suave
-    heatmapCtx.fillStyle = "rgba(0, 229, 160, 0.08)";
-    heatmapCtx.fillRect(0, 0, width, height);
-}
-
-
-/* -------------------------------------------------------
-   EXPONER FUNCIONES
-------------------------------------------------------- */
 
 window.initHeatmap = initHeatmap;
 window.updateHeatmap = updateHeatmap;
+
