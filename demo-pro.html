@@ -2,279 +2,164 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>DocuStream PRO Demo · Document Intelligence</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuStream PRO Demo</title>
 
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="assets/css/style-pro.css">
 
-    <!-- Estilos PRO -->
-    <link rel="stylesheet" href="style-pro.css">
-
-    <!-- Librerías -->
+    <!-- Librerías externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="pro-body">
+<body>
 
-<div class="pro-app">
+<div class="pro-layout">
 
-    <!-- SIDEBAR -->
+    <!-- --------------------------------------------------------------
+         SIDEBAR
+    -------------------------------------------------------------- -->
     <aside class="pro-sidebar">
+        <h2>DocuStream PRO</h2>
 
-        <div class="pro-sidebar-top">
-
-            <div class="pro-logo-lockup">
-                <div class="pro-logo-icon">
-                    <svg viewBox="0 0 200 200">
-                        <defs>
-                            <linearGradient id="gProMini" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#00E5A0"/>
-                                <stop offset="100%" style="stop-color:#00C48C"/>
-                            </linearGradient>
-                        </defs>
-                        <line x1="56" y1="28" x2="56" y2="172" stroke="url(#gProMini)" stroke-width="18" stroke-linecap="round"/>
-                        <path d="M56,28 C56,28 148,28 162,100 C176,172 56,172 56,172"
-                              fill="none" stroke="url(#gProMini)" stroke-width="18" stroke-linecap="round"/>
-                    </svg>
-                </div>
-
-                <div class="pro-logo-text">
-                    <span class="pro-logo-name">DocuStream</span>
-                    <span class="pro-logo-tag">PRO Demo</span>
-                </div>
-            </div>
-
-            <nav class="pro-nav">
-                <button data-view="view-dashboard" onclick="switchView('view-dashboard')">Dashboard</button>
-                <button data-view="view-graph" onclick="switchView('view-graph')">Grafo</button>
-                <button data-view="view-documents" onclick="switchView('view-documents')">Documentos</button>
-                <button data-view="view-integrations" onclick="switchView('view-integrations')">Integraciones</button>
-            </nav>
-
-        </div>
-
-        <div class="pro-sidebar-bottom">
-            <div class="pro-sidebar-pill">Document Intelligence</div>
-            <a href="index.html" class="pro-sidebar-link">← Volver a la landing</a>
-        </div>
-
+        <nav class="pro-nav">
+            <button data-view="view-dashboard" class="active" onclick="switchView('view-dashboard')">Dashboard</button>
+            <button data-view="view-documents" onclick="switchView('view-documents')">Documentos</button>
+            <button data-view="view-integrations" onclick="switchView('view-integrations')">Integraciones</button>
+            <button data-view="view-graph" onclick="switchView('view-graph')">Grafo Avanzado</button>
+        </nav>
     </aside>
 
-    <!-- MAIN -->
-    <main class="pro-main">
+    <!-- --------------------------------------------------------------
+         CONTENIDO PRINCIPAL
+    -------------------------------------------------------------- -->
+    <main>
 
-        <!-- DASHBOARD -->
+        <!-- ----------------------------------------------------------
+             TOPBAR
+        ----------------------------------------------------------- -->
+        <header class="pro-topbar">
+            <h1>Demo PRO</h1>
+
+            <div class="filters">
+                <select id="filterDocType">
+                    <option value="all">Todos los tipos</option>
+                    <option value="api">APIs</option>
+                    <option value="manual">Manuales</option>
+                    <option value="spec">Especificaciones</option>
+                </select>
+
+                <select id="filterPeriod">
+                    <option value="7">Últimos 7 días</option>
+                    <option value="30" selected>Últimos 30 días</option>
+                    <option value="90">Últimos 90 días</option>
+                </select>
+
+                <select id="filterDensity">
+                    <option value="all">Toda la densidad</option>
+                    <option value="high">Alta</option>
+                    <option value="low">Baja</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- ----------------------------------------------------------
+             VISTA: DASHBOARD
+        ----------------------------------------------------------- -->
         <section id="view-dashboard" class="pro-view active-view">
 
-            <!-- TOPBAR -->
-            <header class="pro-topbar">
-                <div>
-                    <h1 class="pro-main-title">Panel de Document Intelligence</h1>
-                    <p class="pro-main-subtitle">Simulación de cómo DocuStream estructura, analiza y visualiza documentación técnica.</p>
-                </div>
-                <div class="pro-topbar-actions">
-                    <button class="pro-chip">Entorno demo</button>
-                    <button class="pro-chip pro-chip--mint">v1.0 Neo-Glass</button>
-                </div>
-            </header>
+            <h2>Resumen de actividad</h2>
 
-            <!-- KPIS -->
-            <section class="pro-kpis">
+            <div class="pro-kpi-grid">
                 <div class="pro-kpi-card">
-                    <span class="pro-kpi-label">Documentos procesados</span>
-                    <span class="pro-kpi-value" id="kpiDocs">1.284</span>
-                    <span class="pro-kpi-trend pro-kpi-trend--up">+18% este mes</span>
+                    <h3>Documentos procesados</h3>
+                    <p id="kpiDocs">—</p>
                 </div>
+
                 <div class="pro-kpi-card">
-                    <span class="pro-kpi-label">Entidades detectadas</span>
-                    <span class="pro-kpi-value" id="kpiEntities">9.732</span>
-                    <span class="pro-kpi-trend">Cobertura 92%</span>
+                    <h3>Latencia media</h3>
+                    <p id="kpiLatency">—</p>
                 </div>
+
                 <div class="pro-kpi-card">
-                    <span class="pro-kpi-label">Relaciones mapeadas</span>
-                    <span class="pro-kpi-value" id="kpiRelations">24.581</span>
-                    <span class="pro-kpi-trend pro-kpi-trend--up">+32% vs trimestre anterior</span>
+                    <h3>Calidad del dato</h3>
+                    <p id="kpiQuality">—</p>
                 </div>
+
                 <div class="pro-kpi-card">
-                    <span class="pro-kpi-label">Tiempo medio de respuesta</span>
-                    <span class="pro-kpi-value" id="kpiLatency">230 ms</span>
-                    <span class="pro-kpi-trend">Consultas semánticas</span>
+                    <h3>Anomalías detectadas</h3>
+                    <p id="kpiAnomalies">—</p>
                 </div>
-            </section>
+            </div>
 
-            <!-- FILTROS -->
-            <section class="pro-filters">
-                <div class="pro-filter-group">
-                    <label>Tipo de documento</label>
-                    <select id="filterDocType">
-                        <option value="all">Todos</option>
-                        <option value="api">APIs & SDKs</option>
-                        <option value="spec">Especificaciones técnicas</option>
-                        <option value="manual">Manuales de usuario</option>
-                        <option value="incident">Informes de incidencias</option>
-                    </select>
-                </div>
-
-                <div class="pro-filter-group">
-                    <label>Periodo</label>
-                    <select id="filterPeriod">
-                        <option value="30">Últimos 30 días</option>
-                        <option value="90">Últimos 90 días</option>
-                        <option value="365">Último año</option>
-                    </select>
-                </div>
-
-                <div class="pro-filter-group">
-                    <label>Densidad semántica</label>
-                    <select id="filterDensity">
-                        <option value="all">Todas</option>
-                        <option value="high">Alta</option>
-                        <option value="medium">Media</option>
-                        <option value="low">Baja</option>
-                    </select>
-                </div>
-            </section>
-
-            <!-- GRID PRINCIPAL -->
-            <section class="pro-grid">
-
-                <!-- PANEL GRAFO -->
-                <div class="pro-panel pro-panel--graph">
-                    <div class="pro-panel-header">
-                        <div>
-                            <h2>Grafo semántico</h2>
-                            <p>Visualización de entidades y relaciones extraídas de la documentación.</p>
-                        </div>
-                        <button class="pro-chip-sm">Vista interactiva</button>
-                    </div>
-                    <div id="graphContainer" class="pro-panel-body"></div>
-                </div>
-
-                <!-- PANEL DASHBOARD -->
-                <div class="pro-panel pro-panel--charts">
-                    <div class="pro-panel-header">
-                        <div>
-                            <h2>Actividad documental</h2>
-                            <p>Evolución de documentos procesados y distribución por tipo.</p>
-                        </div>
-                    </div>
-
-                    <div class="pro-charts-grid">
-                        <div class="pro-chart-block">
-                            <h3>Documentos procesados por mes</h3>
-                            <canvas id="chartLine"></canvas>
-                        </div>
-
-                        <div class="pro-chart-block">
-                            <h3>Distribución por tipo</h3>
-                            <canvas id="chartDonut"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PANEL HEATMAP -->
-                <div class="pro-panel pro-panel--heatmap">
-                    <div class="pro-panel-header">
-                        <div>
-                            <h2>Mapa de densidad</h2>
-                            <p>Zonas de mayor concentración semántica en la base documental.</p>
-                        </div>
-                    </div>
-                    <div id="heatmapContainer" class="pro-panel-body"></div>
-                </div>
-
-                <!-- PANEL DETALLE -->
-                <div class="pro-panel pro-panel--detail">
-                    <div class="pro-panel-header">
-                        <div>
-                            <h2>Detalle de documento</h2>
-                            <p>Ejemplo de cómo DocuStream estructura un documento técnico.</p>
-                        </div>
-                    </div>
-
-                    <div class="pro-panel-body pro-detail-body">
-                        <div class="pro-detail-meta">
-                            <span class="pro-detail-pill">API · Autenticación</span>
-                            <h3>Guía de integración OAuth 2.0</h3>
-                            <p class="pro-detail-sub">Versión 1.4 · Última actualización: hace 3 días</p>
-                        </div>
-
-                        <div class="pro-detail-grid">
-                            <div>
-                                <h4>Entidades clave</h4>
-                                <ul>
-                                    <li>Endpoint: <code>/auth/token</code></li>
-                                    <li>Grant types: <code>client_credentials</code>, <code>authorization_code</code></li>
-                                    <li>Scopes: <code>read:docs</code>, <code>write:docs</code></li>
-                                    <li>Errores: <code>401</code>, <code>403</code>, <code>429</code></li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h4>Relaciones detectadas</h4>
-                                <ul>
-                                    <li><strong>Cliente</strong> → <strong>Aplicación</strong> → <strong>API Gateway</strong></li>
-                                    <li><strong>Token</strong> ↔ <strong>Scope</strong> ↔ <strong>Permisos</strong></li>
-                                    <li><strong>Rate limit</strong> → <strong>Respuesta 429</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="pro-detail-footer">
-                            <span class="pro-detail-score">Confianza semántica: 94%</span>
-                            <button class="pro-btn-ghost">Ver grafo de este documento</button>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
+            <div id="heatmapContainer" class="pro-panel" style="margin-top: 32px;"></div>
         </section>
 
-        <!-- GRAFO AVANZADO -->
-       <section id="view-graph" class="pro-view">
-    <div class="graph-layout">
-        <div id="graphContainer"></div>
-        <aside class="graph-sidebar" id="graphSidebar">
-            <h3>Detalles del nodo</h3>
-            <div id="graphSidebarContent">
-                <p>Selecciona un nodo para ver detalles.</p>
-            </div>
-        </aside>
-    </div>
-</section>
-
-
-        <!-- DOCUMENTOS PRO -->
+        <!-- ----------------------------------------------------------
+             VISTA: DOCUMENTOS
+        ----------------------------------------------------------- -->
         <section id="view-documents" class="pro-view">
+
+            <h2>Documentos</h2>
+
             <div class="documents-container">
                 <div class="documents-list" id="documentsList"></div>
-                <aside class="documents-preview" id="documentsPreview">
+
+                <aside class="documents-preview">
                     <h3>Vista previa</h3>
-                    <div id="documentsPreviewContent"></div>
+                    <div id="documentsPreviewContent">
+                        <p>Selecciona un documento para ver detalles.</p>
+                    </div>
                 </aside>
             </div>
         </section>
 
-        <!-- INTEGRACIONES PRO -->
+        <!-- ----------------------------------------------------------
+             VISTA: INTEGRACIONES
+        ----------------------------------------------------------- -->
         <section id="view-integrations" class="pro-view">
+
+            <h2>Integraciones</h2>
+
             <div class="integrations-grid" id="integrationsGrid"></div>
         </section>
 
-    </main>
+        <!-- ----------------------------------------------------------
+             VISTA: GRAFO AVANZADO
+        ----------------------------------------------------------- -->
+        <section id="view-graph" class="pro-view">
 
+            <h2>Grafo Avanzado</h2>
+
+            <div class="graph-layout">
+                <div id="graphContainer"></div>
+
+                <aside class="graph-sidebar">
+                    <h3>Detalles del nodo</h3>
+                    <div id="graphSidebarContent">
+                        <p>Selecciona un nodo para ver detalles.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+    </main>
 </div>
 
-<!-- JS PRO -->
+<!-- --------------------------------------------------------------
+     SCRIPTS PRO
+-------------------------------------------------------------- -->
+<script src="assets/js/pro-theme.js"></script>
 <script src="assets/js/pro-core.js"></script>
 <script src="assets/js/pro-dashboard.js"></script>
-<script src="assets/js/pro-graph-advanced.js"></script>
 <script src="assets/js/pro-documents.js"></script>
 <script src="assets/js/pro-integrations.js"></script>
+<script src="assets/js/pro-graph-advanced.js"></script>
 
 </body>
 </html>
+
 
 
 
