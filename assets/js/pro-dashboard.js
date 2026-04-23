@@ -1,71 +1,97 @@
 /* --------------------------------------------------------------
 DocuStream PRO — DASHBOARD
-KPIs, tarjetas y resumen de actividad
+KPIs dinámicos · Animaciones GSAP · Datos simulados
 -------------------------------------------------------------- */
 
 console.log("Dashboard PRO loaded");
 
 /* --------------------------------------------------------------
-INICIALIZACIÓN
+GENERACIÓN DE DATOS SIMULADOS
+-------------------------------------------------------------- */
+
+function generateDashboardData(state) {
+    const days = state.period || 30;
+
+    return {
+        docs: Math.floor(days * (40 + Math.random() * 60)),
+        latency: Math.floor(80 + Math.random() * 120),
+        quality: Math.floor(85 + Math.random() * 10),
+        anomalies: Math.floor(Math.random() * 12)
+    };
+}
+
+/* --------------------------------------------------------------
+ANIMACIÓN PRO DE KPIs
+-------------------------------------------------------------- */
+
+function animateKPI(elementId, newValue) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    const current = parseFloat(el.innerText) || 0;
+
+    gsap.fromTo(
+        el,
+        { innerText: current },
+        {
+            innerText: newValue,
+            duration: 1.2,
+            ease: "power2.out",
+            snap: { innerText: 1 },
+            onUpdate: () => {
+                el.innerText = Math.floor(el.innerText);
+            }
+        }
+    );
+
+    // Glow suave en la tarjeta
+    gsap.fromTo(
+        el.parentElement,
+        { boxShadow: "0 0 0px rgba(0,229,160,0)" },
+        {
+            boxShadow: "0 0 18px rgba(0,229,160,0.25)",
+            duration: 0.6,
+            yoyo: true,
+            repeat: 1
+        }
+    );
+}
+
+/* --------------------------------------------------------------
+INICIALIZAR DASHBOARD
 -------------------------------------------------------------- */
 
 function initDashboard() {
     console.log("Inicializando Dashboard PRO…");
-    updateDashboard(PRO_STATE);
+
+    const data = generateDashboardData(PRO_STATE);
+
+    animateKPI("kpiDocs", data.docs);
+    animateKPI("kpiLatency", data.latency);
+    animateKPI("kpiQuality", data.quality);
+    animateKPI("kpiAnomalies", data.anomalies);
 }
 
 /* --------------------------------------------------------------
-ACTUALIZAR KPIs SEGÚN PRO_STATE
+ACTUALIZAR DASHBOARD POR FILTROS
 -------------------------------------------------------------- */
 
 function updateDashboard(state) {
-    const kpiDocs = document.getElementById("kpiDocs");
-    const kpiLatency = document.getElementById("kpiLatency");
-    const kpiQuality = document.getElementById("kpiQuality");
-    const kpiAnomalies = document.getElementById("kpiAnomalies");
+    console.log("Actualizando Dashboard con filtros:", state);
 
-    if (!kpiDocs || !kpiLatency || !kpiQuality || !kpiAnomalies) return;
+    const data = generateDashboardData(state);
 
-    // Base de datos simulada
-    const baseDocs = 1240;
-    const factorPeriod = state.period / 30;
-
-    // Cálculos dinámicos
-    const docsValue = Math.round(baseDocs * factorPeriod);
-    const latencyValue = (120 / factorPeriod).toFixed(0);
-    const qualityValue = (92 + (Math.random() * 4 - 2)).toFixed(1);
-    const anomaliesValue = Math.max(0, Math.round(32 / factorPeriod - randomInt(0, 5)));
-
-    // Asignación a la UI
-    kpiDocs.textContent = docsValue.toLocaleString("es-ES");
-    kpiLatency.textContent = `${latencyValue} ms`;
-    kpiQuality.textContent = `${qualityValue} %`;
-    kpiAnomalies.textContent = anomaliesValue;
-
-    // Animaciones suaves
-    animateKpiCard("#kpiDocs");
-    animateKpiCard("#kpiLatency");
-    animateKpiCard("#kpiQuality");
-    animateKpiCard("#kpiAnomalies");
+    animateKPI("kpiDocs", data.docs);
+    animateKPI("kpiLatency", data.latency);
+    animateKPI("kpiQuality", data.quality);
+    animateKPI("kpiAnomalies", data.anomalies);
 }
 
 /* --------------------------------------------------------------
-ANIMACIÓN SUAVE DE KPIs
+EXPOSICIÓN GLOBAL
 -------------------------------------------------------------- */
 
-function animateKpiCard(selector) {
-    const el = document.querySelector(selector)?.closest(".pro-kpi-card");
-    if (!el) return;
+window.initDashboard = initDashboard;
+window.updateDashboard = updateDashboard;
 
-    gsap.fromTo(el,
-        { scale: 1 },
-        {
-            scale: 1.03,
-            duration: 0.2,
-            yoyo: true,
-            repeat: 1,
-            ease: "power1.out"
-        }
-    );
-}
 
