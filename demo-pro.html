@@ -6,15 +6,18 @@
     <title>DocuStream PRO Demo</title>
 
     <!-- ESTILOS -->
-    <link rel="stylesheet" href="style-pro.css">
+    <link rel="stylesheet" href="assets/css/style-pro.css">
 
     <!-- LIBRERÍAS -->
-    <script src="gsap.min.js"></script>
-    <script src="d3.v7.min.js"></script>
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/d3.v7.min.js"></script>
 </head>
 
 <body>
 
+    <!-- --------------------------------------------------------------
+    SIDEBAR
+    -------------------------------------------------------------- -->
     <aside class="sidebar">
         <h2>DocuStream PRO</h2>
 
@@ -26,8 +29,14 @@
         </nav>
     </aside>
 
+    <!-- --------------------------------------------------------------
+    CONTENIDO PRINCIPAL
+    -------------------------------------------------------------- -->
     <main class="main-content">
 
+        <!-- ----------------------------------------------------------
+        DASHBOARD
+        ---------------------------------------------------------- -->
         <section id="view-dashboard" class="pro-view active-view">
             <h1>Dashboard</h1>
 
@@ -38,13 +47,18 @@
             <div id="heatmapContainer"></div>
         </section>
 
+        <!-- ----------------------------------------------------------
+        DOCUMENTOS PRO
+        ---------------------------------------------------------- -->
         <section id="view-documents" class="pro-view">
             <h1>Documentos</h1>
 
             <div class="documents-container">
 
+                <!-- LISTA -->
                 <div class="documents-list" id="documentsList"></div>
 
+                <!-- PREVIEW -->
                 <div class="documents-preview">
                     <h2>Vista previa</h2>
                     <div id="documentsPreviewContent">Selecciona un documento…</div>
@@ -53,12 +67,18 @@
             </div>
         </section>
 
+        <!-- ----------------------------------------------------------
+        INTEGRACIONES PRO
+        ---------------------------------------------------------- -->
         <section id="view-integrations" class="pro-view">
             <h1>Integraciones</h1>
 
             <div class="integrations-grid" id="integrationsGrid"></div>
         </section>
 
+        <!-- ----------------------------------------------------------
+        GRAFO AVANZADO
+        ---------------------------------------------------------- -->
         <section id="view-graph-advanced" class="pro-view">
             <h1>Grafo Avanzado</h1>
 
@@ -67,16 +87,19 @@
 
     </main>
 
-    <!-- SCRIPTS -->
-    <script src="pro-core.js"></script>
-    <script src="pro-dashboard.js"></script>
-    <script src="pro-documents.js"></script>
-    <script src="pro-integrations.js"></script>
-    <script src="pro-graph-advanced.js"></script>
-    <script src="pro-heatmap.js"></script>
+    <!-- --------------------------------------------------------------
+    SCRIPTS PRO
+    -------------------------------------------------------------- -->
+    <script src="assets/js/pro-core.js"></script>
+    <script src="assets/js/pro-dashboard.js"></script>
+    <script src="assets/js/pro-documents.js"></script>
+    <script src="assets/js/pro-integrations.js"></script>
+    <script src="assets/js/pro-graph-advanced.js"></script>
+    <script src="assets/js/pro-heatmap.js"></script>
 
 </body>
 </html>
+
 
 
 
