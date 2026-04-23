@@ -108,14 +108,6 @@ function runInitialAnimations() {
         ease: "power2.out"
     });
 
-    gsap.from(".pro-topbar", {
-        y: -20,
-        opacity: 0,
-        duration: 0.6,
-        delay: 0.1,
-        ease: "power2.out"
-    });
-
     gsap.from(".pro-kpi-card", {
         opacity: 0,
         y: 20,
@@ -146,5 +138,6 @@ EXPOSICIÓN GLOBAL
 
 window.showView = showView;
 window.applyFilters = applyFilters;
+
 
 
