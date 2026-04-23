@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DocuStream PRO Demo</title>
 
-    <!-- Estilos -->
     <link rel="stylesheet" href="assets/css/style-pro.css" />
 
-    <!-- Librerías -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -30,7 +28,7 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
 
-        <!-- FILTROS SUPERIORES -->
+        <!-- FILTROS -->
         <section class="pro-filters">
             <select id="filterType" onchange="applyFilters()">
                 <option value="all">Todos los tipos</option>
@@ -52,33 +50,16 @@
             </select>
         </section>
 
-        <!-- ============================
-             DASHBOARD PRO
-        ============================= -->
+        <!-- DASHBOARD -->
         <section id="view-dashboard" class="pro-view active-view">
 
             <h2>Resumen de actividad</h2>
 
             <div class="pro-kpi-grid">
-                <div class="pro-kpi-card">
-                    <h3>Documentos procesados</h3>
-                    <p id="kpiDocs">—</p>
-                </div>
-
-                <div class="pro-kpi-card">
-                    <h3>Latencia media</h3>
-                    <p id="kpiLatency">—</p>
-                </div>
-
-                <div class="pro-kpi-card">
-                    <h3>Calidad del dato</h3>
-                    <p id="kpiQuality">—</p>
-                </div>
-
-                <div class="pro-kpi-card">
-                    <h3>Anomalías detectadas</h3>
-                    <p id="kpiAnomalies">—</p>
-                </div>
+                <div class="pro-kpi-card"><h3>Documentos procesados</h3><p id="kpiDocs">—</p></div>
+                <div class="pro-kpi-card"><h3>Latencia media</h3><p id="kpiLatency">—</p></div>
+                <div class="pro-kpi-card"><h3>Calidad del dato</h3><p id="kpiQuality">—</p></div>
+                <div class="pro-kpi-card"><h3>Anomalías detectadas</h3><p id="kpiAnomalies">—</p></div>
             </div>
 
             <div id="dashboardInsight" class="pro-panel" style="margin-top: 24px;"></div>
@@ -91,55 +72,34 @@
             <div id="heatmapContainer" class="pro-panel" style="margin-top: 32px;"></div>
         </section>
 
-        <!-- ============================
-             DOCUMENTOS PRO
-        ============================= -->
+        <!-- DOCUMENTOS -->
         <section id="view-documents" class="pro-view">
 
             <h2>Documentos</h2>
 
             <div class="documents-container">
-
-                <!-- LISTA -->
                 <div class="documents-list" id="documentsList"></div>
 
-                <!-- PREVIEW -->
                 <aside class="documents-preview">
                     <h3>Vista previa</h3>
-
                     <div id="documentsPreviewContent">
                         <p>Selecciona un documento para ver detalles.</p>
                     </div>
                 </aside>
-
             </div>
 
         </section>
 
-        <!-- ============================
-             INTEGRACIONES PRO
-        ============================= -->
+        <!-- INTEGRACIONES -->
         <section id="view-integrations" class="pro-view">
-
             <h2>Integraciones</h2>
-
-            <div id="integrationsGrid" class="integrations-grid">
-                <!-- Se rellena automáticamente -->
-            </div>
-
+            <div id="integrationsGrid" class="integrations-grid"></div>
         </section>
 
-        <!-- ============================
-             GRAFO AVANZADO PRO
-        ============================= -->
+        <!-- GRAFO AVANZADO -->
         <section id="view-graph-advanced" class="pro-view">
-
             <h2>Grafo Avanzado</h2>
-
-            <div id="graphAdvancedContainer" class="pro-panel" style="height: 500px;">
-                <!-- Se rellena desde pro-graph-advanced.js -->
-            </div>
-
+            <div id="graphAdvancedContainer" class="pro-panel" style="height: 500px;"></div>
         </section>
 
     </main>
@@ -180,6 +140,7 @@
 
 </body>
 </html>
+
 
 
 
