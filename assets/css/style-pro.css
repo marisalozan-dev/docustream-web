@@ -201,6 +201,34 @@ TEMA PRO — GLASS + GLOW GLOBAL
     box-shadow: 0 0 24px rgba(0, 229, 160, 0.15);
     transform: translateY(-3px);
 }
+/* ---------------------------------------------
+SIDEBAR PRO — Glow Mint + Active Button
+--------------------------------------------- */
+
+.sidebar nav button {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 229, 160, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar nav button:hover {
+    border-color: rgba(0, 229, 160, 0.35);
+    box-shadow: 0 0 18px rgba(0, 229, 160, 0.25);
+    transform: translateY(-2px);
+}
+
+.sidebar nav button.active-btn {
+    background: rgba(0, 229, 160, 0.15);
+    border-color: rgba(0, 229, 160, 0.45);
+    box-shadow: 0 0 22px rgba(0, 229, 160, 0.35);
+}
 
 
 
