@@ -1,103 +1,72 @@
 /* --------------------------------------------------------------
 DocuStream PRO — CORE ENGINE
-Coordinación de vistas, filtros, animaciones y módulos
+Navegación · Estado global · Animaciones · Persistencia
 -------------------------------------------------------------- */
 
-console.log("Core PRO loaded");
+console.log("DocuStream PRO — Core Engine loaded");
 
 /* --------------------------------------------------------------
 ESTADO GLOBAL
 -------------------------------------------------------------- */
 
 const PRO_STATE = {
-    docType: "all",
-    period: 30,
-    density: "all"
+    currentView: localStorage.getItem("pro-current-view") || "dashboard",
+    filters: {
+        type: "all",
+        period: 30,
+        density: "all"
+    }
 };
 
 /* --------------------------------------------------------------
-INICIALIZACIÓN GENERAL
+NAVEGACIÓN ENTRE VISTAS
 -------------------------------------------------------------- */
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Inicializando DocuStream PRO…");
+function showView(view) {
+    PRO_STATE.currentView = view;
+    localStorage.setItem("pro-current-view", view);
 
-    // Animaciones iniciales
-    gsap.from(".pro-sidebar", { x: -40, opacity: 0, duration: 0.6, ease: "power2.out" });
-    gsap.from(".pro-topbar", { y: -20, opacity: 0, duration: 0.6, ease: "power2.out" });
+    // Ocultar todas las vistas
+    document.querySelectorAll(".pro-view").forEach(v => {
+        v.classList.remove("active-view");
+    });
 
-    // Inicializar vista activa
-    initActiveView();
+    // Mostrar la vista seleccionada
+    const target = document.getElementById(`view-${view}`);
+    if (target) {
+        target.classList.add("active-view");
 
-    // Activar filtros globales
-    setupFilters();
-});
-
-/* --------------------------------------------------------------
-DETECTAR QUÉ VISTA ESTÁ ACTIVA AL CARGAR
--------------------------------------------------------------- */
-
-function initActiveView() {
-    if (document.getElementById("view-dashboard")?.classList.contains("active-view")) {
-        if (typeof initDashboard === "function") initDashboard();
-        if (typeof initHeatmap === "function") initHeatmap();
+        // Animación suave al cambiar de vista
+        gsap.from(target, {
+            opacity: 0,
+            y: 20,
+            duration: 0.35,
+            ease: "power2.out"
+        });
     }
 
-    if (document.getElementById("view-documents")?.classList.contains("active-view")) {
-        if (typeof initDocuments === "function") initDocuments();
-    }
+    // Actualizar highlight del sidebar
+    updateSidebarActive(view);
 
-    if (document.getElementById("view-integrations")?.classList.contains("active-view")) {
-        if (typeof initIntegrations === "function") initIntegrations();
-    }
-
-    if (document.getElementById("view-graph")?.classList.contains("active-view")) {
-        // Reiniciar sidebar
-        const sidebar = document.getElementById("graphSidebarContent");
-        if (sidebar) {
-            sidebar.innerHTML = "<p>Selecciona un nodo para ver detalles.</p>";
-        }
-
-        if (typeof initGraphAdvanced === "function") initGraphAdvanced();
-    }
+    // Inicializar módulos según vista
+    if (view === "dashboard" && typeof initDashboard === "function") initDashboard();
+    if (view === "documents" && typeof initDocuments === "function") initDocuments();
+    if (view === "integrations" && typeof initIntegrations === "function") initIntegrations();
+    if (view === "graph-advanced" && typeof initGraphAdvanced === "function") initGraphAdvanced();
 }
 
 /* --------------------------------------------------------------
-CAMBIO DE VISTAS
+SIDEBAR — HIGHLIGHT DEL BOTÓN ACTIVO
 -------------------------------------------------------------- */
 
-function switchView(viewId) {
-    console.log("Cambiando a vista:", viewId);
+function updateSidebarActive(view) {
+    document.querySelectorAll(".sidebar nav button").forEach(btn => {
+        btn.classList.remove("active-sidebar-btn");
 
-    document.querySelectorAll(".pro-view").forEach(v => v.classList.remove("active-view"));
-    document.getElementById(viewId).classList.add("active-view");
-
-    document.querySelectorAll(".pro-nav button").forEach(btn => btn.classList.remove("active"));
-    document.querySelector(`button[data-view="${viewId}"]`)?.classList.add("active");
-
-    // Inicializar la vista correspondiente
-    if (viewId === "view-dashboard") {
-        if (typeof initDashboard === "function") initDashboard();
-        if (typeof initHeatmap === "function") initHeatmap();
-    }
-
-    if (viewId === "view-documents" && typeof initDocuments === "function") {
-        initDocuments();
-    }
-
-    if (viewId === "view-integrations" && typeof initIntegrations === "function") {
-        initIntegrations();
-    }
-
-    if (viewId === "view-graph") {
-        // Reiniciar sidebar SIEMPRE antes de inicializar el grafo
-        const sidebar = document.getElementById("graphSidebarContent");
-        if (sidebar) {
-            sidebar.innerHTML = "<p>Selecciona un nodo para ver detalles.</p>";
+        if (btn.getAttribute("onclick")?.includes(view)) {
+            btn.classList.add("active-sidebar-btn");
         }
-
-        if (typeof initGraphAdvanced === "function") initGraphAdvanced();
-    }
+    });
 }
 
 /* --------------------------------------------------------------
@@ -105,52 +74,77 @@ FILTROS GLOBALES
 -------------------------------------------------------------- */
 
 function setupFilters() {
-    const docType = document.getElementById("filterDocType");
+    const type = document.getElementById("filterType");
     const period = document.getElementById("filterPeriod");
     const density = document.getElementById("filterDensity");
 
-    if (!docType || !period || !density) return;
+    if (!type || !period || !density) return;
 
-    docType.addEventListener("change", () => {
-        PRO_STATE.docType = docType.value;
-        applyFilters();
-    });
-
-    period.addEventListener("change", () => {
-        PRO_STATE.period = parseInt(period.value);
-        applyFilters();
-    });
-
-    density.addEventListener("change", () => {
-        PRO_STATE.density = density.value;
-        applyFilters();
-    });
+    type.addEventListener("change", applyFilters);
+    period.addEventListener("change", applyFilters);
+    density.addEventListener("change", applyFilters);
 }
-
-/* --------------------------------------------------------------
-APLICAR FILTROS A TODOS LOS MÓDULOS
--------------------------------------------------------------- */
 
 function applyFilters() {
-    console.log("Aplicando filtros:", PRO_STATE);
+    PRO_STATE.filters = {
+        type: document.getElementById("filterType").value,
+        period: parseInt(document.getElementById("filterPeriod").value),
+        density: document.getElementById("filterDensity").value
+    };
 
-    if (typeof updateDashboard === "function") updateDashboard(PRO_STATE);
-    if (typeof updateHeatmap === "function") updateHeatmap(PRO_STATE);
-    if (typeof updateGraphAdvanced === "function") updateGraphAdvanced(PRO_STATE);
+    if (typeof updateDashboard === "function") updateDashboard(PRO_STATE.filters);
+    if (typeof updateHeatmap === "function") updateHeatmap(PRO_STATE.filters);
 }
 
 /* --------------------------------------------------------------
-UTILIDADES
+ANIMACIONES INICIALES
 -------------------------------------------------------------- */
 
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function runInitialAnimations() {
+    gsap.from(".sidebar", {
+        x: -40,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out"
+    });
+
+    gsap.from(".pro-topbar", {
+        y: -20,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power2.out"
+    });
+
+    gsap.from(".pro-kpi-card", {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+        delay: 0.2,
+        ease: "power2.out"
+    });
 }
+
+/* --------------------------------------------------------------
+INICIALIZACIÓN GLOBAL
+-------------------------------------------------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Inicializando DocuStream PRO…");
+
+    setupFilters();
+    runInitialAnimations();
+
+    // Restaurar última vista
+    showView(PRO_STATE.currentView);
+});
 
 /* --------------------------------------------------------------
 EXPOSICIÓN GLOBAL
 -------------------------------------------------------------- */
 
-window.switchView = switchView;
-window.PRO_STATE = PRO_STATE;
+window.showView = showView;
+window.applyFilters = applyFilters;
+
 
