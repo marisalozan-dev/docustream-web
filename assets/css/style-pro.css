@@ -149,6 +149,19 @@ TEMA PRO — GLASS + GLOW GLOBAL
 .active-view {
     display: block;
 }
+.sidebar {
+    position: relative;
+    z-index: 10;
+}
+
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+}
 
 
 
