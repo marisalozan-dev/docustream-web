@@ -1,0 +1,347 @@
+/* --------------------------------------------------------------
+DocuStream PRO — CSS COMPLETO
+Tema · Layout · Dashboard · Documentos · Integraciones · Grafo
+-------------------------------------------------------------- */
+
+/* --------------------------------------------------------------
+VARIABLES DE TEMA (controladas por pro-theme.js)
+-------------------------------------------------------------- */
+
+:root {
+    --bg-main: #050505;
+    --bg-panel: #0d0d0d;
+    --bg-soft: #111111;
+    --text-main: #ffffff;
+    --text-soft: #cccccc;
+    --accent: #00e5a0;
+    --accent-soft: #00e5a055;
+    --radius: 14px;
+    --shadow: 0 0 20px rgba(0, 229, 160, 0.08);
+    --transition: 0.25s ease;
+}
+
+/* --------------------------------------------------------------
+RESET
+-------------------------------------------------------------- */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3, h4 {
+    margin: 0 0 10px;
+}
+
+/* --------------------------------------------------------------
+LAYOUT GENERAL
+-------------------------------------------------------------- */
+
+.pro-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100vh;
+}
+
+/* --------------------------------------------------------------
+SIDEBAR
+-------------------------------------------------------------- */
+
+.pro-sidebar {
+    background: var(--bg-panel);
+    padding: 24px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    box-shadow: var(--shadow);
+}
+
+.pro-sidebar h2 {
+    margin-bottom: 24px;
+}
+
+.pro-nav button {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: var(--bg-soft);
+    border: none;
+    border-radius: var(--radius);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pro-nav button:hover {
+    background: var(--accent-soft);
+}
+
+.pro-nav button.active {
+    background: var(--accent);
+    color: #000;
+}
+
+/* --------------------------------------------------------------
+TOPBAR
+-------------------------------------------------------------- */
+
+.pro-topbar {
+    background: var(--bg-panel);
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------
+VISTAS
+-------------------------------------------------------------- */
+
+.pro-view {
+    display: none;
+    padding: 24px;
+}
+
+.pro-view.active-view {
+    display: block;
+}
+
+/* --------------------------------------------------------------
+DASHBOARD PRO
+-------------------------------------------------------------- */
+
+.pro-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.pro-kpi-card {
+    background: var(--bg-panel);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.pro-kpi-card h3 {
+    opacity: .8;
+    font-size: .9rem;
+}
+
+.pro-kpi-card p {
+    font-size: 1.8rem;
+    margin-top: 6px;
+}
+
+/* --------------------------------------------------------------
+DOCUMENTOS PRO
+-------------------------------------------------------------- */
+
+.documents-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+}
+
+.doc-item {
+    background: var(--bg-panel);
+    padding: 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.doc-item:hover {
+    background: var(--bg-soft);
+}
+
+.doc-meta {
+    opacity: .7;
+    font-size: .85rem;
+}
+
+.doc-confidence {
+    margin-top: 8px;
+    background: #222;
+    height: 6px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.doc-bar {
+    background: var(--accent);
+    height: 100%;
+}
+
+.documents-preview {
+    background: var(--bg-panel);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.doc-summary {
+    opacity: .8;
+}
+
+/* Heatmap */
+.doc-heatmap {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0;
+}
+
+.doc-heatmap span {
+    width: 10px;
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+/* Footer */
+.doc-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.doc-score {
+    opacity: .8;
+}
+
+/* --------------------------------------------------------------
+MINI-GRAFO POR DOCUMENTO
+-------------------------------------------------------------- */
+
+.mini-graph {
+    position: relative;
+    height: 160px;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at center, var(--accent-soft), transparent);
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.mini-node {
+    position: absolute;
+    padding: 4px 8px;
+    font-size: .75rem;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    transform: translate(-50%, -50%);
+    top: calc(50% + (var(--i) * 10px - 30px));
+    left: calc(50% + (var(--i) * 14px - 40px));
+}
+
+/* --------------------------------------------------------------
+INTEGRACIONES PRO
+-------------------------------------------------------------- */
+
+.integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.integration-card {
+    background: var(--bg-panel);
+    padding: 20px;
+    border-radius: var(--radius);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: var(--transition);
+}
+
+.integration-card:hover {
+    background: var(--bg-soft);
+    transform: translateY(-4px);
+}
+
+.integration-icon {
+    font-size: 32px;
+}
+
+.integration-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.integration-info p {
+    opacity: .75;
+    margin: 6px 0 10px;
+}
+
+.integration-tags span {
+    background: var(--accent-soft);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: .75rem;
+    margin-right: 6px;
+}
+
+.integration-meta {
+    margin-left: auto;
+    text-align: right;
+}
+
+.integration-status.active {
+    color: var(--accent);
+}
+
+.integration-status.paused {
+    color: #ff6b6b;
+}
+
+.integration-latency {
+    opacity: .7;
+    font-size: .8rem;
+}
+
+/* --------------------------------------------------------------
+GRAFO AVANZADO
+-------------------------------------------------------------- */
+
+.graph-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+#graphContainer svg {
+    background: var(--bg-panel);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.graph-sidebar {
+    background: var(--bg-panel);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* --------------------------------------------------------------
+BOTONES PRO
+-------------------------------------------------------------- */
+
+.pro-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pro-btn-ghost:hover {
+    background: var(--accent);
+    color: #000;
+}
