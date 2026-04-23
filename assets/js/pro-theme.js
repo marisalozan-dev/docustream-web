@@ -1,23 +1,16 @@
 /* --------------------------------------------------------------
 DocuStream PRO — THEME ENGINE
-Modo oscuro automático · Variables CSS dinámicas
+Modo oscuro forzado · Variables CSS dinámicas
 -------------------------------------------------------------- */
 
 console.log("Theme PRO loaded");
 
 /* --------------------------------------------------------------
-DETECTAR PREFERENCIA DEL SISTEMA
+FORZAR MODO OSCURO SIEMPRE
 -------------------------------------------------------------- */
 
 (function () {
-    const prefersDark = window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (prefersDark) {
-        applyDarkTheme();
-    } else {
-        applyLightTheme();
-    }
+    applyDarkTheme();
 })();
 
 /* --------------------------------------------------------------
@@ -33,11 +26,11 @@ function applyDarkTheme() {
     document.documentElement.style.setProperty("--accent", "#00e5a0");
     document.documentElement.style.setProperty("--accent-soft", "#00e5a055");
 
-    console.log("Tema aplicado: oscuro");
+    console.log("Tema aplicado: oscuro (forzado)");
 }
 
 /* --------------------------------------------------------------
-APLICAR MODO CLARO
+APLICAR MODO CLARO (NO SE USA, PERO LO DEJO POR SI LO QUIERES)
 -------------------------------------------------------------- */
 
 function applyLightTheme() {
@@ -58,3 +51,4 @@ EXPOSICIÓN GLOBAL (por si luego quieres un botón manual)
 
 window.applyDarkTheme = applyDarkTheme;
 window.applyLightTheme = applyLightTheme;
+
