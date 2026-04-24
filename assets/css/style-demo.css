@@ -1,71 +1,39 @@
-/* ============================================================
-   PALETA "FRESH KNOWLEDGE" - DocuStream
-   ============================================================ */
 :root {
-    /* Variables de tu paleta */
-    --leaf-green: #7ED7A1;  /* Verde hoja suave (Acento) */
-    --mint-light: #CFFFE5;  /* Verde menta claro (Fondos suaves) */
-    --water-blue: #A7E8FF;  /* Azul agua (Flujo) */
-    --warm-white: #FDFDFB;  /* Blanco cálido (Fondo principal) */
-    --cloud-grey: #E9EEF2;  /* Gris nube (Neutralidad/Bordes) */
-    --text-soft: #4A4A4A;   /* Gris texto suave (Legibilidad) */
-    
-    /* Variables de estructura */
-    --sidebar-bg: var(--warm-white);
-    --main-bg: var(--warm-white);
-    --card-bg: #FFFFFF;
-    --border: var(--cloud-grey);
-}
-
-* {
-    box-sizing: border-box;
+    --bg-dark: #0a0a0a;
+    --sidebar-bg: #121212;
+    --accent: #00ffa3;
+    --text-main: #e0e0e0;
+    --border: #2a2a2a;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--main-bg);
-    color: var(--text-soft);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     font-family: 'Inter', sans-serif;
     display: flex;
-    line-height: 1.6;
-    overflow-x: hidden;
 }
 
-/* ============================================================
-   SIDEBAR (Limpio y Ordenado)
-   ============================================================ */
+/* SIDEBAR ESTRUCTURA */
 .sidebar {
-    width: 280px;
+    width: 260px;
     height: 100vh;
     background: var(--sidebar-bg);
     position: fixed;
     left: 0;
     top: 0;
-    padding: 40px 25px;
+    padding: 30px 20px;
     border-right: 1px solid var(--border);
     z-index: 1000;
-    display: flex;
-    flex-direction: column;
 }
 
 .sidebar h2 {
-    color: var(--text-soft);
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: -0.5px;
-}
-
-.sidebar .tagline {
-    font-size: 0.85rem;
-    color: var(--leaf-green);
-    margin: 0 0 40px 0;
-    font-weight: 500;
-}
-
-.sidebar nav {
-    flex-grow: 1;
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .sidebar nav button {
@@ -73,52 +41,34 @@ body {
     width: 100%;
     background: transparent;
     border: 1px solid transparent;
-    color: var(--text-soft);
-    padding: 14px 18px;
+    color: #888;
+    padding: 12px 15px;
     text-align: left;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 1rem;
     cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    margin-bottom: 8px;
+    border-radius: 6px;
+    transition: 0.3s;
+    margin-bottom: 5px;
 }
 
 .sidebar nav button:hover {
-    background: var(--mint-light);
-    color: var(--text-soft);
-}
-
-.sidebar nav button.active-nav {
-    background: var(--mint-light);
-    color: var(--text-soft);
-    font-weight: 600;
-    border-left: 4px solid var(--leaf-green);
-    padding-left: 14px; /* Ajuste por el borde */
+    background: #1a1a1a;
+    color: var(--accent);
 }
 
 .back-link {
     display: block;
-    margin-top: auto;
-    color: #888;
+    margin-top: 50px;
+    color: #666;
     text-decoration: none;
     font-size: 0.9rem;
-    padding: 10px;
-    border-radius: 6px;
-}
-.back-link:hover {
-    background: var(--cloud-grey);
-    color: var(--text-soft);
 }
 
-/* ============================================================
-   CONTENIDO PRINCIPAL (Con Respiración)
-   ============================================================ */
+/* CONTENIDO */
 .main-content {
-    margin-left: 280px;
-    padding: 60px 50px;
-    width: calc(100% - 280px);
-    background-color: var(--warm-white);
+    margin-left: 260px;
+    padding: 40px;
+    width: calc(100% - 260px);
 }
 
 .pro-view {
@@ -131,153 +81,40 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-soft); margin: 0 0 5px 0; letter-spacing: -1px; }
-.subtitle { font-size: 1.1rem; color: #888; margin: 0 0 40px 0; font-weight: 400; }
-h2 { font-size: 1.3rem; color: var(--text-soft); margin-top: 0; }
-h3 { font-size: 0.9rem; color: #888; margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
-
-/* ============================================================
-   DISEÑO DE CARDS (Claro y Profesional)
-   ============================================================ */
+/* DISEÑO DE CARDS (KPIs e INTEGRACIONES) */
 .pro-kpi-grid, .integrations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
     margin-top: 30px;
 }
 
-.pro-kpi-card, .int-card, .pro-panel, .preview-box {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 16px;
+.pro-kpi-card, .int-card, .pro-panel {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
     border: 1px solid var(--border);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.pro-kpi-card:hover, .int-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
 }
 
 .kpi-value {
-    font-size: 2.6rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--leaf-green);
-    margin: 15px 0 0 0;
-    letter-spacing: -1px;
+    color: var(--accent);
+    margin: 10px 0 0 0;
 }
 
-/* Paneles de Gráficos conceptuales */
-.pro-dashboard-charts {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 25px;
-    margin-top: 25px;
-}
-.pro-panel {
-    min-height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    font-style: italic;
-    background: #fbfbfd;
-}
+h1 { font-size: 2rem; margin-bottom: 10px; }
+h3 { font-size: 0.9rem; color: #888; margin: 0; }
 
-/* ============================================================
-   BIBLIOTECA VIVA (Documents)
-   ============================================================ */
-.documents-container {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 25px;
-}
-
-.documents-list {
-    background: var(--card-bg);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    padding: 15px;
-}
-
-.doc-item {
-    padding: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--text-soft);
-    transition: 0.2s;
-    border: 1px solid transparent;
-}
-.doc-item:hover {
-    background: var(--cloud-grey);
-}
-.doc-item.active-doc {
-    background: var(--water-blue);
-    font-weight: 600;
-    border-color: rgba(0,0,0,0.05);
-}
-
-.preview-box {
-    background: var(--warm-white);
-}
-
-/* ============================================================
-   ECOSISTEMA (Integrations)
-   ============================================================ */
-.int-card .status {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-left: 5px;
-}
-.int-card .status.active {
-    background: var(--mint-light);
-    color: var(--leaf-green);
-}
-.int-card .status.inactive {
-    background: #eee;
-    color: #888;
-}
-
-/* ============================================================
-   GRAFO (Knowledge)
-   ============================================================ */
+/* GRAFO */
 #graphAdvancedContainer {
     width: 100%;
-    height: 600px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    border: 1px solid var(--border);
+    height: 500px;
+    background: #000;
+    border-radius: 15px;
     margin-top: 20px;
 }
-
-.graph-legend {
-    display: flex;
-    gap: 20px;
-    background: var(--card-bg);
-    padding: 15px 25px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    color: var(--text-soft);
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-}
-.dot.procesado { background: var(--leaf-green); }
-.dot.revision { background: var(--water-blue); }
-.dot.anomalia { background: #FF8A8A; } /* Un rojo suave para anomalías */
