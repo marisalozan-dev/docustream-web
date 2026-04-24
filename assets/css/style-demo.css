@@ -1,227 +1,32 @@
 /* ============================================================
-   DEMO INTERACTIVA FULL PRO — DocuStream
+   DEMO — ESTILOS BASE
    ============================================================ */
-
-:root {
-    --bg: #0d0d0d;
-    --text: #ffffff;
-    --text-muted: #b9b9b9;
-    --mint: #00e5a0;
-    --mint-soft: rgba(0, 229, 160, 0.15);
-    --panel: rgba(255, 255, 255, 0.04);
-    --border: rgba(255, 255, 255, 0.1);
-}
 
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    height: 100vh;
-    overflow: hidden;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    background: #0b0f14;
+    color: #fff;
 }
 
-/* ========================= SIDEBAR ========================= */
-
-.sidebar {
-    padding: 32px 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border-right: 1px solid var(--border);
-    backdrop-filter: blur(14px);
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
-.sidebar h2 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-}
-
-.sidebar nav button,
-.sidebar nav a {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--panel);
-    color: var(--text);
-    cursor: pointer;
-    text-align: left;
-    font-size: 0.95rem;
-    transition: 0.25s;
-    display: block;
-    text-decoration: none;
-}
-
-.sidebar nav button:hover,
-.sidebar nav a:hover {
-    border-color: var(--mint);
-    box-shadow: 0 0 18px var(--mint-soft);
-    transform: translateY(-2px);
-}
-
-.sidebar nav button.active-btn {
-    background: var(--mint-soft);
-    border-color: var(--mint);
-}
-
-/* ========================= MAIN ========================= */
-
+/* Contenedor general */
 .main-content {
     padding: 32px;
-    overflow-y: auto;
-}
-
-/* ========================= VISTAS ========================= */
-
-.pro-view {
-    display: none;
-}
-
-.pro-view.active-view {
-    display: block;
-}
-
-/* ========================= DASHBOARD ========================= */
-
-.pro-kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-}
-
-.pro-kpi-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 14px;
-    transition: 0.25s;
-}
-
-.pro-kpi-card:hover {
-    border-color: var(--mint);
-    box-shadow: 0 0 22px var(--mint-soft);
-}
-
-.kpi-value {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 6px;
-}
-
-.pro-dashboard-charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 24px;
-}
-
-.pro-panel {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px;
-}
-
-/* ========================= DOCUMENTOS ========================= */
-
-.documents-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-}
-
-.documents-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.doc-item {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.doc-item:hover {
-    border-color: var(--mint);
-    box-shadow: 0 0 18px var(--mint-soft);
-}
-
-.documents-preview {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 14px;
-}
-
-/* ========================= INTEGRACIONES ========================= */
-
-.integrations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
-}
-
-.integration-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 14px;
-    text-align: center;
-    transition: 0.25s;
-}
-
-.integration-card:hover {
-    border-color: var(--mint);
-    box-shadow: 0 0 18px var(--mint-soft);
-}
-
-.badge {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-}
-
-.badge.active {
-    background: var(--mint-soft);
-    color: var(--mint);
-}
-
-.badge.paused {
-    background: rgba(255, 150, 0, 0.25);
-    color: #ff9600;
-}
-
-/* ========================= GRAFO ========================= */
-
-.graph-container {
-    width: 100%;
-    min-height: 500px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 10px;
-}
-/* ============================================================
-   FIX DEFINITIVO PARA EL GRAFO AVANZADO
-   ============================================================ */
-
-/* Asegura que el main no limite el ancho */
-.main-content {
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Asegura que la vista del grafo ocupa todo el ancho */
+/* ============================================================
+   GRAFO AVANZADO — CONTENEDOR
+   ============================================================ */
+
 #view-graph-advanced {
     width: 100%;
     min-height: 100vh;
@@ -229,39 +34,6 @@ body {
     flex-direction: column;
 }
 
-/* Asegura que el contenedor del grafo tiene ancho real */
-#graphAdvancedContainer {
-    width: 100% !important;
-    min-width: 600px;
-    min-height: 500px;
-    flex: 1;
-    box-sizing: border-box;
-}
-
-/* Asegura que el SVG se adapta al contenedor */
-#graphAdvancedContainer svg {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-
-#graphAdvancedContainer {
-    min-height: 500px;
-}
-
-/* ============================================================
-   GRAFO AVANZADO — ESTILO ANALÍTICO + VISUAL + DEEPTECH
-   ============================================================ */
-
-/* Contenedor principal del grafo */
-#view-graph-advanced {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Contenedor interno del grafo */
 #graphAdvancedContainer {
     width: 100% !important;
     min-width: 600px;
@@ -270,10 +42,13 @@ body {
     position: relative;
     box-sizing: border-box;
     padding: 12px;
+
+    /* Estética glassmorphism */
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
+
     overflow: hidden;
 }
 
@@ -284,60 +59,8 @@ body {
     overflow: visible;
 }
 
-/* Tooltip analítico */
-.graph-tooltip {
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 10px 14px;
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: 400;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.15s ease-out;
-    box-shadow: 0 0 12px rgba(0, 229, 160, 0.25);
-}
-
-/* Etiquetas del grafo */
-#graphAdvancedContainer text {
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    paint-order: stroke;
-    stroke: rgba(0, 0, 0, 0.4);
-    stroke-width: 2px;
-}
-
-/* Líneas de enlaces */
-#graphAdvancedContainer line {
-    transition: stroke-width 0.2s ease-out;
-}
-
-/* Hover en nodos */
-#graphAdvancedContainer circle:hover {
-    filter: drop-shadow(0 0 10px #00e5a0);
-    transform: scale(1.08);
-    transition: transform 0.15s ease-out;
-}
-
-/* Hover en enlaces */
-#graphAdvancedContainer line:hover {
-    stroke: rgba(255, 255, 255, 0.45);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    #graphAdvancedContainer {
-        min-width: 100%;
-        min-height: 420px;
-    }
-
-    .graph-tooltip {
-        font-size: 0.75rem;
-    }
-}
 /* ============================================================
-   LEYENDA VISUAL DEL GRAFO — ANALÍTICA + VISUAL + DEEPTECH
+   LEYENDA VISUAL — ANALÍTICA + VISUAL
    ============================================================ */
 
 .graph-legend {
@@ -390,11 +113,68 @@ body {
     box-shadow: 0 0 6px #ff4d4d;
 }
 
-/* Responsive */
+/* ============================================================
+   TOOLTIP ANALÍTICO
+   ============================================================ */
+
+.graph-tooltip {
+    position: absolute;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    box-shadow: 0 0 12px rgba(0, 229, 160, 0.25);
+}
+
+/* ============================================================
+   NODOS, ENLACES Y ETIQUETAS
+   ============================================================ */
+
+#graphAdvancedContainer text {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, 0.4);
+    stroke-width: 2px;
+}
+
+#graphAdvancedContainer line {
+    transition: stroke-width 0.2s ease-out;
+}
+
+#graphAdvancedContainer circle:hover {
+    filter: drop-shadow(0 0 10px #00e5a0);
+    transform: scale(1.08);
+    transition: transform 0.15s ease-out;
+}
+
+#graphAdvancedContainer line:hover {
+    stroke: rgba(255, 255, 255, 0.45);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
 @media (max-width: 768px) {
+    #graphAdvancedContainer {
+        min-width: 100%;
+        min-height: 420px;
+    }
+
     .graph-legend {
         flex-wrap: wrap;
         gap: 12px;
+    }
+
+    .graph-tooltip {
+        font-size: 0.75rem;
     }
 }
 
