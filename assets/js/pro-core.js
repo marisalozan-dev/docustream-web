@@ -1,10 +1,9 @@
 /* --------------------------------------------------------------
-DocuStream PRO — CORE ENGINE
+DocuStream PRO — CORE ENGINE (FULL PRO)
 -------------------------------------------------------------- */
 
 console.log("DocuStream PRO — Core Engine loaded");
 
-/* ESTADO GLOBAL */
 const PRO_STATE = {
     currentView: localStorage.getItem("pro-current-view") || "dashboard",
     filters: {
@@ -14,52 +13,31 @@ const PRO_STATE = {
     }
 };
 
-/* --------------------------------------------------------------
-NAVEGACIÓN ENTRE VISTAS
--------------------------------------------------------------- */
+/* ========================= NAVEGACIÓN ========================= */
 
 function showView(view) {
     PRO_STATE.currentView = view;
     localStorage.setItem("pro-current-view", view);
 
-    // Ocultar todas las vistas
-    document.querySelectorAll(".pro-view").forEach(v => {
-        v.classList.remove("active-view");
-    });
-
-    // Mostrar la vista seleccionada
+    document.querySelectorAll(".pro-view").forEach(v => v.classList.remove("active-view"));
     const target = document.getElementById(`view-${view}`);
-    if (target) {
-        target.classList.add("active-view");
+    if (target) target.classList.add("active-view");
 
-        gsap.from(target, {
-            opacity: 0,
-            y: 20,
-            duration: 0.35,
-            ease: "power2.out"
-        });
-    }
-
-    // Botón activo del sidebar
     document.querySelectorAll(".sidebar nav button")
         .forEach(btn => btn.classList.remove("active-btn"));
 
     const activeBtn = document.querySelector(`button[onclick="showView('${view}')"]`);
     if (activeBtn) activeBtn.classList.add("active-btn");
 
-    // Animación del contenido
     animateViewContent(view);
 
-    // Inicializar módulos
-    if (view === "dashboard" && typeof initDashboard === "function") initDashboard();
-    if (view === "documents" && typeof initDocuments === "function") initDocuments();
-    if (view === "integrations" && typeof initIntegrations === "function") initIntegrations();
-    if (view === "graph-advanced" && typeof initGraphAdvanced === "function") initGraphAdvanced();
+    if (view === "dashboard") initDashboard();
+    if (view === "documents") initDocuments();
+    if (view === "integrations") initIntegrations();
+    if (view === "graph-advanced") initGraphAdvanced();
 }
 
-/* --------------------------------------------------------------
-ANIMACIÓN GLOBAL DE ENTRADA DE VISTA
--------------------------------------------------------------- */
+/* ========================= ANIMACIÓN ========================= */
 
 function animateViewContent(view) {
     const container = document.getElementById(`view-${view}`);
@@ -74,18 +52,11 @@ function animateViewContent(view) {
     });
 }
 
-/* --------------------------------------------------------------
-INICIALIZACIÓN GLOBAL
--------------------------------------------------------------- */
+/* ========================= INIT ========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Inicializando DocuStream PRO…");
     showView(PRO_STATE.currentView);
 });
-
-/* --------------------------------------------------------------
-EXPOSICIÓN GLOBAL
--------------------------------------------------------------- */
 
 window.showView = showView;
 
