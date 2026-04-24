@@ -45,6 +45,14 @@ function showView(view) {
         });
     }
 
+    // Actualizar botón activo del sidebar
+    document.querySelectorAll(".sidebar nav button")
+        .forEach(btn => btn.classList.remove("active-btn"));
+
+    const activeBtn = document.querySelector(`button[onclick="showView('${view}')"]`);
+    if (activeBtn) activeBtn.classList.add("active-btn");
+}
+
     // Actualizar highlight del sidebar
     updateSidebarActive(view);
 
