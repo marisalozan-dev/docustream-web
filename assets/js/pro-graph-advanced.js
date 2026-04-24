@@ -116,4 +116,3 @@ EXPOSICIÓN GLOBAL
 -------------------------------------------------------------- */
 
 window.initGraphAdvanced = initGraphAdvanced;
-
