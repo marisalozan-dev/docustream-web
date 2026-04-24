@@ -1,15 +1,17 @@
 /* ============================================================
-   LANDING FULL PRO — DocuStream (Restaurado y con nueva paleta)
+   LANDING FULL PRO — DocuStream (PALETA FRESH KNOWLEDGE)
    ============================================================ */
 
 :root {
-    --bg: #FDFDFB;           /* Warm White */
-    --text: #4A4A4A;         /* Text Soft */
-    --text-muted: #666666;
-    --mint: #7ED7A1;         /* Leaf Green */
-    --mint-soft: rgba(126, 215, 161, 0.15);
-    --panel: #E9EEF2;        /* Cloud Grey */
-    --border: #DDE4E9;
+    --bg: #FDFDFB;           /* Blanco cálido (Fondo principal) */
+    --bg-alt: #E9EEF2;       /* Gris nube (Secciones alternativas) */
+    --text: #4A4A4A;         /* Gris texto suave (Legibilidad total) */
+    --text-muted: #666666;   /* Gris para textos secundarios */
+    --mint: #7ED7A1;         /* Verde hoja suave (Primario/Acentos) */
+    --mint-soft: #CFFFE5;    /* Verde menta claro (Hovers/Fondos suaves) */
+    --aqua: #A7E8FF;         /* Azul agua (Acentos de flujo) */
+    --panel: #FFFFFF;        /* Blanco puro para tarjetas */
+    --border: #D1D9E0;       /* Gris sutil para bordes */
 }
 
 body {
@@ -18,6 +20,7 @@ body {
     background: var(--bg);
     color: var(--text);
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
 /* ========================= HEADER ========================= */
@@ -26,19 +29,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 40px;
+    padding: 18px 40px;
     position: fixed;
     width: 100%;
     top: 0;
-    background: rgba(253, 253, 251, 0.8); /* Fondo claro con opacidad */
+    background: rgba(253, 253, 251, 0.85); /* Fondo blanco cálido con transparencia */
     backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 .logo {
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.05em;
+    color: var(--mint); /* Logo en verde hoja */
 }
 
 .nav a {
@@ -47,6 +53,7 @@ body {
     text-decoration: none;
     font-size: 0.95rem;
     transition: 0.25s;
+    font-weight: 500;
 }
 
 .nav a:hover {
@@ -54,10 +61,16 @@ body {
 }
 
 .btn-outline {
-    padding: 8px 16px;
-    border: 1px solid var(--mint);
+    padding: 8px 18px;
+    border: 2px solid var(--mint);
     border-radius: 8px;
     color: var(--mint) !important;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: var(--mint-soft);
 }
 
 /* ========================= HERO ========================= */
@@ -67,6 +80,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(180deg, #FDFDFB 0%, #E9EEF2 100%);
 }
 
 .hero-content {
@@ -74,45 +88,53 @@ body {
 }
 
 .hero h1 {
-    font-size: 3.2rem;
-    font-weight: 700;
+    font-size: 3.5rem;
+    font-weight: 800;
     margin-bottom: 16px;
     color: var(--text);
+    line-height: 1.1;
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
-    opacity: 0.8;
+    font-size: 1.25rem;
+    color: var(--text-muted);
     margin-bottom: 32px;
 }
 
 .hero-buttons a {
     margin-right: 16px;
+    display: inline-block;
 }
 
 .btn-primary {
     background: var(--mint);
-    color: #fff;
-    padding: 12px 22px;
+    color: #FFFFFF !important; /* Blanco solo aquí para contraste sobre el botón verde */
+    padding: 14px 28px;
     border-radius: 10px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(126, 215, 161, 0.4);
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(126, 215, 161, 0.6);
 }
 
 .btn-secondary {
     background: var(--panel);
     border: 1px solid var(--border);
-    padding: 12px 22px;
+    padding: 14px 28px;
     border-radius: 10px;
     text-decoration: none;
     color: var(--text);
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-/* Contenedor de la imagen (Insertado) */
-.hero-visual {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
+.btn-secondary:hover {
+    background: var(--bg-alt);
 }
 
 /* ========================= SECTIONS ========================= */
@@ -122,60 +144,76 @@ body {
 }
 
 .section.alt {
-    background: var(--panel); /* Usando Cloud Grey */
+    background: var(--bg-alt); /* Cambiado de #111 a Gris Nube */
 }
 
 .section-title {
-    font-size: 2rem;
+    font-size: 2.4rem;
+    font-weight: 800;
     margin-bottom: 20px;
+    color: var(--text);
 }
 
 .section-text {
     max-width: 700px;
-    opacity: 0.85;
+    color: var(--text-muted);
     margin-bottom: 40px;
+    font-size: 1.1rem;
 }
 
 /* ========================= CARDS ========================= */
 
 .cards-3 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
 }
 
 .card {
-    background: #fff; /* Fondo blanco para tarjetas sobre fondo Cloud Grey */
+    background: var(--panel); /* Blanco puro */
     border: 1px solid var(--border);
-    padding: 24px;
-    border-radius: 14px;
-    transition: 0.25s;
-    color: var(--text);
+    padding: 32px;
+    border-radius: 18px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card h3 {
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
 }
 
 .card:hover {
     border-color: var(--mint);
-    box-shadow: 0 0 22px var(--mint-soft);
-    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(-8px);
 }
 
 /* ========================= METRICS ========================= */
 
 .metrics {
     display: flex;
-    gap: 40px;
+    gap: 60px;
     margin-bottom: 40px;
 }
 
 .metric-value {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.8rem;
+    font-weight: 800;
     color: var(--mint);
 }
 
 .metric-label {
-    opacity: 0.7;
+    color: var(--text-muted);
     margin-top: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }
 
 /* ========================= CTA ========================= */
@@ -183,25 +221,35 @@ body {
 .cta {
     text-align: center;
     padding: 140px 40px;
-    background: var(--panel); /* Usando Cloud Grey */
+    background: var(--mint-soft); /* Fondo verde menta suave */
+    border-radius: 40px;
+    margin: 0 40px 80px;
 }
 
 .cta h2 {
-    font-size: 2.4rem;
-    margin-bottom: 12px;
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--text);
 }
 
 .cta p {
-    opacity: 0.8;
-    margin-bottom: 24px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-size: 1.2rem;
 }
 
 /* ========================= FOOTER ========================= */
 
 .footer {
-    padding: 40px;
+    padding: 60px 40px;
     text-align: center;
-    opacity: 0.6;
-    font-size: 0.9rem;
     border-top: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.footer p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    opacity: 0.8;
 }
