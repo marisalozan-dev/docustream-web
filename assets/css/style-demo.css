@@ -1,21 +1,32 @@
 :root {
-    --bg-dark: #0a0a0a;
-    --sidebar-bg: #121212;
-    --accent: #00ffa3;
-    --text-main: #e0e0e0;
-    --border: #2a2a2a;
+    /* Paleta FRESH KNOWLEDGE - Colores Finales */
+    --bg-main: #FDFDFB;      /* Blanco cálido (Fondo) */
+    --sidebar-bg: #E9EEF2;   /* Gris nube (Sidebar) */
+    --accent: #7ED7A1;       /* Verde hoja (Acentos) */
+    --text-dark: #4A4A4A;    /* Gris texto (EL QUE SE VERÁ BIEN) */
+    --border-color: #D1D9E0; /* Gris sutil (Bordes) */
+    --mint: #CFFFE5;         /* Verde menta (Hovers) */
+    --white: #FFFFFF;        /* Solo para el interior de las cards */
+}
+
+/* 1. RESET Y CONFIGURACIÓN BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Forzamos que el color por defecto nunca sea blanco */
+    color: var(--text-dark); 
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-dark);
-    color: var(--text-main);
+    background-color: var(--bg-main);
+    color: var(--text-dark);
     font-family: 'Inter', sans-serif;
     display: flex;
+    min-height: 100vh;
 }
 
-/* SIDEBAR ESTRUCTURA */
+/* 2. SIDEBAR (CORREGIDO) */
 .sidebar {
     width: 260px;
     height: 100vh;
@@ -24,7 +35,7 @@ body {
     left: 0;
     top: 0;
     padding: 30px 20px;
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--border-color);
     z-index: 1000;
 }
 
@@ -33,15 +44,14 @@ body {
     font-size: 1.4rem;
     margin-bottom: 40px;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .sidebar nav button {
     display: block;
     width: 100%;
     background: transparent;
-    border: 1px solid transparent;
-    color: #888;
+    border: none;
+    color: var(--text-dark) !important; /* Forzamos color oscuro */
     padding: 12px 15px;
     text-align: left;
     font-size: 1rem;
@@ -49,72 +59,88 @@ body {
     border-radius: 6px;
     transition: 0.3s;
     margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .sidebar nav button:hover {
-    background: #1a1a1a;
-    color: var(--accent);
+    background: var(--mint);
+    color: #2D5A41 !important; /* Un verde oscuro para el texto en el hover */
 }
 
 .back-link {
     display: block;
     margin-top: 50px;
-    color: #666;
+    color: var(--text-dark);
     text-decoration: none;
     font-size: 0.9rem;
+    opacity: 0.8;
 }
 
-/* CONTENIDO */
+/* 3. CONTENIDO PRINCIPAL */
 .main-content {
     margin-left: 260px;
     padding: 40px;
     width: calc(100% - 260px);
 }
 
-.pro-view {
-    display: none; /* Oculto por defecto */
+h1 { 
+    font-size: 2.2rem; 
+    margin-bottom: 20px; 
+    color: var(--text-dark); /* Títulos oscuros */
 }
 
-.pro-view.active-view {
-    display: block; /* Solo se muestra la activa */
-    animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* DISEÑO DE CARDS (KPIs e INTEGRACIONES) */
-.pro-kpi-grid, .integrations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.pro-kpi-card, .int-card, .pro-panel {
-    background: #1a1a1a;
+/* 4. CARDS (FONDO BLANCO, TEXTO OSCURO) */
+.pro-kpi-card, .int-card, .pro-panel, .doc-item {
+    background: var(--white);
     padding: 20px;
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+    color: var(--text-dark) !important; /* Texto oscuro dentro de las cards */
 }
 
 .kpi-value {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent);
-    margin: 10px 0 0 0;
+    color: var(--accent); /* Los números en verde hoja resaltan bien */
+    margin-top: 10px;
 }
 
-h1 { font-size: 2rem; margin-bottom: 10px; }
-h3 { font-size: 0.9rem; color: #888; margin: 0; }
+h3 { 
+    font-size: 0.9rem; 
+    color: #666666; /* Gris intermedio para subtítulos */
+    margin: 0; 
+    text-transform: uppercase;
+}
 
-/* GRAFO */
+/* 5. GRAFO Y ELEMENTOS GRÁFICOS (D3.js) */
 #graphAdvancedContainer {
-    width: 100%;
-    height: 500px;
-    background: #000;
+    background-color: var(--sidebar-bg); /* Fondo gris nube para el grafo */
     border-radius: 15px;
-    margin-top: 20px;
+    border: 1px solid var(--border-color);
+}
+
+/* Forzar que cualquier texto SVG (como los del grafo) sea oscuro */
+svg text {
+    fill: var(--text-dark) !important;
+    font-weight: 600 !important;
+    text-shadow: 0px 0px 3px rgba(255,255,255,0.8); /* Ayuda a leer sobre colores fuertes */
+}
+
+/* 6. ELEMENTOS ADICIONALES */
+.highlight {
+    background-color: var(--mint);
+    color: #2D5A41;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Vistas activas */
+.pro-view { display: none; }
+.pro-view.active-view { display: block; animation: fadeIn 0.4s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
