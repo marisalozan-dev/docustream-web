@@ -32,7 +32,7 @@ function generateDashboardData(state) {
 }
 
 /* --------------------------------------------------------------
-ANIMACIÓN PRO DE KPIs
+ANIMACIÓN PRO DE KPIs (NUMÉRICA)
 -------------------------------------------------------------- */
 
 function animateKPI(elementId, newValue) {
@@ -174,9 +174,7 @@ function renderQualityDonut(quality) {
         .domain(["calidad", "restante"])
         .range(["#00e5a0", "#222"]);
 
-    const pie = d3.pie()
-        .value(d => d[1]);
-
+    const pie = d3.pie().value(d => d[1]);
     const data_ready = pie(Object.entries(data));
 
     svg.selectAll("path")
@@ -249,23 +247,7 @@ EXPOSICIÓN GLOBAL
 
 window.initDashboard = initDashboard;
 window.updateDashboard = updateDashboard;
-/* --------------------------------------------------------------
-ANIMACIÓN DE KPIs
--------------------------------------------------------------- */
 
-function animateKPIs() {
-    const kpis = document.querySelectorAll(".pro-kpi-card");
-
-    gsap.from(kpis, {
-        opacity: 0,
-        y: 18,
-        duration: 0.45,
-        ease: "power2.out",
-        stagger: 0.08
-    });
-}
-
-document.addEventListener("DOMContentLoaded", animateKPIs);
 
 
 
