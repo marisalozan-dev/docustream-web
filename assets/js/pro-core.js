@@ -43,9 +43,19 @@ function showView(view) {
             duration: 0.35,
             ease: "power2.out"
         });
-        animateViewContent(view);
-
     }
+
+    // Actualizar botón activo del sidebar
+    document.querySelectorAll(".sidebar nav button")
+        .forEach(btn => btn.classList.remove("active-btn"));
+
+    const activeBtn = document.querySelector(`button[onclick="showView('${view}')"]`);
+    if (activeBtn) activeBtn.classList.add("active-btn");
+
+    // Animación del contenido interno
+    animateViewContent(view);
+}
+
     /* --------------------------------------------------------------
 ANIMACIÓN GLOBAL DE ENTRADA DE VISTA
 -------------------------------------------------------------- */
