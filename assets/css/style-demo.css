@@ -1,9 +1,12 @@
 :root {
-    --bg-dark: #0a0a0a;
-    --sidebar-bg: #121212;
-    --accent: #00ffa3;
-    --text-main: #e0e0e0;
-    --border: #2a2a2a;
+    /* Paleta FRESH KNOWLEDGE - Reemplazo de variables */
+    --bg-dark: #FDFDFB;      /* Blanco cálido para el fondo principal */
+    --sidebar-bg: #E9EEF2;   /* Gris nube para el sidebar */
+    --accent: #7ED7A1;       /* Verde hoja suave para acentos y KPIs */
+    --text-main: #4A4A4A;    /* Gris texto suave para legibilidad */
+    --border: #D1D9E0;       /* Gris sutil para bordes */
+    --mint-light: #CFFFE5;   /* Verde menta para estados hover/fondos card */
+    --aqua-flow: #A7E8FF;    /* Azul agua para detalles de flujo */
 }
 
 body {
@@ -29,11 +32,12 @@ body {
 }
 
 .sidebar h2 {
-    color: var(--accent);
+    color: var(--accent); /* Verde hoja */
     font-size: 1.4rem;
     margin-bottom: 40px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 800;
 }
 
 .sidebar nav button {
@@ -41,7 +45,7 @@ body {
     width: 100%;
     background: transparent;
     border: 1px solid transparent;
-    color: #888;
+    color: var(--text-main); /* Cambiado de #888 a tu gris suave */
     padding: 12px 15px;
     text-align: left;
     font-size: 1rem;
@@ -52,16 +56,22 @@ body {
 }
 
 .sidebar nav button:hover {
-    background: #1a1a1a;
-    color: var(--accent);
+    background: var(--mint-light); /* Verde menta al pasar el mouse */
+    color: #2D5A41; /* Texto un poco más oscuro para contraste */
 }
 
 .back-link {
     display: block;
     margin-top: 50px;
-    color: #666;
+    color: var(--text-main);
     text-decoration: none;
     font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.back-link:hover {
+    color: var(--accent);
+    opacity: 1;
 }
 
 /* CONTENIDO */
@@ -72,11 +82,11 @@ body {
 }
 
 .pro-view {
-    display: none; /* Oculto por defecto */
+    display: none; 
 }
 
 .pro-view.active-view {
-    display: block; /* Solo se muestra la activa */
+    display: block; 
     animation: fadeIn 0.4s ease-out;
 }
 
@@ -94,27 +104,44 @@ body {
 }
 
 .pro-kpi-card, .int-card, .pro-panel {
-    background: #1a1a1a;
+    background: #FFFFFF; /* Blanco puro para que resalte sobre el blanco cálido */
     padding: 20px;
     border-radius: 12px;
     border: 1px solid var(--border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02); /* Sombra muy sutil */
+}
+
+/* Efecto especial para la card activa o principal */
+.pro-kpi-card:hover {
+    border-color: var(--aqua-flow);
+    background: #F9FDFF;
 }
 
 .kpi-value {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--accent); /* Verde hoja suave */
     margin: 10px 0 0 0;
 }
 
-h1 { font-size: 2rem; margin-bottom: 10px; }
-h3 { font-size: 0.9rem; color: #888; margin: 0; }
+h1 { 
+    font-size: 2rem; 
+    margin-bottom: 10px; 
+    color: var(--text-main);
+}
+
+h3 { 
+    font-size: 0.9rem; 
+    color: #7a7a7a; 
+    margin: 0; 
+}
 
 /* GRAFO */
 #graphAdvancedContainer {
     width: 100%;
     height: 500px;
-    background: #000;
+    background: #F0F4F7; /* Un gris muy ligero (variación de nube) para el grafo */
     border-radius: 15px;
     margin-top: 20px;
+    border: 1px solid var(--border);
 }
