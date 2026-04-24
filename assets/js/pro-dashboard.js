@@ -249,6 +249,24 @@ EXPOSICIÓN GLOBAL
 
 window.initDashboard = initDashboard;
 window.updateDashboard = updateDashboard;
+/* --------------------------------------------------------------
+ANIMACIÓN DE KPIs
+-------------------------------------------------------------- */
+
+function animateKPIs() {
+    const kpis = document.querySelectorAll(".pro-kpi-card");
+
+    gsap.from(kpis, {
+        opacity: 0,
+        y: 18,
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.08
+    });
+}
+
+document.addEventListener("DOMContentLoaded", animateKPIs);
+
 
 
 
