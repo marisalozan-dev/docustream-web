@@ -19,35 +19,45 @@ function showView(view) {
     PRO_STATE.currentView = view;
     localStorage.setItem("pro-current-view", view);
 
+    // Cambiar vista activa
     document.querySelectorAll(".pro-view").forEach(v => v.classList.remove("active-view"));
     const target = document.getElementById(`view-${view}`);
     if (target) target.classList.add("active-view");
 
+    // Botón activo en sidebar
     document.querySelectorAll(".sidebar nav button")
         .forEach(btn => btn.classList.remove("active-btn"));
 
     const activeBtn = document.querySelector(`button[onclick="showView('${view}')"]`);
     if (activeBtn) activeBtn.classList.add("active-btn");
 
+    // Animación de entrada
     animateViewContent(view);
 
-    // 🔥 FORZAMOS LA INICIALIZACIÓN SIEMPRE
+    // 🔥 INICIALIZACIÓN DE MÓDULOS (con timing correcto)
     switch (view) {
         case "dashboard":
             initDashboard();
             break;
+
         case "documents":
             initDocuments();
             break;
+
         case "integrations":
             initIntegrations();
             break;
+
         case "graph-advanced":
-            setTimeout(() => initGraphAdvanced(), 50); // ← CLAVE
+            // Doble requestAnimationFrame → garantiza que el contenedor ya tiene tamaño real
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    initGraphAdvanced();
+                });
+            });
             break;
     }
 }
-
 
 /* ========================= ANIMACIÓN ========================= */
 
@@ -71,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.showView = showView;
+
 
 
 
