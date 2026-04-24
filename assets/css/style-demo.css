@@ -211,6 +211,39 @@ body {
     border-radius: 14px;
     padding: 10px;
 }
+/* ============================================================
+   FIX DEFINITIVO PARA EL GRAFO AVANZADO
+   ============================================================ */
+
+/* Asegura que el main no limite el ancho */
+.main-content {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Asegura que la vista del grafo ocupa todo el ancho */
+#view-graph-advanced {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Asegura que el contenedor del grafo tiene ancho real */
+#graphAdvancedContainer {
+    width: 100% !important;
+    min-width: 600px;
+    min-height: 500px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+/* Asegura que el SVG se adapta al contenedor */
+#graphAdvancedContainer svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 
 #graphAdvancedContainer {
     min-height: 500px;
