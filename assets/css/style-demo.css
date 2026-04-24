@@ -83,6 +83,7 @@ body {
     padding-left: 280px; /* espacio para el sidebar */
     width: 100%;
     box-sizing: border-box;
+    position: relative; /* ← CLAVE: evita que el grafo se desborde */
 }
 
 h1 {
@@ -234,6 +235,7 @@ h1 {
         font-size: 0.75rem;
     }
 }
+
 
 
 
