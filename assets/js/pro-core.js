@@ -31,11 +31,23 @@ function showView(view) {
 
     animateViewContent(view);
 
-    if (view === "dashboard") initDashboard();
-    if (view === "documents") initDocuments();
-    if (view === "integrations") initIntegrations();
-    if (view === "graph-advanced") initGraphAdvanced();
+    // 🔥 FORZAMOS LA INICIALIZACIÓN SIEMPRE
+    switch (view) {
+        case "dashboard":
+            initDashboard();
+            break;
+        case "documents":
+            initDocuments();
+            break;
+        case "integrations":
+            initIntegrations();
+            break;
+        case "graph-advanced":
+            setTimeout(() => initGraphAdvanced(), 50); // ← CLAVE
+            break;
+    }
 }
+
 
 /* ========================= ANIMACIÓN ========================= */
 
