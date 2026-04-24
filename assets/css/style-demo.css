@@ -219,4 +219,8 @@ body {
     border-radius: 14px;
     padding: 10px;
 }
+#graphAdvancedContainer {
+    min-height: 500px !important;
+}
+
 
