@@ -33,7 +33,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    background: rgba(253, 253, 251, 0.85); /* Fondo blanco cálido con transparencia */
+    background: rgba(253, 253, 251, 0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
@@ -44,7 +44,7 @@ body {
     font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 0.05em;
-    color: var(--mint); /* Logo en verde hoja */
+    color: var(--mint);
 }
 
 .nav a {
@@ -108,7 +108,7 @@ body {
 
 .btn-primary {
     background: var(--mint);
-    color: #FFFFFF !important; /* Blanco solo aquí para contraste sobre el botón verde */
+    color: #FFFFFF !important;
     padding: 14px 28px;
     border-radius: 10px;
     text-decoration: none;
@@ -135,18 +135,21 @@ body {
 
 .btn-secondary:hover {
     background: var(--bg-alt);
+}
 
-  .hero-image {
-    flex: 1;             /* Espacio equilibrado con el texto */
+/* --- CONFIGURACIÓN DE LA IMAGEN (TAMAÑO PEQUEÑO AJUSTADO) --- */
+
+.hero-image {
+    flex: 1;
     display: flex;
-    justify-content: center; /* Centrado en su mitad derecha */
+    justify-content: center;
     align-items: center;
 }
 
 .hero-image svg {
-    width: 85%;          /* Tamaño moderado */
+    width: 75%;          /* Reducido para que sea más elegante */
     height: auto;
-    max-width: 600px;    /* Límite para que no se vea gigante */
+    max-width: 550px;    /* Límite de tamaño pequeño/medio */
     overflow: visible;
     filter: drop-shadow(0 10px 30px rgba(126, 215, 161, 0.1));
 }
@@ -164,19 +167,6 @@ body {
         margin-top: 40px;
     }
 }
-/* Ajuste para que en móviles no se vea gigante y se ponga debajo */
-@media (max-width: 992px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 140px;
-    }
-    .hero-image svg {
-        width: 100%;
-        max-width: 500px;
-        margin-top: 40px;
-    }
-}
 
 /* ========================= SECTIONS ========================= */
 
@@ -185,7 +175,7 @@ body {
 }
 
 .section.alt {
-    background: var(--bg-alt); /* Cambiado de #111 a Gris Nube */
+    background: var(--bg-alt);
 }
 
 .section-title {
@@ -211,7 +201,7 @@ body {
 }
 
 .card {
-    background: var(--panel); /* Blanco puro */
+    background: var(--panel);
     border: 1px solid var(--border);
     padding: 32px;
     border-radius: 18px;
@@ -262,7 +252,7 @@ body {
 .cta {
     text-align: center;
     padding: 140px 40px;
-    background: var(--mint-soft); /* Fondo verde menta suave */
+    background: var(--mint-soft);
     border-radius: 40px;
     margin: 0 40px 80px;
 }
