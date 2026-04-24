@@ -43,7 +43,28 @@ function showView(view) {
             duration: 0.35,
             ease: "power2.out"
         });
+        animateViewContent(view);
+
     }
+    /* --------------------------------------------------------------
+ANIMACIÓN GLOBAL DE ENTRADA DE VISTA
+-------------------------------------------------------------- */
+
+function animateViewContent(view) {
+    const container = document.getElementById(`view-${view}`);
+
+    if (!container) return;
+
+    // Animación suave del contenido interno
+    gsap.from(container.children, {
+        opacity: 0,
+        y: 12,
+        duration: 0.35,
+        ease: "power2.out",
+        stagger: 0.06
+    });
+}
+
 
     // Actualizar botón activo del sidebar
     document.querySelectorAll(".sidebar nav button")
