@@ -282,6 +282,22 @@ SIDEBAR PRO — Glow Mint + Active Button + Hover Premium
     display: block;
 }
 
+/* DOCUMENTOS PRO — Cards premium mejoradas */
+.doc-item {
+    padding: 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 229, 160, 0.12);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.doc-item:hover {
+    border-color: rgba(0, 229, 160, 0.35);
+    box-shadow: 0 0 22px rgba(0, 229, 160, 0.25);
+    transform: translateY(-3px);
+}
+
 
 
 
