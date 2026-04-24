@@ -40,4 +40,23 @@ function initIntegrations() {
 window.initIntegrations = initIntegrations;
 window.openIntegration = openIntegration;
 
+/* --------------------------------------------------------------
+ANIMACIÓN DE CARDS DE INTEGRACIONES
+-------------------------------------------------------------- */
+
+function animateIntegrationCards() {
+    const cards = document.querySelectorAll(".integration-card");
+
+    gsap.from(cards, {
+        opacity: 0,
+        y: 14,
+        duration: 0.35,
+        ease: "power2.out",
+        stagger: 0.05
+    });
+}
+
+document.addEventListener("DOMContentLoaded", animateIntegrationCards);
+
+
 
