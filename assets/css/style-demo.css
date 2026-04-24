@@ -1,15 +1,18 @@
 :root {
-    --bg-dark: #0a0a0a;
-    --sidebar-bg: #121212;
-    --accent: #00ffa3;
-    --text-main: #e0e0e0;
-    --border: #2a2a2a;
+    /* PALETA FRESH KNOWLEDGE */
+    --bg-light: #FDFDFB;          /* blanco cálido */
+    --sidebar-bg: #7ED7A1;        /* verde hoja suave */
+    --accent: #7ED7A1;            /* verde hoja */
+    --accent-soft: #CFFFE5;       /* verde menta claro */
+    --accent-blue: #A7E8FF;       /* azul agua */
+    --text-main: #4A4A4A;         /* gris texto suave */
+    --border: #E9EEF2;            /* gris nube */
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-light);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -29,7 +32,7 @@ body {
 }
 
 .sidebar h2 {
-    color: var(--accent);
+    color: var(--text-main);
     font-size: 1.4rem;
     margin-bottom: 40px;
     text-transform: uppercase;
@@ -39,9 +42,9 @@ body {
 .sidebar nav button {
     display: block;
     width: 100%;
-    background: transparent;
-    border: 1px solid transparent;
-    color: #888;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-blue);
+    color: var(--text-main);
     padding: 12px 15px;
     text-align: left;
     font-size: 1rem;
@@ -52,14 +55,14 @@ body {
 }
 
 .sidebar nav button:hover {
-    background: #1a1a1a;
-    color: var(--accent);
+    background: var(--accent-blue);
+    color: var(--text-main);
 }
 
 .back-link {
     display: block;
     margin-top: 50px;
-    color: #666;
+    color: var(--text-main);
     text-decoration: none;
     font-size: 0.9rem;
 }
@@ -72,11 +75,11 @@ body {
 }
 
 .pro-view {
-    display: none; /* Oculto por defecto */
+    display: none;
 }
 
 .pro-view.active-view {
-    display: block; /* Solo se muestra la activa */
+    display: block;
     animation: fadeIn 0.4s ease-out;
 }
 
@@ -94,10 +97,11 @@ body {
 }
 
 .pro-kpi-card, .int-card, .pro-panel {
-    background: #1a1a1a;
+    background: #FFFFFF;
     padding: 20px;
     border-radius: 12px;
     border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
 .kpi-value {
@@ -107,14 +111,16 @@ body {
     margin: 10px 0 0 0;
 }
 
-h1 { font-size: 2rem; margin-bottom: 10px; }
-h3 { font-size: 0.9rem; color: #888; margin: 0; }
+h1 { font-size: 2rem; margin-bottom: 10px; color: var(--text-main); }
+h3 { font-size: 0.9rem; color: #6A6A6A; margin: 0; }
 
 /* GRAFO */
 #graphAdvancedContainer {
     width: 100%;
     height: 500px;
-    background: #000;
+    background: #FFFFFF;
     border-radius: 15px;
     margin-top: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
