@@ -3,150 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuStream · Document Intelligence</title>
+    <title>DocuStream PRO — Inteligencia Documental en Tiempo Real</title>
 
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Librerías -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="assets/css/style-landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<header class="navbar">
-    <div class="nav-left">
-        <span class="brand">DocuStream</span>
-    </div>
+    <!-- ========================= HEADER ========================= -->
+    <header class="header">
+        <div class="logo">DocuStream PRO</div>
+        <nav class="nav">
+            <a href="#problema">Problema</a>
+            <a href="#solucion">Solución</a>
+            <a href="#mercado">Mercado</a>
+            <a href="#demo">Demo</a>
+            <a href="dossier.html" class="btn-outline">Dossier</a>
+        </nav>
+    </header>
 
-    <nav class="nav-links">
-        <a href="#que-es">¿Qué es?</a>
-        <a href="#caracteristicas">Características</a>
-        <a href="#integraciones">Integraciones</a>
-        <a href="#testimonios">Testimonios</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="index-en.html" class="lang-switch">EN</a>
-    </nav>
+    <!-- ========================= HERO ========================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Documentación viva impulsada por Big Data</h1>
+            <p class="hero-subtitle">
+                El primer sistema de inteligencia documental en tiempo real:  
+                documentos que se adaptan, envejecen con datos y conocen a sus lectores.
+            </p>
 
-    <div class="nav-mobile-icon" id="mobileMenuBtn">☰</div>
-</header>
-
-<!-- MENÚ MÓVIL -->
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#que-es">¿Qué es?</a>
-    <a href="#caracteristicas">Características</a>
-    <a href="#integraciones">Integraciones</a>
-    <a href="#testimonios">Testimonios</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="index-en.html">English</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-left">
-        <h1 class="hero-title">DocuStream</h1>
-        <h2 class="hero-subtitle">Document Intelligence</h2>
-        <p class="hero-tagline">Transformando documentación en conocimiento estructurado.</p>
-
-        <div class="hero-buttons">
-            <a href="demo-pro.html" class="btn-primary">Ver demo</a>
-
-            <a href="index-en.html" class="btn-secondary">English Version</a>
+            <div class="hero-buttons">
+                <a href="demo.html" class="btn-primary">Ver demo interactiva</a>
+                <a href="dossier.html" class="btn-secondary">Dossier para inversores</a>
+            </div>
         </div>
-    </div>
 
-    <div class="hero-right">
-        <div class="hero-icon-wrapper">
+        <div class="hero-visual"></div>
+    </section>
 
-            <!-- GLOW MINT -->
-            <div class="hero-glow"></div>
+    <!-- ========================= PROBLEMA ========================= -->
+    <section id="problema" class="section">
+        <h2 class="section-title">El problema</h2>
+        <p class="section-text">
+            Las organizaciones generan miles de documentos que envejecen silenciosamente.  
+            El 73% de los empleados admite haber seguido procesos desactualizados por falta de alertas oportunas.  
+            El coste anual por empresa: entre 15.000 y 40.000 € en errores, tiempo perdido y riesgos de cumplimiento.
+        </p>
 
-            <!-- SVG ICONO GRANDE INLINE -->
-            <svg class="hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                <defs>
-                    <linearGradient id="gHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#00E5A0"/>
-                        <stop offset="100%" style="stop-color:#00C48C"/>
-                    </linearGradient>
-                </defs>
-
-                <line x1="56" y1="28" x2="56" y2="172" stroke="url(#gHero)" stroke-width="14" stroke-linecap="round"/>
-                <path d="M56,28 C56,28 148,28 162,100 C176,172 56,172 56,172"
-                      fill="none" stroke="url(#gHero)" stroke-width="14" stroke-linecap="round"/>
-
-                <line x1="100" y1="100" x2="71" y2="68" stroke="url(#gHero)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
-                <line x1="100" y1="100" x2="134" y2="72" stroke="url(#gHero)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
-                <line x1="100" y1="100" x2="71" y2="132" stroke="url(#gHero)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
-                <line x1="100" y1="100" x2="134" y2="128" stroke="url(#gHero)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
-
-                <circle cx="100" cy="100" r="10" fill="url(#gHero)"/>
-                <circle cx="100" cy="100" r="4.5" fill="#0A0F0D"/>
-
-                <circle cx="71" cy="68" r="7" fill="url(#gHero)"/>
-                <circle cx="134" cy="72" r="7" fill="url(#gHero)"/>
-                <circle cx="71" cy="132" r="7" fill="url(#gHero)"/>
-                <circle cx="134" cy="128" r="7" fill="url(#gHero)"/>
-            </svg>
-
+        <div class="cards-3">
+            <div class="card">
+                <h3>Documentos estáticos</h3>
+                <p>No se monitorean. Nadie sabe si están actualizados.</p>
+            </div>
+            <div class="card">
+                <h3>Sin datos de uso real</h3>
+                <p>No se sabe qué partes confunden o se ignoran.</p>
+            </div>
+            <div class="card">
+                <h3>Desconexión total</h3>
+                <p>Los cambios en APIs o procesos no se propagan.</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- SECCIÓN: ¿QUÉ ES DOCUSTREAM? -->
-<section id="que-es" class="section">
-    <h2>¿Qué es DocuStream?</h2>
-    <p>DocuStream es un sistema inteligente que transforma documentación técnica en conocimiento estructurado, navegable y accionable.</p>
-</section>
+    <!-- ========================= SOLUCIÓN ========================= -->
+    <section id="solucion" class="section alt">
+        <h2 class="section-title">La solución — DocuStream PRO</h2>
+        <p class="section-text">
+            Una plataforma SaaS que transforma los documentos en organismos vivos,  
+            impulsados por flujos masivos de datos en tiempo real.
+        </p>
 
-<!-- SECCIÓN: CARACTERÍSTICAS -->
-<section id="caracteristicas" class="section">
-    <h2>Características</h2>
-    <ul class="feature-list">
-        <li>Procesamiento inteligente de documentos</li>
-        <li>Extracción automática de entidades</li>
-        <li>Visualización de grafos</li>
-        <li>Integración con APIs</li>
-        <li>Motor semántico avanzado</li>
-    </ul>
-</section>
+        <div class="cards-3">
+            <div class="card">
+                <h3>Obsolescencia predictiva</h3>
+                <p>Predice cuándo un documento quedará desactualizado antes de que ocurra.</p>
+            </div>
+            <div class="card">
+                <h3>Grafo de conocimiento</h3>
+                <p>Mapea relaciones semánticas y propaga sugerencias de actualización.</p>
+            </div>
+            <div class="card">
+                <h3>Comportamiento del lector</h3>
+                <p>Heatmaps, flujos y patrones de lectura a escala.</p>
+            </div>
+        </div>
+    </section>
 
-<!-- SECCIÓN: INTEGRACIONES -->
-<section id="integraciones" class="section">
-    <h2>Integraciones</h2>
-    <p>Compatible con sistemas de gestión documental, APIs empresariales y herramientas de análisis.</p>
-</section>
+    <!-- ========================= MERCADO ========================= -->
+    <section id="mercado" class="section">
+        <h2 class="section-title">Mercado y oportunidad</h2>
 
-<!-- SECCIÓN: TESTIMONIOS -->
-<section id="testimonios" class="section">
-    <h2>Testimonios</h2>
-    <p>“DocuStream ha revolucionado nuestra forma de trabajar con documentación técnica.”</p>
-</section>
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-value">5.200M€</div>
+                <div class="metric-label">Mercado KM europeo</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">14%</div>
+                <div class="metric-label">Crecimiento anual</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Competidores con Big Data + grafo + obsolescencia</div>
+            </div>
+        </div>
 
-<!-- SECCIÓN: ROADMAP -->
-<section id="roadmap" class="section">
-    <h2>Roadmap</h2>
-    <ul class="roadmap-list">
-        <li>Q2: Nuevas integraciones</li>
-        <li>Q3: Motor semántico 2.0</li>
-        <li>Q4: Dashboard avanzado</li>
-    </ul>
-</section>
+        <p class="section-text">
+            DocuStream tiene una ventana de 18–24 meses para liderar el nicho antes de que los grandes players puedan replicarlo.
+        </p>
+    </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 DocuStream · Document Intelligence</p>
-</footer>
+    <!-- ========================= CTA DEMO ========================= -->
+    <section id="demo" class="cta">
+        <h2>Experimenta DocuStream PRO</h2>
+        <p>Dashboard, documentos inteligentes, integraciones y grafo semántico.</p>
+        <a href="demo.html" class="btn-primary">Entrar en la demo</a>
+    </section>
 
-<!-- JS -->
-<script src="script.js"></script>
+    <!-- ========================= FOOTER ========================= -->
+    <footer class="footer">
+        <span>© 2026 DocuStream PRO — Proyecto conceptual</span>
+        <a href="dossier.html">Dossier inversores</a>
+    </footer>
 
 </body>
 </html>
+
 
 
 
