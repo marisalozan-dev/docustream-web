@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER & NAV --- */
         header {
             padding: 20px 50px;
             display: flex;
@@ -39,14 +38,7 @@
             border-bottom: 1px solid var(--cloud-grey);
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--text-soft);
-            text-decoration: none;
-            letter-spacing: -1px;
-        }
-
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--text-soft); text-decoration: none; letter-spacing: -1px; }
         .logo span { color: var(--leaf-green); }
 
         .nav-links a {
@@ -60,7 +52,6 @@
 
         .nav-links a:hover { color: var(--leaf-green); }
 
-        /* --- HERO SECTION --- */
         .hero {
             display: flex;
             align-items: center;
@@ -69,23 +60,9 @@
             min-height: 100vh;
         }
 
-        .hero-content {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            letter-spacing: -2px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: #777;
-            margin-bottom: 40px;
-        }
+        .hero-content { flex: 1; max-width: 600px; }
+        .hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; }
+        .hero-content p { font-size: 1.2rem; color: #777; margin-bottom: 40px; }
 
         .btn-primary {
             background-color: var(--leaf-green);
@@ -95,53 +72,22 @@
             text-decoration: none;
             font-weight: 600;
             display: inline-block;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: 0.3s;
             box-shadow: 0 10px 20px rgba(126, 215, 161, 0.3);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(126, 215, 161, 0.4);
-        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(126, 215, 161, 0.4); }
 
-        /* --- CONTENEDOR DEL SVG --- */
-        .hero-visual {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-        }
+        .hero-visual { flex: 1; display: flex; justify-content: flex-end; position: relative; }
+        .hero-visual svg { width: 110%; height: auto; max-width: 800px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.08)); }
 
-        .hero-visual svg {
-            width: 110%;
-            height: auto;
-            max-width: 800px;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.05));
-        }
-
-        /* --- FEATURES --- */
-        .features {
-            padding: 100px 8%;
-            background: white;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feat-card {
-            padding: 40px;
-            border-radius: 20px;
-            background: var(--warm-white);
-            border: 1px solid var(--cloud-grey);
-        }
-
-        .feat-card h3 { margin-bottom: 15px; }
-
-        /* Estilos de animación del SVG (Inyectados) */
         @keyframes dash { to { stroke-dashoffset: -80; } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .flow-line { stroke-dasharray: 18 12; animation: dash 2s linear infinite; }
         .floating { animation: float 4s ease-in-out infinite; }
+
+        .features { padding: 100px 8%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .feat-card { padding: 40px; border-radius: 20px; background: white; border: 1px solid var(--cloud-grey); }
     </style>
 </head>
 <body>
@@ -149,61 +95,60 @@
     <header>
         <a href="#" class="logo">Docu<span>Stream</span></a>
         <nav class="nav-links">
-            <a href="#features">Tecnología</a>
-            <a href="demo.html" style="color: var(--leaf-green); font-weight: 700;">Ver Demo PRO →</a>
+            <a href="demo.html" style="color: var(--leaf-green); font-weight: 700;">Abrir Demo Interactiva →</a>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Documentación que <span style="color: var(--leaf-green)">cobra vida</span>.</h1>
-            <p>Transformamos datos complejos y manuales estáticos en flujos de conocimiento dinámicos mediante grafos semánticos e IA.</p>
-            <a href="demo.html" class="btn-primary">Explorar Demo Interactiva</a>
+            <h1>Estrategia de datos para <span style="color: var(--leaf-green)">mentes Senior</span>.</h1>
+            <p>DocuStream transforma la documentación técnica en activos visuales inteligentes. Estructura, flujo y claridad para ecosistemas de Big Data.</p>
+            <a href="demo.html" class="btn-primary">Explorar Sistema</a>
         </div>
 
         <div class="hero-visual">
             <svg viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg">
-                <rect width="1600" height="1200" fill="#FDFDFB"/>
-                
-                <g opacity=".1">
-                    <circle cx="100" cy="100" r="4" fill="#7ED7A1"/>
-                    <circle cx="500" cy="100" r="4" fill="#7ED7A1"/>
-                    <circle cx="900" cy="100" r="4" fill="#7ED7A1"/>
-                    <circle cx="1300" cy="100" r="4" fill="#7ED7A1"/>
-                    <circle cx="100" cy="600" r="4" fill="#7ED7A1"/>
-                    <circle cx="1500" cy="600" r="4" fill="#7ED7A1"/>
+                <g opacity=".15">
+                    <circle cx="400" cy="200" r="3" fill="#7ED7A1"/>
+                    <circle cx="1200" cy="200" r="3" fill="#7ED7A1"/>
+                    <circle cx="400" cy="1000" r="3" fill="#7ED7A1"/>
+                    <circle cx="1200" cy="1000" r="3" fill="#7ED7A1"/>
                 </g>
 
-                <path class="flow-line" d="M 440 360 Q 620 440 740 570" fill="none" stroke="#7ED7A1" stroke-width="4" />
-                <path class="flow-line" d="M 1160 360 Q 990 440 870 570" fill="none" stroke="#7ED7A1" stroke-width="4" />
-                <path class="flow-line" d="M 780 670 Q 660 780 440 840" fill="none" stroke="#7ED7A1" stroke-width="4" />
-                <path class="flow-line" d="M 830 670 Q 970 780 1160 840" fill="none" stroke="#7ED7A1" stroke-width="4" />
+                <path class="flow-line" d="M 440 360 Q 620 440 740 570" fill="none" stroke="#7ED7A1" stroke-width="4" opacity="0.6" />
+                <path class="flow-line" d="M 1160 360 Q 990 440 870 570" fill="none" stroke="#7ED7A1" stroke-width="4" opacity="0.6" />
+                <path class="flow-line" d="M 780 670 Q 660 780 440 840" fill="none" stroke="#7ED7A1" stroke-width="4" opacity="0.6" />
+                <path class="flow-line" d="M 830 670 Q 970 780 1160 840" fill="none" stroke="#7ED7A1" stroke-width="4" opacity="0.6" />
 
                 <g class="floating">
-                    <circle cx="800" cy="620" r="110" fill="#E9EEF2"/>
-                    <circle cx="800" cy="620" r="90" fill="none" stroke="#7ED7A1" stroke-width="2" stroke-dasharray="10 10"/>
-                    <text x="800" y="625" font-family="sans-serif" font-size="22" font-weight="600" fill="#4A4A4A" text-anchor="middle">CORE AI</text>
+                    <circle cx="800" cy="620" r="120" fill="#4A4A4A"/>
+                    <circle cx="800" cy="620" r="100" fill="none" stroke="#7ED7A1" stroke-width="3" stroke-dasharray="12 8"/>
+                    <text x="800" y="630" font-family="sans-serif" font-size="24" font-weight="800" fill="#7ED7A1" text-anchor="middle">CORE AI</text>
                 </g>
 
                 <g class="floating" style="animation-delay: -1s">
-                    <rect x="280" y="170" width="220" height="280" rx="20" fill="white" stroke="#E9EEF2" stroke-width="2"/>
-                    <circle cx="450" cy="210" r="15" fill="#7ED7A1" opacity=".2"/>
-                    <text x="390" y="480" font-family="sans-serif" font-size="24" font-weight="600" fill="#4A4A4A" text-anchor="middle">Data Source</text>
+                    <rect x="280" y="170" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
+                    <line x1="320" y1="240" x2="460" y2="240" stroke="#4A4A4A" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+                    <line x1="320" y1="280" x2="420" y2="280" stroke="#4A4A4A" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+                    <text x="390" y="500" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Fuentes</text>
                 </g>
 
                 <g class="floating" style="animation-delay: -2s">
-                    <rect x="1100" y="170" width="220" height="280" rx="20" fill="white" stroke="#E9EEF2" stroke-width="2"/>
-                    <text x="1210" y="480" font-family="sans-serif" font-size="24" font-weight="600" fill="#4A4A4A" text-anchor="middle">Validation</text>
+                    <rect x="1100" y="170" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
+                    <line x1="1140" y1="240" x2="1280" y2="240" stroke="#4A4A4A" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+                    <text x="1210" y="500" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Validación</text>
                 </g>
 
                 <g class="floating" style="animation-delay: -0.5s">
-                    <rect x="280" y="740" width="220" height="280" rx="20" fill="white" stroke="#E9EEF2" stroke-width="2"/>
-                    <text x="390" y="1050" font-family="sans-serif" font-size="24" font-weight="600" fill="#4A4A4A" text-anchor="middle">Automation</text>
+                    <rect x="280" y="740" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
+                    <circle cx="390" cy="850" r="30" fill="none" stroke="#7ED7A1" stroke-width="4"/>
+                    <text x="390" y="1070" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Procesos</text>
                 </g>
 
                 <g class="floating" style="animation-delay: -1.5s">
-                    <rect x="1100" y="740" width="220" height="280" rx="20" fill="white" stroke="#E9EEF2" stroke-width="2"/>
-                    <text x="1210" y="1050" font-family="sans-serif" font-size="24" font-weight="600" fill="#4A4A4A" text-anchor="middle">Big Data Insights</text>
+                    <rect x="1100" y="740" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
+                    <path d="M 1150 880 L 1200 830 L 1250 880" fill="none" stroke="#7ED7A1" stroke-width="5"/>
+                    <text x="1210" y="1070" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Análisis</text>
                 </g>
             </svg>
         </div>
@@ -211,22 +156,18 @@
 
     <section id="features" class="features">
         <div class="feat-card">
-            <h3>Gestión Semántica</h3>
-            <p>No buscamos palabras, buscamos significados. Nuestro motor entiende la jerarquía de tus datos.</p>
-        </div>
-        <div class="feat-card" style="border-top: 4px solid var(--leaf-green)">
-            <h3>Visualización en Red</h3>
-            <p>Observa cómo se conectan tus sistemas en un mapa dinámico de dependencias en tiempo real.</p>
+            <h3>Visualización Semántica</h3>
+            <p>Identificamos relaciones ocultas entre silos de información técnica.</p>
         </div>
         <div class="feat-card">
-            <h3>Docs-as-Code</h3>
-            <p>Integración nativa con flujos de desarrollo para que la documentación nunca quede obsoleta.</p>
+            <h3>Arquitectura Limpia</h3>
+            <p>Diseñado para integrarse en pipelines de datos modernos.</p>
+        </div>
+        <div class="feat-card">
+            <h3>Gobernanza Viva</h3>
+            <p>Documentación que se auto-valida y evoluciona con el proyecto.</p>
         </div>
     </section>
-
-    <footer style="padding: 50px; text-align: center; font-size: 0.8rem; color: #aaa;">
-        &copy; 2026 DocuStream — Fresh Knowledge Framework
-    </footer>
 
 </body>
 </html>
