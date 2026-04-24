@@ -273,6 +273,15 @@ SIDEBAR PRO — Glow Mint + Active Button + Hover Premium
     box-shadow: 0 0 22px rgba(0, 229, 160, 0.35);
 }
 
+/* Vistas PRO: solo se muestra la activa */
+.pro-view {
+    display: none;
+}
+
+.pro-view.active-view {
+    display: block;
+}
+
 
 
 
