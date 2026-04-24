@@ -196,6 +196,23 @@ function updateGraphAdvanced(state) {
             return 1;
         });
 }
+/* --------------------------------------------------------------
+ANIMACIÓN DE ENTRADA DEL GRAFO
+-------------------------------------------------------------- */
+
+function animateGraph() {
+    const graph = document.getElementById("graphAdvancedContainer");
+
+    gsap.from(graph, {
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.45,
+        ease: "power2.out"
+    });
+}
+
+document.addEventListener("DOMContentLoaded", animateGraph);
+
 
 /* --------------------------------------------------------------
 EXPOSICIÓN GLOBAL
