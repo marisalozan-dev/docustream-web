@@ -16,11 +16,14 @@
 
     <aside class="sidebar">
         <h2>DocuStream PRO</h2>
-        <nav>
-            <button onclick="showView('dashboard')">Dashboard</button>
-            <button onclick="showView('documents')">Documentos</button>
-            <button onclick="showView('integrations')">Integraciones</button>
-            <button onclick="showView('graph-advanced')">Grafo Avanzado</button>
+        <nav id="main-nav">
+            <button class="nav-btn active" onclick="showView('dashboard', this)">Dashboard</button>
+            <button class="nav-btn" onclick="showView('documents', this)">Documentos</button>
+            <button class="nav-btn" onclick="showView('integrations', this)">Integraciones</button>
+            <button class="nav-btn" onclick="showView('graph-advanced', this)">Grafo Avanzado</button>
+            
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border);">
+            
             <a href="index.html" class="back-link">← Volver a la landing</a>
         </nav>
     </aside>
@@ -28,29 +31,53 @@
     <main class="main-content">
 
         <section id="view-dashboard" class="pro-view active-view">
-            <h1>Dashboard</h1>
+            <header>
+                <h1>Dashboard Operativo</h1>
+                <p style="color: var(--text-main); opacity: 0.8;">Monitoreo en tiempo real de flujos de documentación.</p>
+            </header>
+
             <div class="pro-kpi-grid">
-                <div class="pro-kpi-card"><h3>Documentos procesados</h3><p id="kpiDocs" class="kpi-value">1,240</p></div>
-                <div class="pro-kpi-card"><h3>Latencia media</h3><p id="kpiLatency" class="kpi-value">24ms</p></div>
-                <div class="pro-kpi-card"><h3>Calidad del dato</h3><p id="kpiQuality" class="kpi-value">98.2%</p></div>
-                <div class="pro-kpi-card"><h3>Anomalías</h3><p id="kpiAnomalies" class="kpi-value">3</p></div>
+                <div class="pro-kpi-card">
+                    <h3>Documentos procesados</h3>
+                    <p id="kpiDocs" class="kpi-value">1,240</p>
+                </div>
+                <div class="pro-kpi-card">
+                    <h3>Latencia media</h3>
+                    <p id="kpiLatency" class="kpi-value">24ms</p>
+                </div>
+                <div class="pro-kpi-card">
+                    <h3>Calidad del dato</h3>
+                    <p id="kpiQuality" class="kpi-value">98.2%</p>
+                </div>
+                <div class="pro-kpi-card">
+                    <h3>Anomalías</h3>
+                    <p id="kpiAnomalies" class="kpi-value" style="color: #ff8a8a;">3</p>
+                </div>
             </div>
-            <div class="pro-dashboard-charts">
-                <div id="activityChart" class="pro-panel">Gráfico de Actividad</div>
-                <div id="qualityDonut" class="pro-panel">Distribución de Calidad</div>
+
+            <div class="pro-dashboard-charts" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 25px;">
+                <div id="activityChart" class="pro-panel" style="min-height: 300px; display: flex; align-items: center; justify-content: center; background: white;">
+                    <span>Gráfico de Actividad (Cargando...)</span>
+                </div>
+                <div id="qualityDonut" class="pro-panel" style="min-height: 300px; display: flex; align-items: center; justify-content: center; background: white;">
+                    <span>Distribución de Calidad</span>
+                </div>
             </div>
         </section>
 
         <section id="view-documents" class="pro-view">
             <h1>Gestión de Documentos</h1>
-            <div class="documents-container">
-                <div class="documents-list" id="documentsList">
-                    <div class="doc-item">📄 Especificación_Tecnica_v2.pdf</div>
-                    <div class="doc-item">📄 Arquitectura_BigData_Final.docx</div>
+            <div class="documents-container" style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; margin-top: 20px;">
+                <div class="documents-list pro-panel" id="documentsList">
+                    <div class="doc-item" style="padding: 12px; border-bottom: 1px solid var(--border); cursor: pointer;">📄 Especificación_Tecnica_v2.pdf</div>
+                    <div class="doc-item" style="padding: 12px; border-bottom: 1px solid var(--border); cursor: pointer;">📄 Arquitectura_BigData_Final.docx</div>
+                    <div class="doc-item" style="padding: 12px; cursor: pointer;">📄 Reporte_Trimestral_Q1.pdf</div>
                 </div>
-                <div class="documents-preview">
-                    <h2>Vista previa</h2>
-                    <div id="documentsPreviewContent" class="preview-box">Seleccione un documento para analizar metadatos...</div>
+                <div class="documents-preview pro-panel">
+                    <h2 style="font-size: 1.2rem;">Vista previa</h2>
+                    <div id="documentsPreviewContent" class="preview-box" style="margin-top: 15px; padding: 20px; background: var(--bg-dark); border-radius: 8px; border: 1px dashed var(--border);">
+                        Seleccione un documento para analizar metadatos...
+                    </div>
                 </div>
             </div>
         </section>
@@ -58,34 +85,53 @@
         <section id="view-integrations" class="pro-view">
             <h1>Ecosistema de Integraciones</h1>
             <div class="integrations-grid">
-                <div class="int-card"><h3>Stripe</h3><p>Pagos y facturación. <strong>Activa</strong></p></div>
-                <div class="int-card"><h3>Salesforce</h3><p>CRM y Pipeline. <strong>Sincronizando</strong></p></div>
-                <div class="int-card"><h3>Slack</h3><p>Notificaciones tiempo real. <strong>Activa</strong></p></div>
+                <div class="int-card">
+                    <h3 style="color: #6366f1;">Stripe</h3>
+                    <p>Pagos y facturación. <br><span class="highlight">Activa</span></p>
+                </div>
+                <div class="int-card">
+                    <h3 style="color: #00a1e0;">Salesforce</h3>
+                    <p>CRM y Pipeline. <br><span style="color: var(--aqua-flow); font-weight: bold;">Sincronizando...</span></p>
+                </div>
+                <div class="int-card">
+                    <h3 style="color: #4a154b;">Slack</h3>
+                    <p>Notificaciones tiempo real. <br><span class="highlight">Activa</span></p>
+                </div>
             </div>
         </section>
 
         <section id="view-graph-advanced" class="pro-view">
             <h1>Grafo Semántico de Conocimiento</h1>
-            <div class="graph-legend">
-                <span class="legend-item"><i class="dot procesado"></i> Procesado</span>
-                <span class="legend-item"><i class="dot revision"></i> Revisión</span>
+            <div class="graph-legend" style="margin-bottom: 15px; display: flex; gap: 20px;">
+                <span class="legend-item" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="dot" style="width: 12px; height: 12px; background: var(--accent); border-radius: 50%;"></i> Procesado
+                </span>
+                <span class="legend-item" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="dot" style="width: 12px; height: 12px; background: var(--aqua-flow); border-radius: 50%;"></i> Revisión
+                </span>
             </div>
-            <div id="graphAdvancedContainer"></div>
+            <div id="graphAdvancedContainer">
+                </div>
         </section>
 
     </main>
 
     <script>
-        function showView(viewId) {
-            // Ocultar todas las vistas
+        function showView(viewId, btnElement) {
+            // 1. Gestionar clases de los botones para feedback visual
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+
+            // 2. Ocultar todas las vistas con una transición suave
             document.querySelectorAll('.pro-view').forEach(view => {
                 view.classList.remove('active-view');
             });
-            // Mostrar la seleccionada
+
+            // 3. Mostrar la vista seleccionada
             const target = document.getElementById('view-' + viewId);
             if(target) {
                 target.classList.add('active-view');
-                window.scrollTo(0,0);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
     </script>
