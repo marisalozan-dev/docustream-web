@@ -249,5 +249,94 @@ body {
     min-height: 500px;
 }
 
+/* ============================================================
+   GRAFO AVANZADO — ESTILO ANALÍTICO + VISUAL + DEEPTECH
+   ============================================================ */
+
+/* Contenedor principal del grafo */
+#view-graph-advanced {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor interno del grafo */
+#graphAdvancedContainer {
+    width: 100% !important;
+    min-width: 600px;
+    min-height: 500px;
+    flex: 1;
+    position: relative;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+/* SVG del grafo */
+#graphAdvancedContainer svg {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible;
+}
+
+/* Tooltip analítico */
+.graph-tooltip {
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    box-shadow: 0 0 12px rgba(0, 229, 160, 0.25);
+}
+
+/* Etiquetas del grafo */
+#graphAdvancedContainer text {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, 0.4);
+    stroke-width: 2px;
+}
+
+/* Líneas de enlaces */
+#graphAdvancedContainer line {
+    transition: stroke-width 0.2s ease-out;
+}
+
+/* Hover en nodos */
+#graphAdvancedContainer circle:hover {
+    filter: drop-shadow(0 0 10px #00e5a0);
+    transform: scale(1.08);
+    transition: transform 0.15s ease-out;
+}
+
+/* Hover en enlaces */
+#graphAdvancedContainer line:hover {
+    stroke: rgba(255, 255, 255, 0.45);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #graphAdvancedContainer {
+        min-width: 100%;
+        min-height: 420px;
+    }
+
+    .graph-tooltip {
+        font-size: 0.75rem;
+    }
+}
+
+
 
 
