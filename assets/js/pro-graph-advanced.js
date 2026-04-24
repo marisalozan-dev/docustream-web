@@ -1,40 +1,51 @@
 /* --------------------------------------------------------------
-GRAFO AVANZADO PRO — D3 Interactivo (Zoom + Pan + Drag)
+GRAFO AVANZADO PRO — Analítico + Visual + Interactivo
 -------------------------------------------------------------- */
 
-console.log("Graph Advanced PRO — Interactivo loaded");
+console.log("Graph Advanced PRO — Analítico + Visual loaded");
 
 /* --------------------------------------------------------------
-DATOS DE EJEMPLO
+DATOS DE EJEMPLO (puedes sustituirlos por datos reales)
 -------------------------------------------------------------- */
 
 const GRAPH_NODES = [
-    { id: "Documento A" },
-    { id: "Documento B" },
-    { id: "Documento C" },
-    { id: "Documento D" }
+    { id: "Documento A", tipo: "procesado", tamaño: 120, updated: "2026-04-20" },
+    { id: "Documento B", tipo: "revision", tamaño: 80, updated: "2026-04-18" },
+    { id: "Documento C", tipo: "critico", tamaño: 200, updated: "2026-04-22" },
+    { id: "Documento D", tipo: "anomalía", tamaño: 60, updated: "2026-04-19" }
 ];
 
 const GRAPH_LINKS = [
-    { source: "Documento A", target: "Documento B" },
-    { source: "Documento A", target: "Documento C" },
-    { source: "Documento B", target: "Documento D" }
+    { source: "Documento A", target: "Documento B", fuerza: 1 },
+    { source: "Documento A", target: "Documento C", fuerza: 2 },
+    { source: "Documento B", target: "Documento D", fuerza: 0.5 }
 ];
+
+/* --------------------------------------------------------------
+MAPA DE COLORES POR TIPO
+-------------------------------------------------------------- */
+
+const COLOR_MAP = {
+    procesado: "#00e5a0",
+    revision: "#4da6ff",
+    anomalía: "#ffcc00",
+    critico: "#ff4d4d"
+};
 
 /* --------------------------------------------------------------
 INICIALIZACIÓN
 -------------------------------------------------------------- */
 
 function initGraphAdvanced() {
-    console.log("Inicializando Grafo Avanzado PRO Interactivo…");
-    renderGraphInteractive();
+    console.log("Inicializando Grafo Avanzado Analítico…");
+    renderGraphAnalytic();
 }
 
 /* --------------------------------------------------------------
-RENDER INTERACTIVO
+RENDER ANALÍTICO + VISUAL
 -------------------------------------------------------------- */
 
-function renderGraphInteractive() {
+function renderGraphAnalytic() {
     const container = document.getElementById("graphAdvancedContainer");
     if (!container) return;
 
@@ -45,10 +56,8 @@ function renderGraphInteractive() {
 
     /* ---------------------- ZOOM + PAN ---------------------- */
     const zoom = d3.zoom()
-        .scaleExtent([0.4, 2.5])
-        .on("zoom", (event) => {
-            svgGroup.attr("transform", event.transform);
-        });
+        .scaleExtent([0.4, 2.8])
+        .on("zoom", (event) => svgGroup.attr("transform", event.transform));
 
     const svg = d3.select("#graphAdvancedContainer")
         .append("svg")
@@ -58,20 +67,34 @@ function renderGraphInteractive() {
 
     const svgGroup = svg.append("g");
 
+    /* ---------------------- TOOLTIP ---------------------- */
+    const tooltip = d3.select("#graphAdvancedContainer")
+        .append("div")
+        .attr("class", "graph-tooltip")
+        .style("position", "absolute")
+        .style("padding", "10px 14px")
+        .style("background", "rgba(0,0,0,0.75)")
+        .style("border", "1px solid rgba(255,255,255,0.15)")
+        .style("border-radius", "8px")
+        .style("color", "#fff")
+        .style("font-size", "0.8rem")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
+
     /* ---------------------- SIMULACIÓN ---------------------- */
     const simulation = d3.forceSimulation(GRAPH_NODES)
-        .force("link", d3.forceLink(GRAPH_LINKS).id(d => d.id).distance(140))
-        .force("charge", d3.forceManyBody().strength(-320))
+        .force("link", d3.forceLink(GRAPH_LINKS).id(d => d.id).distance(150))
+        .force("charge", d3.forceManyBody().strength(-350))
         .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collision", d3.forceCollide().radius(40));
+        .force("collision", d3.forceCollide().radius(d => 20 + d.tamaño / 20));
 
     /* ---------------------- ENLACES ---------------------- */
     const link = svgGroup.selectAll("line")
         .data(GRAPH_LINKS)
         .enter()
         .append("line")
-        .attr("stroke", "rgba(0, 229, 160, 0.35)")
-        .attr("stroke-width", 2);
+        .attr("stroke", "rgba(255,255,255,0.25)")
+        .attr("stroke-width", d => 1 + d.fuerza * 2);
 
     /* ---------------------- DRAG ---------------------- */
     const drag = d3.drag()
@@ -95,10 +118,27 @@ function renderGraphInteractive() {
         .data(GRAPH_NODES)
         .enter()
         .append("circle")
-        .attr("r", 14)
-        .attr("fill", "#00e5a0")
-        .style("filter", "drop-shadow(0 0 6px #00e5a0)")
-        .call(drag);
+        .attr("r", d => 10 + d.tamaño / 20)
+        .attr("fill", d => COLOR_MAP[d.tipo] || "#00e5a0")
+        .style("filter", d => `drop-shadow(0 0 6px ${COLOR_MAP[d.tipo]})`)
+        .call(drag)
+        .on("mouseover", (event, d) => {
+            tooltip
+                .style("opacity", 1)
+                .html(`
+                    <strong>${d.id}</strong><br>
+                    Tipo: ${d.tipo}<br>
+                    Tamaño: ${d.tamaño} KB<br>
+                    Actualizado: ${d.updated}<br>
+                    Conexiones: ${countLinks(d.id)}
+                `);
+        })
+        .on("mousemove", (event) => {
+            tooltip
+                .style("left", event.offsetX + 15 + "px")
+                .style("top", event.offsetY + 15 + "px");
+        })
+        .on("mouseout", () => tooltip.style("opacity", 0));
 
     /* ---------------------- ETIQUETAS ---------------------- */
     const labels = svgGroup.selectAll("text")
@@ -107,7 +147,7 @@ function renderGraphInteractive() {
         .append("text")
         .text(d => d.id)
         .attr("fill", "#fff")
-        .attr("font-size", "0.85rem")
+        .attr("font-size", "0.8rem")
         .attr("font-weight", "500");
 
     /* ---------------------- TICK ---------------------- */
@@ -131,7 +171,15 @@ function renderGraphInteractive() {
 }
 
 /* --------------------------------------------------------------
-ANIMACIÓN DE ENTRADA (PRO)
+FUNCIÓN AUXILIAR: contar conexiones
+-------------------------------------------------------------- */
+
+function countLinks(id) {
+    return GRAPH_LINKS.filter(l => l.source.id === id || l.target.id === id).length;
+}
+
+/* --------------------------------------------------------------
+ANIMACIÓN DE ENTRADA
 -------------------------------------------------------------- */
 
 function animateGraph() {
