@@ -1,8 +1,8 @@
 /* --------------------------------------------------------------
-GRAFO AVANZADO PRO — D3 + Animación Optimizada
+GRAFO AVANZADO PRO — D3 Interactivo (Zoom + Pan + Drag)
 -------------------------------------------------------------- */
 
-console.log("Graph Advanced PRO loaded");
+console.log("Graph Advanced PRO — Interactivo loaded");
 
 /* --------------------------------------------------------------
 DATOS DE EJEMPLO
@@ -26,64 +26,91 @@ INICIALIZACIÓN
 -------------------------------------------------------------- */
 
 function initGraphAdvanced() {
-    console.log("Inicializando Grafo Avanzado PRO…");
-    renderGraph();
+    console.log("Inicializando Grafo Avanzado PRO Interactivo…");
+    renderGraphInteractive();
 }
 
 /* --------------------------------------------------------------
-RENDER DEL GRAFO
+RENDER INTERACTIVO
 -------------------------------------------------------------- */
 
-function renderGraph() {
+function renderGraphInteractive() {
     const container = document.getElementById("graphAdvancedContainer");
     if (!container) return;
 
-    // Limpiar contenido previo
     container.innerHTML = "";
 
-    // Medidas reales del contenedor
     const width = container.clientWidth || 600;
     const height = container.clientHeight || 500;
 
-    // Crear SVG
+    /* ---------------------- ZOOM + PAN ---------------------- */
+    const zoom = d3.zoom()
+        .scaleExtent([0.4, 2.5])
+        .on("zoom", (event) => {
+            svgGroup.attr("transform", event.transform);
+        });
+
     const svg = d3.select("#graphAdvancedContainer")
         .append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .call(zoom);
 
-    // Simulación física
+    const svgGroup = svg.append("g");
+
+    /* ---------------------- SIMULACIÓN ---------------------- */
     const simulation = d3.forceSimulation(GRAPH_NODES)
         .force("link", d3.forceLink(GRAPH_LINKS).id(d => d.id).distance(140))
-        .force("charge", d3.forceManyBody().strength(-260))
-        .force("center", d3.forceCenter(width / 2, height / 2));
+        .force("charge", d3.forceManyBody().strength(-320))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collision", d3.forceCollide().radius(40));
 
-    // Enlaces
-    const link = svg.selectAll("line")
+    /* ---------------------- ENLACES ---------------------- */
+    const link = svgGroup.selectAll("line")
         .data(GRAPH_LINKS)
         .enter()
         .append("line")
         .attr("stroke", "rgba(0, 229, 160, 0.35)")
         .attr("stroke-width", 2);
 
-    // Nodos
-    const node = svg.selectAll("circle")
+    /* ---------------------- DRAG ---------------------- */
+    const drag = d3.drag()
+        .on("start", (event, d) => {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        })
+        .on("drag", (event, d) => {
+            d.fx = event.x;
+            d.fy = event.y;
+        })
+        .on("end", (event, d) => {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        });
+
+    /* ---------------------- NODOS ---------------------- */
+    const node = svgGroup.selectAll("circle")
         .data(GRAPH_NODES)
         .enter()
         .append("circle")
-        .attr("r", 12)
+        .attr("r", 14)
         .attr("fill", "#00e5a0")
-        .style("filter", "drop-shadow(0 0 6px #00e5a0)");
+        .style("filter", "drop-shadow(0 0 6px #00e5a0)")
+        .call(drag);
 
-    // Etiquetas
-    const labels = svg.selectAll("text")
+    /* ---------------------- ETIQUETAS ---------------------- */
+    const labels = svgGroup.selectAll("text")
         .data(GRAPH_NODES)
         .enter()
         .append("text")
         .text(d => d.id)
         .attr("fill", "#fff")
-        .attr("font-size", "0.8rem");
+        .attr("font-size", "0.85rem")
+        .attr("font-weight", "500");
 
-    // Actualización en cada tick
+    /* ---------------------- TICK ---------------------- */
     simulation.on("tick", () => {
         link
             .attr("x1", d => d.source.x)
@@ -96,7 +123,7 @@ function renderGraph() {
             .attr("cy", d => d.y);
 
         labels
-            .attr("x", d => d.x + 14)
+            .attr("x", d => d.x + 16)
             .attr("y", d => d.y + 4);
     });
 
@@ -104,7 +131,7 @@ function renderGraph() {
 }
 
 /* --------------------------------------------------------------
-ANIMACIÓN DE ENTRADA (versión PRO sin parpadeos)
+ANIMACIÓN DE ENTRADA (PRO)
 -------------------------------------------------------------- */
 
 function animateGraph() {
@@ -127,5 +154,6 @@ EXPOSICIÓN GLOBAL
 -------------------------------------------------------------- */
 
 window.initGraphAdvanced = initGraphAdvanced;
+
 
 
