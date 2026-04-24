@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuStream PRO — Fresh Knowledge Demo</title>
+    <title>DocuStream PRO — Demo Interactiva</title>
 
     <link rel="stylesheet" href="assets/css/style-demo.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,79 +15,61 @@
 <body>
 
     <aside class="sidebar">
-        <h2>DocuStream</h2>
-        <p class="tagline">Fresh Knowledge System</p>
+        <h2>DocuStream PRO</h2>
         <nav>
-            <button onclick="showView('dashboard')" class="active-nav">📈 Panel de Flujo</button>
-            <button onclick="showView('documents')">📄 Biblioteca Viva</button>
-            <button onclick="showView('integrations')">🔌 Ecosistema de Datos</button>
-            <button onclick="showView('graph-advanced')">🧠 Grafo de Conocimiento</button>
-            <a href="index.html" class="back-link">← Volver al inicio</a>
+            <button onclick="showView('dashboard')">Dashboard</button>
+            <button onclick="showView('documents')">Documentos</button>
+            <button onclick="showView('integrations')">Integraciones</button>
+            <button onclick="showView('graph-advanced')">Grafo Avanzado</button>
+            <a href="index.html" class="back-link">← Volver a la landing</a>
         </nav>
     </aside>
 
     <main class="main-content">
 
         <section id="view-dashboard" class="pro-view active-view">
-            <h1>Panel de Flujo de Información</h1>
-            <p class="subtitle">Monitorización en tiempo real de la vitalidad documental.</p>
-
+            <h1>Dashboard</h1>
             <div class="pro-kpi-grid">
-                <div class="pro-kpi-card"><h3>Documentos Activos</h3><p id="kpiDocs" class="kpi-value">1,240</p></div>
-                <div class="pro-kpi-card"><h3>Velocidad de Flujo</h3><p id="kpiLatency" class="kpi-value">24ms</p></div>
-                <div class="pro-kpi-card"><h3>Claridad Semántica</h3><p id="kpiQuality" class="kpi-value">98.2%</p></div>
-                <div class="pro-kpi-card"><h3>Nodos Actualizados</h3><p id="kpiAnomalies" class="kpi-value">312</p></div>
+                <div class="pro-kpi-card"><h3>Documentos procesados</h3><p id="kpiDocs" class="kpi-value">1,240</p></div>
+                <div class="pro-kpi-card"><h3>Latencia media</h3><p id="kpiLatency" class="kpi-value">24ms</p></div>
+                <div class="pro-kpi-card"><h3>Calidad del dato</h3><p id="kpiQuality" class="kpi-value">98.2%</p></div>
+                <div class="pro-kpi-card"><h3>Anomalías</h3><p id="kpiAnomalies" class="kpi-value">3</p></div>
             </div>
-            
             <div class="pro-dashboard-charts">
-                <div id="activityChart" class="pro-panel">Tendencia de Vitalidad (Gráfico Conceptual)</div>
-                <div id="qualityDonut" class="pro-panel">Estructura del Conocimiento</div>
+                <div id="activityChart" class="pro-panel">Gráfico de Actividad</div>
+                <div id="qualityDonut" class="pro-panel">Distribución de Calidad</div>
             </div>
         </section>
 
         <section id="view-documents" class="pro-view">
-            <h1>Biblioteca Viva</h1>
-            <p class="subtitle">Gestión centralizada y transparente de tus activos de información.</p>
-
+            <h1>Gestión de Documentos</h1>
             <div class="documents-container">
                 <div class="documents-list" id="documentsList">
-                    <div class="doc-item active-doc">📄 Guía_Onboarding_Sistemas.md</div>
-                    <div class="doc-item">📄 Especificación_API_DataFlow.pdf</div>
-                    <div class="doc-item">📄 Politica_Gobernanza_Datos.docx</div>
+                    <div class="doc-item">📄 Especificación_Tecnica_v2.pdf</div>
+                    <div class="doc-item">📄 Arquitectura_BigData_Final.docx</div>
                 </div>
                 <div class="documents-preview">
-                    <h2>Análisis Documental</h2>
-                    <div id="documentsPreviewContent" class="preview-box">
-                        <p><strong>Estado:</strong> Sincronizado</p>
-                        <p><strong>Última Vitalidad:</strong> Hace 2 min</p>
-                        <p>Seleccione un documento para visualizar su linaje y metadatos...</p>
-                    </div>
+                    <h2>Vista previa</h2>
+                    <div id="documentsPreviewContent" class="preview-box">Seleccione un documento para analizar metadatos...</div>
                 </div>
             </div>
         </section>
 
         <section id="view-integrations" class="pro-view">
-            <h1>Ecosistema de Datos</h1>
-            <p class="subtitle">Conexiones transparentes que nutren el sistema de conocimiento.</p>
-            
+            <h1>Ecosistema de Integraciones</h1>
             <div class="integrations-grid">
-                <div class="int-card active-int"><h3>Conector SAP HANA</h3><p>Extracción de procesos críticos. <span class="status active">Sincronizado</span></p></div>
-                <div class="int-card active-int"><h3>Data Lake (Azure)</h3><p>Flujo de logs y eventos masivos. <span class="status active">Fluyendo</span></p></div>
-                <div class="int-card inactive-int"><h3>Slack Bot</h3><p>Notificaciones de anomalías semánticas. <span class="status inactive">Pausado</span></p></div>
-                <div class="int-card active-int"><h3>Salesforce CRM</h3><p>Linaje de datos de cliente. <span class="status active">Sincronizado</span></p></div>
+                <div class="int-card"><h3>Stripe</h3><p>Pagos y facturación. <strong>Activa</strong></p></div>
+                <div class="int-card"><h3>Salesforce</h3><p>CRM y Pipeline. <strong>Sincronizando</strong></p></div>
+                <div class="int-card"><h3>Slack</h3><p>Notificaciones tiempo real. <strong>Activa</strong></p></div>
             </div>
         </section>
 
         <section id="view-graph-advanced" class="pro-view">
-            <h1>Grafo de Conocimiento Semántico</h1>
-            <p class="subtitle">Visualización interactiva de las relaciones y dependencias de la información.</p>
-
+            <h1>Grafo Semántico de Conocimiento</h1>
             <div class="graph-legend">
-                <span class="legend-item"><i class="dot procesado"></i> Información Vital</span>
-                <span class="legend-item"><i class="dot revision"></i> Flujo en Revisión</span>
-                <span class="legend-item"><i class="dot anomalia"></i> Desconexión Detectada</span>
+                <span class="legend-item"><i class="dot procesado"></i> Procesado</span>
+                <span class="legend-item"><i class="dot revision"></i> Revisión</span>
             </div>
-            
             <div id="graphAdvancedContainer"></div>
         </section>
 
@@ -99,18 +81,10 @@
             document.querySelectorAll('.pro-view').forEach(view => {
                 view.classList.remove('active-view');
             });
-            // Quitar active de los botones
-            document.querySelectorAll('.sidebar nav button').forEach(btn => {
-                btn.classList.remove('active-nav');
-            });
-
             // Mostrar la seleccionada
             const target = document.getElementById('view-' + viewId);
             if(target) {
                 target.classList.add('active-view');
-                // Poner active en el botón pulsado
-                const currentBtn = Array.from(document.querySelectorAll('.sidebar nav button')).find(btn => btn.getAttribute('onclick').includes(viewId));
-                if(currentBtn) currentBtn.classList.add('active-nav');
                 window.scrollTo(0,0);
             }
         }
@@ -123,7 +97,3 @@
     <script src="assets/js/pro-graph-advanced.js"></script>
 </body>
 </html>
-
-
-
-
