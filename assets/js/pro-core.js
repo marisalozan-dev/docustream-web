@@ -1,14 +1,10 @@
 /* --------------------------------------------------------------
 DocuStream PRO — CORE ENGINE
-Navegación · Estado global · Animaciones · Persistencia
 -------------------------------------------------------------- */
 
 console.log("DocuStream PRO — Core Engine loaded");
 
-/* --------------------------------------------------------------
-ESTADO GLOBAL
--------------------------------------------------------------- */
-
+/* ESTADO GLOBAL */
 const PRO_STATE = {
     currentView: localStorage.getItem("pro-current-view") || "dashboard",
     filters: {
@@ -36,7 +32,6 @@ function showView(view) {
     if (target) {
         target.classList.add("active-view");
 
-        // Animación suave al cambiar de vista
         gsap.from(target, {
             opacity: 0,
             y: 20,
@@ -45,24 +40,21 @@ function showView(view) {
         });
     }
 
-    // Actualizar botón activo del sidebar
+    // Botón activo del sidebar
     document.querySelectorAll(".sidebar nav button")
         .forEach(btn => btn.classList.remove("active-btn"));
 
     const activeBtn = document.querySelector(`button[onclick="showView('${view}')"]`);
     if (activeBtn) activeBtn.classList.add("active-btn");
 
-    // Animación del contenido interno
+    // Animación del contenido
     animateViewContent(view);
 
-    // Inicializar módulos según vista
+    // Inicializar módulos
     if (view === "dashboard" && typeof initDashboard === "function") initDashboard();
     if (view === "documents" && typeof initDocuments === "function") initDocuments();
     if (view === "integrations" && typeof initIntegrations === "function") initIntegrations();
     if (view === "graph-advanced" && typeof initGraphAdvanced === "function") initGraphAdvanced();
-
-    // Highlight del sidebar
-    updateSidebarActive(view);
 }
 
 /* --------------------------------------------------------------
@@ -83,70 +75,11 @@ function animateViewContent(view) {
 }
 
 /* --------------------------------------------------------------
-SIDEBAR — HIGHLIGHT DEL BOTÓN ACTIVO
--------------------------------------------------------------- */
-
-function updateSidebarActive(view) {
-    document.querySelectorAll(".sidebar nav button").forEach(btn => {
-        btn.classList.remove("active-sidebar-btn");
-
-        if (btn.getAttribute("onclick")?.includes(view)) {
-            btn.classList.add("active-sidebar-btn");
-        }
-    });
-}
-
-/* --------------------------------------------------------------
-FILTROS GLOBALES
--------------------------------------------------------------- */
-
-function setupFilters() {
-    const type = document.getElementById("filterType");
-    const period = document.getElementById("filterPeriod");
-    const density = document.getElementById("filterDensity");
-
-    if (!type || !period || !density) return;
-
-    type.addEventListener("change", applyFilters);
-    period.addEventListener("change", applyFilters);
-    density.addEventListener("change", applyFilters);
-}
-
-function applyFilters() {
-    PRO_STATE.filters = {
-        type: document.getElementById("filterType").value,
-        period: parseInt(document.getElementById("filterPeriod").value),
-        density: document.getElementById("filterDensity").value
-    };
-
-    if (typeof updateDashboard === "function") updateDashboard(PRO_STATE.filters);
-    if (typeof updateHeatmap === "function") updateHeatmap(PRO_STATE.filters);
-}
-
-/* --------------------------------------------------------------
-ANIMACIONES INICIALES
--------------------------------------------------------------- */
-
-function runInitialAnimations() {
-    gsap.from(".sidebar", {
-        x: -40,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.out"
-    });
-}
-
-/* --------------------------------------------------------------
 INICIALIZACIÓN GLOBAL
 -------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Inicializando DocuStream PRO…");
-
-    setupFilters();
-    runInitialAnimations();
-
-    // Restaurar última vista
     showView(PRO_STATE.currentView);
 });
 
@@ -155,7 +88,7 @@ EXPOSICIÓN GLOBAL
 -------------------------------------------------------------- */
 
 window.showView = showView;
-window.applyFilters = applyFilters;
+
 
 
 
