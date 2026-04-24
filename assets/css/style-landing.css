@@ -135,22 +135,35 @@ body {
 
 .btn-secondary:hover {
     background: var(--bg-alt);
-   /* --- AÑADE ESTO AQUÍ --- */
 
-.hero-image {
-    flex: 1.5;           /* Esto hace que el área de la imagen sea más ancha */
+  .hero-image {
+    flex: 1;             /* Espacio equilibrado con el texto */
     display: flex;
-    justify-content: flex-end;
+    justify-content: center; /* Centrado en su mitad derecha */
     align-items: center;
 }
 
 .hero-image svg {
-    width: 140%;         /* Tamaño aumentado para que se vea imponente */
+    width: 85%;          /* Tamaño moderado */
     height: auto;
-    max-width: 950px;    /* Límite para que no se descontrole en pantallas gigantes */
+    max-width: 600px;    /* Límite para que no se vea gigante */
     overflow: visible;
+    filter: drop-shadow(0 10px 30px rgba(126, 215, 161, 0.1));
 }
 
+/* Ajuste para móviles */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 140px;
+    }
+    .hero-image svg {
+        width: 100%;
+        max-width: 400px;
+        margin-top: 40px;
+    }
+}
 /* Ajuste para que en móviles no se vea gigante y se ponga debajo */
 @media (max-width: 992px) {
     .hero {
