@@ -197,6 +197,24 @@ EXPOSICIÓN GLOBAL
 window.initDocuments = initDocuments;
 window.openDocument = openDocument;
 
+/* --------------------------------------------------------------
+ANIMACIÓN DE CARDS DE DOCUMENTOS
+-------------------------------------------------------------- */
+
+function animateDocumentCards() {
+    const cards = document.querySelectorAll(".doc-item");
+
+    gsap.from(cards, {
+        opacity: 0,
+        y: 14,
+        duration: 0.35,
+        ease: "power2.out",
+        stagger: 0.05
+    });
+}
+
+document.addEventListener("DOMContentLoaded", animateDocumentCards);
+
 
 
 
