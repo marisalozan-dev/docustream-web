@@ -215,6 +215,18 @@ function animateDocumentCards() {
 
 document.addEventListener("DOMContentLoaded", animateDocumentCards);
 
+function selectDocument(doc) {
+    const preview = document.getElementById("documentsPreviewContent");
+
+    // Animación suave del panel
+    gsap.fromTo(preview, 
+        { opacity: 0, y: 10 }, 
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
+    );
+
+    preview.innerHTML = doc.content;
+}
+
 
 
 
