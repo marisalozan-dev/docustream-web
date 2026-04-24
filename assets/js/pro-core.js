@@ -54,18 +54,25 @@ function showView(view) {
 
     // Animación del contenido interno
     animateViewContent(view);
+
+    // Inicializar módulos según vista
+    if (view === "dashboard" && typeof initDashboard === "function") initDashboard();
+    if (view === "documents" && typeof initDocuments === "function") initDocuments();
+    if (view === "integrations" && typeof initIntegrations === "function") initIntegrations();
+    if (view === "graph-advanced" && typeof initGraphAdvanced === "function") initGraphAdvanced();
+
+    // Highlight del sidebar
+    updateSidebarActive(view);
 }
 
-    /* --------------------------------------------------------------
+/* --------------------------------------------------------------
 ANIMACIÓN GLOBAL DE ENTRADA DE VISTA
 -------------------------------------------------------------- */
 
 function animateViewContent(view) {
     const container = document.getElementById(`view-${view}`);
-
     if (!container) return;
 
-    // Animación suave del contenido interno
     gsap.from(container.children, {
         opacity: 0,
         y: 12,
@@ -73,25 +80,6 @@ function animateViewContent(view) {
         ease: "power2.out",
         stagger: 0.06
     });
-}
-
-
-    // Actualizar botón activo del sidebar
-    document.querySelectorAll(".sidebar nav button")
-        .forEach(btn => btn.classList.remove("active-btn"));
-
-    const activeBtn = document.querySelector(`button[onclick="showView('${view}')"]`);
-    if (activeBtn) activeBtn.classList.add("active-btn");
-}
-
-    // Actualizar highlight del sidebar
-    updateSidebarActive(view);
-
-    // Inicializar módulos según vista
-    if (view === "dashboard" && typeof initDashboard === "function") initDashboard();
-    if (view === "documents" && typeof initDocuments === "function") initDocuments();
-    if (view === "integrations" && typeof initIntegrations === "function") initIntegrations();
-    if (view === "graph-advanced" && typeof initGraphAdvanced === "function") initGraphAdvanced();
 }
 
 /* --------------------------------------------------------------
@@ -146,15 +134,6 @@ function runInitialAnimations() {
         duration: 0.6,
         ease: "power2.out"
     });
-
-    gsap.from(".pro-kpi-card", {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.1,
-        delay: 0.2,
-        ease: "power2.out"
-    });
 }
 
 /* --------------------------------------------------------------
@@ -177,6 +156,7 @@ EXPOSICIÓN GLOBAL
 
 window.showView = showView;
 window.applyFilters = applyFilters;
+
 
 
 
