@@ -8,17 +8,14 @@
     <link rel="stylesheet" href="assets/css/style-demo.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Librerías -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 </head>
 
 <body>
 
-    <!-- ========================= SIDEBAR ========================= -->
     <aside class="sidebar">
         <h2>DocuStream PRO</h2>
-
         <nav>
             <button onclick="showView('dashboard')">Dashboard</button>
             <button onclick="showView('documents')">Documentos</button>
@@ -28,97 +25,76 @@
         </nav>
     </aside>
 
-    <!-- ========================= CONTENIDO ========================= -->
     <main class="main-content">
 
-        <!-- DASHBOARD -->
         <section id="view-dashboard" class="pro-view active-view">
             <h1>Dashboard</h1>
-
             <div class="pro-kpi-grid">
-                <div class="pro-kpi-card">
-                    <h3>Documentos procesados</h3>
-                    <p id="kpiDocs" class="kpi-value">0</p>
-                </div>
-                <div class="pro-kpi-card">
-                    <h3>Latencia media</h3>
-                    <p id="kpiLatency" class="kpi-value">0</p>
-                </div>
-                <div class="pro-kpi-card">
-                    <h3>Calidad del dato</h3>
-                    <p id="kpiQuality" class="kpi-value">0</p>
-                </div>
-                <div class="pro-kpi-card">
-                    <h3>Anomalías detectadas</h3>
-                    <p id="kpiAnomalies" class="kpi-value">0</p>
-                </div>
+                <div class="pro-kpi-card"><h3>Documentos procesados</h3><p id="kpiDocs" class="kpi-value">1,240</p></div>
+                <div class="pro-kpi-card"><h3>Latencia media</h3><p id="kpiLatency" class="kpi-value">24ms</p></div>
+                <div class="pro-kpi-card"><h3>Calidad del dato</h3><p id="kpiQuality" class="kpi-value">98.2%</p></div>
+                <div class="pro-kpi-card"><h3>Anomalías</h3><p id="kpiAnomalies" class="kpi-value">3</p></div>
             </div>
-
             <div class="pro-dashboard-charts">
-                <div id="activityChart" class="pro-panel"></div>
-                <div id="qualityDonut" class="pro-panel"></div>
+                <div id="activityChart" class="pro-panel">Gráfico de Actividad</div>
+                <div id="qualityDonut" class="pro-panel">Distribución de Calidad</div>
             </div>
-
-            <div id="dashboardInsight" class="pro-panel"></div>
-
-            <div id="heatmapContainer"></div>
         </section>
 
-        <!-- DOCUMENTOS -->
         <section id="view-documents" class="pro-view">
-            <h1>Documentos</h1>
-
+            <h1>Gestión de Documentos</h1>
             <div class="documents-container">
-                <div class="documents-list" id="documentsList"></div>
-
+                <div class="documents-list" id="documentsList">
+                    <div class="doc-item">📄 Especificación_Tecnica_v2.pdf</div>
+                    <div class="doc-item">📄 Arquitectura_BigData_Final.docx</div>
+                </div>
                 <div class="documents-preview">
                     <h2>Vista previa</h2>
-                    <div id="documentsPreviewContent">Selecciona un documento…</div>
+                    <div id="documentsPreviewContent" class="preview-box">Seleccione un documento para analizar metadatos...</div>
                 </div>
             </div>
         </section>
 
-        <!-- INTEGRACIONES -->
         <section id="view-integrations" class="pro-view">
-            <h1>Integraciones</h1>
-            <div class="integrations-grid" id="integrationsGrid"></div>
+            <h1>Ecosistema de Integraciones</h1>
+            <div class="integrations-grid">
+                <div class="int-card"><h3>Stripe</h3><p>Pagos y facturación. <strong>Activa</strong></p></div>
+                <div class="int-card"><h3>Salesforce</h3><p>CRM y Pipeline. <strong>Sincronizando</strong></p></div>
+                <div class="int-card"><h3>Slack</h3><p>Notificaciones tiempo real. <strong>Activa</strong></p></div>
+            </div>
         </section>
 
-        <!-- GRAFO AVANZADO -->
         <section id="view-graph-advanced" class="pro-view">
-            <h1>Grafo Avanzado</h1>
-
-            <!-- LEYENDA -->
+            <h1>Grafo Semántico de Conocimiento</h1>
             <div class="graph-legend">
-                <div class="legend-item">
-                    <span class="legend-color legend-procesado"></span> Procesado
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color legend-revision"></span> En revisión
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color legend-anomalia"></span> Anomalía
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color legend-critico"></span> Crítico
-                </div>
+                <span class="legend-item"><i class="dot procesado"></i> Procesado</span>
+                <span class="legend-item"><i class="dot revision"></i> Revisión</span>
             </div>
-
-            <!-- CONTENEDOR DEL GRAFO -->
             <div id="graphAdvancedContainer"></div>
-
         </section>
 
     </main>
 
-    <!-- ========================= SCRIPTS ========================= -->
+    <script>
+        function showView(viewId) {
+            // Ocultar todas las vistas
+            document.querySelectorAll('.pro-view').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            // Mostrar la seleccionada
+            const target = document.getElementById('view-' + viewId);
+            if(target) {
+                target.classList.add('active-view');
+                window.scrollTo(0,0);
+            }
+        }
+    </script>
+
     <script src="assets/js/pro-core.js"></script>
     <script src="assets/js/pro-dashboard.js"></script>
     <script src="assets/js/pro-documents.js"></script>
     <script src="assets/js/pro-integrations.js"></script>
     <script src="assets/js/pro-graph-advanced.js"></script>
-    <script src="assets/js/pro-heatmap.js"></script>
-
 </body>
 </html>
 
