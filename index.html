@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="assets/css/style-landing.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos específicos para la animación del SVG integrado */
+        /* Animaciones para el SVG integrado */
         @keyframes dash { to { stroke-dashoffset: -80; } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .flow-line { stroke-dasharray: 18 12; animation: dash 2s linear infinite; }
-        .floating-doc { animation: float 4s ease-in-out infinite; }
+        .floating-node { animation: float 4s ease-in-out infinite; }
     </style>
 </head>
 <body>
@@ -33,12 +33,13 @@
                 El primer sistema de inteligencia documental en tiempo real:  
                 documentos que se adaptan, envejecen con datos y conocen a sus lectores.
             </p>
+
             <div class="hero-buttons">
                 <a href="demo.html" class="btn-primary">Ver demo interactiva</a>
                 <a href="dossier.html" class="btn-secondary">Dossier para inversores</a>
             </div>
         </div>
-        
+
         <div class="hero-visual">
             <svg viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg">
                 <path class="flow-line" d="M 440 360 Q 620 440 740 570" fill="none" stroke="#7ED7A1" stroke-width="5" />
@@ -46,30 +47,30 @@
                 <path class="flow-line" d="M 780 670 Q 660 780 440 840" fill="none" stroke="#7ED7A1" stroke-width="5" />
                 <path class="flow-line" d="M 830 670 Q 970 780 1160 840" fill="none" stroke="#7ED7A1" stroke-width="5" />
 
-                <g class="floating-doc">
+                <g class="floating-node">
                     <circle cx="800" cy="620" r="120" fill="#4A4A4A"/>
                     <circle cx="800" cy="620" r="100" fill="none" stroke="#7ED7A1" stroke-width="3" stroke-dasharray="10 10"/>
-                    <text x="800" y="630" font-family="sans-serif" font-size="22" font-weight="800" fill="#7ED7A1" text-anchor="middle">MOTOR AI</text>
+                    <text x="800" y="630" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#7ED7A1" text-anchor="middle">MOTOR AI</text>
                 </g>
 
-                <g class="floating-doc" style="animation-delay: -1s">
+                <g class="floating-node" style="animation-delay: -1s">
                     <rect x="280" y="170" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
-                    <text x="390" y="500" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Fuentes</text>
+                    <text x="390" y="500" font-family="'Inter', sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Fuentes</text>
                 </g>
 
-                <g class="floating-doc" style="animation-delay: -2s">
+                <g class="floating-node" style="animation-delay: -2s">
                     <rect x="1100" y="170" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
-                    <text x="1210" y="500" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Validación</text>
+                    <text x="1210" y="500" font-family="'Inter', sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Validación</text>
                 </g>
 
-                <g class="floating-doc" style="animation-delay: -0.5s">
+                <g class="floating-node" style="animation-delay: -0.5s">
                     <rect x="280" y="740" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
-                    <text x="390" y="1070" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Procesos</text>
+                    <text x="390" y="1070" font-family="'Inter', sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Procesos</text>
                 </g>
 
-                <g class="floating-doc" style="animation-delay: -1.5s">
+                <g class="floating-node" style="animation-delay: -1.5s">
                     <rect x="1100" y="740" width="220" height="280" rx="15" fill="#E9EEF2" stroke="#4A4A4A" stroke-width="3"/>
-                    <text x="1210" y="1070" font-family="sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Análisis</text>
+                    <text x="1210" y="1070" font-family="'Inter', sans-serif" font-size="28" font-weight="700" fill="#4A4A4A" text-anchor="middle">Análisis</text>
                 </g>
             </svg>
         </div>
@@ -82,6 +83,7 @@
             El 73% de los empleados admite haber seguido procesos desactualizados por falta de alertas oportunas.  
             El coste anual por empresa: entre 15.000 y 40.000 € en errores, tiempo perdido y riesgos de cumplimiento.
         </p>
+
         <div class="cards-3">
             <div class="card">
                 <h3>Documentos estáticos</h3>
@@ -104,6 +106,7 @@
             Una plataforma SaaS que transforma los documentos en organismos vivos,  
             impulsados por flujos masivos de datos en tiempo real.
         </p>
+
         <div class="cards-3">
             <div class="card">
                 <h3>Obsolescencia predictiva</h3>
@@ -122,6 +125,7 @@
 
     <section id="mercado" class="section">
         <h2 class="section-title">Mercado y oportunidad</h2>
+
         <div class="metrics">
             <div class="metric">
                 <div class="metric-value">5.200M€</div>
@@ -136,6 +140,7 @@
                 <div class="metric-label">Competidores con Big Data + grafo + obsolescencia</div>
             </div>
         </div>
+
         <p class="section-text">
             DocuStream tiene una ventana de 18–24 meses para liderar el nicho antes de que los grandes players puedan replicarlo.
         </p>
