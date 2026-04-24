@@ -336,6 +336,68 @@ body {
         font-size: 0.75rem;
     }
 }
+/* ============================================================
+   LEYENDA VISUAL DEL GRAFO — ANALÍTICA + VISUAL + DEEPTECH
+   ============================================================ */
+
+.graph-legend {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    width: fit-content;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #fff;
+    font-weight: 400;
+}
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+
+/* Colores según categorías */
+.legend-procesado {
+    background: #00e5a0;
+    box-shadow: 0 0 6px #00e5a0;
+}
+
+.legend-revision {
+    background: #4da6ff;
+    box-shadow: 0 0 6px #4da6ff;
+}
+
+.legend-anomalia {
+    background: #ffcc00;
+    box-shadow: 0 0 6px #ffcc00;
+}
+
+.legend-critico {
+    background: #ff4d4d;
+    box-shadow: 0 0 6px #ff4d4d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .graph-legend {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
 
 
 
