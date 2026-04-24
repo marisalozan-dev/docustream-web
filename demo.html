@@ -12,6 +12,7 @@
 <body>
     <aside class="sidebar">
         <h2>DocuStream PRO</h2>
+
         <nav>
             <button onclick="showView('dashboard')">Dashboard</button>
             <button onclick="showView('documents')">Documentos</button>
@@ -22,8 +23,10 @@
     </aside>
 
     <main class="main-content">
+
         <section id="view-dashboard" class="pro-view active-view">
             <h1>Dashboard</h1>
+
             <div class="pro-kpi-grid">
                 <div class="pro-kpi-card">
                     <h3>Documentos procesados</h3>
@@ -49,13 +52,16 @@
             </div>
 
             <div id="dashboardInsight" class="pro-panel"></div>
+
             <div id="heatmapContainer"></div>
         </section>
 
         <section id="view-documents" class="pro-view">
             <h1>Documentos</h1>
+
             <div class="documents-container">
                 <div class="documents-list" id="documentsList"></div>
+
                 <div class="documents-preview">
                     <h2>Vista previa</h2>
                     <div id="documentsPreviewContent">Selecciona un documento…</div>
@@ -72,6 +78,7 @@
             <h1>Grafo Avanzado</h1>
             <div id="graphAdvancedContainer" class="graph-container"></div>
         </section>
+
     </main>
 
     <script src="assets/js/pro-core.js"></script>
