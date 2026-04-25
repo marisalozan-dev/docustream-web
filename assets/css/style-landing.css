@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #FDFDFB;
+    background: #E6EBEE; /* FONDO CORREGIDO */
     color: #4A4A4A;
     line-height: 1.6;
 }
@@ -154,3 +154,4 @@ body {
     text-align: center;
     font-size: 14px;
 }
+
