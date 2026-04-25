@@ -46,8 +46,49 @@
         </div>
 
         <div class="hero-visual">
-            <!-- TU SVG AQUÍ -->
-            <!-- Pega tu ilustración completa del flujo documental -->
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5A0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00C48C;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Backbone -->
+  <line x1="112" y1="78" x2="112" y2="322" stroke="url(#mintGrad)" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- D arc -->
+  <path d="M112,78 C112,78 290,78 320,200 C350,322 112,322 112,322"
+        fill="none"
+        stroke="url(#mintGrad)"
+        stroke-width="20"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Network lines -->
+  <line x1="195" y1="200" x2="142" y2="138" stroke="url(#mintGrad)" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  <line x1="195" y1="200" x2="268" y2="148" stroke="url(#mintGrad)" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  <line x1="195" y1="200" x2="142" y2="262" stroke="url(#mintGrad)" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  <line x1="195" y1="200" x2="268" y2="252" stroke="url(#mintGrad)" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Center hub -->
+  <circle cx="195" cy="200" r="13" fill="url(#mintGrad)" filter="url(#glow)"/>
+  <circle cx="195" cy="200" r="7" fill="white"/>
+
+  <!-- Satellite nodes -->
+  <circle cx="142" cy="138" r="8" fill="url(#mintGrad)" filter="url(#glow)"/>
+  <circle cx="268" cy="148" r="8" fill="url(#mintGrad)" filter="url(#glow)"/>
+  <circle cx="142" cy="262" r="8" fill="url(#mintGrad)" filter="url(#glow)"/>
+  <circle cx="268" cy="252" r="8" fill="url(#mintGrad)" filter="url(#glow)"/>
+</svg>
+
         </div>
     </section>
 
