@@ -79,7 +79,7 @@ body {
     text-decoration: none;
 }
 
-/* CONTENEDOR SVG CORREGIDO */
+/* ========================= SVG ========================= */
 .hero-visual {
     width: 100%;
     max-width: 900px;
@@ -154,4 +154,5 @@ body {
     text-align: center;
     font-size: 14px;
 }
+
 
