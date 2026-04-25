@@ -1,4 +1,109 @@
 /* =========================================================
+   RESET + BASE
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background: #fff;
+    line-height: 1.5;
+}
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: #333;
+}
+
+.nav {
+    display: flex;
+    gap: 28px;
+}
+
+.nav a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    transition: 0.2s ease;
+}
+
+.nav a:hover {
+    color: #7ED7A1;
+}
+
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-primary {
+    background: #7ED7A1;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #6ac48f;
+}
+
+.btn-secondary {
+    background: #f2f2f2;
+    color: #333;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #e6e6e6;
+}
+
+
+
+/* =========================================================
    HERO — Diseño equilibrado + SVG mediano-elegante
    ========================================================= */
 
@@ -7,12 +112,30 @@
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    padding: 80px 0;
+    padding: 80px 40px;
 }
 
 .hero-content {
     width: 50%;
     z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 32px;
+    color: #555;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
 }
 
 .hero-visual {
@@ -29,26 +152,21 @@
     display: block;
 }
 
-/* ========================= RESPONSIVE HERO ========================= */
 
-@media (max-width: 900px) {
 
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-        padding: 60px 0;
-    }
+/* =========================================================
+   SECCIONES GENERALES
+   ========================================================= */
 
-    .hero-content,
-    .hero-visual {
-        width: 100%;
-    }
+section {
+    padding: 80px 40px;
+}
 
-    .hero-visual svg {
-        max-width: 80%;
-        margin: 0 auto;
-    }
+.section-title {
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 
@@ -84,21 +202,74 @@
     border-radius: 10px;
     background: #7ED7A1;
     color: #fff;
-    text-decoration: none;
     font-weight: 600;
-    position: relative;
-    margin-top: 0;
 }
 
 .cta-pro .btn-primary:hover {
     background: #6ac48f;
 }
 
-/* ========================= RESPONSIVE CTA ========================= */
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    background: #f7f7f7;
+    color: #666;
+    font-size: 14px;
+}
+
+
+
+/* =========================================================
+   RESPONSIVE GENERAL
+   ========================================================= */
 
 @media (max-width: 900px) {
 
-    .cta-pro {
+    .header {
+        padding: 20px;
+    }
+
+    .nav {
+        gap: 18px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 60px 20px;
+    }
+
+    .hero-content,
+    .hero-visual {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .hero-visual svg {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    section {
         padding: 60px 20px;
     }
 
@@ -108,7 +279,6 @@
 
     .cta-pro p {
         font-size: 18px;
-        margin-bottom: 28px;
     }
 
     .cta-pro .btn-primary {
@@ -116,6 +286,7 @@
         padding: 12px 28px;
     }
 }
+
 
 
 
