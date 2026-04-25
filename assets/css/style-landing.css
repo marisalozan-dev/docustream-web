@@ -1,19 +1,20 @@
-/* ===== HERO LAYOUT ===== */
+/* =========================================================
+   HERO — Diseño equilibrado + SVG mediano-elegante
+   ========================================================= */
+
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 40px; /* separa texto e imagen */
+    gap: 40px;
     padding: 80px 0;
 }
 
-/* Columna izquierda */
 .hero-content {
     width: 50%;
     z-index: 2;
 }
 
-/* Columna derecha */
 .hero-visual {
     width: 50%;
     display: flex;
@@ -21,20 +22,22 @@
     align-items: center;
 }
 
-/* SVG tamaño mediano-elegante */
 .hero-visual svg {
     width: 100%;
+    max-width: 550px;
     height: auto;
-    max-width: 550px; /* tamaño equilibrado */
     display: block;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ========================= RESPONSIVE HERO ========================= */
+
 @media (max-width: 900px) {
+
     .hero {
         flex-direction: column;
         text-align: center;
         gap: 20px;
+        padding: 60px 0;
     }
 
     .hero-content,
@@ -47,11 +50,17 @@
         margin: 0 auto;
     }
 }
-/* ===== CTA PRO ===== */
+
+
+
+/* =========================================================
+   CTA PRO — Sección limpia, centrada y sin solapamientos
+   ========================================================= */
+
 .cta-pro {
     text-align: center;
-    padding: 80px 20px; /* espacio vertical amplio */
-    background: #E6EBEE; /* si ya lo tienes, puedes quitarlo */
+    padding: 80px 20px;
+    background: #E6EBEE;
 }
 
 .cta-pro h2 {
@@ -64,11 +73,10 @@
 .cta-pro p {
     font-size: 20px;
     color: #4A4A4A;
-    margin-bottom: 32px; /* separa el texto del botón */
+    margin-bottom: 32px;
     line-height: 1.5;
 }
 
-/* Botón */
 .cta-pro .btn-primary {
     display: inline-block;
     padding: 14px 32px;
@@ -78,17 +86,18 @@
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    position: relative; /* evita solapamientos */
-    margin-top: 0;      /* por si heredaba margen negativo */
+    position: relative;
+    margin-top: 0;
 }
 
-/* Hover */
 .cta-pro .btn-primary:hover {
     background: #6ac48f;
 }
 
-/* ===== Responsive ===== */
+/* ========================= RESPONSIVE CTA ========================= */
+
 @media (max-width: 900px) {
+
     .cta-pro {
         padding: 60px 20px;
     }
@@ -107,5 +116,6 @@
         padding: 12px 28px;
     }
 }
+
 
 
