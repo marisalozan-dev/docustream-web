@@ -104,27 +104,45 @@ a {
 
 
 /* =========================================================
-   HERO — Diseño equilibrado + SVG mediano-elegante
+   HERO 
    ========================================================= */
+
+/* ========================= HERO ========================= */
 
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 40px;
+    gap: 60px;
     padding: 80px 40px;
+    position: relative;
 }
 
+/* LOGO A LA IZQUIERDA */
+.hero-visual {
+    width: 42%;
+    display: flex;
+    justify-content: flex-start; /* IZQUIERDA */
+    align-items: center;
+}
+
+/* CONTROL DEL TAMAÑO DEL LOGO */
+.hero-logo {
+    width: 100%;
+    max-width: 360px; /* tamaño exacto recomendado */
+    height: auto;
+    display: block;
+}
+
+/* TEXTO A LA DERECHA */
 .hero-content {
-    width: 50%;
-    z-index: 2;
+    width: 58%;
 }
 
 .hero-content h1 {
     font-size: 48px;
     font-weight: 800;
     margin-bottom: 20px;
-    color: #333;
 }
 
 .hero-content p {
@@ -138,19 +156,41 @@ a {
     gap: 20px;
 }
 
-.hero-visual {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ========================= FADE-IN SUAVE ========================= */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s ease-out forwards;
 }
 
-.hero-visual svg {
-    width: 100%;
-    max-width: 550px;
-    height: auto;
-    display: block;
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
+/* ========================= RESPONSIVE ========================= */
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-visual,
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-logo {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+}
+
 
 
 
