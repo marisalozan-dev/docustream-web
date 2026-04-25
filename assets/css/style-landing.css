@@ -47,5 +47,65 @@
         margin: 0 auto;
     }
 }
+/* ===== CTA PRO ===== */
+.cta-pro {
+    text-align: center;
+    padding: 80px 20px; /* espacio vertical amplio */
+    background: #E6EBEE; /* si ya lo tienes, puedes quitarlo */
+}
+
+.cta-pro h2 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #4A4A4A;
+    margin-bottom: 16px;
+}
+
+.cta-pro p {
+    font-size: 20px;
+    color: #4A4A4A;
+    margin-bottom: 32px; /* separa el texto del botón */
+    line-height: 1.5;
+}
+
+/* Botón */
+.cta-pro .btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 20px;
+    border-radius: 10px;
+    background: #7ED7A1;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative; /* evita solapamientos */
+    margin-top: 0;      /* por si heredaba margen negativo */
+}
+
+/* Hover */
+.cta-pro .btn-primary:hover {
+    background: #6ac48f;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .cta-pro {
+        padding: 60px 20px;
+    }
+
+    .cta-pro h2 {
+        font-size: 34px;
+    }
+
+    .cta-pro p {
+        font-size: 18px;
+        margin-bottom: 28px;
+    }
+
+    .cta-pro .btn-primary {
+        font-size: 18px;
+        padding: 12px 28px;
+    }
+}
 
 
