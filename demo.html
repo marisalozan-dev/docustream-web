@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocuStream PRO — Demo Interactiva</title>
 
+    <!-- Estilos -->
     <link rel="stylesheet" href="assets/css/style-demo.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -31,7 +32,7 @@
     <!-- ========================= CONTENIDO ========================= -->
     <main class="main-content">
 
-        <!-- DASHBOARD -->
+        <!-- ========================= DASHBOARD ========================= -->
         <section id="view-dashboard" class="pro-view active-view">
             <h1>Dashboard</h1>
 
@@ -64,7 +65,7 @@
             <div id="heatmapContainer"></div>
         </section>
 
-        <!-- DOCUMENTOS -->
+        <!-- ========================= DOCUMENTOS ========================= -->
         <section id="view-documents" class="pro-view">
             <h1>Documentos</h1>
 
@@ -76,15 +77,97 @@
                     <div id="documentsPreviewContent">Selecciona un documento…</div>
                 </div>
             </div>
+
+            <!-- MOCKUP DE DOCUMENTO INTELIGENTE -->
+            <section class="doc-mockup">
+                <h2 class="section-title">Documento Inteligente</h2>
+
+                <div class="doc-card">
+                    <div class="doc-body">
+                        <header class="doc-header">
+                            <h3>Procedimiento de Onboarding 2026</h3>
+                            <span class="doc-status">Actualizado hace 3 días</span>
+                        </header>
+
+                        <p>
+                            Este documento se adapta automáticamente según el rol del lector,
+                            mostrando solo la información relevante y destacando los pasos críticos.
+                        </p>
+
+                        <ul class="doc-insights">
+                            <li>🔍 82% de los usuarios leen solo la sección 2</li>
+                            <li>⚠️ Riesgo de obsolescencia detectado en el paso 4</li>
+                            <li>📊 Tiempo medio de lectura: 3m 12s</li>
+                            <li>🧠 Recomendación: dividir el paso 3 en dos bloques</li>
+                        </ul>
+                    </div>
+
+                    <aside class="doc-sidebar">
+                        <h4>Mini‑grafo</h4>
+                        <p>Relaciones del documento:</p>
+                        <ul>
+                            <li>✔ Política de RRHH</li>
+                            <li>✔ Manual de Bienvenida</li>
+                            <li>✔ Proceso de IT Setup</li>
+                            <li>✖ Versión 2024 (obsoleta)</li>
+                        </ul>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- FLUJO DE USUARIO -->
+            <section class="user-flow">
+                <h2 class="section-title">Flujo de Usuario</h2>
+
+                <div class="flow-container">
+
+                    <div class="flow-step">
+                        <span class="flow-number">1</span>
+                        <h3>El usuario accede al documento</h3>
+                        <p>DocuStream detecta el rol, idioma y contexto del lector.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <span class="flow-number">2</span>
+                        <h3>Lectura y comportamiento</h3>
+                        <p>El sistema registra secciones leídas, tiempo y patrones de navegación.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <span class="flow-number">3</span>
+                        <h3>Análisis semántico</h3>
+                        <p>El motor detecta conceptos clave, relaciones y posibles inconsistencias.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <span class="flow-number">4</span>
+                        <h3>Generación de insights</h3>
+                        <p>Se identifican pasos confusos, contenido obsoleto y mejoras sugeridas.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <span class="flow-number">5</span>
+                        <h3>Actualización del documento</h3>
+                        <p>El editor recibe recomendaciones automáticas listas para aplicar.</p>
+                    </div>
+
+                    <div class="flow-step">
+                        <span class="flow-number">6</span>
+                        <h3>Retroalimentación al sistema</h3>
+                        <p>El documento aprende y mejora con cada interacción real.</p>
+                    </div>
+
+                </div>
+            </section>
         </section>
 
-        <!-- INTEGRACIONES -->
+        <!-- ========================= INTEGRACIONES ========================= -->
         <section id="view-integrations" class="pro-view">
             <h1>Integraciones</h1>
             <div class="integrations-grid" id="integrationsGrid"></div>
         </section>
 
-        <!-- GRAFO AVANZADO -->
+        <!-- ========================= GRAFO AVANZADO ========================= -->
         <section id="view-graph-advanced" class="pro-view">
             <h1>Grafo Avanzado</h1>
             <div id="graphAdvancedContainer" class="graph-container"></div>
@@ -102,3 +185,4 @@
 
 </body>
 </html>
+
