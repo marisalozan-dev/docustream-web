@@ -224,6 +224,42 @@ a {
 }
 
 
+/* ========================= FADE-IN SUAVE ========================= */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================= RESPONSIVE ========================= */
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-visual,
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-logo {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+}
+
+
 
 
 /* =========================================================
