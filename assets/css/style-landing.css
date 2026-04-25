@@ -103,10 +103,6 @@ a {
 
 
 
-/* =========================================================
-   HERO 
-   ========================================================= */
-
 /* ========================= HERO ========================= */
 
 .hero {
@@ -122,14 +118,14 @@ a {
 .hero-visual {
     width: 42%;
     display: flex;
-    justify-content: flex-start; /* IZQUIERDA */
+    justify-content: flex-start;
     align-items: center;
 }
 
 /* CONTROL DEL TAMAÑO DEL LOGO */
 .hero-logo {
     width: 100%;
-    max-width: 360px; /* tamaño exacto recomendado */
+    max-width: 360px;
     height: auto;
     display: block;
 }
@@ -155,6 +151,42 @@ a {
     display: flex;
     gap: 20px;
 }
+
+/* ========================= FADE-IN SUAVE ========================= */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================= RESPONSIVE ========================= */
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-visual,
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-logo {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+}
+
 
 /* ========================= FADE-IN SUAVE ========================= */
 
