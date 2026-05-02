@@ -144,3 +144,37 @@ svg text {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+.activity-log-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-log-list li {
+    margin-bottom: 12px;
+    border-bottom: 1px solid #E9EEF2;
+    padding-bottom: 8px;
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: #888;
+    display: block;
+}
+
+.activity-type {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #7ED7A1;
+    margin-right: 6px;
+}
+
+.activity-item {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.activity-detail {
+    font-size: 0.85rem;
+    margin: 4px 0 0 0;
+}
