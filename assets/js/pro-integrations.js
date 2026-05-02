@@ -1,81 +1,60 @@
-/* --------------------------------------------------------------
-INTEGRACIONES PRO — Cards + Estados + Animación
--------------------------------------------------------------- */
+/* ============================================================
+   INTEGRACIONES — FlowSync Technologies
+   ============================================================ */
 
-console.log("Integrations PRO loaded");
-
-/* --------------------------------------------------------------
-DATOS DE EJEMPLO
--------------------------------------------------------------- */
-
-const INTEGRATIONS = [
-    { name: "Stripe", status: "active", description: "Pagos y facturación automática." },
-    { name: "SendGrid", status: "active", description: "Notificaciones por correo transaccional." },
-    { name: "Salesforce", status: "paused", description: "CRM y pipeline comercial." },
-    { name: "Slack", status: "active", description: "Alertas en tiempo real al equipo." }
+const integrationsData = [
+    {
+        name: "GitHub",
+        type: "Repositorio de código",
+        status: "Conectado",
+        description: "Ingesta automática de documentación técnica desde la carpeta /docs y archivos README."
+    },
+    {
+        name: "Confluence",
+        type: "Wiki interna",
+        status: "Conectado",
+        description: "Sincronización de espacios de documentación funcional y técnica."
+    },
+    {
+        name: "Notion",
+        type: "Knowledge base",
+        status: "En piloto",
+        description: "Integración con playbooks internos y documentación de procesos."
+    },
+    {
+        name: "Google Drive",
+        type: "Almacenamiento",
+        status: "Conectado",
+        description: "Procesamiento de manuales de soporte, PDFs y documentación histórica."
+    },
+    {
+        name: "Slack",
+        type: "Comunicación",
+        status: "Conectado",
+        description: "Alertas de anomalías y cambios críticos en canales de ingeniería y soporte."
+    },
+    {
+        name: "Jira",
+        type: "Gestión de issues",
+        status: "Planificado",
+        description: "Vinculación de documentación con incidencias y tareas de desarrollo."
+    }
 ];
-
-/* --------------------------------------------------------------
-INICIALIZACIÓN
--------------------------------------------------------------- */
-
-function initIntegrations() {
-    console.log("Inicializando Integraciones PRO…");
-    renderIntegrations();
-}
-
-/* --------------------------------------------------------------
-RENDER DE INTEGRACIONES
--------------------------------------------------------------- */
 
 function renderIntegrations() {
     const grid = document.getElementById("integrationsGrid");
-    if (!grid) return;
-
-    grid.innerHTML = "";
-
-    INTEGRATIONS.forEach(int => {
-        const card = document.createElement("div");
-        card.className = "integration-card";
-
-        card.innerHTML = `
+    grid.innerHTML = integrationsData.map(int => `
+        <div class="int-card">
             <h3>${int.name}</h3>
-            <p style="margin-top:6px; font-size:0.85rem; opacity:0.8;">
-                ${int.description}
-            </p>
-            <span class="badge ${int.status}">
-                ${int.status === "active" ? "Activa" : "Pausada"}
-            </span>
-        `;
-
-        grid.appendChild(card);
-    });
-
-    animateIntegrationCards();
+            <p><strong>Tipo:</strong> ${int.type}</p>
+            <p><strong>Estado:</strong> ${int.status}</p>
+            <p>${int.description}</p>
+        </div>
+    `).join("");
 }
 
-/* --------------------------------------------------------------
-ANIMACIÓN DE CARDS DE INTEGRACIONES
--------------------------------------------------------------- */
+renderIntegrations();
 
-function animateIntegrationCards() {
-    const cards = document.querySelectorAll(".integration-card");
-    if (!cards.length) return;
-
-    gsap.from(cards, {
-        opacity: 0,
-        y: 14,
-        duration: 0.35,
-        ease: "power2.out",
-        stagger: 0.05
-    });
-}
-
-/* --------------------------------------------------------------
-EXPOSICIÓN GLOBAL
--------------------------------------------------------------- */
-
-window.initIntegrations = initIntegrations;
 
 
 
