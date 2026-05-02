@@ -365,6 +365,10 @@ h3 {
 #qualityDonut svg text {
     font-family: "Inter", sans-serif;
 }
+#activityChart svg text {
+    font-family: "Inter", sans-serif;
+    fill: #4A4A4A;
+}
 
 
 
