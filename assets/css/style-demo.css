@@ -320,5 +320,47 @@ h3 {
         height: 420px;
     }
 }
+/* ============================================================
+   ACTIVITY LOG — Fresh Knowledge
+   ============================================================ */
+
+#activityLog {
+    margin-top: 20px;
+}
+
+.activity-log-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-log-list li {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: #888;
+    display: block;
+}
+
+.activity-type {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+.activity-item {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.activity-detail {
+    font-size: 0.85rem;
+    margin: 4px 0 0 0;
+}
 
 
