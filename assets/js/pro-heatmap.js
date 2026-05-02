@@ -1,6 +1,6 @@
 /* ============================================================
    HEATMAP — Actividad de actualización de documentación
-   FlowSync Technologies
+   FlowSync Technologies — Fresh Knowledge Edition
    ============================================================ */
 
 const heatmapData = [
@@ -9,15 +9,19 @@ const heatmapData = [
     { day: 0, hour: 10, value: 5 },
     { day: 0, hour: 11, value: 7 },
     { day: 0, hour: 15, value: 4 },
+
     { day: 1, hour: 10, value: 6 },
     { day: 1, hour: 11, value: 8 },
     { day: 1, hour: 16, value: 5 },
+
     { day: 2, hour: 9,  value: 2 },
     { day: 2, hour: 14, value: 7 },
     { day: 2, hour: 17, value: 6 },
+
     { day: 3, hour: 10, value: 9 },
     { day: 3, hour: 11, value: 10 },
     { day: 3, hour: 15, value: 7 },
+
     { day: 4, hour: 9,  value: 4 },
     { day: 4, hour: 13, value: 6 },
     { day: 4, hour: 16, value: 5 }
@@ -38,13 +42,14 @@ function renderHeatmap() {
         .attr("height", height);
 
     const days = ["L", "M", "X", "J", "V", "S", "D"];
+    const hours = d3.range(8, 19); // 8h a 18h
 
-    // Escalas
+    /* ===================== ESCALAS ===================== */
     const colorScale = d3.scaleLinear()
         .domain([0, 10])
         .range(["#CFFFE5", "#7ED7A1"]); // Fresh Knowledge
 
-    // Ejes
+    /* ===================== ETIQUETAS DÍAS ===================== */
     svg.selectAll(".day-label")
         .data(days)
         .enter()
@@ -56,8 +61,7 @@ function renderHeatmap() {
         .attr("fill", "#4A4A4A")
         .text(d => d);
 
-    const hours = d3.range(8, 19); // 8h a 18h
-
+    /* ===================== ETIQUETAS HORAS ===================== */
     svg.selectAll(".hour-label")
         .data(hours)
         .enter()
@@ -69,11 +73,12 @@ function renderHeatmap() {
         .attr("text-anchor", "middle")
         .text(d => d + "h");
 
-    // Celdas
+    /* ===================== CELDAS ===================== */
     svg.selectAll(".cell")
         .data(heatmapData)
         .enter()
         .append("rect")
+        .attr("class", "heatmap-cell")
         .attr("x", d => 40 + (d.hour - 8) * cellSize)
         .attr("y", d => 30 + d.day * cellSize)
         .attr("width", cellSize - 4)
@@ -81,10 +86,25 @@ function renderHeatmap() {
         .attr("rx", 4)
         .attr("ry", 4)
         .attr("fill", d => colorScale(d.value))
-        .append("title")
-        .text(d => `${days[d.day]} ${d.hour}:00 — ${d.value} actualizaciones`);
+        .on("mouseover", function (event, d) {
+            tooltip.style("opacity", 1)
+                .html(`${days[d.day]} ${d.hour}:00<br><strong>${d.value} actualizaciones</strong>`);
+        })
+        .on("mousemove", function (event) {
+            tooltip.style("left", (event.pageX + 12) + "px")
+                   .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseout", function () {
+            tooltip.style("opacity", 0);
+        });
+
+    /* ===================== TOOLTIP ===================== */
+    const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "heatmap-tooltip");
 }
 
 renderHeatmap();
+
 
 
