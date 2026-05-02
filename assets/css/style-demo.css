@@ -1,180 +1,51 @@
-:root {
-    /* Paleta FRESH KNOWLEDGE - Colores Finales */
-    --bg-main: #FDFDFB;      /* Blanco cálido (Fondo) */
-    --sidebar-bg: #E9EEF2;   /* Gris nube (Sidebar) */
-    --accent: #7ED7A1;       /* Verde hoja (Acentos) */
-    --text-dark: #4A4A4A;    /* Gris texto (EL QUE SE VERÁ BIEN) */
-    --border-color: #D1D9E0; /* Gris sutil (Bordes) */
-    --mint: #CFFFE5;         /* Verde menta (Hovers) */
-    --white: #FFFFFF;        /* Solo para el interior de las cards */
-}
+/* ============================================================
+   HEATMAP — Estilo Fresh Knowledge
+   ============================================================ */
 
-/* 1. RESET Y CONFIGURACIÓN BASE */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Forzamos que el color por defecto nunca sea blanco */
-    color: var(--text-dark); 
-}
-
-body {
-    background-color: var(--bg-main);
-    color: var(--text-dark);
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    min-height: 100vh;
-}
-
-/* 2. SIDEBAR (CORREGIDO) */
-.sidebar {
-    width: 260px;
-    height: 100vh;
-    background: var(--sidebar-bg);
-    position: fixed;
-    left: 0;
-    top: 0;
-    padding: 30px 20px;
-    border-right: 1px solid var(--border-color);
-    z-index: 1000;
-}
-
-.sidebar h2 {
-    color: var(--accent);
-    font-size: 1.4rem;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-}
-
-.sidebar nav button {
-    display: block;
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: var(--text-dark) !important; /* Forzamos color oscuro */
-    padding: 12px 15px;
-    text-align: left;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: 0.3s;
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.sidebar nav button:hover {
-    background: var(--mint);
-    color: #2D5A41 !important; /* Un verde oscuro para el texto en el hover */
-}
-
-.back-link {
-    display: block;
-    margin-top: 50px;
-    color: var(--text-dark);
-    text-decoration: none;
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-/* 3. CONTENIDO PRINCIPAL */
-.main-content {
-    margin-left: 260px;
-    padding: 40px;
-    width: calc(100% - 260px);
-}
-
-h1 { 
-    font-size: 2.2rem; 
-    margin-bottom: 20px; 
-    color: var(--text-dark); /* Títulos oscuros */
-}
-
-/* 4. CARDS (FONDO BLANCO, TEXTO OSCURO) */
-.pro-kpi-card, .int-card, .pro-panel, .doc-item {
-    background: var(--white);
+#heatmapContainer {
     padding: 20px;
     border-radius: 12px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 10px;
-    color: var(--text-dark) !important; /* Texto oscuro dentro de las cards */
+    background: #FFFFFF;
+    border: 1px solid #E9EEF2;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    margin-top: 20px;
 }
 
-.kpi-value {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--accent); /* Los números en verde hoja resaltan bien */
-    margin-top: 10px;
+/* Etiquetas de días y horas */
+#heatmapContainer text {
+    font-family: "Inter", sans-serif;
+    fill: #4A4A4A;
 }
 
-h3 { 
-    font-size: 0.9rem; 
-    color: #666666; /* Gris intermedio para subtítulos */
-    margin: 0; 
-    text-transform: uppercase;
+/* Celdas del heatmap */
+.heatmap-cell {
+    stroke: #FFFFFF;
+    stroke-width: 1px;
+    rx: 4;
+    ry: 4;
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out;
 }
 
-/* 5. GRAFO Y ELEMENTOS GRÁFICOS (D3.js) */
-#graphAdvancedContainer {
-    background-color: var(--sidebar-bg); /* Fondo gris nube para el grafo */
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
+/* Hover suave */
+.heatmap-cell:hover {
+    transform: scale(1.12);
+    opacity: 0.85;
+    cursor: pointer;
 }
 
-/* Forzar que cualquier texto SVG (como los del grafo) sea oscuro */
-svg text {
-    fill: var(--text-dark) !important;
-    font-weight: 600 !important;
-    text-shadow: 0px 0px 3px rgba(255,255,255,0.8); /* Ayuda a leer sobre colores fuertes */
-}
-
-/* 6. ELEMENTOS ADICIONALES */
-.highlight {
-    background-color: var(--mint);
-    color: #2D5A41;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-/* Vistas activas */
-.pro-view { display: none; }
-.pro-view.active-view { display: block; animation: fadeIn 0.4s; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.activity-log-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.activity-log-list li {
-    margin-bottom: 12px;
-    border-bottom: 1px solid #E9EEF2;
-    padding-bottom: 8px;
-}
-
-.activity-time {
-    font-size: 0.75rem;
-    color: #888;
-    display: block;
-}
-
-.activity-type {
+/* Tooltip del heatmap */
+.heatmap-tooltip {
+    position: absolute;
+    background: rgba(255,255,255,0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #E9EEF2;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: #7ED7A1;
-    margin-right: 6px;
+    color: #4A4A4A;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    z-index: 9999;
 }
 
-.activity-item {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.activity-detail {
-    font-size: 0.85rem;
-    margin: 4px 0 0 0;
-}
