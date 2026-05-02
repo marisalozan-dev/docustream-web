@@ -1,156 +1,101 @@
-/* --------------------------------------------------------------
-GRAFO AVANZADO PRO — Analítico + Visual + Interactivo
--------------------------------------------------------------- */
+/* ============================================================
+   GRAFO AVANZADO — FlowSync Technologies
+   ============================================================ */
 
-console.log("Graph Advanced PRO — Analítico + Visual loaded");
+const graphData = {
+    nodes: [
+        { id: "FlowSync Documentation System", type: "root" },
 
-/* --------------------------------------------------------------
-DATOS DE EJEMPLO (puedes sustituirlos por datos reales)
--------------------------------------------------------------- */
+        { id: "API Reference v2.1", type: "doc" },
+        { id: "API Reference v2.0", type: "doc-obsolete" },
+        { id: "User Management Module", type: "module" },
+        { id: "Auth Module Overview", type: "module" },
+        { id: "QA Checklist – Release 4.3", type: "qa" },
+        { id: "Feature Flags Playbook", type: "playbook-anomaly" },
+        { id: "Support Manual – Tier 1", type: "support" },
+        { id: "Breaking Changes Log", type: "log" },
 
-const GRAPH_NODES = [
-    { id: "Documento A", tipo: "procesado", tamaño: 120, updated: "2026-04-20" },
-    { id: "Documento B", tipo: "revision", tamaño: 80, updated: "2026-04-18" },
-    { id: "Documento C", tipo: "critico", tamaño: 200, updated: "2026-04-22" },
-    { id: "Documento D", tipo: "anomalía", tamaño: 60, updated: "2026-04-19" }
-];
+        { id: "/api/v2/users/{id}", type: "endpoint" },
+        { id: "/api/v1/orders", type: "endpoint-anomaly" },
+        { id: "Auth Module", type: "component" },
+        { id: "Automation Engine", type: "component" }
+    ],
+    links: [
+        { source: "FlowSync Documentation System", target: "API Reference v2.1" },
+        { source: "FlowSync Documentation System", target: "API Reference v2.0" },
+        { source: "FlowSync Documentation System", target: "User Management Module" },
+        { source: "FlowSync Documentation System", target: "Auth Module Overview" },
+        { source: "FlowSync Documentation System", target: "QA Checklist – Release 4.3" },
+        { source: "FlowSync Documentation System", target: "Feature Flags Playbook" },
+        { source: "FlowSync Documentation System", target: "Support Manual – Tier 1" },
+        { source: "FlowSync Documentation System", target: "Breaking Changes Log" },
 
-const GRAPH_LINKS = [
-    { source: "Documento A", target: "Documento B", fuerza: 1 },
-    { source: "Documento A", target: "Documento C", fuerza: 2 },
-    { source: "Documento B", target: "Documento D", fuerza: 0.5 }
-];
+        { source: "API Reference v2.1", target: "/api/v2/users/{id}" },
+        { source: "API Reference v2.0", target: "/api/v1/orders" },
 
-/* --------------------------------------------------------------
-MAPA DE COLORES POR TIPO
--------------------------------------------------------------- */
+        { source: "/api/v2/users/{id}", target: "User Management Module" },
+        { source: "/api/v1/orders", target: "Automation Engine" },
 
-const COLOR_MAP = {
-    procesado: "#00e5a0",
-    revision: "#4da6ff",
-    anomalía: "#ffcc00",
-    critico: "#ff4d4d"
+        { source: "Auth Module Overview", target: "Auth Module" },
+        { source: "Breaking Changes Log", target: "/api/v1/orders" },
+        { source: "Feature Flags Playbook", target: "Automation Engine" }
+    ]
 };
 
-/* --------------------------------------------------------------
-INICIALIZACIÓN
--------------------------------------------------------------- */
+/* ===================== RENDER GRAFO ===================== */
 
-function initGraphAdvanced() {
-    console.log("Inicializando Grafo Avanzado Analítico…");
-    renderGraphAnalytic();
-}
+function renderAdvancedGraph() {
+    const container = d3.select("#graphAdvancedContainer");
+    container.selectAll("*").remove();
 
-/* --------------------------------------------------------------
-RENDER ANALÍTICO + VISUAL
--------------------------------------------------------------- */
+    const width = container.node().clientWidth;
+    const height = container.node().clientHeight;
 
-function renderGraphAnalytic() {
-    const container = document.getElementById("graphAdvancedContainer");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const width = container.clientWidth || 600;
-    const height = container.clientHeight || 500;
-
-    /* ---------------------- ZOOM + PAN ---------------------- */
-    const zoom = d3.zoom()
-        .scaleExtent([0.4, 2.8])
-        .on("zoom", (event) => svgGroup.attr("transform", event.transform));
-
-    const svg = d3.select("#graphAdvancedContainer")
-        .append("svg")
+    const svg = container.append("svg")
         .attr("width", width)
-        .attr("height", height)
-        .call(zoom);
+        .attr("height", height);
 
-    const svgGroup = svg.append("g");
+    const simulation = d3.forceSimulation(graphData.nodes)
+        .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(120))
+        .force("charge", d3.forceManyBody().strength(-250))
+        .force("center", d3.forceCenter(width / 2, height / 2));
 
-    /* ---------------------- TOOLTIP ---------------------- */
-    const tooltip = d3.select("#graphAdvancedContainer")
-        .append("div")
-        .attr("class", "graph-tooltip")
-        .style("position", "absolute")
-        .style("padding", "10px 14px")
-        .style("background", "rgba(0,0,0,0.75)")
-        .style("border", "1px solid rgba(255,255,255,0.15)")
-        .style("border-radius", "8px")
-        .style("color", "#fff")
-        .style("font-size", "0.8rem")
-        .style("pointer-events", "none")
-        .style("opacity", 0);
-
-    /* ---------------------- SIMULACIÓN ---------------------- */
-    const simulation = d3.forceSimulation(GRAPH_NODES)
-        .force("link", d3.forceLink(GRAPH_LINKS).id(d => d.id).distance(150))
-        .force("charge", d3.forceManyBody().strength(-350))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collision", d3.forceCollide().radius(d => 20 + d.tamaño / 20));
-
-    /* ---------------------- ENLACES ---------------------- */
-    const link = svgGroup.selectAll("line")
-        .data(GRAPH_LINKS)
+    const link = svg.append("g")
+        .selectAll("line")
+        .data(graphData.links)
         .enter()
         .append("line")
-        .attr("stroke", "rgba(255,255,255,0.25)")
-        .attr("stroke-width", d => 1 + d.fuerza * 2);
+        .attr("stroke", "#E9EEF2")
+        .attr("stroke-width", 1.2);
 
-    /* ---------------------- DRAG ---------------------- */
-    const drag = d3.drag()
-        .on("start", (event, d) => {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-        })
-        .on("drag", (event, d) => {
-            d.fx = event.x;
-            d.fy = event.y;
-        })
-        .on("end", (event, d) => {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-        });
-
-    /* ---------------------- NODOS ---------------------- */
-    const node = svgGroup.selectAll("circle")
-        .data(GRAPH_NODES)
+    const node = svg.append("g")
+        .selectAll("circle")
+        .data(graphData.nodes)
         .enter()
         .append("circle")
-        .attr("r", d => 10 + d.tamaño / 20)
-        .attr("fill", d => COLOR_MAP[d.tipo] || "#00e5a0")
-        .style("filter", d => `drop-shadow(0 0 6px ${COLOR_MAP[d.tipo]})`)
-        .call(drag)
-        .on("mouseover", (event, d) => {
-            tooltip
-                .style("opacity", 1)
-                .html(`
-                    <strong>${d.id}</strong><br>
-                    Tipo: ${d.tipo}<br>
-                    Tamaño: ${d.tamaño} KB<br>
-                    Actualizado: ${d.updated}<br>
-                    Conexiones: ${countLinks(d.id)}
-                `);
+        .attr("r", d => d.type === "root" ? 14 : 8)
+        .attr("fill", d => {
+            if (d.type === "root") return "#7ED7A1";
+            if (d.type.includes("anomaly")) return "#FFB8A8";
+            if (d.type.includes("obsolete")) return "#FFF4B8";
+            if (["qa", "support", "log"].includes(d.type)) return "#A7E8FF";
+            return "#CFFFE5";
         })
-        .on("mousemove", (event) => {
-            tooltip
-                .style("left", event.offsetX + 15 + "px")
-                .style("top", event.offsetY + 15 + "px");
-        })
-        .on("mouseout", () => tooltip.style("opacity", 0));
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended)
+        );
 
-    /* ---------------------- ETIQUETAS ---------------------- */
-    const labels = svgGroup.selectAll("text")
-        .data(GRAPH_NODES)
+    const labels = svg.append("g")
+        .selectAll("text")
+        .data(graphData.nodes)
         .enter()
         .append("text")
         .text(d => d.id)
-        .attr("fill", "#fff")
-        .attr("font-size", "0.8rem")
-        .attr("font-weight", "500");
+        .attr("font-size", 10)
+        .attr("fill", "#4A4A4A");
 
-    /* ---------------------- TICK ---------------------- */
     simulation.on("tick", () => {
         link
             .attr("x1", d => d.source.x)
@@ -163,45 +108,29 @@ function renderGraphAnalytic() {
             .attr("cy", d => d.y);
 
         labels
-            .attr("x", d => d.x + 16)
+            .attr("x", d => d.x + 10)
             .attr("y", d => d.y + 4);
     });
 
-    animateGraph();
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
 }
 
-/* --------------------------------------------------------------
-FUNCIÓN AUXILIAR: contar conexiones
--------------------------------------------------------------- */
-
-function countLinks(id) {
-    return GRAPH_LINKS.filter(l => l.source.id === id || l.target.id === id).length;
-}
-
-/* --------------------------------------------------------------
-ANIMACIÓN DE ENTRADA
--------------------------------------------------------------- */
-
-function animateGraph() {
-    const graph = document.getElementById("graphAdvancedContainer");
-    if (!graph) return;
-
-    gsap.fromTo(graph,
-        { opacity: 0.6, scale: 0.98 },
-        {
-            opacity: 1,
-            scale: 1,
-            duration: 0.35,
-            ease: "power2.out"
-        }
-    );
-}
-
-/* --------------------------------------------------------------
-EXPOSICIÓN GLOBAL
--------------------------------------------------------------- */
-
-window.initGraphAdvanced = initGraphAdvanced;
+renderAdvancedGraph();
 
 
 
