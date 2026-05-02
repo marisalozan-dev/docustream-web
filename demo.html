@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocuStream PRO — Demo Interactiva</title>
 
+    <!-- Estilos -->
     <link rel="stylesheet" href="assets/css/style-demo.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -63,9 +64,10 @@
 
             <div id="heatmapContainer" class="pro-panel"></div>
 
-        </section>
+            <!-- Activity Log dentro del dashboard -->
+            <div id="activityLog" class="pro-panel"></div>
 
-        <div id="activityLog" class="pro-panel"></div>
+        </section>
 
         <!-- DOCUMENTOS -->
         <section id="view-documents" class="pro-view">
@@ -90,14 +92,36 @@
         <!-- GRAFO AVANZADO -->
         <section id="view-graph-advanced" class="pro-view">
             <h1>Grafo Avanzado</h1>
-            <div id="graphAdvancedContainer" class="graph-container"></div>
+            <div id="graphAdvancedContainer"></div>
         </section>
 
     </main>
 
-    <!-- ========================= SCRIPTS ========================= -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <!-- ========================= FUNCIÓN DE NAVEGACIÓN ========================= -->
+    <script>
+    function showView(view) {
+        // Ocultar todas las vistas
+        document.querySelectorAll('.pro-view').forEach(v => v.classList.remove('active-view'));
 
+        // Mostrar la vista seleccionada
+        document.getElementById(`view-${view}`).classList.add('active-view');
+
+        // Actualizar botones activos
+        document.querySelectorAll('.sidebar nav button').forEach(btn => btn.classList.remove('active-btn'));
+        event.target.classList.add('active-btn');
+
+        // Repintar grafo al entrar en su vista
+        if (view === "graph-advanced") {
+            setTimeout(() => {
+                if (typeof renderAdvancedGraph === "function") {
+                    renderAdvancedGraph();
+                }
+            }, 80);
+        }
+    }
+    </script>
+
+    <!-- ========================= SCRIPTS ========================= -->
 <script src="assets/js/pro-dashboard.js"></script>
 <script src="assets/js/pro-documents.js"></script>
 <script src="assets/js/pro-graph-advanced.js"></script>
@@ -107,9 +131,9 @@
 <script src="assets/js/pro-activity-chart.js"></script>
 <script src="assets/js/pro-quality-donut.js"></script>
 
-
 </body>
 </html>
+
 
 
 
