@@ -345,10 +345,39 @@
     let _allDatasets = [];
     let _fmtChart    = null;
 
+    // Normaliza campos que la API puede devolver como objeto en lugar de array
+    function toArray(v) {
+        if (!v) return [];
+        if (Array.isArray(v)) return v;
+        if (typeof v === 'object') return Object.values(v);
+        return [];
+    }
+    function getFormats(ds) {
+        return [...new Set(
+            toArray(ds.distribution)
+                .map(d => (d?.format?.prefLabel?.[0]?.value || d?.format?.prefLabel?.value || '').toUpperCase().split('/')[0].trim())
+                .filter(Boolean)
+        )];
+    }
+    function getTitle(ds) {
+        const t = toArray(ds.title);
+        return t[0]?.value || t[0] || 'Dataset sin título';
+    }
+    function getPub(ds) {
+        return ds.publisher?.name?.[0]?.value || ds.publisher?.name?.value || ds.publisher?.['foaf:name'] || 'Publicador desconocido';
+    }
+    function getKeywords(ds) {
+        return toArray(ds.keyword).map(k => k?.value || k || '').filter(Boolean);
+    }
+    function getTheme(ds) {
+        const t = toArray(ds.theme);
+        return t[0]?.prefLabel?.[0]?.value || t[0]?.prefLabel?.value || t[0]?.id || null;
+    }
+
     function scoreDataset(ds) {
         let s = 50;
-        if (ds.description?.[0]?.value?.length > 50) s += 15;
-        if (ds.keyword?.length > 2) s += 10;
+        if ((ds.description?.[0]?.value || ds.description?.value || '').length > 50) s += 15;
+        if (getKeywords(ds).length > 2) s += 10;
         if (ds.modified) s += 10;
         const age = ds.modified ? (Date.now() - new Date(ds.modified).getTime()) / (864e5 * 365) : 5;
         if      (age < 1) s += 15;
@@ -359,11 +388,11 @@
 
     function detectAnomalies(datasets) {
         const anoms = [];
-        const noDesc = datasets.filter(d => !d.description?.[0]?.value).length;
+        const noDesc = datasets.filter(d => !(d.description?.[0]?.value || d.description?.value)).length;
         if (noDesc) anoms.push({ type: 'warn', msg: `${noDesc} datasets sin descripción` });
         const old = datasets.filter(d => !d.modified || (Date.now() - new Date(d.modified)) / (864e5 * 365) > 2).length;
         if (old)    anoms.push({ type: 'warn', msg: `${old} con actualización > 2 años` });
-        const noKw = datasets.filter(d => !d.keyword?.length).length;
+        const noKw = datasets.filter(d => !getKeywords(d).length).length;
         if (noKw)   anoms.push({ type: 'info', msg: `${noKw} sin etiquetas semánticas` });
         if (!anoms.length) anoms.push({ type: 'ok', msg: 'Sin anomalías críticas' });
         anoms.push({ type: 'ok', msg: `${datasets.length} datasets validados` });
@@ -380,10 +409,10 @@
     function renderFmtChart(datasets) {
         const fc = {};
         datasets.forEach(ds => {
-            [...new Set((ds.distribution || []).map(d => {
-                const f = (d.format?.prefLabel?.[0]?.value || 'Otro').toUpperCase().split('/')[0].trim();
-                return ['CSV','JSON','XML','RDF','XLS','XLSX','PDF'].includes(f) ? f : 'Otro';
-            }))].forEach(f => fc[f] = (fc[f] || 0) + 1);
+            getFormats(ds).forEach(f => {
+                const key = ['CSV','JSON','XML','RDF','XLS','XLSX','PDF'].includes(f) ? f : 'Otro';
+                fc[key] = (fc[key] || 0) + 1;
+            });
         });
         const sorted = Object.entries(fc).sort((a, b) => b[1] - a[1]).slice(0, 6);
         if (_fmtChart) _fmtChart.destroy();
@@ -407,13 +436,13 @@
             return;
         }
         document.getElementById('documentsList').innerHTML = datasets.slice(0, 12).map((ds, i) => {
-            const title = ds.title?.[0]?.value || 'Dataset sin título';
-            const pub   = ds.publisher?.name?.[0]?.value || 'Publicador desconocido';
+            const title = getTitle(ds);
+            const pub   = getPub(ds);
             const mod   = ds.modified ? new Date(ds.modified).toLocaleDateString('es-ES', { year: 'numeric', month: 'short' }) : '—';
             const score = scoreDataset(ds);
             const sc    = score >= 70 ? '#4db87a' : score >= 50 ? '#c8b84a' : '#cc7a60';
             const init  = title.split(' ').slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || 'DS';
-            const fmts  = [...new Set((ds.distribution || []).map(d => (d.format?.prefLabel?.[0]?.value || '').toUpperCase().split('/')[0].trim()).filter(Boolean))].slice(0, 2);
+            const fmts  = getFormats(ds).slice(0, 2);
             return `<div class="doc-item-real" data-idx="${i}" onclick="selectDataset(${i})">
                 <div class="doc-icon-real">${init}</div>
                 <div class="doc-body-real">
@@ -434,11 +463,11 @@
         document.querySelector(`[data-idx="${idx}"]`)?.classList.add('selected');
 
         const ds    = _allDatasets[idx];
-        const title = ds.title?.[0]?.value || 'Dataset';
-        const pub   = ds.publisher?.name?.[0]?.value || '—';
+        const title = getTitle(ds);
+        const pub   = getPub(ds);
         const mod   = ds.modified ? new Date(ds.modified).toLocaleDateString('es-ES') : '—';
         const score = scoreDataset(ds);
-        const fmts  = [...new Set((ds.distribution || []).map(d => (d.format?.prefLabel?.[0]?.value || '').split('/')[0].trim()).filter(Boolean))].join(', ');
+        const fmts  = getFormats(ds).join(', ');
 
         document.getElementById('documentsPreviewContent').innerHTML = `
             <h3>${title}</h3>
@@ -450,7 +479,7 @@
         `;
 
         const desc = ds.description?.[0]?.value || '';
-        const kws  = (ds.keyword || []).map(k => k.value || k).slice(0, 5).join(', ');
+        const kws  = getKeywords(ds).slice(0, 5).join(', ');
 
         try {
             const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -552,22 +581,22 @@
         const nodes = [], links = [], themeMap = {}, pubMap = {}, conceptMap = {};
         datasets.slice(0, 12).forEach((ds, i) => {
             const dsId = 'ds_' + i;
-            nodes.push({ id: dsId, label: (ds.title?.[0]?.value || 'Dataset').substring(0, 32), type: 'dataset', r: 10, ds });
+            nodes.push({ id: dsId, label: getTitle(ds).substring(0, 32), type: 'dataset', r: 10, ds });
 
-            const theme = ds.theme?.[0]?.prefLabel?.[0]?.value || ds.theme?.[0]?.id || null;
+            const theme = getTheme(ds);
             if (theme) {
                 const tKey = 'theme_' + theme;
                 if (!themeMap[tKey]) { themeMap[tKey] = true; nodes.push({ id: tKey, label: theme.substring(0, 22), type: 'theme', r: 14 }); }
                 links.push({ source: dsId, target: tKey });
             }
-            const pub = ds.publisher?.name?.[0]?.value || null;
+            const pub = ds.publisher?.name?.[0]?.value || ds.publisher?.name?.value || null;
             if (pub) {
                 const pKey = 'pub_' + pub.substring(0, 20);
                 if (!pubMap[pKey]) { pubMap[pKey] = true; nodes.push({ id: pKey, label: pub.substring(0, 24), type: 'publisher', r: 12 }); }
                 links.push({ source: dsId, target: pKey });
             }
-            (ds.keyword || []).slice(0, 2).forEach(kw => {
-                const kval = (kw.value || kw || '').substring(0, 18);
+            getKeywords(ds).slice(0, 2).forEach(kw => {
+                const kval = kw.substring(0, 18);
                 if (!kval) return;
                 const cKey = 'concept_' + kval;
                 if (!conceptMap[cKey]) { conceptMap[cKey] = true; nodes.push({ id: cKey, label: kval, type: 'concept', r: 8 }); }
