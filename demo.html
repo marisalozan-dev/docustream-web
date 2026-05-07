@@ -497,13 +497,26 @@
             const t0 = Date.now();
             const j  = await apiFetch(path);
             const ms = Date.now() - t0;
-            console.log('API response:', JSON.stringify(j).substring(0, 300));
-            const datasets = j.result?.items || [];
+            // Extraer datasets de la respuesta — la API linked-data devuelve result.items
+            let datasets = [];
+            if (j?.result?.items)       datasets = j.result.items;
+            else if (j?.items)          datasets = j.items;
+            else if (Array.isArray(j))  datasets = j;
+            else {
+                // Buscar cualquier array en el primer nivel de result
+                const resultKeys = Object.keys(j?.result || {});
+                for (const k of resultKeys) {
+                    if (Array.isArray(j.result[k]) && j.result[k].length > 0) {
+                        datasets = j.result[k]; break;
+                    }
+                }
+            }
+            console.log('Datasets encontrados:', datasets.length, datasets[0]?.title);
             _allDatasets   = datasets;
 
             const el = id => document.getElementById(id);
             el('kpiLatency').textContent  = ms;   el('kpiLatency').classList.remove('loading');
-            el('kpiDocs').textContent     = (j.result?.totalItems || datasets.length).toLocaleString('es-ES');
+            el('kpiDocs').textContent     = (j.result?.totalItems || j.totalItems || datasets.length).toLocaleString('es-ES');
             el('kpiDocs').classList.remove('loading');
             el('kpiDocsSub').textContent  = `${datasets.length} en este lote`;
 
@@ -634,6 +647,7 @@
 
 </body>
 </html>
+
 
 
 
