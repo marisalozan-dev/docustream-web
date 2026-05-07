@@ -1,61 +1,78 @@
 /* ============================================================
-   INTEGRACIONES — FlowSync Technologies
+   INTEGRACIONES — DocuStream PRO · datos.gob.es
    ============================================================ */
 
 const integrationsData = [
     {
-        name: "GitHub",
-        type: "Repositorio de código",
+        name: "datos.gob.es",
+        type: "Catálogo nacional de datos abiertos",
         status: "Conectado",
-        description: "Ingesta automática de documentación técnica desde la carpeta /docs y archivos README."
+        statusColor: "#4db87a",
+        description: "Ingesta en tiempo real del catálogo oficial del Ministerio de Transformación Digital. Más de 50.000 datasets indexados.",
+        icon: "🏛️"
     },
     {
-        name: "Confluence",
-        type: "Wiki interna",
+        name: "API SPARQL",
+        type: "Linked Open Data",
         status: "Conectado",
-        description: "Sincronización de espacios de documentación funcional y técnica."
+        statusColor: "#4db87a",
+        description: "Consultas semánticas sobre el grafo de datos enlazados de la administración pública española.",
+        icon: "🔗"
     },
     {
-        name: "Notion",
-        type: "Knowledge base",
+        name: "INE",
+        type: "Instituto Nacional de Estadística",
         status: "En piloto",
-        description: "Integración con playbooks internos y documentación de procesos."
+        statusColor: "#c8b84a",
+        description: "Integración con series estadísticas oficiales: demografía, economía, mercado laboral y más.",
+        icon: "📊"
     },
     {
-        name: "Google Drive",
-        type: "Almacenamiento",
-        status: "Conectado",
-        description: "Procesamiento de manuales de soporte, PDFs y documentación histórica."
+        name: "AEMET OpenData",
+        type: "Datos meteorológicos",
+        status: "En piloto",
+        statusColor: "#c8b84a",
+        description: "Datasets climáticos y meteorológicos de la Agencia Estatal de Meteorología.",
+        icon: "🌤️"
     },
     {
-        name: "Slack",
-        type: "Comunicación",
-        status: "Conectado",
-        description: "Alertas de anomalías y cambios críticos en canales de ingeniería y soporte."
-    },
-    {
-        name: "Jira",
-        type: "Gestión de issues",
+        name: "Portal Europeo de Datos",
+        type: "data.europa.eu",
         status: "Planificado",
-        description: "Vinculación de documentación con incidencias y tareas de desarrollo."
+        statusColor: "#A7E8FF",
+        description: "Extensión al catálogo europeo con más de 1,5 millones de datasets de 36 países.",
+        icon: "🇪🇺"
+    },
+    {
+        name: "Slack / Teams",
+        type: "Alertas y notificaciones",
+        status: "Planificado",
+        statusColor: "#A7E8FF",
+        description: "Notificaciones automáticas cuando se detectan anomalías o datasets críticos desactualizados.",
+        icon: "🔔"
     }
 ];
 
 function renderIntegrations() {
     const grid = document.getElementById("integrationsGrid");
+    if (!grid) return;
+
     grid.innerHTML = integrationsData.map(int => `
         <div class="int-card">
-            <h3>${int.name}</h3>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+                <span style="font-size:1.4rem">${int.icon}</span>
+                <h3 style="margin:0">${int.name}</h3>
+            </div>
             <p><strong>Tipo:</strong> ${int.type}</p>
-            <p><strong>Estado:</strong> ${int.status}</p>
-            <p>${int.description}</p>
+            <p style="margin:6px 0">
+                <strong>Estado:</strong>
+                <span style="display:inline-block;margin-left:6px;padding:2px 10px;border-radius:6px;font-size:0.78rem;background:${int.statusColor}22;color:${int.statusColor};border:1px solid ${int.statusColor}44;font-weight:600">
+                    ${int.status}
+                </span>
+            </p>
+            <p style="margin-top:8px;font-size:0.85rem;color:#666">${int.description}</p>
         </div>
     `).join("");
 }
 
 renderIntegrations();
-
-
-
-
-
