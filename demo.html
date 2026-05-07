@@ -326,8 +326,8 @@
     <script>
     const BASE_API = 'https://datos.gob.es/apidata/catalog';
     const PROXIES = [
-        u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
         u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+        u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
         u => u
     ];
     async function apiFetch(path) {
@@ -497,6 +497,7 @@
             const t0 = Date.now();
             const j  = await apiFetch(path);
             const ms = Date.now() - t0;
+            console.log('API response:', JSON.stringify(j).substring(0, 300));
             const datasets = j.result?.items || [];
             _allDatasets   = datasets;
 
