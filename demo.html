@@ -498,6 +498,7 @@
             const t0 = Date.now();
             const j  = await apiFetch(path);
             const ms = Date.now() - t0;
+            console.log('JSON keys:', Object.keys(j), 'result keys:', Object.keys(j?.result||{}));
             // Extraer datasets de la respuesta — la API linked-data devuelve result.items
             let datasets = [];
             if (j?.result?.items)       datasets = j.result.items;
@@ -529,9 +530,9 @@
             el('kpiAnomalies').textContent = anoms.filter(a => a.type === 'warn').length;
             el('kpiAnomalies').classList.remove('loading');
 
-            renderAnomalies(anoms);
-            renderFmtChart(datasets);
-            renderDocList(datasets);
+            try { renderAnomalies(anoms); } catch(e2) { console.error('renderAnomalies error:', e2); }
+            try { renderFmtChart(datasets); } catch(e2) { console.error('renderFmtChart error:', e2); }
+            try { renderDocList(datasets); } catch(e2) { console.error('renderDocList error:', e2); }
 
             window._graphData = buildGraphData(datasets);
             if (document.getElementById('view-graph-advanced').classList.contains('active-view')) {
@@ -541,8 +542,9 @@
                     '<div class="empty-state" style="padding-top:6rem">✓ Grafo listo — ve a <strong>Grafo Avanzado</strong></div>';
             }
         } catch(e) {
+            console.error('searchDatasets catch:', e.message, e.stack);
             document.getElementById('documentsList').innerHTML =
-                '<div class="empty-state">Error al conectar con datos.gob.es.</div>';
+                '<div class="empty-state">Error: ' + e.message + '</div>';
         }
     }
 
