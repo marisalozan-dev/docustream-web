@@ -4,725 +4,532 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocuStream PRO — Demo Interactiva</title>
-
-    <!-- Estilos originales — sin tocar -->
     <link rel="stylesheet" href="assets/css/style-demo.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Librerías originales -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-
-    <!-- Chart.js añadido para gráfico de formatos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-
-    <!-- Solo estilos que no existen en style-demo.css -->
     <style>
-        .live-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.72rem;
-            background: var(--accent-soft);
-            border: 1px solid var(--accent-blue);
-            border-radius: 20px;
-            padding: 3px 10px;
-            margin-left: 10px;
-            vertical-align: middle;
-            color: var(--text-main);
-        }
-        .live-dot {
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: #4db87a;
-            animation: livepulse 2s infinite;
-        }
-        @keyframes livepulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-        .source-note {
-            position: absolute;
-            bottom: 24px;
-            left: 20px;
-            right: 20px;
-            font-size: 0.72rem;
-            color: var(--text-main);
-            opacity: .7;
-            line-height: 1.6;
-        }
-        .source-note a { color: var(--text-main); font-weight: 600; }
-
-        .kpi-sub { font-size: 0.72rem; color: #aaa; margin-top: 2px; }
-        .kpi-value.loading { color: #ccc !important; animation: shimmer 1.4s infinite; }
-        @keyframes shimmer { 0%,100%{opacity:.3} 50%{opacity:1} }
-
-        .spinner {
-            display: inline-block;
-            width: 14px; height: 14px;
-            border: 2px solid var(--border);
-            border-top-color: #4db87a;
-            border-radius: 50%;
-            animation: spin .7s linear infinite;
-            vertical-align: middle;
-            margin-right: 6px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .search-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-        .search-row input {
-            flex: 1; min-width: 150px;
-            padding: 9px 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-            color: var(--text-main);
-            background: #fff;
-        }
-        .search-row input:focus { outline: none; border-color: #4db87a; }
-        .search-row select {
-            padding: 9px 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-            color: var(--text-main);
-            background: #fff;
-            cursor: pointer;
-        }
-        .search-row button {
-            padding: 9px 18px;
-            background: #4db87a;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-size: .85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s;
-        }
-        .search-row button:hover { background: #3da66a; }
-
-        /* Doc items reales con la misma base que .doc-item */
-        .doc-item-real {
-            background: #FFFFFF;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-        .doc-item-real:hover { background: var(--accent-soft); }
-        .doc-item-real.selected { border-color: #4db87a; background: var(--accent-soft); }
-        .doc-icon-real {
-            width: 36px; height: 36px;
-            border-radius: 8px;
-            background: var(--accent-soft);
-            display: flex; align-items: center; justify-content: center;
-            font-size: .72rem; font-weight: 700; color: #4db87a;
-            flex-shrink: 0;
-        }
-        .doc-body-real { flex: 1; min-width: 0; }
-        .doc-title-real {
-            font-size: .9rem; font-weight: 600; color: var(--text-main);
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            margin-bottom: 3px;
-        }
-        .doc-meta-real { font-size: .78rem; color: #888; }
-
-        .score-wrap { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
-        .score-bar { width: 52px; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
-        .score-fill { height: 100%; border-radius: 3px; transition: width .7s ease; }
-        .score-n { font-size: .72rem; color: #888; width: 22px; text-align: right; }
-
-        .analysis-box {
-            background: var(--bg-light);
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-size: .85rem;
-            color: var(--text-main);
-            line-height: 1.7;
-            min-height: 60px;
-            border: 1px solid var(--border);
-            margin-top: 12px;
-        }
-        .analysis-box b { color: #4db87a; }
-
-        .anomaly-list { display: grid; gap: 7px; }
-        .anomaly-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: .82rem; }
-        .anomaly-item.warn { background: #FFF4B8; color: #7a6000; }
-        .anomaly-item.ok   { background: var(--accent-soft); color: #2a7a4a; }
-        .anomaly-item.info { background: var(--accent-blue); color: #1a5a7a; }
-
-        .pro-dashboard-charts {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .fmt-chart-wrap { position: relative; width: 100%; height: 200px; margin-top: 8px; }
-
-        .empty-state { text-align: center; padding: 2rem; color: #aaa; font-size: .85rem; }
-        .legend-dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; }
-
-        @media (max-width: 768px) {
-            .pro-dashboard-charts { grid-template-columns: 1fr; }
-        }
+        .live-pill { display:inline-flex;align-items:center;gap:6px;font-size:.72rem;background:var(--accent-soft);border:1px solid var(--accent-blue);border-radius:20px;padding:3px 10px;margin-left:10px;vertical-align:middle;color:var(--text-main); }
+        .live-dot { width:7px;height:7px;border-radius:50%;background:#4db87a;animation:livepulse 2s infinite; }
+        @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.3}}
+        .source-note { position:absolute;bottom:24px;left:20px;right:20px;font-size:.72rem;color:var(--text-main);opacity:.7;line-height:1.6; }
+        .source-note a { color:var(--text-main);font-weight:600; }
+        .kpi-sub { font-size:.72rem;color:#aaa;margin-top:2px; }
+        .kpi-value.loading { color:#ccc!important;animation:shimmer 1.4s infinite; }
+        @keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}
+        .spinner { display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:#4db87a;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px; }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .search-row { display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px; }
+        .search-row input { flex:1;min-width:150px;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:.85rem;color:var(--text-main);background:#fff; }
+        .search-row input:focus { outline:none;border-color:#4db87a; }
+        .search-row select { padding:9px 10px;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:.85rem;color:var(--text-main);background:#fff;cursor:pointer; }
+        .search-row button { padding:9px 18px;background:#4db87a;color:#fff;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:.2s; }
+        .search-row button:hover { background:#3da66a; }
+        .doc-item-real { background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.2s;display:flex;align-items:flex-start;gap:12px;margin-bottom:8px; }
+        .doc-item-real:hover { background:var(--accent-soft); }
+        .doc-item-real.selected { border-color:#4db87a;background:var(--accent-soft); }
+        .doc-icon-real { width:36px;height:36px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#4db87a;flex-shrink:0; }
+        .doc-body-real { flex:1;min-width:0; }
+        .doc-title-real { font-size:.9rem;font-weight:600;color:var(--text-main);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px; }
+        .doc-meta-real { font-size:.78rem;color:#888; }
+        .score-wrap { display:flex;align-items:center;gap:5px;flex-shrink:0; }
+        .score-bar { width:52px;height:5px;background:var(--border);border-radius:3px;overflow:hidden; }
+        .score-fill { height:100%;border-radius:3px;transition:width .7s ease; }
+        .score-n { font-size:.72rem;color:#888;width:22px;text-align:right; }
+        .analysis-box { background:var(--bg-light);border-radius:8px;padding:14px 16px;font-size:.85rem;color:var(--text-main);line-height:1.7;min-height:60px;border:1px solid var(--border);margin-top:12px; }
+        .analysis-box b { color:#4db87a; }
+        .anomaly-list { display:grid;gap:7px; }
+        .anomaly-item { display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:.82rem; }
+        .anomaly-item.warn { background:#FFF4B8;color:#7a6000; }
+        .anomaly-item.ok { background:var(--accent-soft);color:#2a7a4a; }
+        .anomaly-item.info { background:var(--accent-blue);color:#1a5a7a; }
+        .pro-dashboard-charts { display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px; }
+        .fmt-chart-wrap { position:relative;width:100%;height:200px;margin-top:8px; }
+        .empty-state { text-align:center;padding:2rem;color:#aaa;font-size:.85rem; }
+        .legend-dot { width:13px;height:13px;border-radius:50%;flex-shrink:0; }
+        @media(max-width:768px){.pro-dashboard-charts{grid-template-columns:1fr}}
     </style>
 </head>
-
 <body>
 
-    <!-- ========================= SIDEBAR ========================= -->
-    <aside class="sidebar">
-        <h2>DocuStream PRO</h2>
+<aside class="sidebar">
+    <h2>DocuStream PRO</h2>
+    <nav>
+        <button onclick="showView('dashboard',event)">Dashboard</button>
+        <button onclick="showView('documents',event)">Documentos</button>
+        <button onclick="showView('integrations',event)">Integraciones</button>
+        <button onclick="showView('graph-advanced',event)">Grafo Avanzado</button>
+        <a href="index.html" class="back-link">← Inicio</a>
+    </nav>
+    <div class="source-note">
+        <span class="live-dot"></span> Datos en vivo<br><br>
+        Fuente: <a href="https://datos.gob.es" target="_blank">datos.gob.es</a><br>
+        Ministerio de Transformación Digital
+    </div>
+</aside>
 
-        <nav>
-            <button onclick="showView('dashboard', event)">Dashboard</button>
-            <button onclick="showView('documents', event)">Documentos</button>
-            <button onclick="showView('integrations', event)">Integraciones</button>
-            <button onclick="showView('graph-advanced', event)">Grafo Avanzado</button>
-            <a href="index.html" class="back-link">← Inicio</a>
-        </nav>
+<main class="main-content">
 
-        <div class="source-note">
-            <span class="live-dot"></span> Datos en vivo<br><br>
-            Fuente: <a href="https://datos.gob.es" target="_blank">datos.gob.es</a><br>
-            Ministerio de Transformación Digital
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="pro-view active-view">
+        <h1>Dashboard <span class="live-pill"><span class="live-dot"></span>en vivo</span></h1>
+        <div class="pro-kpi-grid" style="margin-bottom:20px">
+            <div class="pro-kpi-card"><h3>Datasets procesados</h3><p id="kpiDocs" class="kpi-value loading">—</p><div class="kpi-sub" id="kpiDocsSub">Cargando...</div></div>
+            <div class="pro-kpi-card"><h3>Latencia media</h3><p id="kpiLatency" class="kpi-value loading">—</p><div class="kpi-sub">milisegundos</div></div>
+            <div class="pro-kpi-card"><h3>Calidad del dato</h3><p id="kpiQuality" class="kpi-value loading">—</p><div class="kpi-sub">score global /100</div></div>
+            <div class="pro-kpi-card"><h3>Anomalías detectadas</h3><p id="kpiAnomalies" class="kpi-value loading">—</p><div class="kpi-sub">en este lote</div></div>
         </div>
-    </aside>
+        <div class="pro-dashboard-charts">
+            <div class="pro-panel"><h3>Distribución por formato</h3><div class="fmt-chart-wrap"><canvas id="fmtChart"></canvas></div></div>
+            <div class="pro-panel"><h3>Detección de anomalías</h3><div class="anomaly-list" id="anomalyList"><div class="empty-state">Cargando...</div></div></div>
+        </div>
+    </section>
 
-    <!-- ========================= CONTENIDO ========================= -->
-    <main class="main-content">
-
-        <!-- DASHBOARD -->
-        <section id="view-dashboard" class="pro-view active-view">
-            <h1>Dashboard <span class="live-pill"><span class="live-dot"></span>en vivo</span></h1>
-
-            <div class="pro-kpi-grid" style="margin-bottom:20px">
-                <div class="pro-kpi-card">
-                    <h3>Datasets procesados</h3>
-                    <p id="kpiDocs" class="kpi-value loading">—</p>
-                    <div class="kpi-sub" id="kpiDocsSub">Cargando...</div>
-                </div>
-                <div class="pro-kpi-card">
-                    <h3>Latencia media</h3>
-                    <p id="kpiLatency" class="kpi-value loading">—</p>
-                    <div class="kpi-sub">milisegundos</div>
-                </div>
-                <div class="pro-kpi-card">
-                    <h3>Calidad del dato</h3>
-                    <p id="kpiQuality" class="kpi-value loading">—</p>
-                    <div class="kpi-sub">score global /100</div>
-                </div>
-                <div class="pro-kpi-card">
-                    <h3>Anomalías detectadas</h3>
-                    <p id="kpiAnomalies" class="kpi-value loading">—</p>
-                    <div class="kpi-sub">en este lote</div>
+    <!-- DOCUMENTOS -->
+    <section id="view-documents" class="pro-view">
+        <h1>Documentos</h1>
+        <div class="pro-panel">
+            <div class="search-row">
+                <input type="text" id="searchInput" placeholder="Buscar datasets… (ej: empleo, salud, transporte)" />
+                <select id="themeSelect">
+                    <option value="">Todas las temáticas</option>
+                    <option value="sector-publico">Sector público</option>
+                    <option value="hacienda">Hacienda</option>
+                    <option value="salud">Salud</option>
+                    <option value="medioambiente">Medio ambiente</option>
+                    <option value="transporte">Transporte</option>
+                    <option value="educacion">Educación</option>
+                    <option value="economia">Economía</option>
+                    <option value="ciencia-y-tecnologia">Ciencia y tecnología</option>
+                </select>
+                <button id="searchBtn">Buscar</button>
+            </div>
+            <div class="documents-container">
+                <div id="documentsList"><div class="empty-state">Introduce una búsqueda o selecciona una temática</div></div>
+                <div class="documents-preview">
+                    <h2>Vista previa</h2>
+                    <div id="documentsPreviewContent"><div class="empty-state">Selecciona un documento…</div></div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="pro-dashboard-charts">
-                <div class="pro-panel">
-                    <h3>Distribución por formato</h3>
-                    <div class="fmt-chart-wrap">
-                        <canvas id="fmtChart" aria-label="Distribución de formatos"></canvas>
-                    </div>
-                </div>
-                <div class="pro-panel">
-                    <h3>Detección de anomalías</h3>
-                    <div class="anomaly-list" id="anomalyList">
-                        <div class="empty-state">Realiza una búsqueda en Documentos</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- INTEGRACIONES -->
+    <section id="view-integrations" class="pro-view">
+        <h1>Integraciones</h1>
+        <div class="integrations-grid" id="integrationsGrid"></div>
+    </section>
 
-        <!-- DOCUMENTOS -->
-        <section id="view-documents" class="pro-view">
-            <h1>Documentos</h1>
+    <!-- GRAFO AVANZADO -->
+    <section id="view-graph-advanced" class="pro-view">
+        <h1>Grafo Avanzado</h1>
+        <div class="graph-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#7ED7A1;border:1px solid #4db87a"></div>Dataset</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#A7E8FF;border:1px solid #7ab8cc"></div>Temática</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#FFF4B8;border:1px solid #c8b84a"></div>Publicador</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#FFB8A8;border:1px solid #cc7a60"></div>Concepto</div>
+        </div>
+        <div id="graphAdvancedContainer"><div class="empty-state" style="padding-top:6rem">Realiza una búsqueda en Documentos para generar el grafo semántico</div></div>
+        <div class="graph-tooltip" id="graphTooltip"></div>
+    </section>
 
-            <div class="pro-panel">
-                <div class="search-row">
-                    <input type="text" id="searchInput" placeholder="Buscar datasets… (ej: empleo, salud, transporte)" />
-                    <select id="themeSelect">
-                        <option value="">Todas las temáticas</option>
-                        <option value="sector-publico">Sector público</option>
-                        <option value="hacienda">Hacienda</option>
-                        <option value="salud">Salud</option>
-                        <option value="medioambiente">Medio ambiente</option>
-                        <option value="transporte">Transporte</option>
-                        <option value="educacion">Educación</option>
-                        <option value="economia">Economía</option>
-                        <option value="ciencia-y-tecnologia">Ciencia y tecnología</option>
-                    </select>
-                    <button id="searchBtn">Buscar</button>
-                </div>
+</main>
 
-                <div class="documents-container">
-                    <div id="documentsList">
-                        <div class="empty-state">Introduce una búsqueda o selecciona una temática</div>
-                    </div>
-                    <div class="documents-preview">
-                        <h2>Vista previa</h2>
-                        <div id="documentsPreviewContent">
-                            <div class="empty-state">Selecciona un documento…</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<script>
+function showView(view, e) {
+    document.querySelectorAll('.pro-view').forEach(v => v.classList.remove('active-view'));
+    document.getElementById('view-' + view).classList.add('active-view');
+    document.querySelectorAll('.sidebar nav button').forEach(b => b.classList.remove('active-btn'));
+    if (e && e.target) e.target.classList.add('active-btn');
+    if (view === 'graph-advanced') setTimeout(() => { if (window._graphData) renderAdvancedGraph(window._graphData); }, 80);
+}
+</script>
 
-        <!-- INTEGRACIONES -->
-        <section id="view-integrations" class="pro-view">
-            <h1>Integraciones</h1>
-            <div class="integrations-grid" id="integrationsGrid"></div>
-        </section>
+<script>
+/* ================================================================
+   HELPERS — normaliza la estructura variable de la API linked-data
+   ================================================================ */
 
-        <!-- GRAFO AVANZADO -->
-        <section id="view-graph-advanced" class="pro-view">
-            <h1>Grafo Avanzado</h1>
+// Convierte cualquier valor (array, objeto, null) en array seguro
+function safeArray(v) {
+    if (!v) return [];
+    if (Array.isArray(v)) return v;
+    if (typeof v === 'object') return Object.values(v).filter(x => x && typeof x === 'object');
+    return [];
+}
 
-            <div class="graph-legend">
-                <div class="legend-item"><div class="legend-dot" style="background:#7ED7A1;border:1px solid #4db87a"></div>Dataset</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#A7E8FF;border:1px solid #7ab8cc"></div>Temática</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#FFF4B8;border:1px solid #c8b84a"></div>Publicador</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#FFB8A8;border:1px solid #cc7a60"></div>Concepto</div>
-            </div>
+// Extrae string de un campo que puede ser string, objeto {value:...} o array
+function safeStr(v) {
+    if (!v) return '';
+    if (typeof v === 'string') return v;
+    if (Array.isArray(v)) return safeStr(v[0]);
+    if (typeof v === 'object') return v.value || v['@value'] || '';
+    return String(v);
+}
 
-            <div id="graphAdvancedContainer">
-                <div class="empty-state" style="padding-top:6rem">
-                    Realiza una búsqueda en Documentos para generar el grafo semántico
-                </div>
-            </div>
-            <div class="graph-tooltip" id="graphTooltip"></div>
-        </section>
+function getTitle(ds)    { return safeStr(ds.title) || 'Dataset sin título'; }
+function getPub(ds)      { return safeStr(ds.publisher?.name) || safeStr(ds.publisher?.['foaf:name']) || 'Publicador desconocido'; }
+function getModified(ds) { return ds.modified || ds['dct:modified'] || null; }
+function getDesc(ds)     { return safeStr(ds.description); }
 
-    </main>
+function getKeywords(ds) {
+    const kw = ds.keyword || ds['dcat:keyword'] || [];
+    return safeArray(Array.isArray(kw) ? kw : [kw])
+        .map(k => safeStr(k))
+        .filter(Boolean);
+}
 
-    <!-- ========================= NAVEGACIÓN ========================= -->
-    <script>
-    function showView(view, e) {
-        document.querySelectorAll('.pro-view').forEach(v => v.classList.remove('active-view'));
-        document.getElementById('view-' + view).classList.add('active-view');
-        document.querySelectorAll('.sidebar nav button').forEach(btn => btn.classList.remove('active-btn'));
-        if (e && e.target) e.target.classList.add('active-btn');
-        if (view === 'graph-advanced') {
-            setTimeout(() => { if (window._graphData) renderAdvancedGraph(window._graphData); }, 80);
-        }
-    }
-    </script>
+function getTheme(ds) {
+    const themes = safeArray(Array.isArray(ds.theme) ? ds.theme : ds.theme ? [ds.theme] : []);
+    const t = themes[0];
+    if (!t) return null;
+    return safeStr(t.prefLabel) || safeStr(t.id) || safeStr(t['@id']) || null;
+}
 
-    <!-- ========================= DATOS REALES — datos.gob.es + Claude API ========================= -->
-    <script>
-    const BASE_API = 'https://datos.gob.es/apidata/catalog';
-    const PROXIES = [
-        u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
-        u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-        u => u
-    ];
-    async function apiFetch(path) {
-        const fullUrl = BASE_API + path;
-        for (const proxy of PROXIES) {
-            try {
-                const r = await fetch(proxy(fullUrl), { signal: AbortSignal.timeout(7000) });
-                if (!r.ok) continue;
-                const data = await r.json();
-                return data;
-            } catch(e) { continue; }
-        }
-        throw new Error('Sin conexion');
-    }
-    let _allDatasets = [];
-    let _fmtChart    = null;
+function getFormats(ds) {
+    const distRaw = ds.distribution || ds['dcat:distribution'] || [];
+    const dists = Array.isArray(distRaw) ? distRaw : typeof distRaw === 'object' ? Object.values(distRaw) : [];
+    const fmts = dists
+        .filter(d => d && typeof d === 'object')
+        .map(d => {
+            const pref = d?.format?.prefLabel || d?.['dct:format']?.prefLabel;
+            return safeStr(pref).toUpperCase().split('/')[0].trim();
+        })
+        .filter(Boolean);
+    return [...new Set(fmts.map(f => ['CSV','JSON','XML','RDF','XLS','XLSX','PDF'].includes(f) ? f : 'Otro'))];
+}
 
-    // Normaliza campos que la API puede devolver como objeto en lugar de array
-    function toArray(v) {
-        if (!v) return [];
-        if (Array.isArray(v)) return v;
-        if (typeof v === 'object') {
-            // Si es un objeto linked-data puede tener clave numérica o ser el item directamente
-            const vals = Object.values(v);
-            // Si los valores son objetos (distribuciones reales), devolverlos
-            if (vals.length && typeof vals[0] === 'object') return vals;
-            // Si el propio objeto parece un item (tiene _about, format, etc.), envolverlo
-            if (v['_about'] || v['format'] || v['accessURL']) return [v];
-            return vals;
-        }
-        return [];
-    }
-    function getFormats(ds) {
+/* ================================================================
+   API — proxy con fallback
+   ================================================================ */
+const BASE_API = 'https://datos.gob.es/apidata/catalog';
+const PROXIES = [
+    u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+    u => u
+];
+
+async function apiFetch(path) {
+    const fullUrl = BASE_API + path;
+    for (const proxy of PROXIES) {
         try {
-            return [...new Set(
-                toArray(ds.distribution)
-                    .filter(d => d && typeof d === 'object')
-                    .map(d => {
-                        const pref = d?.format?.prefLabel;
-                        const val = Array.isArray(pref) ? pref[0]?.value : pref?.value || '';
-                        return (val || '').toUpperCase().split('/')[0].trim();
-                    })
-                    .filter(Boolean)
-            )];
-        } catch(e) { return []; }
+            const r = await fetch(proxy(fullUrl), { signal: AbortSignal.timeout(8000) });
+            if (!r.ok) continue;
+            const data = await r.json();
+            return data;
+        } catch(e) { continue; }
     }
-    function getTitle(ds) {
-        const t = toArray(ds.title);
-        return t[0]?.value || t[0] || 'Dataset sin título';
-    }
-    function getPub(ds) {
-        return ds.publisher?.name?.[0]?.value || ds.publisher?.name?.value || ds.publisher?.['foaf:name'] || 'Publicador desconocido';
-    }
-    function getKeywords(ds) {
-        return toArray(ds.keyword).map(k => k?.value || k || '').filter(Boolean);
-    }
-    function getTheme(ds) {
-        const t = toArray(ds.theme);
-        return t[0]?.prefLabel?.[0]?.value || t[0]?.prefLabel?.value || t[0]?.id || null;
-    }
+    throw new Error('Sin conexión con datos.gob.es');
+}
 
-    function scoreDataset(ds) {
-        let s = 50;
-        if ((ds.description?.[0]?.value || ds.description?.value || '').length > 50) s += 15;
-        if (getKeywords(ds).length > 2) s += 10;
-        if (ds.modified) s += 10;
-        const age = ds.modified ? (Date.now() - new Date(ds.modified).getTime()) / (864e5 * 365) : 5;
-        if      (age < 1) s += 15;
-        else if (age < 2) s += 8;
-        else if (age > 3) s -= 10;
-        return Math.min(99, Math.max(30, Math.round(s)));
+/* extrae el array de datasets de cualquier forma de respuesta */
+function extractDatasets(j) {
+    if (!j) return [];
+    if (j.result?.items && Array.isArray(j.result.items)) return j.result.items;
+    if (Array.isArray(j.result)) return j.result;
+    if (Array.isArray(j)) return j;
+    // buscar cualquier array dentro de result
+    for (const k of Object.keys(j.result || {})) {
+        if (Array.isArray(j.result[k]) && j.result[k].length > 0) return j.result[k];
     }
+    return [];
+}
 
-    function detectAnomalies(datasets) {
-        const anoms = [];
-        const noDesc = datasets.filter(d => !(d.description?.[0]?.value || d.description?.value)).length;
-        if (noDesc) anoms.push({ type: 'warn', msg: `${noDesc} datasets sin descripción` });
-        const old = datasets.filter(d => !d.modified || (Date.now() - new Date(d.modified)) / (864e5 * 365) > 2).length;
-        if (old)    anoms.push({ type: 'warn', msg: `${old} con actualización > 2 años` });
-        const noKw = datasets.filter(d => !getKeywords(d).length).length;
-        if (noKw)   anoms.push({ type: 'info', msg: `${noKw} sin etiquetas semánticas` });
-        if (!anoms.length) anoms.push({ type: 'ok', msg: 'Sin anomalías críticas' });
-        anoms.push({ type: 'ok', msg: `${datasets.length} datasets validados` });
-        return anoms;
+function extractTotal(j) {
+    return j?.result?.totalItems || j?.totalItems || 0;
+}
+
+/* ================================================================
+   MÉTRICAS
+   ================================================================ */
+let _allDatasets = [];
+let _fmtChart    = null;
+
+function scoreDataset(ds) {
+    let s = 50;
+    if (getDesc(ds).length > 50) s += 15;
+    if (getKeywords(ds).length > 2) s += 10;
+    const mod = getModified(ds);
+    if (mod) s += 10;
+    const age = mod ? (Date.now() - new Date(mod).getTime()) / (864e5 * 365) : 5;
+    if      (age < 1) s += 15;
+    else if (age < 2) s += 8;
+    else if (age > 3) s -= 10;
+    return Math.min(99, Math.max(30, Math.round(s)));
+}
+
+function detectAnomalies(datasets) {
+    const anoms = [];
+    const noDesc = datasets.filter(d => !getDesc(d)).length;
+    if (noDesc) anoms.push({ type:'warn', msg:`${noDesc} datasets sin descripción` });
+    const old = datasets.filter(d => { const m = getModified(d); return !m || (Date.now()-new Date(m))/(864e5*365)>2; }).length;
+    if (old)    anoms.push({ type:'warn', msg:`${old} con actualización > 2 años` });
+    const noKw = datasets.filter(d => !getKeywords(d).length).length;
+    if (noKw)   anoms.push({ type:'info', msg:`${noKw} sin etiquetas semánticas` });
+    if (!anoms.length) anoms.push({ type:'ok', msg:'Sin anomalías críticas' });
+    anoms.push({ type:'ok', msg:`${datasets.length} datasets validados` });
+    return anoms;
+}
+
+function renderAnomalies(anoms) {
+    const icons = { warn:'⚠', ok:'✓', info:'ℹ' };
+    document.getElementById('anomalyList').innerHTML = anoms.map(a =>
+        `<div class="anomaly-item ${a.type}"><span style="width:16px;text-align:center">${icons[a.type]}</span>${a.msg}</div>`
+    ).join('');
+}
+
+function renderFmtChart(datasets) {
+    const fc = {};
+    datasets.forEach(ds => {
+        getFormats(ds).forEach(f => { fc[f] = (fc[f]||0)+1; });
+    });
+    const sorted = Object.entries(fc).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    if (_fmtChart) _fmtChart.destroy();
+    if (!sorted.length) return;
+    _fmtChart = new Chart(document.getElementById('fmtChart'), {
+        type: 'doughnut',
+        data: { labels: sorted.map(e=>e[0]), datasets:[{ data:sorted.map(e=>e[1]), backgroundColor:['#7ED7A1','#A7E8FF','#4db87a','#FFF4B8','#FFB8A8','#CFFFE5'], borderWidth:0 }] },
+        options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ font:{size:11,family:'Inter'}, padding:10, color:'#4A4A4A' } } } }
+    });
+}
+
+function updateKPIs(datasets, j, ms) {
+    const el = id => document.getElementById(id);
+    const total = extractTotal(j);
+    el('kpiDocs').textContent = (total || datasets.length).toLocaleString('es-ES');
+    el('kpiDocs').classList.remove('loading');
+    el('kpiDocsSub').textContent = `${datasets.length} en este lote`;
+    if (ms !== null) { el('kpiLatency').textContent = ms; el('kpiLatency').classList.remove('loading'); }
+    const scores = datasets.map(scoreDataset);
+    el('kpiQuality').textContent = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : '—';
+    el('kpiQuality').classList.remove('loading');
+    const anoms = detectAnomalies(datasets);
+    el('kpiAnomalies').textContent = anoms.filter(a=>a.type==='warn').length;
+    el('kpiAnomalies').classList.remove('loading');
+    renderAnomalies(anoms);
+    renderFmtChart(datasets);
+}
+
+/* ================================================================
+   DOCUMENTOS
+   ================================================================ */
+function renderDocList(datasets) {
+    if (!datasets.length) {
+        document.getElementById('documentsList').innerHTML = '<div class="empty-state">No se encontraron datasets.</div>';
+        return;
     }
-
-    function renderAnomalies(anoms) {
-        const icons = { warn: '⚠', ok: '✓', info: 'ℹ' };
-        document.getElementById('anomalyList').innerHTML = anoms.map(a =>
-            `<div class="anomaly-item ${a.type}"><span style="width:16px;text-align:center">${icons[a.type]}</span>${a.msg}</div>`
-        ).join('');
-    }
-
-    function renderFmtChart(datasets) {
-        const fc = {};
-        datasets.forEach(ds => {
-            getFormats(ds).forEach(f => {
-                const key = ['CSV','JSON','XML','RDF','XLS','XLSX','PDF'].includes(f) ? f : 'Otro';
-                fc[key] = (fc[key] || 0) + 1;
-            });
-        });
-        const sorted = Object.entries(fc).sort((a, b) => b[1] - a[1]).slice(0, 6);
-        if (_fmtChart) _fmtChart.destroy();
-        _fmtChart = new Chart(document.getElementById('fmtChart'), {
-            type: 'doughnut',
-            data: {
-                labels: sorted.map(e => e[0]),
-                datasets: [{ data: sorted.map(e => e[1]), backgroundColor: ['#7ED7A1','#A7E8FF','#4db87a','#FFF4B8','#FFB8A8','#CFFFE5'], borderWidth: 0 }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom', labels: { font: { size: 11, family: 'Inter' }, padding: 10, color: '#4A4A4A' } } }
-            }
-        });
-    }
-
-    function renderDocList(datasets) {
-        console.log('renderDocList llamado con', datasets.length, 'datasets');
-        if (!datasets.length) {
-            document.getElementById('documentsList').innerHTML = '<div class="empty-state">No se encontraron datasets.</div>';
-            return;
-        }
-        document.getElementById('documentsList').innerHTML = datasets.slice(0, 12).map((ds, i) => {
-            const title = getTitle(ds);
-            const pub   = getPub(ds);
-            const mod   = ds.modified ? new Date(ds.modified).toLocaleDateString('es-ES', { year: 'numeric', month: 'short' }) : '—';
-            const score = scoreDataset(ds);
-            const sc    = score >= 70 ? '#4db87a' : score >= 50 ? '#c8b84a' : '#cc7a60';
-            const init  = title.split(' ').slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || 'DS';
-            const fmts  = getFormats(ds).slice(0, 2);
-            return `<div class="doc-item-real" data-idx="${i}" onclick="selectDataset(${i})">
-                <div class="doc-icon-real">${init}</div>
-                <div class="doc-body-real">
-                    <div class="doc-title-real">${title}</div>
-                    <div class="doc-meta-real">${pub} · ${mod}</div>
-                    <span class="doc-status">${fmts.join(' · ') || 'Dataset'}</span>
-                </div>
-                <div class="score-wrap">
-                    <div class="score-bar"><div class="score-fill" style="width:${score}%;background:${sc}"></div></div>
-                    <div class="score-n">${score}</div>
-                </div>
-            </div>`;
-        }).join('');
-    }
-
-    async function selectDataset(idx) {
-        document.querySelectorAll('.doc-item-real').forEach(el => el.classList.remove('selected'));
-        document.querySelector(`[data-idx="${idx}"]`)?.classList.add('selected');
-
-        const ds    = _allDatasets[idx];
+    document.getElementById('documentsList').innerHTML = datasets.slice(0,12).map((ds,i) => {
         const title = getTitle(ds);
         const pub   = getPub(ds);
-        const mod   = ds.modified ? new Date(ds.modified).toLocaleDateString('es-ES') : '—';
+        const mod   = getModified(ds);
+        const modStr = mod ? new Date(mod).toLocaleDateString('es-ES',{year:'numeric',month:'short'}) : '—';
         const score = scoreDataset(ds);
-        const fmts  = getFormats(ds).join(', ');
+        const sc    = score>=70?'#4db87a':score>=50?'#c8b84a':'#cc7a60';
+        const init  = title.split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'DS';
+        const fmts  = getFormats(ds).slice(0,2);
+        return `<div class="doc-item-real" data-idx="${i}" onclick="selectDataset(${i})">
+            <div class="doc-icon-real">${init}</div>
+            <div class="doc-body-real">
+                <div class="doc-title-real">${title}</div>
+                <div class="doc-meta-real">${pub} · ${modStr}</div>
+                <span class="doc-status">${fmts.join(' · ')||'Dataset'}</span>
+            </div>
+            <div class="score-wrap">
+                <div class="score-bar"><div class="score-fill" style="width:${score}%;background:${sc}"></div></div>
+                <div class="score-n">${score}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
 
+async function selectDataset(idx) {
+    document.querySelectorAll('.doc-item-real').forEach(el=>el.classList.remove('selected'));
+    document.querySelector(`[data-idx="${idx}"]`)?.classList.add('selected');
+    const ds    = _allDatasets[idx];
+    const title = getTitle(ds);
+    const pub   = getPub(ds);
+    const mod   = getModified(ds);
+    const modStr = mod ? new Date(mod).toLocaleDateString('es-ES') : '—';
+    const score = scoreDataset(ds);
+    const fmts  = getFormats(ds).join(', ');
+    const kws   = getKeywords(ds).slice(0,5).join(', ');
+    const desc  = getDesc(ds);
+
+    document.getElementById('documentsPreviewContent').innerHTML = `
+        <h3>${title}</h3>
+        <p><strong>Publicador:</strong> ${pub}</p>
+        <p><strong>Última actualización:</strong> ${modStr}</p>
+        <p><strong>Formatos:</strong> ${fmts||'—'}</p>
+        <p><strong>Score de calidad:</strong> ${score}/100</p>
+        <p><strong>Análisis IA:</strong> <span class="spinner"></span> Analizando…</p>
+    `;
+
+    try {
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({
+                model:'claude-sonnet-4-20250514', max_tokens:1000,
+                messages:[{ role:'user', content:`Analiza este dataset de datos.gob.es en 3-4 frases en español. Sé técnico y directo. Comenta: qué contiene, su utilidad práctica, calidad documental (score ${score}/100) y si está actualizado (última modificación: ${modStr}). Dataset: ${title}. Publicador: ${pub}. Descripción: ${desc}. Palabras clave: ${kws}. Formatos: ${fmts}.` }]
+            })
+        });
+        const data = await resp.json();
+        const text = data.content?.[0]?.text || 'No se pudo obtener análisis.';
         document.getElementById('documentsPreviewContent').innerHTML = `
             <h3>${title}</h3>
             <p><strong>Publicador:</strong> ${pub}</p>
-            <p><strong>Última actualización:</strong> ${mod}</p>
-            <p><strong>Formatos:</strong> ${fmts || '—'}</p>
+            <p><strong>Última actualización:</strong> ${modStr}</p>
+            <p><strong>Formatos:</strong> ${fmts||'—'}</p>
             <p><strong>Score de calidad:</strong> ${score}/100</p>
-            <p><strong>Análisis IA:</strong> <span class="spinner"></span> Analizando…</p>
+            <div class="analysis-box">${text.replace(/(\b\d{4}\b|\d+\/100|CSV|JSON|XML|RDF)/g,'<b>$1</b>')}</div>
         `;
-
-        const desc = ds.description?.[0]?.value || '';
-        const kws  = getKeywords(ds).slice(0, 5).join(', ');
-
-        try {
-            const resp = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'claude-sonnet-4-20250514',
-                    max_tokens: 1000,
-                    messages: [{ role: 'user', content: `Analiza este dataset de datos.gob.es en 3-4 frases en español. Sé técnico y directo. Comenta: qué contiene, su utilidad práctica, calidad documental (score ${score}/100) y si está actualizado (última modificación: ${mod}). Dataset: ${title}. Publicador: ${pub}. Descripción: ${desc}. Palabras clave: ${kws}. Formatos: ${fmts}.` }]
-                })
-            });
-            const data = await resp.json();
-            const text = data.content?.[0]?.text || 'No se pudo obtener análisis.';
-            document.getElementById('documentsPreviewContent').innerHTML = `
-                <h3>${title}</h3>
-                <p><strong>Publicador:</strong> ${pub}</p>
-                <p><strong>Última actualización:</strong> ${mod}</p>
-                <p><strong>Formatos:</strong> ${fmts || '—'}</p>
-                <p><strong>Score de calidad:</strong> ${score}/100</p>
-                <div class="analysis-box">${text.replace(/(\b\d{4}\b|\d+\/100|CSV|JSON|XML|RDF)/g, '<b>$1</b>')}</div>
-            `;
-        } catch(e) {
-            document.getElementById('documentsPreviewContent').innerHTML +=
-                '<p style="color:#cc7a60;margin-top:8px">Error al conectar con análisis IA.</p>';
-        }
+    } catch(e) {
+        document.getElementById('documentsPreviewContent').innerHTML +=
+            '<p style="color:#cc7a60;margin-top:8px">Error al conectar con análisis IA.</p>';
     }
+}
 
-    async function searchDatasets(query, theme) {
-        document.getElementById('documentsList').innerHTML =
-            '<div class="empty-state"><span class="spinner"></span> Consultando datos.gob.es…</div>';
-        document.getElementById('documentsPreviewContent').innerHTML =
-            '<div class="empty-state">Selecciona un documento…</div>';
-        ['kpiDocs','kpiLatency','kpiQuality','kpiAnomalies'].forEach(id =>
-            document.getElementById(id).classList.add('loading')
+async function searchDatasets(query, theme) {
+    document.getElementById('documentsList').innerHTML = '<div class="empty-state"><span class="spinner"></span> Consultando datos.gob.es…</div>';
+    document.getElementById('documentsPreviewContent').innerHTML = '<div class="empty-state">Selecciona un documento…</div>';
+    ['kpiDocs','kpiLatency','kpiQuality','kpiAnomalies'].forEach(id => document.getElementById(id).classList.add('loading'));
+    document.getElementById('graphAdvancedContainer').innerHTML = '<div class="empty-state" style="padding-top:6rem"><span class="spinner"></span> Construyendo grafo…</div>';
+
+    let path;
+    if (theme)             path = `/dataset/theme/${theme}.json?_pageSize=20&_sort=-modified`;
+    else if (query.trim()) path = `/dataset/title/${encodeURIComponent(query.trim())}.json?_pageSize=20&_sort=-modified`;
+    else                   path = `/dataset.json?_pageSize=20&_sort=-modified`;
+
+    try {
+        const t0 = Date.now();
+        const j  = await apiFetch(path);
+        const ms = Date.now() - t0;
+        const datasets = extractDatasets(j);
+        _allDatasets = datasets;
+
+        updateKPIs(datasets, j, ms);
+        renderDocList(datasets);
+
+        window._graphData = buildGraphData(datasets);
+        if (document.getElementById('view-graph-advanced').classList.contains('active-view')) {
+            renderAdvancedGraph(window._graphData);
+        } else {
+            document.getElementById('graphAdvancedContainer').innerHTML =
+                '<div class="empty-state" style="padding-top:6rem">✓ Grafo listo — ve a <strong>Grafo Avanzado</strong></div>';
+        }
+    } catch(e) {
+        document.getElementById('documentsList').innerHTML = `<div class="empty-state">Error: ${e.message}</div>`;
+    }
+}
+
+/* ================================================================
+   GRAFO D3
+   ================================================================ */
+function buildGraphData(datasets) {
+    const nodes=[], links=[], themeMap={}, pubMap={}, conceptMap={};
+    datasets.slice(0,12).forEach((ds,i) => {
+        const dsId = 'ds_'+i;
+        nodes.push({ id:dsId, label:getTitle(ds).substring(0,32), type:'dataset', r:10, ds });
+        const theme = getTheme(ds);
+        if (theme) {
+            const tKey = 'theme_'+theme;
+            if (!themeMap[tKey]) { themeMap[tKey]=true; nodes.push({ id:tKey, label:theme.substring(0,22), type:'theme', r:14 }); }
+            links.push({ source:dsId, target:tKey });
+        }
+        const pub = getPub(ds);
+        if (pub && pub !== 'Publicador desconocido') {
+            const pKey = 'pub_'+pub.substring(0,20);
+            if (!pubMap[pKey]) { pubMap[pKey]=true; nodes.push({ id:pKey, label:pub.substring(0,24), type:'publisher', r:12 }); }
+            links.push({ source:dsId, target:pKey });
+        }
+        getKeywords(ds).slice(0,2).forEach(kw => {
+            const kval = kw.substring(0,18);
+            if (!kval) return;
+            const cKey = 'concept_'+kval;
+            if (!conceptMap[cKey]) { conceptMap[cKey]=true; nodes.push({ id:cKey, label:kval, type:'concept', r:8 }); }
+            links.push({ source:dsId, target:cKey });
+        });
+    });
+    return { nodes, links };
+}
+
+function renderAdvancedGraph(data) {
+    const container = document.getElementById('graphAdvancedContainer');
+    if (!data?.nodes?.length) {
+        container.innerHTML = '<div class="empty-state" style="padding-top:6rem">Realiza una búsqueda en Documentos para generar el grafo semántico</div>';
+        return;
+    }
+    container.innerHTML = '';
+    const tooltip  = document.getElementById('graphTooltip');
+    const W = container.clientWidth||700, H = 500;
+    const colorMap  = { dataset:'#7ED7A1', theme:'#A7E8FF', publisher:'#FFF4B8', concept:'#FFB8A8' };
+    const strokeMap = { dataset:'#4db87a', theme:'#7ab8cc', publisher:'#c8b84a', concept:'#cc7a60' };
+
+    const svg = d3.select(container).append('svg').attr('width',W).attr('height',H).style('font-family','Inter,sans-serif');
+    svg.append('defs').append('marker').attr('id','arrow').attr('viewBox','0 -4 8 8').attr('refX',18).attr('refY',0).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto').append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#ccc');
+
+    const sim = d3.forceSimulation(data.nodes)
+        .force('link', d3.forceLink(data.links).id(d=>d.id).distance(d=>d.source.type==='dataset'&&d.target.type==='theme'?95:d.source.type==='dataset'&&d.target.type==='publisher'?105:72).strength(0.6))
+        .force('charge', d3.forceManyBody().strength(-230))
+        .force('center',    d3.forceCenter(W/2,H/2))
+        .force('collision', d3.forceCollide().radius(d=>d.r+14));
+
+    const link = svg.append('g').selectAll('line').data(data.links).join('line').attr('stroke','#E9EEF2').attr('stroke-width',1.5).attr('marker-end','url(#arrow)');
+    const node = svg.append('g').selectAll('g').data(data.nodes).join('g').style('cursor','pointer')
+        .call(d3.drag()
+            .on('start',(e,d)=>{ if(!e.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+            .on('drag', (e,d)=>{ d.fx=e.x; d.fy=e.y; })
+            .on('end',  (e,d)=>{ if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
         );
-        document.getElementById('graphAdvancedContainer').innerHTML =
-            '<div class="empty-state" style="padding-top:6rem"><span class="spinner"></span> Construyendo grafo…</div>';
+    node.append('circle').attr('r',d=>d.r).attr('fill',d=>colorMap[d.type]).attr('stroke',d=>strokeMap[d.type]).attr('stroke-width',1.5);
+    node.append('text').attr('text-anchor','middle').attr('dy',d=>d.r+13).attr('font-size',d=>d.type==='theme'?'10px':'9px').attr('fill','#4A4A4A').text(d=>d.label.length>18?d.label.substring(0,17)+'…':d.label);
 
-        let path;
-        if (theme)             path = `/dataset/theme/${theme}.json?_pageSize=20&_sort=-modified`;
-        else if (query.trim()) path = `/dataset/title/${encodeURIComponent(query.trim())}.json?_pageSize=20&_sort=-modified`;
-        else                   path = `/dataset.json?_pageSize=20&_sort=-modified`;
+    node.on('mouseover',(e,d)=>{
+        let html=`<strong>${d.label}</strong><br>Tipo: ${d.type}`;
+        if(d.type==='dataset'&&d.ds){ const m=getModified(d.ds); html+=`<br>Actualizado: ${m?new Date(m).toLocaleDateString('es-ES',{year:'numeric',month:'short'}):'—'}<br>Score: ${scoreDataset(d.ds)}/100`; }
+        tooltip.innerHTML=html; tooltip.style.opacity='1';
+    })
+    .on('mousemove',e=>{ const r=container.getBoundingClientRect(); let x=e.clientX-r.left+12,y=e.clientY-r.top-10; if(x+210>W) x-=220; tooltip.style.left=x+'px'; tooltip.style.top=y+'px'; })
+    .on('mouseout',()=>{ tooltip.style.opacity='0'; });
 
-        try {
-            const t0 = Date.now();
-            const j  = await apiFetch(path);
-            const ms = Date.now() - t0;
-            console.log('JSON keys:', Object.keys(j), 'result keys:', Object.keys(j?.result||{}));
-            // Extraer datasets de la respuesta — la API linked-data devuelve result.items
-            let datasets = [];
-            if (j?.result?.items)       datasets = j.result.items;
-            else if (j?.items)          datasets = j.items;
-            else if (Array.isArray(j))  datasets = j;
-            else {
-                // Buscar cualquier array en el primer nivel de result
-                const resultKeys = Object.keys(j?.result || {});
-                for (const k of resultKeys) {
-                    if (Array.isArray(j.result[k]) && j.result[k].length > 0) {
-                        datasets = j.result[k]; break;
-                    }
-                }
-            }
-            console.log('Datasets encontrados:', datasets.length, datasets[0]?.title);
-            _allDatasets   = datasets;
-
-            const el = id => document.getElementById(id);
-            el('kpiLatency').textContent  = ms;   el('kpiLatency').classList.remove('loading');
-            el('kpiDocs').textContent     = (j.result?.totalItems || j.totalItems || datasets.length).toLocaleString('es-ES');
-            el('kpiDocs').classList.remove('loading');
-            el('kpiDocsSub').textContent  = `${datasets.length} en este lote`;
-
-            const scores = datasets.map(scoreDataset);
-            const avgQ   = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
-            el('kpiQuality').textContent  = avgQ; el('kpiQuality').classList.remove('loading');
-
-            const anoms = detectAnomalies(datasets);
-            el('kpiAnomalies').textContent = anoms.filter(a => a.type === 'warn').length;
-            el('kpiAnomalies').classList.remove('loading');
-
-            try { renderAnomalies(anoms); } catch(e2) { console.error('renderAnomalies error:', e2); }
-            try { renderFmtChart(datasets); } catch(e2) { console.error('renderFmtChart error:', e2); }
-            try { renderDocList(datasets); } catch(e2) { console.error('renderDocList error:', e2); }
-
-            window._graphData = buildGraphData(datasets);
-            if (document.getElementById('view-graph-advanced').classList.contains('active-view')) {
-                renderAdvancedGraph(window._graphData);
-            } else {
-                el('graphAdvancedContainer').innerHTML =
-                    '<div class="empty-state" style="padding-top:6rem">✓ Grafo listo — ve a <strong>Grafo Avanzado</strong></div>';
-            }
-        } catch(e) {
-            console.error('searchDatasets catch:', e.message, e.stack);
-            document.getElementById('documentsList').innerHTML =
-                '<div class="empty-state">Error: ' + e.message + '</div>';
-        }
-    }
-
-    function buildGraphData(datasets) {
-        const nodes = [], links = [], themeMap = {}, pubMap = {}, conceptMap = {};
-        datasets.slice(0, 12).forEach((ds, i) => {
-            const dsId = 'ds_' + i;
-            nodes.push({ id: dsId, label: getTitle(ds).substring(0, 32), type: 'dataset', r: 10, ds });
-
-            const theme = getTheme(ds);
-            if (theme) {
-                const tKey = 'theme_' + theme;
-                if (!themeMap[tKey]) { themeMap[tKey] = true; nodes.push({ id: tKey, label: theme.substring(0, 22), type: 'theme', r: 14 }); }
-                links.push({ source: dsId, target: tKey });
-            }
-            const pub = ds.publisher?.name?.[0]?.value || ds.publisher?.name?.value || null;
-            if (pub) {
-                const pKey = 'pub_' + pub.substring(0, 20);
-                if (!pubMap[pKey]) { pubMap[pKey] = true; nodes.push({ id: pKey, label: pub.substring(0, 24), type: 'publisher', r: 12 }); }
-                links.push({ source: dsId, target: pKey });
-            }
-            getKeywords(ds).slice(0, 2).forEach(kw => {
-                const kval = kw.substring(0, 18);
-                if (!kval) return;
-                const cKey = 'concept_' + kval;
-                if (!conceptMap[cKey]) { conceptMap[cKey] = true; nodes.push({ id: cKey, label: kval, type: 'concept', r: 8 }); }
-                links.push({ source: dsId, target: cKey });
-            });
-        });
-        return { nodes, links };
-    }
-
-    function renderAdvancedGraph(data) {
-        const container = document.getElementById('graphAdvancedContainer');
-        if (!data || !data.nodes.length) {
-            container.innerHTML = '<div class="empty-state" style="padding-top:6rem">Realiza una búsqueda en Documentos para generar el grafo semántico</div>';
-            return;
-        }
-        container.innerHTML = '';
-        const tooltip = document.getElementById('graphTooltip');
-        const W = container.clientWidth || 700, H = 500;
-        const colorMap  = { dataset:'#7ED7A1', theme:'#A7E8FF', publisher:'#FFF4B8', concept:'#FFB8A8' };
-        const strokeMap = { dataset:'#4db87a', theme:'#7ab8cc', publisher:'#c8b84a', concept:'#cc7a60' };
-
-        const svg = d3.select(container).append('svg').attr('width', W).attr('height', H).style('font-family','Inter,sans-serif');
-        svg.append('defs').append('marker').attr('id','arrow').attr('viewBox','0 -4 8 8').attr('refX',18).attr('refY',0).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto').append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#ccc');
-
-        const sim = d3.forceSimulation(data.nodes)
-            .force('link', d3.forceLink(data.links).id(d => d.id).distance(d => d.source.type==='dataset'&&d.target.type==='theme'?95:d.source.type==='dataset'&&d.target.type==='publisher'?105:72).strength(0.6))
-            .force('charge', d3.forceManyBody().strength(-230))
-            .force('center', d3.forceCenter(W/2, H/2))
-            .force('collision', d3.forceCollide().radius(d => d.r + 14));
-
-        const link = svg.append('g').selectAll('line').data(data.links).join('line').attr('stroke','#E9EEF2').attr('stroke-width',1.5).attr('marker-end','url(#arrow)');
-        const node = svg.append('g').selectAll('g').data(data.nodes).join('g').style('cursor','pointer')
-            .call(d3.drag()
-                .on('start',(e,d)=>{ if(!e.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
-                .on('drag', (e,d)=>{ d.fx=e.x; d.fy=e.y; })
-                .on('end',  (e,d)=>{ if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
-            );
-
-        node.append('circle').attr('r',d=>d.r).attr('fill',d=>colorMap[d.type]).attr('stroke',d=>strokeMap[d.type]).attr('stroke-width',1.5);
-        node.append('text').attr('text-anchor','middle').attr('dy',d=>d.r+13).attr('font-size',d=>d.type==='theme'?'10px':'9px').attr('fill','#4A4A4A').text(d=>d.label.length>18?d.label.substring(0,17)+'…':d.label);
-
-        node.on('mouseover',(e,d)=>{
-            let html = `<strong>${d.label}</strong><br>Tipo: ${d.type}`;
-            if (d.type==='dataset'&&d.ds) {
-                const mod = d.ds.modified ? new Date(d.ds.modified).toLocaleDateString('es-ES',{year:'numeric',month:'short'}) : '—';
-                html += `<br>Actualizado: ${mod}<br>Score: ${scoreDataset(d.ds)}/100`;
-            }
-            tooltip.innerHTML = html; tooltip.style.opacity='1';
-        })
-        .on('mousemove',e=>{
-            const rect=container.getBoundingClientRect();
-            let x=e.clientX-rect.left+12, y=e.clientY-rect.top-10;
-            if(x+210>W) x-=220;
-            tooltip.style.left=x+'px'; tooltip.style.top=y+'px';
-        })
-        .on('mouseout',()=>{ tooltip.style.opacity='0'; });
-
-        sim.on('tick',()=>{
-            link.attr('x1',d=>Math.max(16,Math.min(W-16,d.source.x))).attr('y1',d=>Math.max(16,Math.min(H-16,d.source.y))).attr('x2',d=>Math.max(16,Math.min(W-16,d.target.x))).attr('y2',d=>Math.max(16,Math.min(H-16,d.target.y)));
-            node.attr('transform',d=>`translate(${Math.max(16,Math.min(W-16,d.x))},${Math.max(16,Math.min(H-16,d.y))})`);
-        });
-    }
-
-    async function loadInitialKPIs() {
-        // Muestra los KPIs del dashboard con datos reales del catálogo
-        try {
-            const j = await apiFetch('/dataset.json?_pageSize=20&_sort=-modified');
-            let datasets = j?.result?.items || j?.items || [];
-            if (!datasets.length) {
-                const rk = Object.keys(j?.result || {});
-                for (const k of rk) { if (Array.isArray(j.result[k]) && j.result[k].length) { datasets = j.result[k]; break; } }
-            }
-            _allDatasets = datasets;
-            const el = id => document.getElementById(id);
-            el('kpiDocs').textContent = (j?.result?.totalItems || datasets.length).toLocaleString('es-ES');
-            el('kpiDocs').classList.remove('loading');
-            el('kpiDocsSub').textContent = datasets.length + ' en este lote';
-            el('kpiLatency').textContent = '—';
-            el('kpiLatency').classList.remove('loading');
-            const scores = datasets.map(scoreDataset);
-            const avgQ = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
-            el('kpiQuality').textContent = avgQ;
-            el('kpiQuality').classList.remove('loading');
-            const anoms = detectAnomalies(datasets);
-            el('kpiAnomalies').textContent = anoms.filter(a=>a.type==='warn').length;
-            el('kpiAnomalies').classList.remove('loading');
-            renderAnomalies(anoms);
-            renderFmtChart(datasets);
-            window._graphData = buildGraphData(datasets);
-        } catch(e) {
-            console.error('Error cargando KPIs iniciales:', e);
-        }
-    }
-
-    document.getElementById('searchBtn').addEventListener('click', () =>
-        searchDatasets(document.getElementById('searchInput').value, document.getElementById('themeSelect').value)
-    );
-    document.getElementById('searchInput').addEventListener('keydown', e => {
-        if (e.key === 'Enter') searchDatasets(document.getElementById('searchInput').value, document.getElementById('themeSelect').value);
+    sim.on('tick',()=>{
+        link.attr('x1',d=>Math.max(16,Math.min(W-16,d.source.x))).attr('y1',d=>Math.max(16,Math.min(H-16,d.source.y))).attr('x2',d=>Math.max(16,Math.min(W-16,d.target.x))).attr('y2',d=>Math.max(16,Math.min(H-16,d.target.y)));
+        node.attr('transform',d=>`translate(${Math.max(16,Math.min(W-16,d.x))},${Math.max(16,Math.min(H-16,d.y))})`);
     });
-    document.getElementById('themeSelect').addEventListener('change', () => {
-        const t = document.getElementById('themeSelect').value;
-        if (t) searchDatasets(document.getElementById('searchInput').value, t);
-    });
+}
 
-    // Carga inicial solo del dashboard (KPIs de publicadores)
-    loadInitialKPIs();
-    </script>
+/* ================================================================
+   EVENTOS Y CARGA INICIAL
+   ================================================================ */
+document.getElementById('searchBtn').addEventListener('click', () =>
+    searchDatasets(document.getElementById('searchInput').value, document.getElementById('themeSelect').value)
+);
+document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key==='Enter') searchDatasets(document.getElementById('searchInput').value, document.getElementById('themeSelect').value);
+});
+document.getElementById('themeSelect').addEventListener('change', () => {
+    const t = document.getElementById('themeSelect').value;
+    if (t) searchDatasets(document.getElementById('searchInput').value, t);
+});
 
-    <!-- Integraciones actualizadas para datos.gob.es -->
-    <script src="assets/js/pro-integrations.js"></script>
+// Carga inicial del dashboard
+(async () => {
+    try {
+        const t0 = Date.now();
+        const j  = await apiFetch('/dataset.json?_pageSize=20&_sort=-modified');
+        const ms = Date.now() - t0;
+        const datasets = extractDatasets(j);
+        _allDatasets = datasets;
+        updateKPIs(datasets, j, ms);
+        window._graphData = buildGraphData(datasets);
+    } catch(e) {
+        document.getElementById('kpiDocs').textContent = '—';
+        ['kpiDocs','kpiLatency','kpiQuality','kpiAnomalies'].forEach(id => document.getElementById(id).classList.remove('loading'));
+    }
+})();
+</script>
+
+<script src="assets/js/pro-integrations.js"></script>
 
 </body>
 </html>
