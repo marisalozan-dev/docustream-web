@@ -349,15 +349,30 @@
     function toArray(v) {
         if (!v) return [];
         if (Array.isArray(v)) return v;
-        if (typeof v === 'object') return Object.values(v);
+        if (typeof v === 'object') {
+            // Si es un objeto linked-data puede tener clave numérica o ser el item directamente
+            const vals = Object.values(v);
+            // Si los valores son objetos (distribuciones reales), devolverlos
+            if (vals.length && typeof vals[0] === 'object') return vals;
+            // Si el propio objeto parece un item (tiene _about, format, etc.), envolverlo
+            if (v['_about'] || v['format'] || v['accessURL']) return [v];
+            return vals;
+        }
         return [];
     }
     function getFormats(ds) {
-        return [...new Set(
-            toArray(ds.distribution)
-                .map(d => (d?.format?.prefLabel?.[0]?.value || d?.format?.prefLabel?.value || '').toUpperCase().split('/')[0].trim())
-                .filter(Boolean)
-        )];
+        try {
+            return [...new Set(
+                toArray(ds.distribution)
+                    .filter(d => d && typeof d === 'object')
+                    .map(d => {
+                        const pref = d?.format?.prefLabel;
+                        const val = Array.isArray(pref) ? pref[0]?.value : pref?.value || '';
+                        return (val || '').toUpperCase().split('/')[0].trim();
+                    })
+                    .filter(Boolean)
+            )];
+        } catch(e) { return []; }
     }
     function getTitle(ds) {
         const t = toArray(ds.title);
@@ -711,6 +726,7 @@
 
 </body>
 </html>
+
 
 
 
