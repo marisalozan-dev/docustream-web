@@ -401,6 +401,7 @@
     }
 
     function renderDocList(datasets) {
+        console.log('renderDocList llamado con', datasets.length, 'datasets');
         if (!datasets.length) {
             document.getElementById('documentsList').innerHTML = '<div class="empty-state">No se encontraron datasets.</div>';
             return;
@@ -628,6 +629,37 @@
         });
     }
 
+    async function loadInitialKPIs() {
+        // Muestra los KPIs del dashboard con datos reales del catálogo
+        try {
+            const j = await apiFetch('/dataset.json?_pageSize=20&_sort=-modified');
+            let datasets = j?.result?.items || j?.items || [];
+            if (!datasets.length) {
+                const rk = Object.keys(j?.result || {});
+                for (const k of rk) { if (Array.isArray(j.result[k]) && j.result[k].length) { datasets = j.result[k]; break; } }
+            }
+            _allDatasets = datasets;
+            const el = id => document.getElementById(id);
+            el('kpiDocs').textContent = (j?.result?.totalItems || datasets.length).toLocaleString('es-ES');
+            el('kpiDocs').classList.remove('loading');
+            el('kpiDocsSub').textContent = datasets.length + ' en este lote';
+            el('kpiLatency').textContent = '—';
+            el('kpiLatency').classList.remove('loading');
+            const scores = datasets.map(scoreDataset);
+            const avgQ = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
+            el('kpiQuality').textContent = avgQ;
+            el('kpiQuality').classList.remove('loading');
+            const anoms = detectAnomalies(datasets);
+            el('kpiAnomalies').textContent = anoms.filter(a=>a.type==='warn').length;
+            el('kpiAnomalies').classList.remove('loading');
+            renderAnomalies(anoms);
+            renderFmtChart(datasets);
+            window._graphData = buildGraphData(datasets);
+        } catch(e) {
+            console.error('Error cargando KPIs iniciales:', e);
+        }
+    }
+
     document.getElementById('searchBtn').addEventListener('click', () =>
         searchDatasets(document.getElementById('searchInput').value, document.getElementById('themeSelect').value)
     );
@@ -639,7 +671,8 @@
         if (t) searchDatasets(document.getElementById('searchInput').value, t);
     });
 
-    searchDatasets('', '');
+    // Carga inicial solo del dashboard (KPIs de publicadores)
+    loadInitialKPIs();
     </script>
 
     <!-- Integraciones actualizadas para datos.gob.es -->
