@@ -343,50 +343,31 @@ function renderDocList(datasets) {
     }).join('');
 }
 
-async function selectDataset(idx) {
+function selectDataset(idx) {
     document.querySelectorAll('.doc-item-real').forEach(el=>el.classList.remove('selected'));
     document.querySelector(`[data-idx="${idx}"]`)?.classList.add('selected');
-    const ds    = _allDatasets[idx];
-    const title = getTitle(ds);
-    const pub   = getPub(ds);
-    const mod   = getModified(ds);
+    const ds     = _allDatasets[idx];
+    const title  = getTitle(ds);
+    const pub    = getPub(ds);
+    const mod    = getModified(ds);
     const modStr = mod ? new Date(mod).toLocaleDateString('es-ES') : '—';
-    const score = scoreDataset(ds);
-    const fmts  = getFormats(ds).join(', ');
-    const kws   = getKeywords(ds).slice(0,5).join(', ');
-    const desc  = getDesc(ds);
+    const score  = scoreDataset(ds);
+    const fmts   = getFormats(ds).join(', ');
+    const kws    = getKeywords(ds).slice(0, 5).join(', ');
+    const desc   = getDesc(ds);
+    const sc     = score >= 70 ? '#4db87a' : score >= 50 ? '#c8b84a' : '#cc7a60';
 
     document.getElementById('documentsPreviewContent').innerHTML = `
         <h3>${title}</h3>
         <p><strong>Publicador:</strong> ${pub}</p>
         <p><strong>Última actualización:</strong> ${modStr}</p>
-        <p><strong>Formatos:</strong> ${fmts||'—'}</p>
-        <p><strong>Score de calidad:</strong> ${score}/100</p>
-        <p><strong>Análisis IA:</strong> <span class="spinner"></span> Analizando…</p>
+        <p><strong>Formatos:</strong> ${fmts || '—'}</p>
+        <p><strong>Palabras clave:</strong> ${kws || '—'}</p>
+        <p><strong>Score de calidad:</strong>
+            <span style="font-weight:700;color:${sc}">${score}/100</span>
+        </p>
+        ${desc ? `<div class="analysis-box" style="margin-top:12px">${desc}</div>` : ''}
     `;
-
-    try {
-        const resp = await fetch('https://api.anthropic.com/v1/messages', {
-            method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({
-                model:'claude-sonnet-4-20250514', max_tokens:1000,
-                messages:[{ role:'user', content:`Analiza este dataset de datos.gob.es en 3-4 frases en español. Sé técnico y directo. Comenta: qué contiene, su utilidad práctica, calidad documental (score ${score}/100) y si está actualizado (última modificación: ${modStr}). Dataset: ${title}. Publicador: ${pub}. Descripción: ${desc}. Palabras clave: ${kws}. Formatos: ${fmts}.` }]
-            })
-        });
-        const data = await resp.json();
-        const text = data.content?.[0]?.text || 'No se pudo obtener análisis.';
-        document.getElementById('documentsPreviewContent').innerHTML = `
-            <h3>${title}</h3>
-            <p><strong>Publicador:</strong> ${pub}</p>
-            <p><strong>Última actualización:</strong> ${modStr}</p>
-            <p><strong>Formatos:</strong> ${fmts||'—'}</p>
-            <p><strong>Score de calidad:</strong> ${score}/100</p>
-            <div class="analysis-box">${text.replace(/(\b\d{4}\b|\d+\/100|CSV|JSON|XML|RDF)/g,'<b>$1</b>')}</div>
-        `;
-    } catch(e) {
-        document.getElementById('documentsPreviewContent').innerHTML +=
-            '<p style="color:#cc7a60;margin-top:8px">Error al conectar con análisis IA.</p>';
-    }
 }
 
 async function searchDatasets(query, theme) {
