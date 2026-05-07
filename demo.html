@@ -324,7 +324,24 @@
 
     <!-- ========================= DATOS REALES — datos.gob.es + Claude API ========================= -->
     <script>
-    const CATALOG_API = 'https://corsproxy.io/?url=https://datos.gob.es/apidata/catalog';
+    const BASE_API = 'https://datos.gob.es/apidata/catalog';
+    const PROXIES = [
+        u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+        u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+        u => u
+    ];
+    async function apiFetch(path) {
+        const fullUrl = BASE_API + path;
+        for (const proxy of PROXIES) {
+            try {
+                const r = await fetch(proxy(fullUrl), { signal: AbortSignal.timeout(7000) });
+                if (!r.ok) continue;
+                const data = await r.json();
+                return data;
+            } catch(e) { continue; }
+        }
+        throw new Error('Sin conexion');
+    }
     let _allDatasets = [];
     let _fmtChart    = null;
 
@@ -471,15 +488,14 @@
         document.getElementById('graphAdvancedContainer').innerHTML =
             '<div class="empty-state" style="padding-top:6rem"><span class="spinner"></span> Construyendo grafo…</div>';
 
-        let url;
-        if (theme)             url = `${CATALOG_API}/dataset/theme/${theme}.json?_pageSize=20&_sort=-modified`;
-        else if (query.trim()) url = `${CATALOG_API}/dataset/title/${encodeURIComponent(query.trim())}.json?_pageSize=20&_sort=-modified`;
-        else                   url = `${CATALOG_API}/dataset.json?_pageSize=20&_sort=-modified`;
+        let path;
+        if (theme)             path = `/dataset/theme/${theme}.json?_pageSize=20&_sort=-modified`;
+        else if (query.trim()) path = `/dataset/title/${encodeURIComponent(query.trim())}.json?_pageSize=20&_sort=-modified`;
+        else                   path = `/dataset.json?_pageSize=20&_sort=-modified`;
 
         try {
             const t0 = Date.now();
-            const r  = await fetch(url);
-            const j  = await r.json();
+            const j  = await apiFetch(path);
             const ms = Date.now() - t0;
             const datasets = j.result?.items || [];
             _allDatasets   = datasets;
@@ -617,6 +633,7 @@
 
 </body>
 </html>
+
 
 
 
