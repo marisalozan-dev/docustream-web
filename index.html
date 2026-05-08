@@ -3,111 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:image" content="https://marisalozan-dev.github.io/docustream-web/assets/images/og-docustream.png">
-    <meta property="og:title" content="Documentación viva impulsada por Big Data">
-    <meta property="og:description" content="Sistema conceptual que combina Big Data, grafos semánticos y análisis de comportamiento lector.">
-    <meta property="og:type" content="website">
     <title>DocuStream PRO — Inteligencia Documental en Tiempo Real</title>
+
     <link rel="stylesheet" href="assets/css/style-landing.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .hero-visual svg { width:100%;height:auto;max-width:700px; }
-        @keyframes dash { to { stroke-dashoffset:-80; } }
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
-        .flow-line { stroke-dasharray:18 12;animation:dash 2s linear infinite; }
-        .floating { animation:float 4s ease-in-out infinite; }
-    </style>
 </head>
 
 <body>
 
-<header class="header">
-    <div class="logo">DocuStream PRO</div>
-    <nav class="nav">
-        <a href="#problema">Problema</a>
-        <a href="#solucion">Solución</a>
-        <a href="#mercado">Mercado</a>
-        <a href="#demo">Demo</a>
-        <a href="dossier.html" class="btn-outline">Dossier</a>
-    </nav>
-</header>
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="logo">DocuStream PRO</div>
+        <nav class="nav">
+            <a href="#problema">Problema</a>
+            <a href="#solucion">Solución</a>
+            <a href="#mercado">Mercado</a>
+            <a href="#demo">Demo</a>
+            <a href="dossier.html" class="btn-outline">Dossier</a>
+        </nav>
+    </header>
 
-<section class="hero">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
 
-    <!-- LOGO DARK A LA IZQUIERDA -->
-    <div class="hero-visual fade-in">
-        <img src="assets/images/logo-dark.svg" alt="DocuStream PRO Logo" class="hero-logo">
-    </div>
+        <!-- VISUAL IZQUIERDA -->
+        <div class="hero-visual fade-in">
+            <img src="assets/images/logo-dark.svg" alt="DocuStream PRO Logo" class="hero-logo">
+        </div>
 
-    <!-- TEXTO A LA DERECHA -->
-    <div class="hero-content fade-in">
-        <h1>Documentación viva impulsada por Big Data</h1>
-        <p>
-            El primer sistema de inteligencia documental en tiempo real:
-            documentos que se adaptan, envejecen con datos y conocen a sus lectores.
+        <!-- TEXTO DERECHA -->
+        <div class="hero-content fade-in">
+            <h1>Documentación viva impulsada por Big Data</h1>
+            <p class="hero-subtitle">
+                El primer sistema de inteligencia documental en tiempo real:  
+                documentos que se adaptan, envejecen con datos y conocen a sus lectores.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="demo.html" class="btn-primary">Probar Demo</a>
+                <a href="#features" class="btn-secondary">Saber más</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ================= PROBLEMA ================= -->
+    <section id="problema" class="section">
+        <h2 class="section-title">El problema</h2>
+
+        <p class="section-text">
+            Las organizaciones generan miles de documentos que envejecen silenciosamente.  
+            El 73% de los empleados admite haber seguido procesos desactualizados por falta de alertas oportunas.  
+            El coste anual por empresa: entre 15.000 y 40.000 € en errores, tiempo perdido y riesgos de cumplimiento.
         </p>
 
-        <div class="hero-buttons">
-            <a href="demo.html" class="btn-primary">Ver demo interactiva</a>
-            <a href="dossier.html" class="btn-secondary">Dossier para inversores</a>
+        <div class="cards-3">
+            <div class="card">
+                <h3>Documentos estáticos</h3>
+                <p>No se monitorean. Nadie sabe si están actualizados.</p>
+            </div>
+            <div class="card">
+                <h3>Sin datos de uso real</h3>
+                <p>No se sabe qué partes confunden o se ignoran.</p>
+            </div>
+            <div class="card">
+                <h3>Desconexión total</h3>
+                <p>Los cambios en APIs o procesos no se propagan.</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-</section>
+    <!-- ================= SOLUCIÓN ================= -->
+    <section id="solucion" class="section alt">
+        <h2 class="section-title">La solución — DocuStream PRO</h2>
 
+        <p class="section-text">
+            Una plataforma SaaS que transforma los documentos en organismos vivos,  
+            impulsados por flujos masivos de datos en tiempo real.
+        </p>
 
-<section id="problema" class="section">
-    <h2 class="section-title">El problema</h2>
-    <p class="section-text">
-        Las organizaciones generan miles de documentos que envejecen silenciosamente.
-        El 73% de los empleados admite haber seguido procesos desactualizados por falta de alertas oportunas.
-        El coste anual por empresa: entre 15.000 y 40.000 € en errores, tiempo perdido y riesgos de cumplimiento.
-    </p>
-    <div class="cards-3">
-        <div class="card"><h3>Documentos estáticos</h3><p>No se monitorean. Nadie sabe si están actualizados.</p></div>
-        <div class="card"><h3>Sin datos de uso real</h3><p>No se sabe qué partes confunden o se ignoran.</p></div>
-        <div class="card"><h3>Desconexión total</h3><p>Los cambios en APIs o procesos no se propagan.</p></div>
-    </div>
-</section>
+        <div class="cards-3">
+            <div class="card">
+                <h3>Obsolescencia predictiva</h3>
+                <p>Predice cuándo un documento quedará desactualizado antes de que ocurra.</p>
+            </div>
+            <div class="card">
+                <h3>Grafo de conocimiento</h3>
+                <p>Mapea relaciones semánticas y propaga sugerencias de actualización.</p>
+            </div>
+            <div class="card">
+                <h3>Comportamiento del lector</h3>
+                <p>Heatmaps, flujos y patrones de lectura a escala.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="solucion" class="section alt">
-    <h2 class="section-title">La solución — DocuStream PRO</h2>
-    <p class="section-text">
-        Una plataforma SaaS que transforma los documentos en organismos vivos,
-        impulsados por flujos masivos de datos en tiempo real.
-    </p>
-    <div class="cards-3">
-        <div class="card"><h3>Obsolescencia predictiva</h3><p>Predice cuándo un documento quedará desactualizado antes de que ocurra.</p></div>
-        <div class="card"><h3>Grafo de conocimiento</h3><p>Mapea relaciones semánticas y propaga sugerencias de actualización.</p></div>
-        <div class="card"><h3>Comportamiento del lector</h3><p>Heatmaps, flujos y patrones de lectura a escala.</p></div>
-    </div>
-</section>
+    <!-- ================= MERCADO ================= -->
+    <section id="mercado" class="section">
+        <h2 class="section-title">Mercado y oportunidad</h2>
 
-<section id="mercado" class="section">
-    <h2 class="section-title">Mercado y oportunidad</h2>
-    <div class="metrics">
-        <div class="metric"><div class="metric-value">5.200M€</div><div class="metric-label">Mercado KM europeo</div></div>
-        <div class="metric"><div class="metric-value">14%</div><div class="metric-label">Crecimiento anual</div></div>
-        <div class="metric"><div class="metric-value">0</div><div class="metric-label">Competidores con Big Data + grafo + obsolescencia</div></div>
-    </div>
-    <p class="section-text">
-        DocuStream tiene una ventana de 18–24 meses para liderar el nicho antes de que los grandes players puedan replicarlo.
-    </p>
-</section>
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-value">5.200M€</div>
+                <div class="metric-label">Mercado KM europeo</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">14%</div>
+                <div class="metric-label">Crecimiento anual</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Competidores con Big Data + grafo + obsolescencia</div>
+            </div>
+        </div>
 
-<section id="demo" class="cta">
-    <h2>Experimenta DocuStream PRO</h2>
-    <p>Dashboard, documentos inteligentes, integraciones y grafo semántico.</p>
-    <a href="demo.html" class="btn-primary">Entrar en la demo</a>
-</section>
+        <p class="section-text">
+            DocuStream tiene una ventana de 18–24 meses para liderar el nicho antes de que los grandes players puedan replicarlo.
+        </p>
+    </section>
 
-<footer class="footer">
-    <span>© 2026 DocuStream PRO — Proyecto conceptual</span>
-    <a href="dossier.html">Dossier inversores</a>
-</footer>
+    <!-- ================= CTA DEMO ================= -->
+    <section id="demo" class="cta">
+        <h2>Experimenta DocuStream PRO</h2>
+        <p>Dashboard, documentos inteligentes, integraciones y grafo semántico.</p>
+        <a href="demo.html" class="btn-primary">Entrar en la demo</a>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <span>© 2026 DocuStream PRO — Proyecto conceptual</span>
+        <a href="dossier.html">Dossier inversores</a>
+    </footer>
 
 </body>
 </html>
+
 
 
 
