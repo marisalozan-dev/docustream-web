@@ -320,6 +320,7 @@ h3 {
         height: 420px;
     }
 }
+
 /* ============================================================
    ACTIVITY LOG — Fresh Knowledge
    ============================================================ */
@@ -362,6 +363,7 @@ h3 {
     font-size: 0.85rem;
     margin: 4px 0 0 0;
 }
+
 #qualityDonut svg text {
     font-family: "Inter", sans-serif;
 }
@@ -369,6 +371,37 @@ h3 {
     font-family: "Inter", sans-serif;
     fill: #4A4A4A;
 }
+
+/* ============================================================
+   AJUSTES EXTRA PARA DOCUMENTOS PRO
+   ============================================================ */
+
+.docs-search-box {
+    margin-bottom: 20px;
+}
+
+#docs-search {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+    outline: none;
+    background: #FFFFFF;
+    transition: 0.2s;
+}
+
+#docs-search:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(126, 215, 161, 0.25);
+}
+
+.docs-error {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #C0392B;
+}
+
 
 
 
