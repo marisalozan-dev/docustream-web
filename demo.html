@@ -88,31 +88,30 @@
 
     <!-- DOCUMENTOS -->
     <section id="view-documents" class="pro-view">
-        <h1>Documentos</h1>
-        <div class="pro-panel">
-            <div class="search-row">
-                <input type="text" id="searchInput" placeholder="Buscar datasets… (ej: empleo, salud, transporte)" />
-                <select id="themeSelect">
-                    <option value="">Todas las temáticas</option>
-                    <option value="sector-publico">Sector público</option>
-                    <option value="hacienda">Hacienda</option>
-                    <option value="salud">Salud</option>
-                    <option value="medioambiente">Medio ambiente</option>
-                    <option value="transporte">Transporte</option>
-                    <option value="educacion">Educación</option>
-                    <option value="economia">Economía</option>
-                    <option value="ciencia-y-tecnologia">Ciencia y tecnología</option>
-                </select>
-                <button id="searchBtn">Buscar</button>
-            </div>
-            <div class="documents-container">
-                <div id="documentsList"><div class="empty-state">Introduce una búsqueda o selecciona una temática</div></div>
-                <div class="documents-preview">
-                    <h2>Vista previa</h2>
-                    <div id="documentsPreviewContent"><div class="empty-state">Selecciona un documento…</div></div>
-                </div>
-            </div>
-        </div>
+      <div class="pro-panel">
+    <h1>Documentos PRO</h1>
+    <p>Explora datasets de salud desde datos.gob.es con búsqueda semántica ligera.</p>
+
+    <!-- Buscador -->
+    <div class="docs-search-box">
+        <input
+            id="docs-search"
+            type="text"
+            placeholder="Buscar por descripción, publicador o recurso..."
+        />
+    </div>
+
+    <!-- Contenedor donde se pintan los documentos -->
+    <div id="docs-list" class="documents-container">
+        <!-- Rellenado dinámicamente por pro-documents.js -->
+    </div>
+
+    <!-- Mensaje de error -->
+    <div id="docs-error" class="docs-error" style="display:none;">
+        No se pudieron cargar los documentos. Intenta recargar la página.
+    </div>
+</div>
+
     </section>
 
     <!-- INTEGRACIONES -->
